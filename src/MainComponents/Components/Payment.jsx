@@ -71,9 +71,9 @@ const Payment = ({ title }) => {
   console.log(paymentmethod);
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [paymentmethod?.data]);
 
   const next = paymentmethod?.data?.meta?.next;

@@ -75,9 +75,9 @@ const Complaints = ({ title }) => {
   console.log(complain);
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [complain?.data]);
 
   const next = complain?.data?.meta?.next;

@@ -59,9 +59,9 @@ const ApiPartner = ({ title }) => {
   console.log(apiagentrole);
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [apiagentrole?.data]);
 
   const next = apiagentrole?.data?.meta?.next;

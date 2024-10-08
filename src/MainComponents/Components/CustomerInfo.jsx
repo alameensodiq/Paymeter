@@ -75,9 +75,9 @@ const CustomerInfo = ({ title }) => {
   console.log(discometer);
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [discometer?.data]);
 
   const Downloading = () => {

@@ -56,9 +56,9 @@ const Loans = ({ title }) => {
   console.log(discos);
 
   useEffect(() => {
-    // setTimeout(() => {
+    setTimeout(() => {
       setloading(true);
-    // }, [2000]);
+    }, [3000]);
   }, [discos?.data]);
 
   const next = discos?.data?.meta?.next;

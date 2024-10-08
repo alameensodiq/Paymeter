@@ -70,9 +70,9 @@ const Setting = ({ title }) => {
   };
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [getsettings?.data]);
 
   const dateChanger = (date) => {

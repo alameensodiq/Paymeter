@@ -69,7 +69,9 @@ const Transfers = ({ title }) => {
   console.log(transactions);
 
   useEffect(() => {
-    setloading(true);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [transactions]);
 
   const next = transactions?.data?.meta?.next;

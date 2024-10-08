@@ -53,9 +53,9 @@ const Investments = ({ title }) => {
   console.log(banks);
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [banks]);
 
   const next = banks?.data?.meta?.next;

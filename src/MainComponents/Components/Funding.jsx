@@ -74,9 +74,9 @@ const Funding = ({ title }) => {
   console.log(funding);
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [funding?.data]);
 
   const next = funding?.data?.meta?.next;

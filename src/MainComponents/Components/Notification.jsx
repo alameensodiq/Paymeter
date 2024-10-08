@@ -74,9 +74,9 @@ const Notification = ({ title }) => {
   console.log(notifications);
 
   useEffect(() => {
-    // setTimeout(() => {
-    setloading(true);
-    // }, [2000]);
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
   }, [notifications?.data]);
 
   const next = notifications?.data?.meta?.next;
