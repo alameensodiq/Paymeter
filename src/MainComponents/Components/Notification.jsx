@@ -303,6 +303,18 @@ const Notification = ({ title }) => {
                       data={notifications?.data?.data}
                     />
                   )}
+                {!notifications?.status && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
 
                 {/* {notifications?.data?.meta?.totalCount >= 1   ? (
                   status === "accepted" ? (
