@@ -170,7 +170,7 @@ const CustomerInfo = ({ title }) => {
                   )}
                 </div>
               </div> */}
-              <div className="flex h-[45px] w-[40%] flex-row justify-end gap-3 px-3">
+              <div className="flex h-[45px] w-[30%] flex-row justify-end gap-3 px-3">
                 {/* <input
                  type='date'
                  className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
@@ -181,18 +181,18 @@ const CustomerInfo = ({ title }) => {
                  className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
                  placeholder="Search by name, customerID, account number, transaction reference"
                /> */}
-                <button
+                {/* <button
                   onClick={() => setStep(11)}
                   className="px-2 flex  flex-row gap-1 items-center bg-route-color w-[80%] rounded-custom text-white font-semibold text-[11px]"
                 >
                   Commission
-                </button>
-                <button className="px-2 flex  flex-row gap-1 items-center bg-route-color w-[100%] rounded-custom text-white font-semibold text-[11px]">
+                </button> */}
+                <button className="px-2 flex justify-center  flex-row gap-1 items-center bg-route-color w-[50%] rounded-custom text-white font-semibold text-[11px]">
                   Add New Meter
                 </button>
                 <button
                   onClick={() => Downloading()}
-                  className="px-2 flex  flex-row gap-1 items-center bg-route-color w-[100%] rounded-custom text-white font-semibold text-[10px]"
+                  className="px-2 flex  justify-center  flex-row gap-1 items-center bg-route-color w-[50%] rounded-custom text-white font-semibold text-[10px]"
                 >
                   Download Report <Download />
                 </button>
