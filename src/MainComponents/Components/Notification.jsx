@@ -197,7 +197,10 @@ const Notification = ({ title }) => {
               <div className="flex flex-col">
                 <div className="flex flex-row gap-6 justify-center text-[14px] items-center text-route-noncolor pt-[10px] font-medium">
                   <span
-                    onClick={() => setStatus("accepted")}
+                    onClick={() => {
+                      setStatus("accepted");
+                      setCurrentPage(0);
+                    }}
                     className={`${
                       status === "accepted"
                         ? "text-route-color cursor-pointer"
@@ -207,7 +210,10 @@ const Notification = ({ title }) => {
                     Accepted
                   </span>
                   <span
-                    onClick={() => setStatus("pending")}
+                    onClick={() => {
+                      setStatus("pending");
+                      setCurrentPage(0);
+                    }}
                     className={`${
                       status === "pending"
                         ? "text-route-color cursor-pointer"
@@ -217,7 +223,10 @@ const Notification = ({ title }) => {
                     Pending
                   </span>
                   <span
-                    onClick={() => setStatus("rejected")}
+                    onClick={() => {
+                      setStatus("rejected");
+                      setCurrentPage(0);
+                    }}
                     className={`${
                       status === "rejected"
                         ? "text-route-color cursor-pointer"
@@ -303,7 +312,31 @@ const Notification = ({ title }) => {
                       data={notifications?.data?.data}
                     />
                   )}
-                {!notifications?.status && (
+                {!notifications?.status && status === "accepted" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {!notifications?.status && status === "pending" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {!notifications?.status && status === "rejected" && (
                   <div
                     style={{
                       display: "flex",

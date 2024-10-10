@@ -65,24 +65,22 @@ const Dashboard = ({ title }) => {
           <Navbar title={title} />
         </div>
         <div className="w-[100%] py-9 px-5 flex flex-col gap-7">
-          <div className="flex flex-row justify-start">
+          {/* <div className="flex flex-row justify-start">
             <select className="border rounded-custom p-1 text-[10px] w-[10%] h-[30px] outline-none">
               <option>Hope bank</option>
               <option>GT bank</option>
               <option>Sterling bank</option>
             </select>
-          </div>
+          </div> */}
           <div className="flex lg:flex-row flex-col md:flex-col gap-3">
             <div
               className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  Total Customers
-                </span>
+                <span className="text-card-title text-[14px]">Total Users</span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {dashboard?.data?.totalCustomers}
+                  {dashboard?.data?.totalUsers}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -102,10 +100,10 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  Total Transfers
+                  Total Agents
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {dashboard?.data?.totalTransfers}
+                  {dashboard?.data?.totalAgents}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -126,12 +124,11 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  Total Agents
+                  Total API PARTNERS
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   {/* ₦1 */}
-                  ---
-                  {/* {dashboard?.data?.totalRevenue?.daily?.NGN} */}
+                  {dashboard?.data?.totalApiPartners}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -151,11 +148,10 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  Total Api-Partner
+                  Total Earning Partner
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ----
-                  {/* {dashboard?.data?.totalRevenue?.monthly?.NGN} */}
+                  {dashboard?.data?.totalEarningPartners}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -175,10 +171,10 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  Total Revenue
+                  Total User Roles
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {dashboard?.data?.totalRevenue?.yearly?.NGN}
+                  {dashboard?.data?.totalUsersRole}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -326,39 +322,6 @@ const Dashboard = ({ title }) => {
             <div className="flex flex-col border rounded-custom gap-2 pt-3">
               <div className="flex flex-row px-4 gap-4 items-center justify-between">
                 <div className="flex flex-row gap-4 items-center">
-                  {dashboard?.data?.totalMonthlyRevenue[0]?.disco && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#E9EDF5]"></span>
-                      {dashboard?.data?.totalMonthlyRevenue[0]?.disco}
-                    </>
-                  )}
-                  {dashboard?.data?.totalMonthlyRevenue[1]?.disco && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#9932CC]"></span>
-                      {dashboard?.data?.totalMonthlyRevenue[1]?.disco}
-                    </>
-                  )}
-                  {dashboard?.data?.totalMonthlyRevenue[2]?.disco && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#c29bd6]"></span>
-                      {dashboard?.data?.totalMonthlyRevenue[2]?.disco}
-                    </>
-                  )}
-                  {dashboard?.data?.totalMonthlyRevenue[3]?.disco && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#d81694]"></span>
-                      {dashboard?.data?.totalMonthlyRevenue[3]?.disco}
-                    </>
-                  )}
-                  {dashboard?.data?.totalMonthlyRevenue[4]?.disco && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-button-bg"></span>
-                      {dashboard?.data?.totalMonthlyRevenue[4]?.disco}
-                    </>
-                  )}
-                  {/* <span className="w-[10px] h-[10px] rounded-circle bg-discos"></span> IBEDC */}
-                </div>
-                <div className="flex flex-row gap-4 items-center">
                   <span className="text-[14px]">Previous Month</span>
                   <div className="position:relative w-[120px] h-[30px] rounded-custom px-[4px] flex flex-row border items-center">
                     {/* <input className='input' type='date' /> */}
@@ -380,7 +343,7 @@ const Dashboard = ({ title }) => {
                   <Ellipses />
                 </div>
               </div>
-              <DoubleLineChart data={dashboard?.data?.totalMonthlyCount} />
+              <DoubleLineChart data={[]} />
             </div>
           </div>
           <div className="flex flex-col gap-3">
@@ -393,13 +356,13 @@ const Dashboard = ({ title }) => {
             <div className="flex flex-col border rounded-custom gap-2 pt-3">
               <div className="flex flex-row px-4 gap-4 items-center justify-between">
                 <div className="flex flex-row gap-4 items-center">
-                  {dashboard?.data?.totalMonthlyRevenue[0]?.disco && (
+                  {/* {dashboard?.data?.totalMonthlyRevenue[0]?.disco && (
                     <>
                       <span className="w-[10px] h-[10px] rounded-circle bg-[#E9EDF5]"></span>
                       {dashboard?.data?.totalMonthlyRevenue[0]?.disco}
                     </>
-                  )}
-                  {dashboard?.data?.totalMonthlyRevenue[1]?.disco && (
+                  )} */}
+                  {/* {dashboard?.data?.totalMonthlyRevenue[1]?.disco && (
                     <>
                       <span className="w-[10px] h-[10px] rounded-circle bg-[#9932CC]"></span>
                       {dashboard?.data?.totalMonthlyRevenue[1]?.disco}
@@ -422,7 +385,7 @@ const Dashboard = ({ title }) => {
                       <span className="w-[10px] h-[10px] rounded-circle bg-button-bg"></span>
                       {dashboard?.data?.totalMonthlyRevenue[4]?.disco}
                     </>
-                  )}
+                  )} */}
                   {/* <span className="w-[10px] h-[10px] rounded-circle bg-discos"></span> IBEDC */}
                 </div>
                 <div className="flex flex-row gap-4 items-center">

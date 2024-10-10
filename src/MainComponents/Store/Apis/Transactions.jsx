@@ -3,23 +3,23 @@ import toast from "react-hot-toast";
 
 export const Transactions = createAsyncThunk(
   "transactions",
-  async ({startDate, searcher, currentPage},thunkAPI) => {
+  async ({ startDate, searcher, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const dateObj = new Date(startDate);
 
     const formattedDate = dateObj.toISOString().slice(0, 10);
-    const accessToken = sessionStorage.getItem('token')
-
+    const accessToken = sessionStorage.getItem("token");
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}transaction?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}admin/all-transactions?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
+        // `${process.env.REACT_APP_BASE_URL}transaction?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
         {
           method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
+            Authorization: `Bearer ${accessToken}`
+          }
         }
       );
       let data = await response.json();

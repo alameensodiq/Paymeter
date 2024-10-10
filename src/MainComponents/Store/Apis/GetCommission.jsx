@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const UserData = createAsyncThunk(
-  "userdata",
+export const GetCommission = createAsyncThunk(
+  "getcommission",
   async ({ id }, thunkAPI) => {
     const accessToken = sessionStorage.getItem("token");
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}transaction/by-user/${id}`,
+        `${process.env.REACT_APP_BASE_URL}admin/${id}/commissions`,
         {
           method: "GET",
           headers: {

@@ -530,6 +530,13 @@ const AppUserModal = ({
     if (real) {
       setReal("");
     }
+    setEarnings({
+      email: "",
+      name: "",
+      address: "",
+      phone: "",
+      nin: ""
+    });
   };
 
   const handleSubmit = () => {
