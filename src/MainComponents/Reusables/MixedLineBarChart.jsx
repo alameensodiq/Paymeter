@@ -1,16 +1,23 @@
 import Chart from "react-apexcharts";
 
-function MixedLineBarChart({color, background, daily}) {
+function MixedLineBarChart({ color, background, daily, data }) {
+  const revenueData = data && data.map((item) => item.revenue);
+  console.log(revenueData);
+  console.log(data);
   const series = [
     {
       name: "Website Blog",
       type: "column",
-      data: daily ? [440, 505, 414, 671] : [440, 505, 414, 671]
+      data: daily
+        ? [440, 505, 414, 671, 440, 505, 414, 671, 440, 505, 414, 671]
+        : data && data
+        ? revenueData
+        : [440, 505, 414, 671, 440, 505, 414, 671, 440, 505, 414, 671]
     },
     {
       name: "Social Media",
       type: "line",
-      data: daily ? [23, 402, 35, 207] : [23, 402, 35, 207]
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   ];
 
@@ -59,14 +66,29 @@ function MixedLineBarChart({color, background, daily}) {
         show: false
       }
     },
-    labels: daily ? ["02-01-2024", "03-01-2024", "04-01-2024", "05-01-2024"] :  ["Jan", "Feb", "Mar", "Apr"],
+    labels: daily
+      ? ["02-01-2024", "03-01-2024", "04-01-2024", "05-01-2024"]
+      : [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ],
     legend: {
       show: false,
       fontSize: "11px"
     },
     fill: {
-      opacity: 0.4,
-    //   colors: background
+      opacity: 0.4
+      //   colors: background
     }
   };
 

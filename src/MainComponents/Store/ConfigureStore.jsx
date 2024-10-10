@@ -29,6 +29,9 @@ import { ComplainApproveSlice } from "./Reducers/ComplainApprove";
 import { UserDataSlice } from "./Reducers/UserData";
 import { GetCommissionSlice } from "./Reducers/GetCommission";
 import { UserWalletSlice } from "./Reducers/UserWallet";
+import { DashboardDailySlice } from "./Reducers/DashboardDaily";
+import { DashboardYearlySlice } from "./Reducers/DashboardYearly";
+import { DashboardDiscoMonthlySlice } from "./Reducers/DashboardDiscoMonthly";
 
 export default configureStore({
   reducer: {
@@ -61,6 +64,9 @@ export default configureStore({
     complainapprove: ComplainApproveSlice?.reducer,
     userdata: UserDataSlice?.reducer,
     getcommission: GetCommissionSlice?.reducer,
-    userwallet: UserWalletSlice?.reducer
+    userwallet: UserWalletSlice?.reducer,
+    dashboarddaily: DashboardDailySlice?.reducer,
+    dashboardyearly: DashboardYearlySlice?.reducer,
+    dashboarddiscomonthly: DashboardDiscoMonthlySlice?.reducer
   }
 });

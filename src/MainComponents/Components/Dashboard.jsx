@@ -21,11 +21,15 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Dashboards } from "../Store/Apis/Dashboard";
+import { DashboardDaily } from "../Store/Apis/DashboardDaily";
+import { DashboardYearly } from "../Store/Apis/DashboardYearly";
+import { DashboardDiscoMonthlys } from "../Store/Apis/DashboardDiscoMonthly";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
     new Date(Date.now() + 3600 * 1000 * 24)
   );
+  const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const datePickerRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,6 +37,9 @@ const Dashboard = ({ title }) => {
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       dispatch(Dashboards());
+      dispatch(DashboardDaily());
+      dispatch(DashboardYearly());
+      dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
     } else {
       navigate("/");
@@ -40,7 +47,7 @@ const Dashboard = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, []);
+  }, [startDate]);
 
   const dateChanger = (date) => {
     console.log(date);
@@ -55,6 +62,20 @@ const Dashboard = ({ title }) => {
     (state) => state?.dashboard
   );
   console.log(dashboard);
+
+  const { dashboarddaily, authenticatingdashboarddaily } = useSelector(
+    (state) => state?.dashboarddaily
+  );
+  console.log(dashboarddaily);
+
+  const { dashboardyearly, authenticatingdashboardyearly } = useSelector(
+    (state) => state?.dashboardyearly
+  );
+  console.log(dashboardyearly);
+
+  const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
+    useSelector((state) => state?.dashboarddiscomonthly);
+  console.log(dashboarddiscomonthly);
   return (
     <div className="flex flex-row">
       <div className="w-[15%] h-[100%]">
@@ -130,13 +151,13 @@ const Dashboard = ({ title }) => {
                   {/* ₦1 */}
                   {dashboard?.data?.totalApiPartners}
                 </span>
-                <div className="flex flex-row gap-1 text-[10px]">
+                {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
                     <Increase />
                   </span>
                   <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average daily revenue</span>
-                </div>
+                </div> */}
               </div>
               <div>
                 <TotalInvestment />
@@ -153,13 +174,13 @@ const Dashboard = ({ title }) => {
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   {dashboard?.data?.totalEarningPartners}
                 </span>
-                <div className="flex flex-row gap-1 text-[10px]">
+                {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
                     <Increase />
                   </span>
                   <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average monthly revenue</span>
-                </div>
+                </div> */}
               </div>
               <div>
                 <TotalInvestment />
@@ -171,18 +192,18 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  Total User Roles
+                  Total Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {dashboard?.data?.totalUsersRole}
+                  {dashboardyearly?.data?.totalRevenue}
                 </span>
-                <div className="flex flex-row gap-1 text-[10px]">
+                {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
                     <Increase />
                   </span>
                   <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span>
-                </div>
+                </div> */}
               </div>
               <div>
                 <TotalInvestment />
@@ -214,13 +235,17 @@ const Dashboard = ({ title }) => {
               </div>
             </div>
             <div
-              className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
+              className="flex flex-col lg:w-[50%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
               <div className="flex flex-row justify-center">
                 <span className="text-second-card-text">Monthly Revenue</span>
               </div>
-              <MixedLineBarChart color={"#05B2FA"} background={"#c3e2f0"} />
+              <MixedLineBarChart
+                color={"#05B2FA"}
+                background={"#c3e2f0"}
+                data={dashboardyearly?.data?.monthlyRevenues}
+              />
               <div className="flex flex-row justify-center gap-2">
                 <span className="text-second-card-text text-[16px]">44%</span>
                 <div className="flex flex-col text-compare-second-card text-[10px]">
@@ -234,7 +259,7 @@ const Dashboard = ({ title }) => {
                 </button>
               </div>
             </div>
-            <div
+            {/* <div
               className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
@@ -258,7 +283,7 @@ const Dashboard = ({ title }) => {
                   Details
                 </button>
               </div>
-            </div>
+            </div> */}
             <div
               className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
@@ -394,8 +419,8 @@ const Dashboard = ({ title }) => {
                     {/* <input className='input' type='date' /> */}
                     <DatePicker
                       className="text-[8px] outline-none"
-                      selected={endDate}
-                      onChange={(date) => dateChanger(date)}
+                      selected={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
                       ref={datePickerRef}
                       showTimeSelect={false}
                       dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
@@ -410,7 +435,9 @@ const Dashboard = ({ title }) => {
                   <Ellipses />
                 </div>
               </div>
-              <DoubleBarChart data={dashboard?.data?.totalMonthlyRevenue} />
+              <DoubleBarChart
+                data={dashboarddiscomonthly?.data?.totalMonthlyRevenue}
+              />
             </div>
           </div>
           <div className="flex flex-col gap-3">
