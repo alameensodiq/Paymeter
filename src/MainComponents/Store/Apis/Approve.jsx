@@ -3,36 +3,54 @@ import toast from "react-hot-toast";
 
 export const Approve = createAsyncThunk(
   "approve",
-  async ({ userId, notId, stat }, thunkAPI) => {
+  async ({ userId, notId, stat, items, declineMessage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
-
     const accessToken = sessionStorage.getItem("token");
+
+    // Prepare the body based on the notId value
+    let body;
+
+    if (notId === "decline") {
+      body = JSON.stringify({
+        email: items?.email,
+        declineMessage
+      });
+    } else {
+      // Assuming "approve" or other cases
+      body = JSON.stringify({
+        email: items?.email,
+        nin: items?.nin,
+        address: items?.address,
+        proofOfAddressUrl: items?.addressUrl
+      });
+    }
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/approve-upgrade?userId=${userId}&notificationId=${notId}&action=${stat}&=`,
+        `${process.env.REACT_APP_BASE_URL}admin/approve-upgrade?userId=${userId}&notificationId=${items?.id}&action=${stat}`,
         {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`
-          }
+          },
+          body // Use the constructed body
         }
       );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       let data = await response.json();
-      // toast.success(data.message);
       console.log(data);
-      //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
-      //   sessionStorage.setItem('role', data?.data?.user?.userRole);
-      // sessionStorage.setItem('token', data?.data?.token );
       return data;
     } catch (e) {
+      console.error("API call failed:", e);
       return thunkAPI.rejectWithValue({
         error: "Failed! To establish connection."
       });
-      // console.log('Error', e.response.data);
-      // thunkAPI.rejectWithValue(e.response.data);
     }
   }
 );

@@ -35,6 +35,9 @@ const Notification = ({ title }) => {
   const [searcher, setSearcher] = useState("");
   const [loading, setloading] = useState(false);
   const [status, setStatus] = useState("accepted");
+  const [userId, setuserId] = useState("");
+  const [notId, setnotId] = useState("");
+  const [stat, setstat] = useState("");
   //   const [action, setAction] = useState("disable");
   //   const [notificationsId, setnotificationsId] = useState(null);
   const [role, setRole] = useState("APIPARTNER");
@@ -98,8 +101,15 @@ const Notification = ({ title }) => {
   };
 
   const Pays = (notificationsId, notId, action) => {
-    dispatch(Approve({ userId: notificationsId, notId, stat: action }));
-    setReload(true);
+    console.log(notificationsId);
+    console.log(notId);
+    console.log(action);
+    setuserId(notificationsId);
+    setnotId(notId);
+    setstat(action);
+    // dispatch(Approve({ userId: notificationsId, notId, stat: action }));
+    // setReload(true);
+    setStep(24);
   };
 
   const Downloading = () => {
@@ -131,6 +141,11 @@ const Notification = ({ title }) => {
           setUserIds={setUserIds}
           setStep={setStep}
           step={step}
+          userId={userId}
+          stat={stat}
+          notId={notId}
+          setuserId={setuserId}
+          setstat={setstat}
           setReload={setReload}
         />
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">

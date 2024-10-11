@@ -18,6 +18,7 @@ import { UserCom } from "../MainComponents/Store/Apis/UserCom";
 import { CreateEarnings } from "../MainComponents/Store/Apis/CreateEarnings";
 import { TogglePay } from "../MainComponents/Store/Apis/TogglePay";
 import { FundingApproval } from "../MainComponents/Store/Apis/FundingApproval";
+import { Approve } from "../MainComponents/Store/Apis/Approve";
 
 const AppUserModal = ({
   setStep,
@@ -30,12 +31,17 @@ const AppUserModal = ({
   real,
   setpaymentMethodIds,
   setActions,
-  setReal
+  setReal,
+  userId,
+  stat,
+  setuserId,
+  setstat
 }) => {
   const dispatch = useDispatch();
   const [hide, sethide] = useState(false);
   const [uploadfile, setupload] = useState("");
   const [update, setUpdate] = useState("");
+  const [approving, setApproving] = useState("");
   const [bustate, setBusstate] = useState(false);
   const [bustate2, setBusstate2] = useState(false);
   const [bustate3, setBusstate3] = useState(false);
@@ -45,9 +51,11 @@ const AppUserModal = ({
   const [bustate7, setBusstate7] = useState(false);
   const [bustate8, setBusstate8] = useState(false);
   const [bustate9, setBusstate9] = useState(false);
+  const [bustate10, setBusstate10] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
   const [itemersinst, setItemersinst] = useState("");
+  const [Approved, setApproved] = useState(false);
   const [partner, setPartner] = useState({
     name: "",
     email: "",
@@ -165,6 +173,11 @@ const AppUserModal = ({
   );
   console.log(fundingapproval);
 
+  const { approve, authenticatingapprove } = useSelector(
+    (state) => state?.approve
+  );
+  console.log(approve);
+
   useEffect(() => {
     if (bustate && createdbank?.status) {
       setStep(3);
@@ -196,6 +209,9 @@ const AppUserModal = ({
     if (bustate9 && fundingapproval?.status) {
       setStep(23);
     }
+    if (bustate10 && approve?.status) {
+      setStep(26);
+    }
 
     console.log(update);
   }, [
@@ -213,12 +229,14 @@ const AppUserModal = ({
     bustate7,
     bustate8,
     bustate9,
+    bustate10,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
     earningpartner?.status,
     togglepay?.status,
-    fundingapproval?.status
+    fundingapproval?.status,
+    approve?.status
   ]);
 
   const Change = (e) => {
@@ -255,6 +273,12 @@ const AppUserModal = ({
       ...partner,
       [name]: value
     });
+  };
+
+  const ChangeApproving = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setApproving(e.target.value);
   };
 
   const ChangePartnerNumber = (e) => {
@@ -456,6 +480,9 @@ const AppUserModal = ({
 
   const handleCloseModal4 = () => {
     setStep(0);
+    setApproving("");
+    setuserId("");
+    setstat("");
     setRegbus({
       name: "",
       code: "",
@@ -516,6 +543,7 @@ const AppUserModal = ({
     setBusstate4(false);
     setBusstate5(false);
     setBusstate6(false);
+    setBusstate10(false);
     setReload(true);
     setPassword("");
     if (userIds) {
@@ -2443,6 +2471,177 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully Fund Request</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={24}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You are about to accept Agent Notification, Are you sure the
+            </span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Reject"
+              large
+              onClick={() => setStep(25)}
+            />
+            <LargeSignInButton
+              title="Accept"
+              onClick={() => {
+                console.log(paymentMethodIds, actions, real);
+                dispatch(
+                  Approve({
+                    userId: userId?.user?.id,
+                    notId: "approve",
+                    stat,
+                    items: userId
+                  })
+                );
+                setBusstate10(true);
+              }}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={25}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Notification"
+      >
+        <ModalInputText
+          label="Reason for Rejection"
+          onChange={(e) => ChangeApproving(e)}
+          name="name"
+          value={approving}
+          placeholder={`${`Enter Your Reason for Rejection`}`}
+        />
+
+        <LargeSignInButton
+          onClick={() => {
+            console.log(paymentMethodIds, actions, real);
+            dispatch(
+              Approve({
+                userId: userId?.user?.id,
+                notId: "decline",
+                stat,
+                items: userId,
+                declineMessage: approving
+              })
+            );
+            setBusstate10(true);
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={26}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Notification {Approved ? "Approved" : "Declined"}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>Notification Status Changed</span>
           </div>
           <div
             style={{

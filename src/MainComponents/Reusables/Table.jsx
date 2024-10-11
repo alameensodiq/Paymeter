@@ -1452,21 +1452,21 @@ const Tables = ({
                   <StyledTableCell style={{ width: "15%" }}>
                     {item?.status === "ACCEPTED" ? (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "decline")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
                         className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
                       >
                         ACCEPETD
                       </button>
                     ) : item?.status === "REJECTED" ? (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
                         className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
                       >
                         DECLINED
                       </button>
                     ) : (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
                         className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
                       >
                         PENDING
@@ -1785,54 +1785,81 @@ const Tables = ({
             </TableHead>
             <TableBody>
               {data?.map((item, index) => (
-                <StyledTableRow
-                  onClick={() => {
-                    setStep(11);
-                    setUserIds(item?.id);
-                  }}
-                >
+                <StyledTableRow>
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
+                    onClick={() => {
+                      setStep(11);
+                      setUserIds(item?.id);
+                    }}
                   >
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
+                    onClick={() => {
+                      setStep(11);
+                      setUserIds(item?.id);
+                    }}
                   >
                     {item?.user?.name}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell
+                    style={{ width: "15%" }}
+                    onClick={() => {
+                      setStep(11);
+                      setUserIds(item?.id);
+                    }}
+                  >
                     {item?.user?.email}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell
+                    style={{ width: "15%" }}
+                    onClick={() => {
+                      setStep(11);
+                      setUserIds(item?.id);
+                    }}
+                  >
                     {item?.user?.phone}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "20%" }}>
+                  <StyledTableCell
+                    style={{ width: "20%" }}
+                    onClick={() => {
+                      setStep(11);
+                      setUserIds(item?.id);
+                    }}
+                  >
                     {item?.message}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell
+                    style={{ width: "15%" }}
+                    onClick={() => {
+                      setStep(11);
+                      setUserIds(item?.id);
+                    }}
+                  >
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     {item?.status === "ACCEPTED" ? (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "decline")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
                         className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
                       >
-                        ACCEPETD
+                        ACCEPTED
                       </button>
                     ) : item?.status === "REJECTED" ? (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                        // onClick={() => Pay(item, item?.user?.id, "approve")}
                         className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
                       >
                         DECLINED
                       </button>
                     ) : (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                        onClick={() => Pay(item, item?.user?.id, "approve")}
                         className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
                       >
                         PENDING
@@ -1907,21 +1934,21 @@ const Tables = ({
                   <StyledTableCell style={{ width: "15%" }}>
                     {item?.status === "ACCEPTED" ? (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "decline")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
                         className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
                       >
                         ACCEPETD
                       </button>
                     ) : item?.status === "REJECTED" ? (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
                         className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
                       >
                         DECLINED
                       </button>
                     ) : (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
                         className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
                       >
                         PENDING

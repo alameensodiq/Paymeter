@@ -289,7 +289,7 @@ const Dashboard = ({ title }) => {
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
               <div className="flex flex-row px-4 gap-4 items-center justify-end">
-                <span className="text-[14px]">Disco-Customer</span>
+                <span className="text-[14px]">Disco-Meter</span>
                 <div className="position:relative w-[120px] h-[30px] rounded-custom px-[5px] flex flex-row border items-center">
                   {/* <input className='input' type='date' /> */}
                   <DatePicker
