@@ -270,6 +270,15 @@ const Tables = ({
                     AGENT COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMMISSION FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMMISSION CAP FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMMISSION PERCENTAGE TYPE FEE VALUE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
                   </StyledTableCell>
                 </TableRow>
@@ -315,6 +324,15 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionCapFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionPercentageTypeFeeValue}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.feeDueToSystem}
