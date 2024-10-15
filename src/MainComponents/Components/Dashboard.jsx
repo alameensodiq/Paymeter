@@ -25,6 +25,7 @@ import { DashboardDaily } from "../Store/Apis/DashboardDaily";
 import { DashboardYearly } from "../Store/Apis/DashboardYearly";
 import { DashboardDiscoMonthlys } from "../Store/Apis/DashboardDiscoMonthly";
 import { Transactions } from "../Store/Apis/Transactions";
+import { DashboardSummary } from "../Store/Apis/DashboardSummary";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -42,6 +43,7 @@ const Dashboard = ({ title }) => {
       dispatch(Dashboards());
       dispatch(DashboardDaily());
       dispatch(DashboardYearly());
+      dispatch(DashboardSummary());
       dispatch(Transactions({ startDate, searcher, currentPage }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
@@ -81,6 +83,11 @@ const Dashboard = ({ title }) => {
     (state) => state?.dashboardyearly
   );
   console.log(dashboardyearly);
+
+  const { dashboardsummary, authenticatingdashboardsummary } = useSelector(
+    (state) => state?.dashboardsummary
+  );
+  console.log(dashboardsummary);
 
   // const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
   //   useSelector((state) => state?.dashboarddiscomonthly);
@@ -355,10 +362,9 @@ const Dashboard = ({ title }) => {
             </div>
             <div className="flex flex-col border rounded-custom gap-2 pt-3">
               <div className="flex flex-row px-4 gap-4 items-center justify-between">
-                <div className="flex flex-row gap-4 items-center">
+                {/* <div className="flex flex-row gap-4 items-center">
                   <span className="text-[14px]">Previous Month</span>
                   <div className="position:relative w-[120px] h-[30px] rounded-custom px-[4px] flex flex-row border items-center">
-                    {/* <input className='input' type='date' /> */}
                     <DatePicker
                       className="text-[8px] outline-none"
                       selected={endDate}
@@ -375,9 +381,9 @@ const Dashboard = ({ title }) => {
                     />
                   </div>
                   <Ellipses />
-                </div>
+                </div> */}
               </div>
-              <DoubleLineChart data={[]} />
+              <DoubleLineChart data={dashboardsummary?.data?.monthlyRevenues} />
             </div>
           </div>
           <div className="flex flex-col gap-3">
@@ -422,10 +428,9 @@ const Dashboard = ({ title }) => {
                   )} */}
                   {/* <span className="w-[10px] h-[10px] rounded-circle bg-discos"></span> IBEDC */}
                 </div>
-                <div className="flex flex-row gap-4 items-center">
+                {/* <div className="flex flex-row gap-4 items-center">
                   <span className="text-[14px]">Previous Month</span>
                   <div className="position:relative w-[120px] h-[30px] rounded-custom px-[4px] flex flex-row border items-center">
-                    {/* <input className='input' type='date' /> */}
                     <DatePicker
                       className="text-[8px] outline-none"
                       selected={startDate}
@@ -442,9 +447,9 @@ const Dashboard = ({ title }) => {
                     />
                   </div>
                   <Ellipses />
-                </div>
+                </div> */}
               </div>
-              <DoubleBarChart data={[]} />
+              <DoubleBarChart data={dashboardsummary?.data?.monthlyRevenues} />
             </div>
           </div>
           <div className="flex flex-col gap-3">

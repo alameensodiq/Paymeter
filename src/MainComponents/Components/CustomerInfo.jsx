@@ -187,9 +187,9 @@ const CustomerInfo = ({ title }) => {
                 >
                   Commission
                 </button> */}
-                <button className="px-2 flex justify-center  flex-row gap-1 items-center bg-route-color w-[50%] rounded-custom text-white font-semibold text-[11px]">
+                {/* <button className="px-2 flex justify-center  flex-row gap-1 items-center bg-route-color w-[50%] rounded-custom text-white font-semibold text-[11px]">
                   Add New Meter
-                </button>
+                </button> */}
                 <button
                   onClick={() => Downloading()}
                   className="px-2 flex  justify-center  flex-row gap-1 items-center bg-route-color w-[50%] rounded-custom text-white font-semibold text-[10px]"

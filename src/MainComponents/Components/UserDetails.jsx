@@ -28,6 +28,7 @@ import { Loader } from "./Loader";
 import Pagination from "../Reusables/Pagination";
 import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
+import AppUserModal from "../../Modal/AppUserModal";
 
 const UserDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -41,6 +42,9 @@ const UserDetails = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [status, setStatus] = useState("accepted");
   const [loading, setloading] = useState(false);
+  const [naming, setNaming] = useState("");
+  const [step, setStep] = useState(0);
+  const [reload, setReload] = useState(false);
   let id = window?.location?.pathname.split("/")[2];
   console.log(id);
 
@@ -71,9 +75,14 @@ const UserDetails = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
+    if (reload && sessionStorage.getItem("token") && id) {
+      dispatch(UserData({ id }));
+      dispatch(UserWallet({ id }));
+      dispatch(GetCommission({ id }));
+    }
 
     //eslint-disable-next-line
-  }, [userdata?.status]);
+  }, [userdata?.status, reload]);
 
   const isEarningRoute = location.pathname.startsWith("/earning/");
 
@@ -118,6 +127,13 @@ const UserDetails = ({ title }) => {
       <div className="flex flex-col w-[85%] h-[100%]">
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
+          <AppUserModal
+            naming={naming}
+            setNaming={setNaming}
+            setStep={setStep}
+            step={step}
+            setReload={setReload}
+          />
         </div>
         <div className="w-[100%] py-9 px-5 flex flex-col gap-7">
           <div className="flex flex-row justify-start">
@@ -269,8 +285,8 @@ const UserDetails = ({ title }) => {
                 {status === "accepted" && (
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
-                {status === "pending" && showCommission && (
-                  <div className="w-[90px] h-[2px] bg-route-color ml-[12%]" />
+                {status === "pending" && !isEarningRoute && (
+                  <div className="w-[90px] h-[2px] bg-route-color ml-[9%]" />
                 )}
               </div>
             </div>
@@ -283,7 +299,12 @@ const UserDetails = ({ title }) => {
                 {!isEarningRoute &&
                   getcommission?.data?.length >= 1 &&
                   status === "pending" && (
-                    <Tables overviewcommission data={getcommission?.data} />
+                    <Tables
+                      setStep={setStep}
+                      setNaming={setNaming}
+                      overviewcommission
+                      data={getcommission?.data}
+                    />
                   )}
                 {userdata?.data?.meta?.totalCount === 0 &&
                   status === "accepted" && (

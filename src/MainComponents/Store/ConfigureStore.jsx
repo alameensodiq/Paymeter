@@ -33,6 +33,8 @@ import { DashboardDailySlice } from "./Reducers/DashboardDaily";
 import { DashboardYearlySlice } from "./Reducers/DashboardYearly";
 import { DashboardDiscoMonthlySlice } from "./Reducers/DashboardDiscoMonthly";
 import { EditSettingsSlice } from "./Reducers/EditSettings";
+import { DashboardSummarySlice } from "./Reducers/DashboardSummary";
+import { UserComEditSlice } from "./Reducers/UserComEdit";
 
 export default configureStore({
   reducer: {
@@ -60,6 +62,7 @@ export default configureStore({
     getsettings: GetSettingsSlice?.reducer,
     createsettings: CreateSettingsSlice?.reducer,
     usercom: UserComSlice?.reducer,
+    usercomedit: UserComEditSlice?.reducer,
     earningpartner: CreateEarningsSlice?.reducer,
     complain: ComplainSlice?.reducer,
     complainapprove: ComplainApproveSlice?.reducer,
@@ -69,6 +72,7 @@ export default configureStore({
     dashboarddaily: DashboardDailySlice?.reducer,
     dashboardyearly: DashboardYearlySlice?.reducer,
     dashboarddiscomonthly: DashboardDiscoMonthlySlice?.reducer,
-    editsettings: EditSettingsSlice?.reducer
+    editsettings: EditSettingsSlice?.reducer,
+    dashboardsummary: DashboardSummarySlice?.reducer
   }
 });

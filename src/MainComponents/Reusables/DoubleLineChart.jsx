@@ -1,27 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
-function DoubleLineChart({data}) {
-  // const series = [
-  //   {
-  //     //   name: "High - 2013",
-  //     data: [40, 80, 30, 10, 70, 20, 10]
-  //   },
-  //   {
-  //     //   name: "Low - 2013",
-  //     data: [10, 30, 70, 30, 90, 50, 60]
-  //   }
-  // ];
+function DoubleLineChart({ data }) {
+  console.log("Data received:", data);
 
-  const series = data ? data?.map(item => ({
-    name: item?.disco,
-    data: item?.month?.map(real => real?.count)
-  })) : [];
+  // Prepare the series based on the disco data for each month
+  const series = Array.isArray(data)
+    ? data.flatMap((item) =>
+        item.discoData.map((disco) => ({
+          name: disco.discoName,
+          type: "line",
+          data: Array(12)
+            .fill(0)
+            .map((_, index) => {
+              const monthNames = [
+                "JANUARY",
+                "FEBRUARY",
+                "MARCH",
+                "APRIL",
+                "MAY",
+                "JUNE",
+                "JULY",
+                "AUGUST",
+                "SEPTEMBER",
+                "OCTOBER",
+                "NOVEMBER",
+                "DECEMBER"
+              ];
+              return item.month === monthNames[index]
+                ? disco.transactionCount
+                : 0;
+            })
+        }))
+      )
+    : [];
 
-  console.log(data)
+  console.log("Series prepared:", series);
+
+  // Generate unique colors for each disco based on the number of series
+  const colors = series.map((_, index) => {
+    const colorPalette = [
+      "#E9EDF5",
+      "#9932CC",
+      "#c29bd6",
+      "#d81694",
+      "#1E90FF",
+      "#FF4500"
+    ];
+    return colorPalette[index % colorPalette.length]; // Cycle through colors
+  });
 
   const options = {
-    colors: [ "#E9EDF5","#9932CC", "#c29bd6", "#d81694"],
+    colors: colors, // Use the dynamically generated colors
     chart: {
       height: 220,
       type: "line",
@@ -35,29 +65,41 @@ function DoubleLineChart({data}) {
     dataLabels: {
       enabled: false
     },
-    stroke: {   
+    stroke: {
       curve: "smooth",
-      width: 3
+      width: 2
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ]
     },
     yaxis: {
       tickAmount: 5,
       min: 0,
-      max: 10000
+      max: 10 // Adjust as needed based on your data
     },
     tooltip: {
-      x: {
-        formatter: undefined,
-        title: "Title: "
-      }
+      shared: true,
+      intersect: false
     },
     legend: {
-      show: false // Set this to false to hide legend labels
+      show: true
     }
   };
 
   return <Chart options={options} series={series} type="line" height={290} />;
 }
+
 export default DoubleLineChart;

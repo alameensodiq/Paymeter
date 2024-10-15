@@ -1,33 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
-function DoubleBarChart({data}) {
+function DoubleBarChart({ data }) {
+  // Log the input data to verify structure
+  console.log("Data received:", data);
 
-  console.log(data)
-  // const series = [
-  //   {
-  //     name: "Income",
-  //     type: "column",
-  //     data: [14, 20, 25, 15, 35, 28, 38, 46]
-  //   },
-  //   {
-  //     name: "Cashflow",
-  //     type: "column",
-  //     data: [11, 33, 31, 40, 41, 49, 65, 85]
-  //   }
-  // ];
+  // Initialize an empty series array
+  let series = [];
 
+  if (Array.isArray(data)) {
+    // Create a series for each disco in discoData for each month
+    series = data
+      .map((monthData) => {
+        const { discoData, month } = monthData;
 
-  const series = data ? data?.map(item => ({
-    name: item?.disco,
-    type: "column",
-    data: item?.month?.map(real => real?.amount?.AMOUNT)
-  })) : [];
+        // Ensure discoData is defined and is an array
+        if (Array.isArray(discoData)) {
+          return discoData.map((disco) => ({
+            name: disco.discoName,
+            type: "column",
+            data: Array(12)
+              .fill(0)
+              .map((_, index) => {
+                // Check if this month corresponds to the current index
+                return month ===
+                  [
+                    "JANUARY",
+                    "FEBRUARY",
+                    "MARCH",
+                    "APRIL",
+                    "MAY",
+                    "JUNE",
+                    "JULY",
+                    "AUGUST",
+                    "SEPTEMBER",
+                    "OCTOBER",
+                    "NOVEMBER",
+                    "DECEMBER"
+                  ][index]
+                  ? disco.totalRevenue
+                  : 0;
+              })
+          }));
+        }
+        return []; // Return an empty array if discoData is not valid
+      })
+      .flat(); // Flatten the resulting arrays into a single series array
+  }
 
-   console.log(series)
+  console.log("Series prepared:", series);
+
+  // Generate unique colors for each disco based on the number of series
+  const colors = series.map((_, index) => {
+    const colorPalette = [
+      "#E9EDF5",
+      "#9932CC",
+      "#c29bd6",
+      "#d81694",
+      "#1E90FF",
+      "#FF4500"
+    ];
+    return colorPalette[index % colorPalette.length]; // Cycle through colors
+  });
 
   const options = {
-    colors: [ "#E9EDF5","#9932CC", "#c29bd6", "#d81694"],
+    colors: colors, // Use the dynamically generated colors
     chart: {
       height: 220,
       type: "bar",
@@ -43,41 +80,46 @@ function DoubleBarChart({data}) {
         horizontal: false,
         columnWidth: "45%",
         borderRadius: 1
-        //   endingShape: 'rounded',
       }
     },
     dataLabels: {
       enabled: false
     },
     stroke: {
-      //   curve: "smooth",
-      //   width: [1, 1, 4]
       show: true,
       width: 2,
       colors: ["transparent"]
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ]
     },
     yaxis: {
       tickAmount: 5,
       min: 0,
-      max: 10000
+      max: 1000 // Adjust as needed
     },
     fill: {
       opacity: 1
     },
-    // tooltip: {
-    //   x: {
-    //     formatter: undefined,
-    //     title: "Title: "
-    //   }
-    // },
     legend: {
-      show: false // Set this to false to hide legend labels
+      show: false
     }
   };
 
   return <Chart options={options} series={series} type="bar" height={290} />;
 }
+
 export default DoubleBarChart;

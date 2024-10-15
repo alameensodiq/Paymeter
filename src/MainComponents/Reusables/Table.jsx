@@ -39,7 +39,8 @@ const Tables = ({
   overviewtransaction,
   overviewcommission,
   setdiscname,
-  setsettingId
+  setsettingId,
+  setNaming
 }) => {
   const navigate = useNavigate();
   console.log(data);
@@ -2169,7 +2170,12 @@ const Tables = ({
               </TableHead>
               <TableBody>
                 {data?.map((item, index) => (
-                  <StyledTableRow>
+                  <StyledTableRow
+                    onClick={() => {
+                      setStep(33);
+                      setNaming(item);
+                    }}
+                  >
                     <StyledTableCell style={{ width: "5%" }}>
                       {index + 1}
                     </StyledTableCell>

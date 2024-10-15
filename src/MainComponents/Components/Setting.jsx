@@ -43,7 +43,7 @@ const Setting = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload) {
+    if (reload && sessionStorage.getItem("token")) {
       dispatch(GetSettings());
       //   dispatch(Banks({ startDate, searcher, currentPage }));
       setReload(false);
