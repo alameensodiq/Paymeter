@@ -58,7 +58,7 @@ const Notification = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload && approve?.status) {
+    if (reload) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
       dispatch(Notifications({ status }));
       setReload(false);
@@ -239,11 +239,11 @@ const Notification = ({ title }) => {
                   </span>
                   <span
                     onClick={() => {
-                      setStatus("rejected");
+                      setStatus("REJECTED");
                       setCurrentPage(0);
                     }}
                     className={`${
-                      status === "rejected"
+                      status === "REJECTED"
                         ? "text-route-color cursor-pointer"
                         : "text-route-noncolor cursor-pointer"
                     }`}
@@ -258,7 +258,7 @@ const Notification = ({ title }) => {
                   {status === "pending" && (
                     <div className="w-[75px] h-[2px] bg-route-color ml-[34%]" />
                   )}
-                  {status === "rejected" && (
+                  {status === "REJECTED" && (
                     <div className="w-[80px] h-[2px] bg-route-color ml-[69%]" />
                   )}
                 </div>
@@ -317,7 +317,7 @@ const Notification = ({ title }) => {
                     />
                   )}
                 {notifications?.data?.meta?.totalCount >= 1 &&
-                  status === "rejected" && (
+                  status === "REJECTED" && (
                     <Tables
                       rejected
                       Pay={Pays}

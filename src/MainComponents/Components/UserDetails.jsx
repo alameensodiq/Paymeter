@@ -18,7 +18,7 @@ import Donuts from "../Reusables/Donuts";
 import DoubleLineChart from "../Reusables/DoubleLineChart";
 import Tables from "../Reusables/Table";
 import DoubleBarChart from "../Reusables/DoubleBarChart";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Dashboards } from "../Store/Apis/Dashboard";
@@ -52,11 +52,14 @@ const UserDetails = ({ title }) => {
   const { getcommission, authenticatinggetcommission } = useSelector(
     (state) => state?.getcommission
   );
-  console.log(userdata);
+  console.log(getcommission);
   const { userwallet, authenticatinguserwallet } = useSelector(
     (state) => state?.userwallet
   );
   console.log(userwallet);
+
+  const [showCommission, setShowCommission] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && id) {
@@ -71,6 +74,8 @@ const UserDetails = ({ title }) => {
 
     //eslint-disable-next-line
   }, [userdata?.status]);
+
+  const isEarningRoute = location.pathname.startsWith("/earning/");
 
   const next = userdata?.data?.meta?.next;
   const previous = userdata?.data?.meta?.prev;
@@ -244,25 +249,27 @@ const UserDetails = ({ title }) => {
                 >
                   Transactions
                 </span>
-                <span
-                  onClick={() => {
-                    setStatus("pending");
-                    setCurrentPage(0);
-                  }}
-                  className={`${
-                    status === "pending"
-                      ? "text-route-color cursor-pointer"
-                      : "text-route-noncolor cursor-pointer"
-                  }`}
-                >
-                  Commissions
-                </span>
+                {!isEarningRoute && (
+                  <span
+                    onClick={() => {
+                      setStatus("pending");
+                      setCurrentPage(0);
+                    }}
+                    className={`${
+                      status === "pending"
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    Commissions
+                  </span>
+                )}
               </div>
               <div className="gap-2">
                 {status === "accepted" && (
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
-                {status === "pending" && (
+                {status === "pending" && showCommission && (
                   <div className="w-[90px] h-[2px] bg-route-color ml-[12%]" />
                 )}
               </div>
@@ -271,54 +278,51 @@ const UserDetails = ({ title }) => {
               <>
                 {userdata?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
-                    <Tables
-                      overviewtransaction
-                      data={userdata?.data?.data?.systemTransactions}
-                    />
+                    <Tables overviewtransaction data={userdata?.data?.data} />
                   )}
-                {getcommission?.data?.meta?.totalCount >= 1 &&
+                {!isEarningRoute &&
+                  getcommission?.data?.length >= 1 &&
                   status === "pending" && (
-                    <Tables
-                      overviewcommission
-                      data={userdata?.data?.data?.systemTransactions}
+                    <Tables overviewcommission data={getcommission?.data} />
+                  )}
+                {userdata?.data?.meta?.totalCount === 0 &&
+                  status === "accepted" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
+                {getcommission?.data?.length === 0 && status === "pending" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {userdata?.data?.meta?.totalCount >= 1 &&
+                  status === "accepted" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
                     />
                   )}
-                {!userdata?.status && status === "accepted" && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                )}
-                {!getcommission?.status && status === "pending" && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                )}
-                {userdata?.data?.meta?.totalCount >= 1 && (
-                  <Pagination
-                    set={activater}
-                    currentPage={currentPage}
-                    postsPerPage={postsPerPage}
-                    totalPosts={totalPosts}
-                    paginate={paginate}
-                    previous={previous}
-                    next={next}
-                  />
-                )}
-                {getcommission?.data?.meta?.totalCount >= 1 && (
+                {/* {getcommission?.data?.length >= 1 && (
                   <Pagination
                     set={activater}
                     currentPage={currentPage}
@@ -328,7 +332,7 @@ const UserDetails = ({ title }) => {
                     previous={previous2}
                     next={next2}
                   />
-                )}
+                )} */}
               </>
             ) : (
               <Loader />

@@ -1,28 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const CreatedDisco = createAsyncThunk(
-  "createddisco",
-  async (
-    {
-      name,
-      shortName,
-      commissionsDTO,
-      earningPartnerId,
-      email,
-      logoUrl,
-      phone,
-      systemFee
-    },
-    thunkAPI
-  ) => {
+export const EditSettings = createAsyncThunk(
+  "editsettings",
+  async ({ name, userType, commissions, settingId }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
+
     const accessToken = sessionStorage.getItem("token");
+
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/onboard-disco`,
+        `${process.env.REACT_APP_BASE_URL}admin/edit-global-settings/${settingId}`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -30,19 +20,17 @@ export const CreatedDisco = createAsyncThunk(
           },
           body: JSON.stringify({
             name,
-            shortName,
-            commissionsDTO,
-            earningPartnerId,
-            email,
-            logoUrl,
-            systemFee,
-            phone
+            userType,
+            commissions
           })
         }
       );
       let data = await response.json();
-      toast.success(data.message);
+      // toast.success(data.message);
       console.log(data);
+      //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
+      //   sessionStorage.setItem('role', data?.data?.user?.userRole);
+      // sessionStorage.setItem('token', data?.data?.token );
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue({

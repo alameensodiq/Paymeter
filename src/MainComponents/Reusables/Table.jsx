@@ -37,7 +37,9 @@ const Tables = ({
   pending,
   rejected,
   overviewtransaction,
-  overviewcommission
+  overviewcommission,
+  setdiscname,
+  setsettingId
 }) => {
   const navigate = useNavigate();
   console.log(data);
@@ -428,18 +430,50 @@ const Tables = ({
             <TableBody>
               {data?.map((item, index) => (
                 <StyledTableRow>
-                  <StyledTableCell style={{ width: "20%" }}>1</StyledTableCell>
-                  <StyledTableCell style={{ width: "20%" }}>
+                  <StyledTableCell
+                    onClick={() => {
+                      setStep(27);
+                      setdiscname(item?.shortName);
+                    }}
+                    style={{ width: "20%" }}
+                  >
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    onClick={() => {
+                      setStep(27);
+                      setdiscname(item?.shortName);
+                    }}
+                    style={{ width: "20%" }}
+                  >
                     {item?.name}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "20%" }}>
-                    29a, berkeley
+                  <StyledTableCell
+                    onClick={() => {
+                      setStep(27);
+                      setdiscname(item?.shortName);
+                    }}
+                    style={{ width: "20%" }}
+                  >
+                    ------
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "20%" }}>
+                  <StyledTableCell
+                    onClick={() => {
+                      setStep(27);
+                      setdiscname(item?.shortName);
+                    }}
+                    style={{ width: "20%" }}
+                  >
                     {item?.shortName}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "20%" }}>
-                    12/05/2024
+                  <StyledTableCell
+                    onClick={() => {
+                      setStep(27);
+                      setdiscname(item?.shortName);
+                    }}
+                    style={{ width: "20%" }}
+                  >
+                    -----
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     <button
@@ -943,7 +977,7 @@ const Tables = ({
                         justifyContent: "center",
                         color: "#000000"
                       }}
-                      onClick={() => navigate(`/agents/${item?.id}`)}
+                      onClick={() => navigate(`/agents/${item?.user?.id}`)}
                     >
                       View
                     </span>
@@ -1269,7 +1303,12 @@ const Tables = ({
               </TableHead>
               <TableBody>
                 {data?.map((item, index) => (
-                  <StyledTableRow>
+                  <StyledTableRow
+                    onClick={() => {
+                      setStep(30);
+                      setsettingId(item?.id);
+                    }}
+                  >
                     <StyledTableCell style={{ width: "20%" }}>
                       {index + 1}
                     </StyledTableCell>
@@ -1438,7 +1477,7 @@ const Tables = ({
                     {item?.user?.name}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    {item?.user?.email}
+                    {item?.email}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     {item?.user?.phone}
@@ -1481,7 +1520,7 @@ const Tables = ({
                         justifyContent: "center",
                         color: "#000000"
                       }}
-                      onClick={() => navigate(`/agents/${item?.id}`)}
+                      onClick={() => navigate(`/agents/${item?.user?.id}`)}
                     >
                       View
                     </span>
@@ -1813,7 +1852,7 @@ const Tables = ({
                       setUserIds(item?.id);
                     }}
                   >
-                    {item?.user?.email}
+                    {item?.email}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "15%" }}
@@ -1920,7 +1959,7 @@ const Tables = ({
                     {item?.user?.name}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    {item?.user?.email}
+                    {item?.email}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     {item?.user?.phone}

@@ -574,8 +574,8 @@ const Sidebar = () => {
           <Link
             to="/payment"
             className={`flex flex-row h-[33px] ${
-              router.pathname === "/discos" ||
-              router.pathname.startsWith("/discos/")
+              router.pathname === "/payment" ||
+              router.pathname.startsWith("/payment/")
                 ? "bg-route-bg gap-2 rounded-custom-router"
                 : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
             }`}
@@ -583,14 +583,14 @@ const Sidebar = () => {
             onMouseLeave={() => setIsHovered12(false)}
           >
             {router.pathname === "/payment" ||
-            isHovered4 ||
+            isHovered12 ||
             router.pathname.startsWith("/payment") ? (
               <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
             ) : (
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
             {router.pathname === "/payment" ||
-            isHovered4 ||
+            isHovered12 ||
             router.pathname.startsWith("/payment/") ? (
               <LoanColor
                 className={`${

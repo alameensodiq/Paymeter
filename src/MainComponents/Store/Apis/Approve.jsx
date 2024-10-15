@@ -27,7 +27,7 @@ export const Approve = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/approve-upgrade?userId=${userId}&notificationId=${items?.id}&action=${stat}`,
+        `${process.env.REACT_APP_BASE_URL}admin/approve-upgrade?userId=${userId}&notificationId=${items?.id}&action=${notId}`,
         {
           method: "POST",
           headers: {

@@ -24,6 +24,7 @@ import { Dashboards } from "../Store/Apis/Dashboard";
 import { DashboardDaily } from "../Store/Apis/DashboardDaily";
 import { DashboardYearly } from "../Store/Apis/DashboardYearly";
 import { DashboardDiscoMonthlys } from "../Store/Apis/DashboardDiscoMonthly";
+import { Transactions } from "../Store/Apis/Transactions";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -32,6 +33,8 @@ const Dashboard = ({ title }) => {
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const datePickerRef = useRef(null);
   const navigate = useNavigate();
+  const [searcher, setSearcher] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,7 +42,8 @@ const Dashboard = ({ title }) => {
       dispatch(Dashboards());
       dispatch(DashboardDaily());
       dispatch(DashboardYearly());
-      dispatch(DashboardDiscoMonthlys({ startDate }));
+      dispatch(Transactions({ startDate, searcher, currentPage }));
+      // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
     } else {
       navigate("/");
@@ -47,7 +51,7 @@ const Dashboard = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [startDate]);
+  }, [startDate, , searcher, currentPage]);
 
   const dateChanger = (date) => {
     console.log(date);
@@ -57,6 +61,11 @@ const Dashboard = ({ title }) => {
   const PickDate = () => {
     datePickerRef.current.setOpen(true);
   };
+
+  const { transactions, authenticatingtransactions } = useSelector(
+    (state) => state?.transactions
+  );
+  console.log(transactions);
 
   const { dashboard, authenticatingdashboard } = useSelector(
     (state) => state?.dashboard
@@ -73,9 +82,9 @@ const Dashboard = ({ title }) => {
   );
   console.log(dashboardyearly);
 
-  const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
-    useSelector((state) => state?.dashboarddiscomonthly);
-  console.log(dashboarddiscomonthly);
+  // const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
+  //   useSelector((state) => state?.dashboarddiscomonthly);
+  // console.log(dashboarddiscomonthly);
   return (
     <div className="flex flex-row">
       <div className="w-[15%] h-[100%]">
@@ -435,9 +444,7 @@ const Dashboard = ({ title }) => {
                   <Ellipses />
                 </div>
               </div>
-              <DoubleBarChart
-                data={dashboarddiscomonthly?.data?.totalMonthlyRevenue}
-              />
+              <DoubleBarChart data={[]} />
             </div>
           </div>
           <div className="flex flex-col gap-3">
@@ -451,7 +458,7 @@ const Dashboard = ({ title }) => {
                 <Filtering />
                 <span className="text-[14px]">Filters</span>
               </div>
-              <Tables overview />
+              <Tables transfers data={transactions?.data?.data?.slice(0, 10)} />
             </div>
           </div>
         </div>

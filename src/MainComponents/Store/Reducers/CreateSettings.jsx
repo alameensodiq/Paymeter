@@ -27,7 +27,7 @@ export const CreateSettingsSlice = createSlice({
       return state;
     });
     builder.addCase(CreateSettings.pending, (state, action) => {
-      state.authenticatinggetsettings = true;
+      state.authenticatingcreatesettings = true;
       state.authenticated = true;
     });
     builder.addCase(CreateSettings.rejected, (state, action) => {

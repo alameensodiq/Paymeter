@@ -29,6 +29,7 @@ const Setting = ({ title }) => {
   const [activater, setActivater] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
   const [searcher, setSearcher] = useState("");
+  const [settingId, setsettingId] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
@@ -98,7 +99,13 @@ const Setting = ({ title }) => {
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
         </div>
-        <AppUserModal setStep={setStep} step={step} setReload={setReload} />
+        <AppUserModal
+          settingId={settingId}
+          setsettingId={setsettingId}
+          setStep={setStep}
+          step={step}
+          setReload={setReload}
+        />
         <div className="w-[100%] py-9 px-5 flex flex-row gap-10">
           <button
             onClick={() => SendForgot()}
@@ -121,7 +128,12 @@ const Setting = ({ title }) => {
         </div>
         {loading ? (
           <>
-            <Tables setting data={getsettings?.data?.data} setStep={setStep} />
+            <Tables
+              setsettingId={setsettingId}
+              setting
+              data={getsettings?.data?.data}
+              setStep={setStep}
+            />
             {getsettings?.data?.meta?.totalCount >= 1 && (
               <Pagination
                 set={activater}

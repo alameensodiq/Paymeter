@@ -19,6 +19,10 @@ import { CreateEarnings } from "../MainComponents/Store/Apis/CreateEarnings";
 import { TogglePay } from "../MainComponents/Store/Apis/TogglePay";
 import { FundingApproval } from "../MainComponents/Store/Apis/FundingApproval";
 import { Approve } from "../MainComponents/Store/Apis/Approve";
+import { ApiAgentRole } from "../MainComponents/Store/Apis/ApiAgentRoles";
+import EarningPartnerSelect from "../bits/EarningPartnerSelect";
+import { DashboardDiscoMonthlys } from "../MainComponents/Store/Apis/DashboardDiscoMonthly";
+import { EditSettings } from "../MainComponents/Store/Apis/EditSettings";
 
 const AppUserModal = ({
   setStep,
@@ -35,7 +39,11 @@ const AppUserModal = ({
   userId,
   stat,
   setuserId,
-  setstat
+  setstat,
+  discname,
+  setdiscname,
+  settingId,
+  setsettingId
 }) => {
   const dispatch = useDispatch();
   const [hide, sethide] = useState(false);
@@ -52,9 +60,13 @@ const AppUserModal = ({
   const [bustate8, setBusstate8] = useState(false);
   const [bustate9, setBusstate9] = useState(false);
   const [bustate10, setBusstate10] = useState(false);
+  const [bustate11, setBusstate11] = useState(false);
+  const [bustate12, setBusstate12] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
   const [itemersinst, setItemersinst] = useState("");
+  const [itemersettings, setItemersettings] = useState("");
+  const [itemerseditdisc, setItemerseditdisc] = useState("");
   const [Approved, setApproved] = useState(false);
   const [partner, setPartner] = useState({
     name: "",
@@ -66,6 +78,16 @@ const AppUserModal = ({
   });
 
   const [settingglobal, setSettingsGlobal] = useState({
+    name: "",
+    userType: "",
+    commissions: {
+      commissionType: "",
+      fee: null,
+      capFee: null
+    }
+  });
+
+  const [settingglobaledit, setSettingsGlobaledit] = useState({
     name: "",
     userType: "",
     commissions: {
@@ -115,10 +137,17 @@ const AppUserModal = ({
       fee: null,
       capFee: null
     },
+    systemFee: "",
     earningPartnerId: "",
     email: "",
     logoUrl: "",
     phone: null
+  });
+
+  const [editdisc, setEditDisc] = useState({
+    commissionType: "",
+    fee: null,
+    capFee: null
   });
 
   const [password, setPassword] = useState("");
@@ -178,7 +207,17 @@ const AppUserModal = ({
   );
   console.log(approve);
 
+  const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
+    useSelector((state) => state?.dashboarddiscomonthly);
+  console.log(dashboarddiscomonthly);
+
+  const { editsettings, authenticatingeditsettings } = useSelector(
+    (state) => state?.editsettings
+  );
+  console.log(editsettings);
+
   useEffect(() => {
+    dispatch(ApiAgentRole({ role: "EARNINGPARTNER" }));
     if (bustate && createdbank?.status) {
       setStep(3);
     }
@@ -212,6 +251,12 @@ const AppUserModal = ({
     if (bustate10 && approve?.status) {
       setStep(26);
     }
+    if (bustate11 && dashboarddiscomonthly?.status) {
+      setStep(29);
+    }
+    if (bustate12 && editsettings?.status) {
+      setStep(32);
+    }
 
     console.log(update);
   }, [
@@ -230,20 +275,38 @@ const AppUserModal = ({
     bustate8,
     bustate9,
     bustate10,
+    bustate11,
+    bustate12,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
     earningpartner?.status,
     togglepay?.status,
     fundingapproval?.status,
-    approve?.status
+    approve?.status,
+    dashboarddiscomonthly?.status,
+    editsettings?.status
   ]);
+
+  const { apiagentrole, authenticatingapiagentrole } = useSelector(
+    (state) => state?.apiagentrole
+  );
+  console.log(apiagentrole);
 
   const Change = (e) => {
     const { name, value } = e.target;
     console.log(value);
     setRegbus({
       ...regbus,
+      [name]: value
+    });
+  };
+
+  const ChangeEditDisco = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setEditDisc({
+      ...editdisc,
       [name]: value
     });
   };
@@ -261,7 +324,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
     console.log(value);
     setPay({
-      ...regbus,
+      ...pay,
       [name]: value
     });
   };
@@ -384,24 +447,38 @@ const AppUserModal = ({
     const {
       name,
       shortName,
-      earningPartnerDto,
+      earningPartnerId,
       commissionsDTO,
       email,
       logoUrl,
-      phone
+      phone,
+      systemFee
     } = disc;
     dispatch(
       CreatedDisco({
         name,
         shortName,
         commissionsDTO,
-        earningPartnerDto,
+        earningPartnerId,
         email,
+        systemFee,
         logoUrl,
         phone
       })
     );
     setBusstate2(true);
+  };
+  const SendEditDisco = () => {
+    const { commissionType } = editdisc;
+    console.log(discname);
+    console.log(editdisc);
+    dispatch(
+      DashboardDiscoMonthlys({
+        editdisc,
+        discname
+      })
+    );
+    setBusstate11(true);
   };
 
   const SendEarningPartner = () => {
@@ -465,6 +542,20 @@ const AppUserModal = ({
     setBusstate6(true);
   };
 
+  const SendEditSettings = () => {
+    const { name, userType, commissions } = settingglobaledit;
+    console.log({ name, userType, commissions });
+    dispatch(
+      EditSettings({
+        name,
+        userType,
+        commissions,
+        settingId
+      })
+    );
+    setBusstate12(true);
+  };
+
   const SendUser = () => {
     const { discoName, userId, commissionDetails } = userglobal;
     console.log({ discoName, userId, commissionDetails });
@@ -481,8 +572,15 @@ const AppUserModal = ({
   const handleCloseModal4 = () => {
     setStep(0);
     setApproving("");
-    setuserId("");
-    setstat("");
+    if (userId) {
+      setuserId("");
+    }
+    if (stat) {
+      setstat("");
+    }
+    if (settingId) {
+      setsettingId("");
+    }
     setRegbus({
       name: "",
       code: "",
@@ -513,6 +611,9 @@ const AppUserModal = ({
       password_confirmation: ""
     });
     setItemer("");
+    setItemersinst("");
+    setItemerseditdisc("");
+    setItemerdisco("");
     setDisc({
       name: "",
       shortName: "",
@@ -544,6 +645,8 @@ const AppUserModal = ({
     setBusstate5(false);
     setBusstate6(false);
     setBusstate10(false);
+    setBusstate11(false);
+    setApproved(false);
     setReload(true);
     setPassword("");
     if (userIds) {
@@ -565,6 +668,9 @@ const AppUserModal = ({
       phone: "",
       nin: ""
     });
+    if (discname) {
+      setdiscname("");
+    }
   };
 
   const handleSubmit = () => {
@@ -607,6 +713,20 @@ const AppUserModal = ({
       ...prev,
       commissions:
         itemers === "Fixed"
+          ? {
+              commissionType: "FIXED",
+              fee: null
+            }
+          : {
+              commissionType: "PERCENTAGE",
+              fee: null,
+              capFee: null
+            }
+    }));
+    setSettingsGlobaledit((prev) => ({
+      ...prev,
+      commissions:
+        itemersettings === "Fixed"
           ? {
               commissionType: "FIXED",
               fee: null
@@ -662,13 +782,34 @@ const AppUserModal = ({
               fee: ""
             }
     }));
-  }, [itemers, itemersdisco, itemersinst]);
+    if (itemerseditdisc === "Fixed") {
+      setEditDisc({
+        commissionType: "Fixed",
+        fee: null
+      });
+    } else {
+      setEditDisc({
+        commissionType: "PERCENTAGE",
+        capFee: null,
+        fee: null
+      });
+    }
+  }, [itemers, itemersdisco, itemersinst, itemerseditdisc, itemersettings]);
 
   const ChangeSettings = (e) => {
     const { name, value } = e.target;
     console.log(value);
     setSettingsGlobal({
       ...settingglobal,
+      [name]: value
+    });
+  };
+
+  const ChangeSettingsEdit = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setSettingsGlobaledit({
+      ...settingglobaledit,
       [name]: value
     });
   };
@@ -699,6 +840,31 @@ const AppUserModal = ({
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
     setSettingsGlobal((prev) => ({
+      ...prev,
+      commissions: {
+        ...prev.commissions,
+        [name]: sanitizedValue
+      }
+    }));
+  };
+
+  const ChangeSettingsTypeEdit = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+    setSettingsGlobaledit((prev) => ({
       ...prev,
       commissions: {
         ...prev.commissions,
@@ -1138,6 +1304,21 @@ const AppUserModal = ({
           name="email"
           value={disc?.email}
           placeholder={`${`Enter Disco Email`}`}
+        />
+        <EarningPartnerSelect
+          name="earningPartnerId"
+          label="Choose Earning Partner"
+          value={disc?.earningPartnerId}
+          onChange={(e) => ChangeDisc(e)}
+          earningPartnerId
+          options={apiagentrole?.data?.data}
+        />
+        <ModalInputText
+          label="System Fee"
+          onChange={(e) => ChangeDiscNumber(e)}
+          name="systemFee"
+          value={disc?.systemFee}
+          placeholder={`${`Enter Disco Name`}`}
         />
         <ModalInputText
           label="Phone"
@@ -2547,7 +2728,7 @@ const AppUserModal = ({
               onClick={() => setStep(25)}
             />
             <LargeSignInButton
-              title="Accept"
+              title="Confirm"
               onClick={() => {
                 console.log(paymentMethodIds, actions, real);
                 dispatch(
@@ -2558,6 +2739,7 @@ const AppUserModal = ({
                     items: userId
                   })
                 );
+                setApproved(true);
                 setBusstate10(true);
               }}
               large
@@ -2597,6 +2779,7 @@ const AppUserModal = ({
               })
             );
             setBusstate10(true);
+            setApproved(false);
           }}
           bigger
           title={"Submit"}
@@ -2642,6 +2825,454 @@ const AppUserModal = ({
             }}
           >
             <span>Notification Status Changed</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={27}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Commission"
+      >
+        <ModalInputSelectTwo
+          name="commissionType"
+          label="commission Type"
+          // onChange={(e) => ChangeDisc(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemerseditdisc}
+          big
+          setItemer={setItemerseditdisc}
+        />
+        {itemerseditdisc === "Fixed" ? (
+          <>
+            <ModalInputText
+              label="Fee"
+              onChange={(e) => ChangeEditDisco(e)}
+              name="fee"
+              value={editdisc?.fee}
+              placeholder={`${`Enter Fee`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+          </>
+        ) : itemerseditdisc === "Percentage" ? (
+          <>
+            <ModalInputText
+              label="Fee"
+              onChange={(e) => ChangeEditDisco(e)}
+              name="fee"
+              value={editdisc?.fee}
+              placeholder={`${`Enter Fee`}`}
+            />
+            <ModalInputText
+              label="cap Fee"
+              onChange={(e) => ChangeEditDisco(e)}
+              name="capFee"
+              value={editdisc?.capFee}
+              placeholder={`${`Enter Cap Fee`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+          </>
+        ) : (
+          ""
+        )}
+        <LargeSignInButton
+          onClick={() => {
+            const { commissionType } = editdisc;
+            console.log({ commissionType });
+
+            if (commissionType) {
+              setStep(28);
+            } else {
+              toast.error("Fill Commission Type");
+            }
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={28}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to edit Commission, Are you sure the</span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => SendEditDisco()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={29}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Commission Edited
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Edit Commission</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={30}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="EDIT"
+      >
+        <ModalInputSelect
+          name="name"
+          label="Disco"
+          value={settingglobaledit?.name}
+          onChange={(e) => ChangeSettingsEdit(e)}
+          options={["Disco List", "EKEDC", "IKJEDC"]}
+        />
+        <ModalInputSelect
+          label="User Type"
+          name="userType"
+          value={settingglobaledit?.userType}
+          onChange={(e) => ChangeSettingsEdit(e)}
+          options={["User Types List", "AGENT", "APIPARTNER"]}
+        />
+        <ModalInputSelectTwo
+          name="commissionType"
+          label="Commission Type"
+          // onChange={(e) => ChangeSettings(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemersettings}
+          big
+          setItemer={setItemersettings}
+        />
+        {itemersettings === "Fixed" ? (
+          <ModalInputText
+            label="Fixed Commission"
+            onChange={(e) => ChangeSettingsTypeEdit(e)}
+            name="fee"
+            value={settingglobaledit?.commissions?.fee}
+            placeholder={`${`Enter Fixed Commission`}`}
+          />
+        ) : itemersettings === "Percentage" ? (
+          <>
+            <ModalInputText
+              label="Percentage Commission"
+              onChange={(e) => ChangeSettingsTypeEdit(e)}
+              name="fee"
+              value={settingglobaledit?.commissions?.fee}
+              placeholder={`${`Enter Percentage Commission`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+            <ModalInputText
+              label="Cap Fee"
+              onChange={(e) => ChangeSettingsTypeEdit(e)}
+              name="capFee"
+              value={settingglobaledit?.commissions?.capFee}
+              placeholder={`${`Enter Cap Fee`}`}
+            />
+          </>
+        ) : (
+          ""
+        )}
+        {/* <ModalInputText
+          label="Name"
+          onChange={(e) => ChangePartner(e)}
+          name="name"
+          value={partner?.name}
+          placeholder={`${`Enter Partner Name`}`}
+        />
+        <ModalInputText
+          label="Email"
+          onChange={(e) => ChangePartner(e)}
+          name="email"
+          value={partner?.email}
+          placeholder={`${`Enter Email Address`}`}
+        />
+        <ModalInputText
+          label="Phone Number"
+          onChange={(e) => ChangePartner(e)}
+          name="phone"
+          value={partner?.phone}
+          placeholder={`${`Enter Phone Number`}`}
+        />
+        <ModalInputText
+          label="Address"
+          onChange={(e) => ChangePartner(e)}
+          name="address"
+          value={partner?.address}
+          placeholder={`${`Enter Address`}`}
+        />
+        <ModalInputText
+          label="Password"
+          onChange={(e) => ChangePartner(e)}
+          name="password"
+          value={partner?.password}
+          placeholder={`${`Enter Password`}`}
+        />
+        <ModalInputText
+          label="Confirm Password"
+          onChange={(e) => ChangePartner(e)}
+          name="password_confirmation"
+          value={partner?.password_confirmation}
+          placeholder={`${`Confirm Passowrd`}`}
+        /> */}
+        <LargeSignInButton
+          onClick={() => {
+            const { name, userType, commissions } = settingglobaledit;
+            console.log({ name, userType, commissions });
+
+            // Check for missing values
+            const isFeeMissing = commissions?.fee === null;
+            const isCapFeeMissing = commissions?.capFee === null;
+
+            if (
+              name &&
+              userType &&
+              (itemers === "Fixed"
+                ? !isFeeMissing
+                : !isFeeMissing && !isCapFeeMissing)
+            ) {
+              setStep(31);
+            } else {
+              toast.error("Fill all details");
+            }
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={31}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to edit Commission, Are you sure the</span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => SendEditSettings()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={32}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Commission Edited
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Edit Commission</span>
           </div>
           <div
             style={{

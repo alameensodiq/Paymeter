@@ -32,6 +32,7 @@ import { UserWalletSlice } from "./Reducers/UserWallet";
 import { DashboardDailySlice } from "./Reducers/DashboardDaily";
 import { DashboardYearlySlice } from "./Reducers/DashboardYearly";
 import { DashboardDiscoMonthlySlice } from "./Reducers/DashboardDiscoMonthly";
+import { EditSettingsSlice } from "./Reducers/EditSettings";
 
 export default configureStore({
   reducer: {
@@ -67,6 +68,7 @@ export default configureStore({
     userwallet: UserWalletSlice?.reducer,
     dashboarddaily: DashboardDailySlice?.reducer,
     dashboardyearly: DashboardYearlySlice?.reducer,
-    dashboarddiscomonthly: DashboardDiscoMonthlySlice?.reducer
+    dashboarddiscomonthly: DashboardDiscoMonthlySlice?.reducer,
+    editsettings: EditSettingsSlice?.reducer
   }
 });

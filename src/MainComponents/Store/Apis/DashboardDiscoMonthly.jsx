@@ -3,24 +3,21 @@ import toast from "react-hot-toast";
 
 export const DashboardDiscoMonthlys = createAsyncThunk(
   "dashboarddiscomonthly",
-  async ({ startDate }, thunkAPI) => {
+  async ({ editdisc, discname }, thunkAPI) => {
     const accessToken = sessionStorage.getItem("token");
-    const dateObjs = new Date(startDate);
-    const year = dateObjs.getFullYear();
-    const month = String(dateObjs.getMonth() + 1).padStart(2, "0");
-
-    console.log(`Fetching data for Year: ${year}, Month: ${month}`);
+    console.log(editdisc, discname);
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}dashboard/monthly-revenue/${month}/${year}`,
+        `${process.env.REACT_APP_BASE_URL}admin/edit-disco-commission/${discname}`,
         {
-          method: "GET",
+          method: "PATCH",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`
-          }
+          },
+          body: JSON.stringify(editdisc)
         }
       );
 
