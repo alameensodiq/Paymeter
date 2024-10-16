@@ -24,6 +24,7 @@ import EarningPartnerSelect from "../bits/EarningPartnerSelect";
 import { DashboardDiscoMonthlys } from "../MainComponents/Store/Apis/DashboardDiscoMonthly";
 import { EditSettings } from "../MainComponents/Store/Apis/EditSettings";
 import { UserComEdit } from "../MainComponents/Store/Apis/UserComEdit";
+import { Discos } from "../MainComponents/Store/Apis/Discos";
 
 const AppUserModal = ({
   setStep,
@@ -167,6 +168,20 @@ const AppUserModal = ({
   });
 
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    dispatch(Discos());
+  }, []);
+
+  const { discos, authenticatingdiscos } = useSelector(
+    (state) => state?.discos
+  );
+  console.log(discos);
+
+  const discoOptions = [
+    "Disco List", // Placeholder option
+    ...(discos?.data?.data.map((disco) => disco.shortName) || [])
+  ];
 
   const { createdbank, authenticatingcreatedbank } = useSelector(
     (state) => state?.createdbank
@@ -1890,7 +1905,7 @@ const AppUserModal = ({
           label="Disco"
           value={userglobal?.discoName}
           onChange={(e) => ChangeSettingsUser(e)}
-          options={["Disco List", "EKEDC", "IKJEDC"]}
+          options={discoOptions}
         />
 
         {/* <ModalInputSelect
@@ -2024,7 +2039,7 @@ const AppUserModal = ({
           label="Disco"
           value={settingglobal?.name}
           onChange={(e) => ChangeSettings(e)}
-          options={["Disco List", "EKEDC", "IKJEDC"]}
+          options={discoOptions}
         />
         <ModalInputSelect
           label="User Type"
@@ -3170,7 +3185,7 @@ const AppUserModal = ({
           label="Disco"
           value={settingglobaledit?.name}
           onChange={(e) => ChangeSettingsEdit(e)}
-          options={["Disco List", "EKEDC", "IKJEDC"]}
+          options={discoOptions}
         />
         <ModalInputSelect
           label="User Type"
@@ -3428,7 +3443,7 @@ const AppUserModal = ({
           label="Disco"
           value={userglobaledit?.discoName}
           onChange={(e) => ChangeSettingsUserEdit(e)}
-          options={["Disco List", "EKEDC", "IKJEDC"]}
+          options={discoOptions}
         />
 
         {/* <ModalInputSelect
