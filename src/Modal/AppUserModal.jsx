@@ -154,6 +154,7 @@ const AppUserModal = ({
     },
     systemFee: "",
     earningPartnerId: "",
+    earningPartnerFee: "",
     email: "",
     logoUrl: "",
     phone: null
@@ -454,12 +455,12 @@ const AppUserModal = ({
   const datePickerRef = useRef(null);
 
   const SendDetailsBank = () => {
-    const { code, name, ussd, logoUrl, bankCommission } = regbus;
+    const { name, logoUrl, bankCommission } = regbus;
     dispatch(
       CreateBank({
-        code,
+        // code,
         name,
-        ussd,
+        // ussd,
         logoUrl,
         bankCommission
       })
@@ -472,6 +473,7 @@ const AppUserModal = ({
       name,
       shortName,
       earningPartnerId,
+      earningPartnerFee,
       commissionsDTO,
       email,
       logoUrl,
@@ -484,6 +486,7 @@ const AppUserModal = ({
         shortName,
         commissionsDTO,
         earningPartnerId,
+        earningPartnerFee,
         email,
         systemFee,
         logoUrl,
@@ -660,6 +663,7 @@ const AppUserModal = ({
         capFee: null
       },
       earningPartnerId: "",
+      earningPartnerFee: "",
       email: "",
       logoUrl: ""
     });
@@ -1418,6 +1422,15 @@ const AppUserModal = ({
           earningPartnerId
           options={apiagentrole?.data?.data}
         />
+        {disc?.earningPartnerId !== "" && (
+          <ModalInputText
+            label="Earning Partner Fee"
+            onChange={(e) => ChangeDiscNumber(e)}
+            name="earningPartnerFee"
+            value={disc?.earningPartnerFee}
+            placeholder={`${`Enter Earning Partner Fee`}`}
+          />
+        )}
         <ModalInputText
           label="System Fee"
           onChange={(e) => ChangeDiscNumber(e)}
@@ -1505,7 +1518,6 @@ const AppUserModal = ({
         ) : (
           ""
         )}
-
         <LargeSignInButton
           onClick={() => {
             const { shortName, name, commissionsDTO, phone, email } = disc;

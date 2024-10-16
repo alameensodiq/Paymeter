@@ -18,7 +18,7 @@ function Donuts() {
           labels: {
             show: true
           }
-        },
+        }
       }
     },
     legend: {
