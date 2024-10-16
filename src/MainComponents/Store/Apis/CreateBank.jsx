@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const CreateBank = createAsyncThunk(
   "createdbank",
-  async ({ code, name, ussd, logoUrl, bankCommission }, thunkAPI) => {
+  async ({ name, logoUrl, bankCommission }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const accessToken = sessionStorage.getItem("token");
 
@@ -16,9 +16,9 @@ export const CreateBank = createAsyncThunk(
           Authorization: `Bearer ${accessToken}`
         },
         body: JSON.stringify({
-          code,
+          // code,
           name,
-          ussd,
+          // ussd,
           logoUrl,
           bankCommission
         })

@@ -142,7 +142,7 @@ const Dashboard = ({ title }) => {
                   This Week Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {dashboard?.data?.totalAgents}
+                  {/* {dashboard?.data?.totalAgents} */} ----
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -326,11 +326,9 @@ const Dashboard = ({ title }) => {
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  Total Revenue
-                </span>
+                <span className="text-card-title text-[14px]">Total Admin</span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {dashboardyearly?.data?.totalRevenue}
+                  {/* {dashboardyearly?.data?.totalRevenue} */} 1
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -346,7 +344,7 @@ const Dashboard = ({ title }) => {
             </div>
           </div>
           <div className="flex lg:flex-row md:flex-col flex-col gap-3">
-            <div
+            {/* <div
               className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
@@ -368,12 +366,76 @@ const Dashboard = ({ title }) => {
                   Details
                 </button>
               </div>
-            </div>
+            </div> */}
             <div
-              className="flex flex-col lg:w-[50%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
+              className="flex flex-col lg:w-[75%] md:w-[100%] sm:w-[100%] h-[420px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
-              <div className="flex flex-row justify-center">
+              <div className="flex flex-row gap-2 items-center">
+                <span className="text-circle-color font-bold">
+                  Monthly Revenue Per Discos Overview
+                </span>
+                <Sign />
+              </div>
+              {/* <div className="flex flex-col border rounded-custom gap-2 pt-3"> */}
+              <div className="flex flex-row px-4 gap-4 items-center justify-between">
+                <div className="flex flex-row gap-4 items-center">
+                  {/* {dashboard?.data?.totalMonthlyRevenue[0]?.disco && (
+                    <>
+                      <span className="w-[10px] h-[10px] rounded-circle bg-[#E9EDF5]"></span>
+                      {dashboard?.data?.totalMonthlyRevenue[0]?.disco}
+                    </>
+                  )} */}
+                  {/* {dashboard?.data?.totalMonthlyRevenue[1]?.disco && (
+                    <>
+                      <span className="w-[10px] h-[10px] rounded-circle bg-[#9932CC]"></span>
+                      {dashboard?.data?.totalMonthlyRevenue[1]?.disco}
+                    </>
+                  )}
+                  {dashboard?.data?.totalMonthlyRevenue[2]?.disco && (
+                    <>
+                      <span className="w-[10px] h-[10px] rounded-circle bg-[#c29bd6]"></span>
+                      {dashboard?.data?.totalMonthlyRevenue[2]?.disco}
+                    </>
+                  )}
+                  {dashboard?.data?.totalMonthlyRevenue[3]?.disco && (
+                    <>
+                      <span className="w-[10px] h-[10px] rounded-circle bg-[#d81694]"></span>
+                      {dashboard?.data?.totalMonthlyRevenue[3]?.disco}
+                    </>
+                  )}
+                  {dashboard?.data?.totalMonthlyRevenue[4]?.disco && (
+                    <>
+                      <span className="w-[10px] h-[10px] rounded-circle bg-button-bg"></span>
+                      {dashboard?.data?.totalMonthlyRevenue[4]?.disco}
+                    </>
+                  )} */}
+                  {/* <span className="w-[10px] h-[10px] rounded-circle bg-discos"></span> IBEDC */}
+                </div>
+                {/* <div className="flex flex-row gap-4 items-center">
+                  <span className="text-[14px]">Previous Month</span>
+                  <div className="position:relative w-[120px] h-[30px] rounded-custom px-[4px] flex flex-row border items-center">
+                    <DatePicker
+                      className="text-[8px] outline-none"
+                      selected={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      ref={datePickerRef}
+                      showTimeSelect={false}
+                      dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
+                      placeholderText="13 Oct 2023"
+                      popperPlacement="bottom-start"
+                    />
+                    <Calendar
+                      className="text-[10px]"
+                      onClick={() => PickDate()}
+                    />
+                  </div>
+                  <Ellipses />
+                </div> */}
+              </div>
+              <DoubleBarChart data={dashboardsummary?.data?.monthlyRevenues} />
+              {/* </div> */}
+              {/* <div className="flex flex-row justify-center">
                 <span className="text-second-card-text">Monthly Revenue</span>
               </div>
               <MixedLineBarChart
@@ -392,7 +454,7 @@ const Dashboard = ({ title }) => {
                 <button className="bg-details-colortwo w-[180px] text-[12px] h-[40px] text-details-bgtwo rounded-custom">
                   Details
                 </button>
-              </div>
+              </div> */}
             </div>
             {/* <div
               className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
@@ -420,7 +482,7 @@ const Dashboard = ({ title }) => {
               </div>
             </div> */}
             <div
-              className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
+              className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[420px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
               <div className="flex flex-row px-4 gap-4 items-center justify-end">

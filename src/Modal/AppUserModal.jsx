@@ -124,8 +124,8 @@ const AppUserModal = ({
 
   const [regbus, setRegbus] = useState({
     name: "",
-    code: "",
-    ussd: "",
+    // code: "",
+    // ussd: "",
     logoUrl: "",
     bankCommission: {
       bankCommissionType: "",
@@ -620,8 +620,8 @@ const AppUserModal = ({
     }
     setRegbus({
       name: "",
-      code: "",
-      ussd: "",
+      // code: "",
+      // ussd: "",
       logoUrl: "",
       bankCommission: {
         bankCommissionType: "",
@@ -1130,20 +1130,20 @@ const AppUserModal = ({
           value={regbus?.name}
           placeholder={`${`Enter Bank Name`}`}
         />
-        <ModalInputText
+        {/* <ModalInputText
           label="Code"
           onChange={(e) => Change(e)}
           name="code"
           value={regbus?.code}
           placeholder={`${`Enter Bank Code`}`}
-        />
-        <ModalInputText
+        /> */}
+        {/* <ModalInputText
           label="USSD"
           onChange={(e) => Change(e)}
           name="ussd"
           value={regbus?.ussd}
           placeholder={`${`Enter Bank Ussd`}`}
-        />
+        /> */}
         <ModalInputSelectTwo
           name="commissionsDTO"
           label="Commission DTO"
@@ -1239,8 +1239,8 @@ const AppUserModal = ({
         )}
         <LargeSignInButton
           onClick={() => {
-            const { code, name, ussd, logoUrl, bankCommission } = regbus;
-            console.log({ code, name, ussd, logoUrl, bankCommission });
+            const { name, logoUrl, bankCommission } = regbus;
+            console.log({ name, logoUrl, bankCommission });
 
             // Check for missing values
             const isFeeMissing =
@@ -1249,9 +1249,9 @@ const AppUserModal = ({
 
             if (
               name &&
-              ussd &&
+              // ussd &&
               logoUrl &&
-              code &&
+              // code &&
               !isFeeMissing &&
               !isCapFeeMissing
             ) {
