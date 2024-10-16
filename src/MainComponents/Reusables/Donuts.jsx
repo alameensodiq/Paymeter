@@ -16,7 +16,12 @@ function Donuts() {
         endAngle: 270,
         donut: {
           labels: {
-            show: true
+            show: true,
+            total: {
+              show: true,
+              label: "Total Meter",
+              formatter: () => `200`
+            }
           }
         }
       }
