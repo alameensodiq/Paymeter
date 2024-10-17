@@ -257,9 +257,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     RRN
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     REFERENCE
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     USER TYPE
                   </StyledTableCell>
@@ -313,9 +313,9 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.rrn}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.reference}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.userType}
                     </StyledTableCell>

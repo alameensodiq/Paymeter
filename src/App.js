@@ -24,6 +24,7 @@ import Funding from "./MainComponents/Components/Funding";
 import EarningPartner from "./MainComponents/Components/EraningPartner";
 import Complaints from "./MainComponents/Components/Complaints";
 import UserDetails from "./MainComponents/Components/UserDetails";
+import Meter from "./MainComponents/Components/Meter";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -61,6 +62,10 @@ function App() {
           <Route
             path="/earning/:id"
             element={<UserDetails title={"Earning Partner Details"} />}
+          />
+          <Route
+            path="/meter/:id"
+            element={<Meter title={"Meter Details"} />}
           />
           <Route
             path="/api/:id"

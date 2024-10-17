@@ -31,9 +31,7 @@ const Navbar = ({ title }) => {
           <span className=" text-white text-[12px] text-medium pt-1">
             Tobi Alebiosu
           </span>
-          <span className="pt-2">
-            <Carat />
-          </span>
+          <span className="pt-2">{/* <Carat /> */}</span>
         </div>
       </div>
     </div>

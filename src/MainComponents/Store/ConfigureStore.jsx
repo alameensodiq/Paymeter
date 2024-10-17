@@ -35,6 +35,8 @@ import { DashboardDiscoMonthlySlice } from "./Reducers/DashboardDiscoMonthly";
 import { EditSettingsSlice } from "./Reducers/EditSettings";
 import { DashboardSummarySlice } from "./Reducers/DashboardSummary";
 import { UserComEditSlice } from "./Reducers/UserComEdit";
+import { DashboardDailyMonthlySlice } from "./Reducers/DashboardDailyMonthly";
+import { metersSlice } from "./Reducers/meters";
 
 export default configureStore({
   reducer: {
@@ -73,6 +75,8 @@ export default configureStore({
     dashboardyearly: DashboardYearlySlice?.reducer,
     dashboarddiscomonthly: DashboardDiscoMonthlySlice?.reducer,
     editsettings: EditSettingsSlice?.reducer,
-    dashboardsummary: DashboardSummarySlice?.reducer
+    dashboardsummary: DashboardSummarySlice?.reducer,
+    dashboarddailymonthly: DashboardDailyMonthlySlice?.reducer,
+    meters: metersSlice?.reducer
   }
 });

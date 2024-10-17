@@ -26,6 +26,7 @@ import { DashboardYearly } from "../Store/Apis/DashboardYearly";
 import { DashboardDiscoMonthlys } from "../Store/Apis/DashboardDiscoMonthly";
 import { Transactions } from "../Store/Apis/Transactions";
 import { DashboardSummary } from "../Store/Apis/DashboardSummary";
+import { DashboardDailyMonthly } from "../Store/Apis/DasboardDailyMonthly";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -44,6 +45,7 @@ const Dashboard = ({ title }) => {
       dispatch(DashboardDaily());
       dispatch(DashboardYearly());
       dispatch(DashboardSummary());
+      dispatch(DashboardDailyMonthly());
       dispatch(Transactions({ startDate, searcher, currentPage }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
@@ -68,6 +70,10 @@ const Dashboard = ({ title }) => {
     (state) => state?.transactions
   );
   console.log(transactions);
+
+  const { dashboarddailymonthly, authenticatingdashboarddailymonthly } =
+    useSelector((state) => state?.dashboarddailymonthly);
+  console.log(dashboarddailymonthly);
 
   const { dashboard, authenticatingdashboard } = useSelector(
     (state) => state?.dashboard
@@ -119,7 +125,7 @@ const Dashboard = ({ title }) => {
                   Today Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {/* {dashboard?.data?.totalUsers} */} -----
+                  {dashboarddailymonthly?.data?.dailyRevenue}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -142,7 +148,7 @@ const Dashboard = ({ title }) => {
                   This Week Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {/* {dashboard?.data?.totalAgents} */} ----
+                  {dashboarddailymonthly?.data?.weeklyRevenue}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -280,7 +286,7 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  Total API PARTNERS
+                  Total API-Partners
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   {/* ₦1 */}

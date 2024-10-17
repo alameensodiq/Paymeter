@@ -1193,7 +1193,7 @@ const AppUserModal = ({
             />
             <ModalInputText
               onClick={() => PickDater()}
-              label="Take photo"
+              label="Upload Image"
               photo
             />
           </>
@@ -1533,7 +1533,7 @@ const AppUserModal = ({
             />
             <ModalInputText
               onClick={() => PickDater()}
-              label="Take photo"
+              label="Upload Image"
               photo
             />
           </>
@@ -2518,12 +2518,20 @@ const AppUserModal = ({
           onClick={() => {
             const { email, name, address, phone, nin } = earnings;
             console.log({ email, name, address, phone, nin });
-
-            if (name && phone && email && nin && address) {
+            if (
+              name &&
+              phone &&
+              email &&
+              nin &&
+              address &&
+              email.includes("@")
+            ) {
               // setStep(19);
               SendEarningPartner();
             } else {
-              toast.error("Fill all details");
+              toast.error(
+                "Fill all details correctly, including a valid email."
+              );
             }
           }}
           bigger
