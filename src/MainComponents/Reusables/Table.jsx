@@ -2055,7 +2055,7 @@ const Tables = ({
                     DISCO COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION FEE
+                    DISCO COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     RRN
@@ -2179,7 +2179,7 @@ const Tables = ({
                     COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    COMMISSION FEE
+                    COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     COMMISSION CAP FEE

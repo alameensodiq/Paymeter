@@ -181,7 +181,7 @@ const UserDetails = ({ title }) => {
               >
                 <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                   <span className="text-card-title text-[14px]">
-                    Total Transfers
+                    Total Transaction Count
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
                     ---

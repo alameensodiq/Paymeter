@@ -70,6 +70,7 @@ const AppUserModal = ({
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
+  const [itemersdiscoearning, setItemerdiscoearning] = useState("");
   const [itemersinst, setItemersinst] = useState("");
   const [itemersettings, setItemersettings] = useState("");
   const [itemerseditdisc, setItemerseditdisc] = useState("");
@@ -1438,14 +1439,59 @@ const AppUserModal = ({
           options={apiagentrole?.data?.data}
         />
         {disc?.earningPartnerId !== "" && (
-          <ModalInputText
-            label="Earning Partner Fee"
-            onChange={(e) => ChangeDiscNumber(e)}
-            name="earningPartnerFee"
-            value={disc?.earningPartnerFee}
-            placeholder={`${`Enter Earning Partner Fee`}`}
-          />
+          <>
+            <ModalInputSelectTwo
+              name="commissionsDTO"
+              label="Earning Commission"
+              // onChange={(e) => ChangeDisc(e)}
+              options={["Fixed", "Percentage"]}
+              itemer={itemersdiscoearning}
+              big
+              setItemer={setItemerdiscoearning}
+            />
+
+            {itemersdiscoearning === "Fixed" ? (
+              <ModalInputText
+                label="Fixed Commission"
+                // onChange={(e) => ChangeSettingsTypeUser(e)}
+                name="fee"
+                // value={userglobal?.commissionDetails?.fee}
+                placeholder="Enter Fixed Commission"
+              />
+            ) : itemersdiscoearning === "Percentage" ? (
+              <>
+                <ModalInputText
+                  label="Percentage Commission"
+                  // onChange={(e) => ChangeSettingsTypeUser(e)}
+                  name="fee"
+                  // value={userglobal?.commissionDetails?.fee}
+                  placeholder="Enter Percentage Commission"
+                />
+                <span style={{ color: "red", fontSize: "10px" }}>
+                  Note: Percentage must be less than or equal to Disco
+                  Percentage with Paymeter
+                </span>
+                <ModalInputText
+                  label="Cap Fee"
+                  // onChange={(e) => ChangeSettingsTypeUser(e)}
+                  name="capFee"
+                  // value={userglobal?.commissionDetails?.capFee}
+                  placeholder="Enter Cap Fee"
+                />
+              </>
+            ) : null}
+          </>
         )}
+
+        {/* <ModalInputSelectTwo
+          name="commissionsDTO"
+          label="Commission DTO"
+          onChange={(e) => ChangeDisc(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemersdisco}
+          big
+          setItemer={setItemerdisco}
+        /> */}
         <ModalInputText
           label="System Fee"
           onChange={(e) => ChangeDiscNumber(e)}
