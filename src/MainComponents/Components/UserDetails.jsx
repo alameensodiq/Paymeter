@@ -286,7 +286,7 @@ const UserDetails = ({ title }) => {
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
                 {status === "pending" && !isEarningRoute && (
-                  <div className="w-[90px] h-[2px] bg-route-color ml-[9%]" />
+                  <div className="w-[90px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[11%] sm:ml-[18%]" />
                 )}
               </div>
             </div>

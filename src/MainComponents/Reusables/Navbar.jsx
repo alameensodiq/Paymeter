@@ -25,9 +25,7 @@ const Navbar = ({ title }) => {
         </div>
       </div>
       <div className="flex flex-row gap-9">
-        <span>
-          <Notice />
-        </span>
+        <span>{/* <Notice /> */}</span>
         <div className="flex flex-row gap-4 pt-2">
           <Prof />
           <span className=" text-white text-[12px] text-medium pt-1">
