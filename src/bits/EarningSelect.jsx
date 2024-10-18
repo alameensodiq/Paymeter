@@ -18,9 +18,9 @@ const EarningSelect = ({
   return (
     <Flex>
       <select name={name} value={value} onChange={onChange} className="input">
+        <option>Select Earning Partner</option>
         {options?.map((item, index) => (
           <>
-            <option>Select Earning Partner</option>
             <option key={item} value={item.id}>
               {item?.lastName}
               {""}

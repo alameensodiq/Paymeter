@@ -5,6 +5,7 @@ import { ReactComponent as Filter } from "./../../assets/Filter.svg";
 import Tables from "../Reusables/Table";
 import { ReactComponent as Search } from "./../../assets/Search.svg";
 import { ReactComponent as Download } from "./../../assets/Download.svg";
+import { ReactComponent as Goback } from "./../../assets/goback.svg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ReactComponent as Calendar } from "../../assets/calendar.svg";
@@ -12,11 +13,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { Banks } from "../Store/Apis/Banks";
-import { meters } from "../Store/Apis/meters";
 import AppUserModal from "../../Modal/AppUserModal";
 import Pagination from "../Reusables/Pagination";
 import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
+import { metersing } from "../Store/Apis/meters";
 
 const Meter = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -40,14 +41,14 @@ const Meter = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && id) {
-      dispatch(meters({ startDate, searcher, currentPage, id }));
+      dispatch(metersing({ startDate, searcher, currentPage, id }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
     if (reload && id) {
-      dispatch(meters({ startDate, searcher, currentPage, id }));
+      dispatch(metersing({ startDate, searcher, currentPage, id }));
       setReload(false);
     }
 
@@ -117,9 +118,15 @@ const Meter = ({ title }) => {
           setReload={setReload}
         />
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
+          <div>
+            <Goback
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/discos")}
+            />
+          </div>
           <div className="flex flex-row justify-between">
-            <span className="text-route-name text-[28px] font-semibold">
-              Meter Transactions
+            <span className="text-route-name text-[25px] font-semibold">
+              {meters?.data?.data[0]?.customerName}Meter Transactions
             </span>
             <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">
@@ -163,7 +170,7 @@ const Meter = ({ title }) => {
               </div> */}
               <button
                 onClick={() => Downloading()}
-                className="px-2 flex flex-row gap-1 items-center bg-route-color w-[12%] rounded-custom text-white font-semibold text-[11px]"
+                className="px-2 flex flex-row gap-1 items-center bg-route-color w-[12%] rounded-custom text-white font-semibold text-[11px] h-[40px]"
               >
                 Download Report <Download />
               </button>
@@ -179,7 +186,7 @@ const Meter = ({ title }) => {
                   <>
                     <Tables
                       setdiscname={setdiscname}
-                      loans
+                      metering
                       setStep={setStep}
                       data={meters?.data?.data}
                     />

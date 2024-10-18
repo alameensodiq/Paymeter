@@ -54,20 +54,20 @@ const CustomerInfo = ({ title }) => {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
+    if (sessionStorage.getItem("token") && id) {
       dispatch(Discometer({ id, searcher, currentPage }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload) {
+    if (reload && id && sessionStorage.getItem("token")) {
       dispatch(Discometer());
       setReload(false);
     }
 
     //eslint-disable-next-line
-  }, [reload, searcher, currentPage]);
+  }, [reload, searcher, currentPage, id]);
 
   const { discometer, authenticatingdiscometer } = useSelector(
     (state) => state?.discometer

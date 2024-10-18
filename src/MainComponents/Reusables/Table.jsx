@@ -40,7 +40,8 @@ const Tables = ({
   overviewcommission,
   setdiscname,
   setsettingId,
-  setNaming
+  setNaming,
+  metering
 }) => {
   const navigate = useNavigate();
   console.log(data);
@@ -255,28 +256,34 @@ const Tables = ({
                     DISCO COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION CAP
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     RRN
                   </StyledTableCell>
-                  {/* <StyledTableCell style={{ width: "10%" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
                     REFERENCE
-                  </StyledTableCell> */}
+                  </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     USER TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    EARNING PARTNER FEE
+                    BANK COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION CAP FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMMISSION FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    AGENT COMMISSION CAP FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    AGENT COMMISSION PERCENTAGE TYPE FEE VALUE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
@@ -311,28 +318,34 @@ const Tables = ({
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionCapFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.rrn}
                     </StyledTableCell>
-                    {/* <StyledTableCell style={{ width: "10%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.reference}
-                    </StyledTableCell> */}
+                    </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.userType}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.earningPartnerFee}
+                      {item?.bankCommissionType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFeeCap}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionFee}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionCapFee}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionPercentageTypeFeeValue}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.feeDueToSystem}
@@ -875,10 +888,10 @@ const Tables = ({
                 <StyledTableCell style={{ width: "10%" }}>
                   METER TYPE
                 </StyledTableCell>
-                <StyledTableCell style={{ width: "15%" }}>
+                <StyledTableCell style={{ width: "10%" }}>
                   ACCOUNT NAME
                 </StyledTableCell>
-                <StyledTableCell style={{ width: "15%" }}>
+                <StyledTableCell style={{ width: "10%" }}>
                   ADDRESS
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "15%" }}>BANK</StyledTableCell>
@@ -891,6 +904,7 @@ const Tables = ({
                 <StyledTableCell style={{ width: "15%" }}>
                   CUSTOMER REFERENCE
                 </StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -902,10 +916,10 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     {item?.type}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
                     {item?.accountName}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
                     {item?.address}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -919,6 +933,16 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     {item?.customerReference}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    <p
+                      className="text-route-color"
+                      onClick={() =>
+                        navigate(`/meter/${item?.customerReference}`)
+                      }
+                    >
+                      View
+                    </p>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -2058,6 +2082,9 @@ const Tables = ({
                     DISCO COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION CAP
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     RRN
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -2071,6 +2098,9 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION CAP FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMMISSION TYPE
@@ -2114,6 +2144,9 @@ const Tables = ({
                       {item?.discoSystemCommissionFee}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionCapFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.rrn}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -2127,6 +2160,9 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFeeCap}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType}
@@ -2213,6 +2249,154 @@ const Tables = ({
                       {item?.commissions?.capFee}
                     </StyledTableCell>
 
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                    {item?.paymentStatus === "successfull" ? (
+                      <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+                        Successful
+                      </button>
+                    ) : (
+                      <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+                        Failed
+                      </button>
+                    )}
+                  </StyledTableCell> */}
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </ScrollableXContainer>
+      ) : metering ? (
+        <ScrollableXContainer>
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+            sx={{ maxHeight: "60vh" }}
+          >
+            <Table
+              stickyHeader
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "5%" }}>S/N</StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    CUSTOMER NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACCOUNT NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    METER NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TRANSACTION AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION CAP
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    RRN
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    REFERENCE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    USER TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION CAP FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMMISSION FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    FEE DUE TO SYSTEM
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.customerName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.accountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.meterNo}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.transactionAmount}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionCapFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.rrn}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.reference}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.userType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFeeCap}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.feeDueToSystem}
+                    </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (
                       <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">

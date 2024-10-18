@@ -332,7 +332,7 @@ const AppUserModal = ({
   const { apiagentrole, authenticatingapiagentrole } = useSelector(
     (state) => state?.apiagentrole
   );
-  console.log(apiagentrole);
+  console.log(apiagentrole?.data?.data);
 
   const Change = (e) => {
     const { name, value } = e.target;
@@ -496,21 +496,30 @@ const AppUserModal = ({
       phone,
       systemFee
     } = disc;
+
+    // Check if the email is valid
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
     dispatch(
       CreatedDisco({
         name,
         shortName,
         commissionsDTO,
         earningPartnerId,
-        earningPartnerFee,
+        earningPartnerFee: parseFloat(earningPartnerFee),
         email,
-        systemFee,
+        systemFee: parseFloat(systemFee),
         logoUrl,
         phone
       })
     );
+
     setBusstate2(true);
   };
+
   const SendEditDisco = () => {
     const { commissionType } = editdisc;
     console.log(discname);
@@ -678,10 +687,12 @@ const AppUserModal = ({
         fee: null,
         capFee: null
       },
+      systemFee: "",
       earningPartnerId: "",
       earningPartnerFee: "",
       email: "",
-      logoUrl: ""
+      logoUrl: "",
+      phone: null
     });
     setPay({
       name: ""
@@ -1027,7 +1038,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -1039,11 +1050,15 @@ const AppUserModal = ({
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
+
+    // Convert sanitizedValue to a number
+    const numericValue = parseFloat(sanitizedValue) || 0; // Default to 0 if NaN
+
     setDisc((prev) => ({
       ...prev,
       commissionsDTO: {
         ...prev.commissionsDTO,
-        [name]: sanitizedValue
+        [name]: numericValue // Update with numeric value
       }
     }));
   };
@@ -1439,6 +1454,15 @@ const AppUserModal = ({
           options={apiagentrole?.data?.data}
         />
         {disc?.earningPartnerId !== "" && (
+          <ModalInputText
+            label="Earning Partner Fee Percentage"
+            onChange={(e) => ChangeDiscNumber(e)}
+            name="earningPartnerFee"
+            value={disc?.earningPartnerFee}
+            placeholder={`${`Enter Earning Partner Percentage`}`}
+          />
+        )}
+        {/* {disc?.earningPartnerId !== "" && (
           <>
             <ModalInputSelectTwo
               name="commissionsDTO"
@@ -1481,7 +1505,7 @@ const AppUserModal = ({
               </>
             ) : null}
           </>
-        )}
+        )} */}
 
         {/* <ModalInputSelectTwo
           name="commissionsDTO"

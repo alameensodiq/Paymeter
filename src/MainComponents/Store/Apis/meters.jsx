@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const meters = createAsyncThunk(
+export const metersing = createAsyncThunk(
   "meters",
   async ({ startDate, searcher, currentPage, id }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);

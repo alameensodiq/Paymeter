@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { meters } from "../Apis/meters";
+import { metersing } from "../Apis/meters";
 
 export const metersSlice = createSlice({
   name: "meters",
@@ -20,17 +20,17 @@ export const metersSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(meters.fulfilled, (state, action) => {
+    builder.addCase(metersing.fulfilled, (state, action) => {
       state.meters = action.payload;
       state.authenticated = false;
       state.authenticatingmeters = false;
       return state;
     });
-    builder.addCase(meters.pending, (state, action) => {
+    builder.addCase(metersing.pending, (state, action) => {
       state.authenticatingmeters = true;
       state.authenticated = true;
     });
-    builder.addCase(meters.rejected, (state, action) => {
+    builder.addCase(metersing.rejected, (state, action) => {
       state.errors = action.errors || action.payload;
       state.authenticated = false;
       state.authenticatingmeters = false;
