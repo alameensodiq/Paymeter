@@ -288,6 +288,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISPENSE TOKEN
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -350,6 +353,9 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.feeDueToSystem}
                     </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.listtoken[0]}
+                    </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (
                       <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
@@ -391,9 +397,9 @@ const Tables = ({
                 <StyledTableCell style={{ width: "20%" }}>
                   AMOUNT RECEIVED
                 </StyledTableCell>
-                <StyledTableCell style={{ width: "10%", textAlign: "center" }}>
+                {/* <StyledTableCell style={{ width: "10%", textAlign: "center" }}>
                   STATUS
-                </StyledTableCell>
+                </StyledTableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -417,14 +423,14 @@ const Tables = ({
                   <StyledTableCell style={{ width: "20%" }}>
                     200,000
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     <button
                       // onClick={() => navigate(`/discos/${item?.id}`)}
                       className="h-[30px] w-[100%] border border-none text-button-bg font-semibold text-[9px]"
                     >
                       View
                     </button>
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                 </StyledTableRow>
               ))}
             </TableBody>
@@ -1461,7 +1467,7 @@ const Tables = ({
                         onClick={() => Pay(item?.id, "enable")}
                         className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
                       >
-                        DECLINE
+                        DISABLED
                       </button>
                     )}
                   </StyledTableCell>
@@ -2111,6 +2117,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISPENSE TOKEN
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -2172,6 +2181,9 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.feeDueToSystem}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.listtoken[0]}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (

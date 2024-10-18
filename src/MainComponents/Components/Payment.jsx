@@ -53,7 +53,7 @@ const Payment = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload) {
+    if (reload && sessionStorage.getItem("token")) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
       dispatch(GetPay());
       setReload(false);
@@ -96,9 +96,9 @@ const Payment = ({ title }) => {
   };
 
   const Pays = (paymentMethodId, action) => {
-    setStep(20);
     setpaymentMethodIds(paymentMethodId);
     setActions(action);
+    setStep(20);
   };
 
   const Downloading = () => {

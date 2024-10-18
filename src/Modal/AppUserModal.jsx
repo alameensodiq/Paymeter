@@ -345,11 +345,31 @@ const AppUserModal = ({
 
   const ChangeEditDisco = (e) => {
     const { name, value } = e.target;
-    console.log(value);
-    setEditDisc({
-      ...editdisc,
-      [name]: value
-    });
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    // Convert the sanitized value to a number
+    const numericValue = parseFloat(sanitizedValue);
+
+    // Update the state with the numeric value if it's a valid number
+    if (!isNaN(numericValue)) {
+      setEditDisc({
+        ...editdisc,
+        [name]: numericValue
+      });
+    }
   };
 
   const ChangeEarning = (e) => {
@@ -721,6 +741,7 @@ const AppUserModal = ({
     setBusstate4(false);
     setBusstate5(false);
     setBusstate6(false);
+    setBusstate8(false);
     setBusstate10(false);
     setBusstate11(false);
     setApproved(false);
@@ -879,7 +900,7 @@ const AppUserModal = ({
     }));
     if (itemerseditdisc === "Fixed") {
       setEditDisc({
-        commissionType: "Fixed",
+        commissionType: "FIXED",
         fee: null
       });
     } else {
