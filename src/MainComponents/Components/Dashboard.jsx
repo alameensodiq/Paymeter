@@ -95,6 +95,36 @@ const Dashboard = ({ title }) => {
   );
   console.log(dashboardsummary);
 
+  const [revenueData, setRevenueData] = useState([]);
+
+  useEffect(() => {
+    if (dashboardyearly?.data?.monthlyRevenues) {
+      setRevenueData(dashboardyearly.data.monthlyRevenues);
+    }
+  }, [dashboardyearly?.data?.monthlyRevenues]);
+
+  // Function to update revenue for the current month
+  const updateRevenueForCurrentMonth = () => {
+    const currentMonthIndex = new Date().getMonth(); // 0 for January, 11 for December
+
+    setRevenueData((prevData) =>
+      prevData.map((item, index) => {
+        if (index === currentMonthIndex) {
+          return { ...item, revenue: item.revenue + 0 };
+        }
+        return item;
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (revenueData.length > 0) {
+      updateRevenueForCurrentMonth();
+    }
+  }, [revenueData.length]);
+
+  const currentMonthRevenue = revenueData[new Date().getMonth()]?.revenue;
+
   // const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
   //   useSelector((state) => state?.dashboarddiscomonthly);
   // console.log(dashboarddiscomonthly);
@@ -173,7 +203,8 @@ const Dashboard = ({ title }) => {
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   {/* ₦1 */}
-                  {/* {dashboard?.data?.totalApiPartners} */} -----
+                  {currentMonthRevenue}
+                  {/* {dashboard?.data?.totalApiPartners} */}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -196,7 +227,7 @@ const Dashboard = ({ title }) => {
                   This Year Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {/* {dashboard?.data?.totalEarningPartners} */} -----
+                  {dashboardyearly?.data?.totalRevenue}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -219,7 +250,7 @@ const Dashboard = ({ title }) => {
                   Total Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {dashboardyearly?.data?.totalRevenue}
+                  ----
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
