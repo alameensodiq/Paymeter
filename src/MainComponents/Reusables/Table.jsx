@@ -1877,56 +1877,56 @@ const Tables = ({
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                   >
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                   >
                     {item?.user?.name}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "15%" }}
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                   >
                     {item?.email}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "15%" }}
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                   >
                     {item?.user?.phone}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "20%" }}
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                   >
                     {item?.message}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "15%" }}
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                   >
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
                   </StyledTableCell>
@@ -1990,10 +1990,10 @@ const Tables = ({
             <TableBody>
               {data?.map((item, index) => (
                 <StyledTableRow
-                  onClick={() => {
-                    setStep(11);
-                    setUserIds(item?.id);
-                  }}
+                // onClick={() => {
+                //   setStep(11);
+                //   setUserIds(item?.id);
+                // }}
                 >
                   <StyledTableCell
                     className="text-dob"

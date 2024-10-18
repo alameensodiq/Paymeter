@@ -317,6 +317,7 @@ const AppUserModal = ({
     bustate10,
     bustate11,
     bustate12,
+    bustate13,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -1009,25 +1010,31 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
 
     // If there's more than one decimal point, keep only the first one
     if (decimalCount > 1) {
-      const firstDecimalIndex = sanitizedValue.indexOf(".");
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
-    setUserGlobal((prev) => ({
-      ...prev,
-      commissionDetails: {
-        ...prev.commissionDetails,
-        [name]: sanitizedValue
-      }
-    }));
+
+    // Convert the sanitized value to a number
+    const numericValue = parseFloat(sanitizedValue);
+
+    // Update the state with the numeric value if it's a valid number
+    if (!isNaN(numericValue)) {
+      setUserGlobal((prev) => ({
+        ...prev,
+        commissionDetails: {
+          ...prev.commissionDetails,
+          [name]: numericValue // Pass the numeric value
+        }
+      }));
+    }
   };
 
   const ChangeSettingsTypeUseredit = (e) => {
