@@ -653,8 +653,8 @@ const AppUserModal = ({
       logoUrl: "",
       bankCommission: {
         bankCommissionType: "",
-        bankFixedCommissionFee: "",
-        bankFeeTax: "",
+        capFee: "",
+        taxFee: "",
         fee: ""
       }
     });
@@ -866,14 +866,14 @@ const AppUserModal = ({
         itemersinst === "Fixed"
           ? {
               bankCommissionType: "FIXED",
-              bankFixedCommissionFee: "",
-              bankFeeTax: "",
+              capFee: "",
+              taxFee: "",
               fee: ""
             }
           : {
               bankCommissionType: "PERCENTAGE",
-              bankFixedCommissionFee: "",
-              bankFeeTax: "",
+              capFee: "",
+              taxFee: "",
               fee: ""
             }
     }));
@@ -1216,17 +1216,17 @@ const AppUserModal = ({
         {itemersinst === "Fixed" ? (
           <>
             <ModalInputText
-              label="Bank Fixed Commission"
+              label="Bank Cap Fee"
               onChange={(e) => ChangeSettingsTypeUserInst(e)}
-              name="bankFixedCommissionFee"
-              value={regbus?.bankCommission?.bankFixedCommissionFee}
+              name="capFee"
+              value={regbus?.bankCommission?.capFee}
               placeholder={`${`Enter Percentage Commission`}`}
             />
             <ModalInputText
               label="Bank Fee Tax"
               onChange={(e) => ChangeSettingsTypeUserInst(e)}
-              name="bankFeeTax"
-              value={regbus?.bankCommission?.bankFeeTax}
+              name="taxFee"
+              value={regbus?.bankCommission?.taxFee}
               placeholder={`${`Enter Bank Fee Tax`}`}
             />
             <ModalInputText
@@ -1244,17 +1244,17 @@ const AppUserModal = ({
         ) : itemersinst === "Percentage" ? (
           <>
             <ModalInputText
-              label="Bank Percentage Commission"
+              label="Bank Percentage  Commission"
               onChange={(e) => ChangeSettingsTypeUserInst(e)}
-              name="bankFixedCommissionFee"
-              value={regbus?.bankCommission?.bankFixedCommissionFee}
+              name="capFee"
+              value={regbus?.bankCommission?.capFee}
               placeholder={`${`Enter Percentage Commission`}`}
             />
             <ModalInputText
               label="Bank Fee Tax"
               onChange={(e) => ChangeSettingsTypeUserInst(e)}
               name="bankFeeTax"
-              value={regbus?.bankCommission?.bankFeeTax}
+              value={regbus?.bankCommission?.taxFee}
               placeholder={`${`Enter Bank Fee Tax`}`}
             />
             <ModalInputText
