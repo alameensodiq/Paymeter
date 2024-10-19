@@ -584,6 +584,7 @@ const AppUserModal = ({
       })
     );
     setBusstate5(true);
+    setReload(true);
   };
 
   const SendPartner = () => {
@@ -960,23 +961,28 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
 
     // If there's more than one decimal point, keep only the first one
     if (decimalCount > 1) {
-      const firstDecimalIndex = sanitizedValue.indexOf(".");
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
     setSettingsGlobal((prev) => ({
       ...prev,
       commissions: {
         ...prev.commissions,
-        [name]: sanitizedValue
+        [name]: sanitizedValue // Pass the sanitized string value
       }
     }));
   };
@@ -985,23 +991,28 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
 
     // If there's more than one decimal point, keep only the first one
     if (decimalCount > 1) {
-      const firstDecimalIndex = sanitizedValue.indexOf(".");
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
     setSettingsGlobaledit((prev) => ({
       ...prev,
       commissions: {
         ...prev.commissions,
-        [name]: sanitizedValue
+        [name]: sanitizedValue // Pass the sanitized string value
       }
     }));
   };
@@ -1022,26 +1033,26 @@ const AppUserModal = ({
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
 
-    // Convert the sanitized value to a number
-    const numericValue = parseFloat(sanitizedValue);
-
-    // Update the state with the numeric value if it's a valid number
-    if (!isNaN(numericValue)) {
-      setUserGlobal((prev) => ({
-        ...prev,
-        commissionDetails: {
-          ...prev.commissionDetails,
-          [name]: numericValue // Pass the numeric value
-        }
-      }));
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
     }
+
+    // Update the state with the sanitized string value
+    setUserGlobal((prev) => ({
+      ...prev,
+      commissionDetails: {
+        ...prev.commissionDetails,
+        [name]: sanitizedValue // Pass the sanitized string value
+      }
+    }));
   };
 
   const ChangeSettingsTypeUseredit = (e) => {
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -1053,11 +1064,17 @@ const AppUserModal = ({
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
     setUserGlobaledit((prev) => ({
       ...prev,
       commissionDetails: {
         ...prev.commissionDetails,
-        [name]: sanitizedValue
+        [name]: sanitizedValue // Update with sanitized string value
       }
     }));
   };
@@ -1079,14 +1096,16 @@ const AppUserModal = ({
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
 
-    // Convert sanitizedValue to a number
-    const numericValue = parseFloat(sanitizedValue) || 0; // Default to 0 if NaN
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
 
-    setDisc((prev) => ({
-      ...prev,
+    setDisc((prevDisc) => ({
+      ...prevDisc,
       commissionsDTO: {
-        ...prev.commissionsDTO,
-        [name]: numericValue // Update with numeric value
+        ...prevDisc.commissionsDTO,
+        [name]: sanitizedValue // Update with sanitized string value
       }
     }));
   };
@@ -1095,7 +1114,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -1107,11 +1126,17 @@ const AppUserModal = ({
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
     setRegbus((prev) => ({
       ...prev,
       bankCommission: {
         ...prev.bankCommission,
-        [name]: sanitizedValue
+        [name]: sanitizedValue // Update with sanitized string value
       }
     }));
   };
@@ -1604,7 +1629,7 @@ const AppUserModal = ({
             label="Fixed Commission"
             onChange={(e) => ChangeSettingsTypeUserDisco(e)}
             name="fee"
-            value={disc?.commissionsDTO?.fee}
+            value={disc?.commissionsDTO?.fee || ""}
             placeholder={`${`Enter Fixed Commission`}`}
           />
         ) : itemersdisco === "Percentage" ? (
@@ -1613,7 +1638,7 @@ const AppUserModal = ({
               label="Percentage Commission"
               onChange={(e) => ChangeSettingsTypeUserDisco(e)}
               name="fee"
-              value={disc?.commissionsDTO?.fee}
+              value={disc?.commissionsDTO?.fee || ""}
               placeholder={`${`Enter Percentage Commission`}`}
             />
             <span style={{ color: "red", fontSize: "10px" }}>
@@ -3560,7 +3585,7 @@ const AppUserModal = ({
           options={["User Types List", "AGENT", "APIPARTNER"]}
         /> */}
         <ModalInputSelectTwo
-          name="commissionType"
+          name="commissionTypess"
           label="Commission Type"
           // onChange={(e) => ChangeSettingsUser(e)}
           options={["Fixed", "Percentage"]}

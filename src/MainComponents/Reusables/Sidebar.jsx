@@ -528,7 +528,7 @@ const Sidebar = () => {
               Payment-Shift
             </p>
           </Link> */}
-          <Link
+          {/* <Link
             to="/funding"
             className={`flex flex-row h-[33px] ${
               router.pathname === "/funding"
@@ -570,7 +570,7 @@ const Sidebar = () => {
             >
               Funding Request
             </p>
-          </Link>
+          </Link> */}
           <Link
             to="/payment"
             className={`flex flex-row h-[33px] ${

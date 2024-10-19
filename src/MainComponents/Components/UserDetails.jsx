@@ -286,13 +286,13 @@ const UserDetails = ({ title }) => {
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
                 {status === "pending" && !isEarningRoute && (
-                  <div className="w-[90px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[11%] sm:ml-[18%]" />
+                  <div className="w-[90px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[13%] sm:ml-[18%]" />
                 )}
               </div>
             </div>
             {loading ? (
               <>
-                {userdata?.data?.meta?.totalCount >= 1 &&
+                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables overviewtransaction data={userdata?.data?.data} />
                   )}
@@ -306,7 +306,7 @@ const UserDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )}
-                {userdata?.data?.meta?.totalCount === 0 &&
+                {userdata?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
                       style={{
@@ -331,7 +331,7 @@ const UserDetails = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )}
-                {userdata?.data?.meta?.totalCount >= 1 &&
+                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}

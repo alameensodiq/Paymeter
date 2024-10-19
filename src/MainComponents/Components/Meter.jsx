@@ -182,7 +182,38 @@ const Meter = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {meters?.data?.data?.length >= 1 ? (
+                {meters?.data?.data?.length >= 1 && (
+                  <>
+                    <Tables
+                      setdiscname={setdiscname}
+                      metering
+                      setStep={setStep}
+                      data={meters?.data?.data}
+                    />
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  </>
+                )}
+                {!meters?.status && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {/* {meters?.data?.data?.length >= 1 ? (
                   <>
                     <Tables
                       setdiscname={setdiscname}
@@ -213,7 +244,7 @@ const Meter = ({ title }) => {
                   </div>
                 ) : (
                   ""
-                )}
+                )} */}
               </>
             ) : (
               <Loader />
