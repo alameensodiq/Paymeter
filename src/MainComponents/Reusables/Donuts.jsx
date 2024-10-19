@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
-function Donuts() {
+function Donuts({ data }) {
   //  const series = data?.subscriptionPlan((item) => item.value)
-  const series = [20, 10, 50, 50];
+  const totalMeters =
+    data?.reduce((sum, item) => {
+      return sum + (item?.totalMeters || 0);
+    }, 0) || 0;
+
+  console.log(totalMeters);
+
+  const series = data
+    ? data?.map((item) => item?.totalMeters)
+    : [20, 10, 50, 50];
 
   const options = {
     chart: {
@@ -20,7 +29,12 @@ function Donuts() {
             total: {
               show: true,
               label: "Total Meter",
-              formatter: () => `200`
+              formatter: () => {
+                const totalMeters = data?.reduce((sum, item) => {
+                  return sum + (item?.totalMeters || 0);
+                }, 0);
+                return totalMeters !== undefined ? `${totalMeters}` : "0";
+              }
             }
           }
         }
@@ -37,9 +51,9 @@ function Donuts() {
     },
     fill: {
       colors: [
-        "rgba(246, 141, 43, 1)",
-        "rgba(244, 167, 157, 1)",
         "rgba(52, 75, 253, 1)",
+        "rgba(244, 167, 157, 1)",
+        "rgba(246, 141, 43, 1)",
         "rgba(255, 210, 0, 1)"
       ]
     },

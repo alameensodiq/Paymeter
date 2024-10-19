@@ -27,6 +27,7 @@ import { DashboardDiscoMonthlys } from "../Store/Apis/DashboardDiscoMonthly";
 import { Transactions } from "../Store/Apis/Transactions";
 import { DashboardSummary } from "../Store/Apis/DashboardSummary";
 import { DashboardDailyMonthly } from "../Store/Apis/DasboardDailyMonthly";
+import { ListofMeter } from "../Store/Apis/ListofMeter";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -46,6 +47,7 @@ const Dashboard = ({ title }) => {
       dispatch(DashboardYearly());
       dispatch(DashboardSummary());
       dispatch(DashboardDailyMonthly());
+      dispatch(ListofMeter());
       dispatch(Transactions({ startDate, searcher, currentPage }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
@@ -70,6 +72,11 @@ const Dashboard = ({ title }) => {
     (state) => state?.transactions
   );
   console.log(transactions);
+
+  const { listofmeter, authenticatinglistofmeter } = useSelector(
+    (state) => state?.listofmeter
+  );
+  console.log(listofmeter);
 
   const { dashboarddailymonthly, authenticatingdashboarddailymonthly } =
     useSelector((state) => state?.dashboarddailymonthly);
@@ -542,31 +549,56 @@ const Dashboard = ({ title }) => {
                   />
                 </div>
               </div>
-              <Donuts />
+              {listofmeter?.data && <Donuts data={listofmeter?.data} />}
               <div className="flex flex-col gap-3 px-[15px]">
+                {listofmeter?.data[0]?.discoName && (
+                  <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
+                    <div className="flex flex-row gap-1 items-center text-[12px]">
+                      <span className="w-[15px] h-[15px] rounded-circle bg-details-color"></span>
+                      <span className="text-compare-second-card">
+                        {listofmeter?.data[0]?.discoName}
+                      </span>
+                      <span className="text-circle-color">
+                        {" "}
+                        {listofmeter?.data[0]?.totalMeters}
+                      </span>
+                    </div>
+                    {listofmeter?.data[1]?.discoName && (
+                      <div className="flex flex-row gap-1 items-center text-[12px]">
+                        <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
+                        <span className="text-compare-second-card">
+                          {listofmeter?.data[1]?.discoName}
+                        </span>
+                        <span className="text-circle-color">
+                          {listofmeter?.data[1]?.totalMeters}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
                 <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
-                  <div className="flex flex-row gap-1 items-center text-[12px]">
-                    <span className="w-[15px] h-[15px] rounded-circle bg-details-color"></span>
-                    <span className="text-compare-second-card">IBADAN</span>
-                    <span className="text-circle-color">3000</span>
-                  </div>
-                  <div className="flex flex-row gap-1 items-center text-[12px]">
-                    <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
-                    <span className="text-compare-second-card">IKEJA</span>
-                    <span className="text-circle-color">1000</span>
-                  </div>
-                </div>
-                <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
-                  <div className="flex flex-row gap-1 items-center text-[12px]">
-                    <span className="w-[15px] h-[15px] rounded-circle bg-data-bg"></span>
-                    <span className="text-compare-second-card">EKO</span>
-                    <span className="text-circle-color">555</span>
-                  </div>
-                  <div className="flex flex-row gap-1 items-center text-[12px]">
-                    <span className="w-[15px] h-[15px] rounded-circle bg-elect-bg"></span>
-                    <span className="text-compare-second-card">ABUJA</span>
-                    <span className="text-circle-color">987</span>
-                  </div>
+                  {listofmeter?.data[2]?.discoName && (
+                    <div className="flex flex-row gap-1 items-center text-[12px]">
+                      <span className="w-[15px] h-[15px] rounded-circle bg-data-bg"></span>
+                      <span className="text-compare-second-card">
+                        {listofmeter?.data[2]?.discoName}
+                      </span>
+                      <span className="text-circle-color">
+                        {listofmeter?.data[2]?.totalMeters}
+                      </span>
+                    </div>
+                  )}
+                  {listofmeter?.data[3]?.discoName && (
+                    <div className="flex flex-row gap-1 items-center text-[12px]">
+                      <span className="w-[15px] h-[15px] rounded-circle bg-elect-bg"></span>
+                      <span className="text-compare-second-card">
+                        {listofmeter?.data[3]?.discoName}
+                      </span>
+                      <span className="text-circle-color">
+                        {listofmeter?.data[3]?.totalMeters}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
