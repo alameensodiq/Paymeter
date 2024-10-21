@@ -361,11 +361,11 @@ const AppUserModal = ({
   ]);
 
   useEffect(() => {
-    if (call) {
+    if (call && !role1) {
       dispatch(ApiAgentRole({ role: "EARNINGPARTNER" }));
     }
-    if (role1) {
-      dispatch(ApiAgentRole({ role: role1 }));
+    if (role1 && !call) {
+      dispatch(ApiAgentRole({ role1 }));
     }
   }, [call, role1]);
 
@@ -1265,7 +1265,7 @@ const AppUserModal = ({
       ...prevDisc,
       commissionsDTO: {
         ...prevDisc.commissionsDTO,
-        [name]: parseFloat(sanitizedValue) // Update with sanitized string value
+        [name]: sanitizedValue // Update with sanitized string value
       }
     }));
   };
