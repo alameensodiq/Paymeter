@@ -3161,42 +3161,6 @@ const AppUserModal = ({
         </div>
       </AppModal>
       <AppModal
-        step={38}
-        currentStep={step}
-        closeModal={handleCloseModal4}
-        // updateUserListData(update);
-        // window.location.reload()
-      >
-        <ModalInputSelect
-          name="districtManagerId"
-          label="Choose District Manager"
-          value={districthead}
-          onChange={(e) => setDistricthead(e)}
-          options={districtOptions}
-        />
-
-        <LargeSignInButton
-          onClick={() => {
-            console.log(paymentMethodIds, actions, real);
-            dispatch(
-              Approve({
-                userId: userId?.user?.id,
-                notId: "approve",
-                districtManagerId: districthead,
-                stat,
-                items: userId
-              })
-            );
-            setApproved(true);
-            setBusstate10(true);
-          }}
-          bigger
-          title={"Submit"}
-          background
-          color
-        />
-      </AppModal>
-      <AppModal
         step={25}
         currentStep={step}
         closeModal={handleCloseModal4}
@@ -4163,6 +4127,42 @@ const AppUserModal = ({
             />
           </div>
         </div>
+      </AppModal>
+      <AppModal
+        step={38}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <ModalInputSelect
+          name="districtManagerId"
+          label="Choose District Manager"
+          value={districthead}
+          onChange={(e) => setDistricthead(e)}
+          options={districtOptions}
+        />
+
+        <LargeSignInButton
+          onClick={() => {
+            console.log(paymentMethodIds, actions, real);
+            dispatch(
+              Approve({
+                userId: userId?.user?.id,
+                notId: "approve",
+                districtManagerId: districthead,
+                stat,
+                items: userId
+              })
+            );
+            setApproved(true);
+            setBusstate10(true);
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
       </AppModal>
     </div>
   );
