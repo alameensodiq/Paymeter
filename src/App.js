@@ -32,6 +32,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route
+        path="/payment-shift"
+        element={<PaymentShift title={"Payment and Shift"} />}
+      />
       {token && (
         <>
           <Route
@@ -50,10 +54,6 @@ function App() {
           <Route
             path="/transactions"
             element={<Transfers title={"Transactions"} />}
-          />
-          <Route
-            path="/payment-shift"
-            element={<PaymentShift title={"Payment and Shift"} />}
           />
           <Route path="/agents" element={<Agents title={"Agents"} />} />
           <Route
