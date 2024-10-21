@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import Pagination from "../Reusables/Pagination";
 import { Payment } from "../Store/Apis/Payment";
 import { Shift } from "../Store/Apis/Shift";
+import empty from "../../assets/empty.png";
 
 const PaymentShift = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
@@ -235,7 +236,7 @@ const PaymentShift = ({ title }) => {
                   >
                     Meter Payment
                   </span>
-                  <span
+                  {/* <span
                     onClick={() => Othering()}
                     className={`${
                       other
@@ -244,15 +245,15 @@ const PaymentShift = ({ title }) => {
                     }`}
                   >
                     Shift
-                  </span>
+                  </span> */}
                 </div>
                 <div className="gap-6">
                   {whitecrust && (
                     <div className="w-[105px] h-[2px] bg-route-color" />
                   )}
-                  {other && (
+                  {/* {other && (
                     <div className="w-[60px] h-[2px] bg-route-color ml-[74%]" />
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className="flex flex-row justify-end gap-4 px-3">
@@ -301,7 +302,7 @@ const PaymentShift = ({ title }) => {
                 )}
               </div>
             </div>
-            {whitecrust && payment?.data?.length >= 1 ? (
+            {whitecrust && payment?.data?.length >= 1 && (
               <>
                 <Tables payment data={payment?.data} />
                 {/* <Pagination
@@ -314,7 +315,20 @@ const PaymentShift = ({ title }) => {
                   next={next}
                 /> */}
               </>
-            ) : other && shift?.data?.length >= 1 ? (
+            )}{" "}
+            {whitecrust && !payment?.status && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <img src={empty} alt="empty" />
+              </div>
+            )}{" "}
+            {other && shift?.data?.length >= 1 && (
               <>
                 <Tables shift data={shift?.data} />
                 {/* <Pagination
@@ -327,8 +341,18 @@ const PaymentShift = ({ title }) => {
                   next={next}
                 /> */}
               </>
-            ) : (
-              ""
+            )}
+            {other && !payment?.status && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <img src={empty} alt="empty" />
+              </div>
             )}
           </div>
         </div>

@@ -6,6 +6,12 @@ export const Payment = createAsyncThunk(
   async ({ customerReference, dateFrom, dateTo }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const accessToken = sessionStorage.getItem("token");
+    const dateObj = new Date(dateFrom);
+
+    const formattedDate = dateObj.toISOString().slice(0, 10);
+    const dateObjs = new Date(dateTo);
+
+    const formattedDateTo = dateObjs.toISOString().slice(0, 10);
 
     try {
       const response = await fetch(
@@ -19,8 +25,8 @@ export const Payment = createAsyncThunk(
           },
           body: JSON.stringify({
             customerReference,
-            dateFrom,
-            dateTo
+            dateFrom: formattedDate,
+            dateTo: formattedDateTo
           })
         }
       );
