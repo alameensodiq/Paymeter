@@ -25,6 +25,7 @@ import EarningPartner from "./MainComponents/Components/EraningPartner";
 import Complaints from "./MainComponents/Components/Complaints";
 import UserDetails from "./MainComponents/Components/UserDetails";
 import Meter from "./MainComponents/Components/Meter";
+import DistrictManager from "./MainComponents/Components/DistrictManager";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -74,6 +75,10 @@ function App() {
           <Route
             path="/earning"
             element={<EarningPartner title={"Earning Partner"} />}
+          />
+          <Route
+            path="/manager"
+            element={<DistrictManager title={"District Manager"} />}
           />
           <Route
             path="/complaint"

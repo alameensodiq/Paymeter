@@ -56,20 +56,20 @@ const PaymentShift = ({ title }) => {
   // };
 
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      dispatch(
-        Payment({
-          customerReference: searcher,
-          dateFrom: startDater,
-          dateTo: endDate
-        })
-      );
-      dispatch(Shift({ date: startDate, currentPage }));
-      return;
-    } else {
-      navigate("/");
-      toast.error("You aren't logged in");
-    }
+    // if (sessionStorage.getItem("token")) {
+    dispatch(
+      Payment({
+        customerReference: searcher,
+        dateFrom: startDater,
+        dateTo: endDate
+      })
+    );
+    dispatch(Shift({ date: startDate, currentPage }));
+    return;
+    // } else {
+    //   navigate("/");
+    //   toast.error("You aren't logged in");
+    // }
 
     //eslint-disable-next-line
   }, [startDate, searcher, currentPage, startDater, endDate]);
@@ -135,12 +135,12 @@ const PaymentShift = ({ title }) => {
 
   return (
     <div className="flex flex-row">
-      <div className="w-[15%] h-[100%]">
+      {/* <div className="w-[15%] h-[100%]">
         <Sidebar />
-      </div>
-      <div className="flex flex-col w-[85%] h-[100%]">
+      </div> */}
+      <div className="flex flex-col w-[100%] h-[100%]">
         <div className="w-[100%] h-[20%]">
-          <Navbar title={title} />
+          <Navbar title={title} remove />
         </div>
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
           {whitecrust ? (

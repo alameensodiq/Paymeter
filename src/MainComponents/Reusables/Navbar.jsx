@@ -3,7 +3,7 @@ import { ReactComponent as Notice } from "./../../assets/Notice.svg";
 import { ReactComponent as Prof } from "./../../assets/Prof.svg";
 import { ReactComponent as Carat } from "./../../assets/Carat.svg";
 
-const Navbar = ({ title }) => {
+const Navbar = ({ title, remove }) => {
   const date = new Date();
   const formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
@@ -26,13 +26,15 @@ const Navbar = ({ title }) => {
       </div>
       <div className="flex flex-row gap-9">
         <span>{/* <Notice /> */}</span>
-        <div className="flex flex-row gap-4 pt-2">
-          <Prof />
-          <span className=" text-white text-[12px] text-medium pt-1">
-            Tobi Alebiosu
-          </span>
-          <span className="pt-2">{/* <Carat /> */}</span>
-        </div>
+        {!remove && (
+          <div className="flex flex-row gap-4 pt-2">
+            <Prof />
+            <span className=" text-white text-[12px] text-medium pt-1">
+              Tobi Alebiosu
+            </span>
+            <span className="pt-2">{/* <Carat /> */}</span>
+          </div>
+        )}
       </div>
     </div>
   );

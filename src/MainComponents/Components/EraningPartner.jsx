@@ -37,20 +37,20 @@ const EarningPartner = ({ title }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      dispatch(ApiAgentRole({ role: "EARNINGPARTNER" }));
+    if (sessionStorage.getItem("token") && role === "EARNINGPARTNER") {
+      dispatch(ApiAgentRole({ role }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload) {
-      dispatch(ApiAgentRole({ role: "EARNINGPARTNER" }));
+    if (reload && role === "EARNINGPARTNER") {
+      dispatch(ApiAgentRole({ role }));
       setReload(false);
     }
 
     //eslint-disable-next-line
-  }, [reload]);
+  }, [reload, role]);
 
   const { apiagentrole, authenticatingapiagentrole } = useSelector(
     (state) => state?.apiagentrole
@@ -61,7 +61,7 @@ const EarningPartner = ({ title }) => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [apiagentrole?.data]);
+  }, [apiagentrole?.data?.data]);
 
   const next = apiagentrole?.data?.meta?.next;
   const previous = apiagentrole?.data?.meta?.prev;

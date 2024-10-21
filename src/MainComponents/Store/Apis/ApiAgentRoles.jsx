@@ -3,10 +3,20 @@ import toast from "react-hot-toast";
 
 export const ApiAgentRole = createAsyncThunk(
   "apiagent",
-  async ({ role }, thunkAPI) => {
-    console.log(process.env.REACT_APP_BASE_URL);
+  async ({ role1, role2 }, thunkAPI) => {
+    console.log("Base URL:", process.env.REACT_APP_BASE_URL);
 
     const accessToken = sessionStorage.getItem("token");
+
+    // Determine the role based on role1 and role2
+    let role;
+    if (role1) {
+      role = "DISTRICTMANAGER";
+    } else if (role2) {
+      role = "APIPARTNER";
+    } else {
+      role = "EARNINGPARTNER";
+    }
 
     try {
       const response = await fetch(
@@ -20,19 +30,19 @@ export const ApiAgentRole = createAsyncThunk(
           }
         }
       );
-      let data = await response.json();
+
+      const data = await response.json();
+      console.log("API Response:", data);
+
+      // Uncomment and use toast for user feedback if needed
       // toast.success(data.message);
-      console.log(data);
-      //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
-      //   sessionStorage.setItem('role', data?.data?.user?.userRole);
-      // sessionStorage.setItem('token', data?.data?.token );
-      return data;
+
+      return data; // Return the data on success
     } catch (e) {
+      console.error("Error fetching agent role:", e); // Log the error for debugging
       return thunkAPI.rejectWithValue({
-        error: "Failed! To establish connection."
+        error: "Failed to establish connection."
       });
-      // console.log('Error', e.response.data);
-      // thunkAPI.rejectWithValue(e.response.data);
     }
   }
 );

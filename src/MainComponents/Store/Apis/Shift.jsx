@@ -14,8 +14,8 @@ export const Shift = createAsyncThunk(
           method: "POST",
           headers: {
             Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json"
+            // Authorization: `Bearer ${accessToken}`
           },
           body: JSON.stringify({
             date

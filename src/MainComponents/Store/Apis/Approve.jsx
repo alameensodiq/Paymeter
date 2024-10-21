@@ -3,7 +3,10 @@ import toast from "react-hot-toast";
 
 export const Approve = createAsyncThunk(
   "approve",
-  async ({ userId, notId, stat, items, declineMessage }, thunkAPI) => {
+  async (
+    { userId, notId, stat, items, declineMessage, districtManagerId },
+    thunkAPI
+  ) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const accessToken = sessionStorage.getItem("token");
 
@@ -21,7 +24,8 @@ export const Approve = createAsyncThunk(
         email: items?.email,
         nin: items?.nin,
         address: items?.address,
-        proofOfAddressUrl: items?.addressUrl
+        proofOfAddressUrl: items?.addressUrl,
+        districtManagerId
       });
     }
 

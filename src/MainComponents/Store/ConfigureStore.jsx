@@ -38,6 +38,7 @@ import { UserComEditSlice } from "./Reducers/UserComEdit";
 import { DashboardDailyMonthlySlice } from "./Reducers/DashboardDailyMonthly";
 import { metersSlice } from "./Reducers/meters";
 import { ListofMeterSlice } from "./Reducers/Listofmeter";
+import { CreateManagerSlice } from "./Reducers/CreateManager";
 
 export default configureStore({
   reducer: {
@@ -79,6 +80,7 @@ export default configureStore({
     dashboardsummary: DashboardSummarySlice?.reducer,
     dashboarddailymonthly: DashboardDailyMonthlySlice?.reducer,
     meters: metersSlice?.reducer,
-    listofmeter: ListofMeterSlice?.reducer
+    listofmeter: ListofMeterSlice?.reducer,
+    managers: CreateManagerSlice?.reducer
   }
 });

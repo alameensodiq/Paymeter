@@ -35,23 +35,24 @@ const ApiPartner = ({ title }) => {
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [role2, setRole2] = useState(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      dispatch(ApiAgentRole({ role: "APIPARTNER" }));
+    if (sessionStorage.getItem("token") && role === "APIPARTNER") {
+      dispatch(ApiAgentRole({ role2 }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload) {
+    if (reload && role === "APIPARTNER") {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
-      dispatch(ApiAgentRole({ role: "APIPARTNER" }));
+      dispatch(ApiAgentRole({ role2 }));
       setReload(false);
     }
 
     //eslint-disable-next-line
-  }, [reload]);
+  }, [reload, role]);
 
   const { apiagentrole, authenticatingapiagentrole } = useSelector(
     (state) => state?.apiagentrole
@@ -62,7 +63,7 @@ const ApiPartner = ({ title }) => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [apiagentrole?.data]);
+  }, [apiagentrole?.data?.data]);
 
   const next = apiagentrole?.data?.meta?.next;
   const previous = apiagentrole?.data?.meta?.prev;

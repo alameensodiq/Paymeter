@@ -38,6 +38,7 @@ const Sidebar = () => {
   const [isHovered12, setIsHovered12] = useState(false);
   const [isHovered14, setIsHovered14] = useState(false);
   const [isHovered15, setIsHovered15] = useState(false);
+  const [isHovered16, setIsHovered16] = useState(false);
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
@@ -425,6 +426,57 @@ const Sidebar = () => {
               }`}
             >
               EarningPartner
+            </p>
+          </Link>
+          <Link
+            to="/manager"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/manager" ||
+              router.pathname.startsWith("/manager/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered16(true)}
+            onMouseLeave={() => setIsHovered16(false)}
+          >
+            {router.pathname === "/manager" ||
+            isHovered16 ||
+            router.pathname.startsWith("/manager/") ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/manager" ||
+            isHovered16 ||
+            router.pathname.startsWith("/manager/") ? (
+              <CableColor
+                className={`${
+                  router.pathname === "/manager" ||
+                  router.pathname.startsWith("/manager/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Cable
+                className={`${
+                  router.pathname === "/manager" ||
+                  router.pathname.startsWith("/manager/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/manager" ||
+                router.pathname.startsWith("/manager/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              District Manager
             </p>
           </Link>
           <Link

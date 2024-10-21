@@ -25,6 +25,7 @@ import { DashboardDiscoMonthlys } from "../MainComponents/Store/Apis/DashboardDi
 import { EditSettings } from "../MainComponents/Store/Apis/EditSettings";
 import { UserComEdit } from "../MainComponents/Store/Apis/UserComEdit";
 import { Discos } from "../MainComponents/Store/Apis/Discos";
+import { CreateManager } from "../MainComponents/Store/Apis/CreateManager";
 
 const AppUserModal = ({
   setStep,
@@ -47,8 +48,13 @@ const AppUserModal = ({
   settingId,
   setsettingId,
   naming,
-  setNaming
+  setNaming,
+  call,
+  role1
 }) => {
+  const [searcher, setSearcher] = useState("");
+  const [startDate, setStartDate] = useState(new Date("2022-01-01"));
+  const [currentPage, setCurrentPage] = useState(0);
   const dispatch = useDispatch();
   const [hide, sethide] = useState(false);
   const [uploadfile, setupload] = useState("");
@@ -67,14 +73,17 @@ const AppUserModal = ({
   const [bustate11, setBusstate11] = useState(false);
   const [bustate12, setBusstate12] = useState(false);
   const [bustate13, setBusstate13] = useState(false);
+  const [bustate14, setBusstate14] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
+  const [itemersmanager, setItemermanager] = useState("");
   const [itemersdiscoearning, setItemerdiscoearning] = useState("");
   const [itemersinst, setItemersinst] = useState("");
   const [itemersettings, setItemersettings] = useState("");
   const [itemerseditdisc, setItemerseditdisc] = useState("");
   const [Approved, setApproved] = useState(false);
+  const [districthead, setDistricthead] = useState("");
   const [partner, setPartner] = useState({
     name: "",
     email: "",
@@ -162,6 +171,18 @@ const AppUserModal = ({
     phone: null
   });
 
+  const [manager, setManager] = useState({
+    name: "",
+    address: "",
+    commissionsDTO: {
+      commissionType: "",
+      fee: null
+      // capFee: null
+    },
+    email: "",
+    phone: ""
+  });
+
   const [editdisc, setEditDisc] = useState({
     commissionType: "",
     fee: null,
@@ -171,7 +192,7 @@ const AppUserModal = ({
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    dispatch(Discos());
+    dispatch(Discos({ startDate, searcher, currentPage }));
   }, []);
 
   const { discos, authenticatingdiscos } = useSelector(
@@ -253,8 +274,12 @@ const AppUserModal = ({
   );
   console.log(editsettings);
 
+  const { managers, authenticatingmanagers } = useSelector(
+    (state) => state?.managers
+  );
+  console.log(managers);
+
   useEffect(() => {
-    dispatch(ApiAgentRole({ role: "EARNINGPARTNER" }));
     if (bustate && createdbank?.status) {
       setStep(3);
     }
@@ -297,6 +322,9 @@ const AppUserModal = ({
     if (bustate13 && usercomedit?.status) {
       setStep(34);
     }
+    if (bustate14 && managers?.status) {
+      setStep(37);
+    }
 
     console.log(update);
   }, [
@@ -318,6 +346,7 @@ const AppUserModal = ({
     bustate11,
     bustate12,
     bustate13,
+    bustate14,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -327,13 +356,28 @@ const AppUserModal = ({
     approve?.status,
     dashboarddiscomonthly?.status,
     editsettings?.status,
-    usercomedit?.status
+    usercomedit?.status,
+    managers?.status
   ]);
+
+  useEffect(() => {
+    if (call) {
+      dispatch(ApiAgentRole({ role: "EARNINGPARTNER" }));
+    }
+    if (role1) {
+      dispatch(ApiAgentRole({ role: role1 }));
+    }
+  }, [call, role1]);
 
   const { apiagentrole, authenticatingapiagentrole } = useSelector(
     (state) => state?.apiagentrole
   );
   console.log(apiagentrole?.data?.data);
+
+  const districtOptions = [
+    "District List", // Placeholder option
+    ...(apiagentrole?.data?.data.map((district) => district.lastName) || [])
+  ];
 
   const Change = (e) => {
     const { name, value } = e.target;
@@ -437,6 +481,15 @@ const AppUserModal = ({
     });
   };
 
+  const ChangeManager = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setManager({
+      ...manager,
+      [name]: value
+    });
+  };
+
   const ChangeDiscNumber = (e) => {
     const { name, value } = e.target;
 
@@ -455,6 +508,29 @@ const AppUserModal = ({
     }
 
     setDisc((prevDisc) => ({
+      ...prevDisc,
+      [name]: sanitizedValue
+    }));
+  };
+
+  const ChangeManagerNumber = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    setManager((prevDisc) => ({
       ...prevDisc,
       [name]: sanitizedValue
     }));
@@ -539,6 +615,28 @@ const AppUserModal = ({
     );
 
     setBusstate2(true);
+  };
+
+  const SendDetailsManager = () => {
+    const { name, phone, commissionsDTO, email, address } = manager;
+
+    // Check if the email is valid
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    dispatch(
+      CreateManager({
+        name,
+        address,
+        commissionsDTO,
+        email,
+        phone
+      })
+    );
+
+    setBusstate14(true);
   };
 
   const SendEditDisco = () => {
@@ -680,6 +778,17 @@ const AppUserModal = ({
         fee: ""
       }
     });
+    setManager({
+      name: "",
+      address: "",
+      commissionsDTO: {
+        commissionType: "",
+        fee: null
+        // capFee: null
+      },
+      email: "",
+      phone: ""
+    });
     setSettingsGlobal({
       name: "",
       userType: "",
@@ -701,6 +810,7 @@ const AppUserModal = ({
     setItemersinst("");
     setItemerseditdisc("");
     setItemerdisco("");
+    setItemermanager("");
     setDisc({
       name: "",
       shortName: "",
@@ -744,8 +854,12 @@ const AppUserModal = ({
     setBusstate5(false);
     setBusstate6(false);
     setBusstate8(false);
+    setBusstate9(false);
     setBusstate10(false);
     setBusstate11(false);
+    setBusstate12(false);
+    setBusstate13(false);
+    setBusstate14(false);
     setApproved(false);
     setReload(true);
     setPassword("");
@@ -883,6 +997,20 @@ const AppUserModal = ({
               capFee: null
             }
     }));
+    setManager((prev) => ({
+      ...prev,
+      commissionsDTO:
+        itemersmanager === "Fixed"
+          ? {
+              commissionType: "FIXED",
+              fee: null
+            }
+          : {
+              commissionType: "PERCENTAGE",
+              fee: null,
+              capFee: null
+            }
+    }));
     setRegbus((prev) => ({
       ...prev,
       bankCommission:
@@ -918,7 +1046,8 @@ const AppUserModal = ({
     itemersinst,
     itemerseditdisc,
     itemersettings,
-    itemersedit
+    itemersedit,
+    itemersmanager
   ]);
 
   const ChangeSettings = (e) => {
@@ -1106,6 +1235,37 @@ const AppUserModal = ({
       commissionsDTO: {
         ...prevDisc.commissionsDTO,
         [name]: sanitizedValue // Update with sanitized string value
+      }
+    }));
+  };
+
+  const ChangeSettingsTypeUserManager = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
+    setManager((prevDisc) => ({
+      ...prevDisc,
+      commissionsDTO: {
+        ...prevDisc.commissionsDTO,
+        [name]: parseFloat(sanitizedValue) // Update with sanitized string value
       }
     }));
   };
@@ -2992,25 +3152,49 @@ const AppUserModal = ({
             />
             <LargeSignInButton
               title="Confirm"
-              onClick={() => {
-                console.log(paymentMethodIds, actions, real);
-                dispatch(
-                  Approve({
-                    userId: userId?.user?.id,
-                    notId: "approve",
-                    stat,
-                    items: userId
-                  })
-                );
-                setApproved(true);
-                setBusstate10(true);
-              }}
+              onClick={() => setStep(38)}
               large
               background
               color
             />
           </div>
         </div>
+      </AppModal>
+      <AppModal
+        step={38}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <ModalInputSelect
+          name="districtManagerId"
+          label="Choose District Manager"
+          value={districthead}
+          onChange={(e) => setDistricthead(e)}
+          options={districtOptions}
+        />
+
+        <LargeSignInButton
+          onClick={() => {
+            console.log(paymentMethodIds, actions, real);
+            dispatch(
+              Approve({
+                userId: userId?.user?.id,
+                notId: "approve",
+                districtManagerId: districthead,
+                stat,
+                items: userId
+              })
+            );
+            setApproved(true);
+            setBusstate10(true);
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
       </AppModal>
       <AppModal
         step={25}
@@ -3732,6 +3916,234 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully Edit Commission</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={35}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Manager"
+      >
+        <ModalInputText
+          label="Name"
+          onChange={(e) => ChangeManager(e)}
+          name="name"
+          value={manager?.name}
+          placeholder={`${`Enter Manager's Name`}`}
+        />
+        <ModalInputText
+          label="Email"
+          onChange={(e) => ChangeManager(e)}
+          name="email"
+          value={manager?.email}
+          placeholder={`${`Enter Manager's Email`}`}
+        />
+        <ModalInputText
+          label="Address"
+          onChange={(e) => ChangeManager(e)}
+          name="address"
+          value={manager?.address}
+          placeholder={`${`Enter Manager's Address`}`}
+        />
+        <ModalInputText
+          label="Phone Number"
+          onChange={(e) => ChangeManagerNumber(e)}
+          name="phone"
+          value={manager?.phone}
+          placeholder={`${`Enter Phone Number`}`}
+        />
+        <ModalInputSelectTwo
+          name="commissionsDTO"
+          label="Commission DTO"
+          onChange={(e) => ChangeManager(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemersmanager}
+          big
+          setItemer={setItemermanager}
+        />
+        {itemersmanager === "Fixed" ? (
+          <ModalInputText
+            label="Fixed Commission"
+            onChange={(e) => ChangeSettingsTypeUserManager(e)}
+            name="fee"
+            value={manager?.commissionsDTO?.fee || ""}
+            placeholder={`${`Enter Fixed Commission`}`}
+          />
+        ) : itemersmanager === "Percentage" ? (
+          <>
+            <ModalInputText
+              label="Percentage Commission"
+              onChange={(e) => ChangeSettingsTypeUserManager(e)}
+              name="fee"
+              value={manager?.commissionsDTO?.fee || ""}
+              placeholder={`${`Enter Percentage Commission`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+            <ModalInputText
+              label="Cap Fee"
+              onChange={(e) => ChangeSettingsTypeUserManager(e)}
+              name="capFee"
+              value={manager?.commissionsDTO?.capFee}
+              placeholder={`${`Enter Cap Fee`}`}
+            />
+          </>
+        ) : (
+          ""
+        )}
+        <LargeSignInButton
+          onClick={() => {
+            const { address, name, commissionsDTO, phone, email } = manager;
+            console.log({ address, name, commissionsDTO, phone, email });
+
+            // Check for missing values
+            const isFeeMissing = commissionsDTO?.fee === null;
+            const isCapFeeMissing = commissionsDTO?.capFee === null;
+
+            if (
+              name &&
+              address &&
+              phone &&
+              email &&
+              (itemersmanager === "Fixed"
+                ? !isFeeMissing
+                : !isFeeMissing && !isCapFeeMissing)
+            ) {
+              setStep(36);
+            } else {
+              toast.error("Fill all details");
+            }
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={36}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to add a Manager, Are you sure the</span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => SendDetailsManager()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={37}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Account Created
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Added a new Manager</span>
           </div>
           <div
             style={{
