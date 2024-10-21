@@ -351,7 +351,7 @@ const Notification = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )}
-                {!notifications?.status && status === "rejected" && (
+                {!notifications?.status && status === "REJECTED" && (
                   <div
                     style={{
                       display: "flex",

@@ -57,7 +57,12 @@ const PaymentShift = ({ title }) => {
   // };
 
   useEffect(() => {
-    // if (sessionStorage.getItem("token")) {
+    // Check if searcher has at least 5 characters
+    if (searcher.length < 8) {
+      return; // Do not dispatch if less than 5 characters
+    }
+
+    // Dispatch actions if the condition is met
     dispatch(
       Payment({
         customerReference: searcher,
@@ -65,15 +70,11 @@ const PaymentShift = ({ title }) => {
         dateTo: endDate
       })
     );
-    dispatch(Shift({ date: startDate, currentPage }));
-    return;
-    // } else {
-    //   navigate("/");
-    //   toast.error("You aren't logged in");
-    // }
 
-    //eslint-disable-next-line
-  }, [startDate, searcher, currentPage, startDater, endDate]);
+    dispatch(Shift({ date: startDater, currentPage }));
+
+    // eslint-disable-next-line
+  }, [startDater, searcher, currentPage, endDate]);
 
   const { payment, authenticatingpayment } = useSelector(
     (state) => state?.payment
