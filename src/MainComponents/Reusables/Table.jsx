@@ -342,7 +342,9 @@ const Tables = ({
                       {item?.discoSystemCommissionFee}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoSystemCommissionCapFee}
+                      {item?.discoSystemCommissionCapFee
+                        ? item?.discoSystemCommissionCapFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.systemFeePerDisco}
@@ -354,19 +356,29 @@ const Tables = ({
                       {item?.userType}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionType}
+                      {item?.bankCommissionType
+                        ? item?.bankCommissionType
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionFee}
+                      {item?.bankCommissionFee
+                        ? item?.bankCommissionFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionFeeCap}
+                      {item?.bankCommissionFeeCap
+                        ? item?.bankCommissionFeeCap
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionType}
+                      {item?.agentCommissionType
+                        ? item?.agentCommissionType
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionFee}
+                      {item?.agentCommissionFee
+                        ? item?.agentCommissionFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.feeDueToSystem}
@@ -375,13 +387,19 @@ const Tables = ({
                       {item?.dispense?.listtoken[0]}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.earningPartnerFee}
+                      {item?.dispense?.systemTransactions?.earningPartnerFee
+                        ? item?.dispense?.systemTransactions?.earningPartnerFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.districtManagerFee}
+                      {item?.dispense?.systemTransactions?.districtManagerFee
+                        ? item?.dispense?.systemTransactions?.districtManagerFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.bankTaxFee}
+                      {item?.dispense?.systemTransactions?.bankTaxFee
+                        ? item?.dispense?.systemTransactions?.bankTaxFee
+                        : "not applicable"}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (
@@ -2261,7 +2279,9 @@ const Tables = ({
                       {item?.discoSystemCommissionFee}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoSystemCommissionCapFee}
+                      {item?.discoSystemCommissionCapFee
+                        ? item?.discoSystemCommissionCapFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.systemFeePerDisco}
@@ -2273,19 +2293,29 @@ const Tables = ({
                       {item?.userType}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionType}
+                      {item?.bankCommissionType
+                        ? item?.bankCommissionType
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionFee}
+                      {item?.bankCommissionFee
+                        ? item?.bankCommissionFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionFeeCap}
+                      {item?.bankCommissionFeeCap
+                        ? item?.bankCommissionFeeCap
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionType}
+                      {item?.agentCommissionType
+                        ? item?.agentCommissionType
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionFee}
+                      {item?.agentCommissionFee
+                        ? item?.agentCommissionFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.feeDueToSystem}
@@ -2294,13 +2324,19 @@ const Tables = ({
                       {item?.dispense?.listtoken[0]}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.earningPartnerFee}
+                      {item?.dispense?.systemTransactions?.earningPartnerFee
+                        ? item?.dispense?.systemTransactions?.earningPartnerFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.districtManagerFee}
+                      {item?.dispense?.systemTransactions?.districtManagerFee
+                        ? item?.dispense?.systemTransactions?.districtManagerFee
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.bankTaxFee}
+                      {item?.dispense?.systemTransactions?.bankTaxFee
+                        ? item?.dispense?.systemTransactions?.bankTaxFee
+                        : "not applicable"}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (
