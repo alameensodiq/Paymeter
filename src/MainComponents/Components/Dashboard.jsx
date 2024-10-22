@@ -541,81 +541,71 @@ const Dashboard = ({ title }) => {
               <div className="flex flex-row px-4 gap-4 items-center justify-center">
                 <span className="text-[14px]">Disco-Meter</span>
                 {/* <div className="position:relative w-[120px] h-[30px] rounded-custom px-[5px] flex flex-row border items-center"> */}
-                {/* <input className='input' type='date' /> */}
-                {/* <DatePicker
-                    className="text-[8px] outline-none"
-                    selected={endDate}
-                    onChange={(date) => dateChanger(date)}
-                    ref={datePickerRef}
-                    showTimeSelect={false}
-                    dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
-                    placeholderText="13 Oct 2023"
-                    popperPlacement="bottom-start"
-                  />
-                  <Calendar
-                    className="text-[10px]"
-                    onClick={() => PickDate()}
-                  /> */}
-                {/* </div> */}
               </div>
               {listofmeter?.data ? <Donuts data={listofmeter?.data} /> : ""}
               <div className="flex flex-col gap-3 px-[15px]">
-                {listofmeter?.data[0]?.discoName ? (
+                {listofmeter?.data &&
+                listofmeter.data.length > 0 &&
+                listofmeter.data[0]?.discoName ? (
                   <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
                     <div className="flex flex-row gap-1 items-center text-[12px]">
                       <span className="w-[15px] h-[15px] rounded-circle bg-details-color"></span>
                       <span className="text-compare-second-card">
-                        {listofmeter?.data[0]?.discoName}
+                        {listofmeter.data[0].discoName}
                       </span>
                       <span className="text-circle-color">
-                        {" "}
-                        {listofmeter?.data[0]?.totalMeters}
+                        {listofmeter.data[0]?.totalMeters ?? 0}{" "}
+                        {/* Default to 0 if undefined */}
                       </span>
                     </div>
                   </div>
-                ) : (
-                  ""
-                )}
-                {listofmeter?.data[1]?.discoName ? (
+                ) : null}
+
+                {listofmeter?.data &&
+                listofmeter.data.length > 1 &&
+                listofmeter.data[1]?.discoName ? (
                   <div className="flex flex-row gap-1 items-center text-[12px]">
                     <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
                     <span className="text-compare-second-card">
-                      {listofmeter?.data[1]?.discoName}
+                      {listofmeter.data[1].discoName}
                     </span>
                     <span className="text-circle-color">
-                      {listofmeter?.data[1]?.totalMeters}
+                      {listofmeter.data[1]?.totalMeters ?? 0}{" "}
+                      {/* Default to 0 if undefined */}
                     </span>
                   </div>
-                ) : (
-                  ""
-                )}
+                ) : null}
+
                 <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
-                  {listofmeter?.data[2]?.discoName ? (
+                  {listofmeter?.data &&
+                  listofmeter.data.length > 2 &&
+                  listofmeter.data[2]?.discoName ? (
                     <div className="flex flex-row gap-1 items-center text-[12px]">
                       <span className="w-[15px] h-[15px] rounded-circle bg-data-bg"></span>
                       <span className="text-compare-second-card">
-                        {listofmeter?.data[2]?.discoName}
+                        {listofmeter.data[2].discoName}
                       </span>
                       <span className="text-circle-color">
-                        {listofmeter?.data[2]?.totalMeters}
+                        {listofmeter.data[2]?.totalMeters ?? 0}{" "}
+                        {/* Default to 0 if undefined */}
                       </span>
                     </div>
-                  ) : (
-                    ""
-                  )}
-                  {listofmeter?.data[3]?.discoName ? (
+                  ) : null}
+
+                  {listofmeter?.data &&
+                  listofmeter.data.length > 3 &&
+                  listofmeter.data[3]?.discoName ? (
                     <div className="flex flex-row gap-1 items-center text-[12px]">
                       <span className="w-[15px] h-[15px] rounded-circle bg-elect-bg"></span>
                       <span className="text-compare-second-card">
-                        {listofmeter?.data[3]?.discoName}
+                        {listofmeter.data[3].discoName}
                       </span>
                       <span className="text-circle-color">
-                        {listofmeter?.data[3]?.totalMeters}
+                        {listofmeter.data[3]?.totalMeters ?? 0}{" "}
+                        {/* Default to 0 if undefined */}
                       </span>
                     </div>
-                  ) : (
-                    ""
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
