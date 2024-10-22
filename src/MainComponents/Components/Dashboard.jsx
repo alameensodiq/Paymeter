@@ -107,7 +107,7 @@ const Dashboard = ({ title }) => {
 
   useEffect(() => {
     if (dashboardyearly?.data?.monthlyRevenues) {
-      setRevenueData(dashboardyearly.data.monthlyRevenues);
+      setRevenueData(dashboardyearly?.data.monthlyRevenues);
     }
   }, [dashboardyearly?.data?.monthlyRevenues]);
 
@@ -560,7 +560,7 @@ const Dashboard = ({ title }) => {
               </div>
               {listofmeter?.data && <Donuts data={listofmeter?.data} />}
               <div className="flex flex-col gap-3 px-[15px]">
-                {listofmeter?.data[0]?.discoName && (
+                {listofmeter?.data[0]?.discoName ? (
                   <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
                     <div className="flex flex-row gap-1 items-center text-[12px]">
                       <span className="w-[15px] h-[15px] rounded-circle bg-details-color"></span>
@@ -584,6 +584,8 @@ const Dashboard = ({ title }) => {
                       </div>
                     )}
                   </div>
+                ) : (
+                  ""
                 )}
                 <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
                   {listofmeter?.data[2]?.discoName && (
