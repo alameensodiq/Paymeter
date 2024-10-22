@@ -133,6 +133,11 @@ const Dashboard = ({ title }) => {
 
   const currentMonthRevenue = revenueData[new Date().getMonth()]?.revenue;
 
+  const formatNumberWithCommas = (number) => {
+    if (number == null) return "0"; // Handle null or undefined
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   // const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
   //   useSelector((state) => state?.dashboarddiscomonthly);
   // console.log(dashboarddiscomonthly);
@@ -163,7 +168,10 @@ const Dashboard = ({ title }) => {
                   Today Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  ₦{dashboarddailymonthly?.data?.dailyRevenue}
+                  ₦
+                  {formatNumberWithCommas(
+                    dashboarddailymonthly?.data?.dailyRevenue
+                  )}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>{/* <Increase /> */}</span>
@@ -184,7 +192,10 @@ const Dashboard = ({ title }) => {
                   This Week Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  ₦{dashboarddailymonthly?.data?.weeklyRevenue}
+                  ₦
+                  {formatNumberWithCommas(
+                    dashboarddailymonthly?.data?.weeklyRevenue
+                  )}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -208,7 +219,7 @@ const Dashboard = ({ title }) => {
                   This Month Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {/* ₦1 */}₦{currentMonthRevenue}
+                  {/* ₦1 */}₦ {formatNumberWithCommas(currentMonthRevenue)}
                   {/* {dashboard?.data?.totalApiPartners} */}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
@@ -232,7 +243,7 @@ const Dashboard = ({ title }) => {
                   This Year Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{dashboardyearly?.data?.totalRevenue}
+                  ₦{formatNumberWithCommas(dashboardyearly?.data?.totalRevenue)}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -278,7 +289,7 @@ const Dashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Total Users</span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {dashboard?.data?.totalUsers}
+                  {formatNumberWithCommas(dashboard?.data?.totalUsers)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>{/* <Increase /> */}</span>
@@ -299,7 +310,7 @@ const Dashboard = ({ title }) => {
                   Total Agents
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {dashboard?.data?.totalAgents}
+                  {formatNumberWithCommas(dashboard?.data?.totalAgents)}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -324,7 +335,7 @@ const Dashboard = ({ title }) => {
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   {/* ₦1 */}
-                  {dashboard?.data?.totalApiPartners}
+                  {formatNumberWithCommas(dashboard?.data?.totalApiPartners)}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -347,7 +358,9 @@ const Dashboard = ({ title }) => {
                   Total Earning Partner
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {dashboard?.data?.totalEarningPartners}
+                  {formatNumberWithCommas(
+                    dashboard?.data?.totalEarningPartners
+                  )}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>

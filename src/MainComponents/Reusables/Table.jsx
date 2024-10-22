@@ -239,6 +239,12 @@ const Tables = ({
                     DATE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    REFERENCE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    USER TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -257,31 +263,16 @@ const Tables = ({
                     TRANSACTION AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION TYPE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION CAP
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    SYSTEM CHARGE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    REFERENCE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    USER TYPE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    BANK COMMISSION CAP FEE
+                    BANK COMMISSION CAP
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK TAX FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMMISSION TYPE
@@ -290,19 +281,31 @@ const Tables = ({
                     AGENT COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    DISTRICT COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISTRICT MANAGER COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    SERVICE CHARGE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION CAP
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    EARNING PARTNER FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISPENSE TOKEN
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    EARNING MANAGER FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DISTRICT MANAGER FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    BANK TAX FEE
+                    TOKEN
                   </StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -313,9 +316,13 @@ const Tables = ({
                       {index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      <Moment format="YYYY-MM-DD">
-                        {item?.dispense?.updatedDate}
-                      </Moment>
+                      <Moment>{item?.dispense?.updatedDate}</Moment>
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.reference}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.userType}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.customerName}
@@ -336,26 +343,6 @@ const Tables = ({
                       ₦{item?.transactionAmount}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoSystemCommissionType}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.discoSystemCommissionFee}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoSystemCommissionCapFee
-                        ? `₦${item?.discoSystemCommissionCapFee}`
-                        : "not applicable"}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.systemFeePerDisco}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.reference}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.userType}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
                         ? item?.bankCommissionType
                         : "not applicable"}
@@ -371,8 +358,8 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionType
-                        ? item?.agentCommissionType
+                      {item?.dispense?.systemTransactions?.bankTaxFee
+                        ? `₦${item?.dispense?.systemTransactions?.bankTaxFee}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -381,14 +368,13 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.feeDueToSystem}
+                      {item?.agentCommissionType
+                        ? item?.agentCommissionType
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.listtoken[0]}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.earningPartnerFee
-                        ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
+                      {item?.managerCommissionType
+                        ? `₦${item?.managerCommissionType}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -397,9 +383,29 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.bankTaxFee
-                        ? `₦${item?.dispense?.systemTransactions?.bankTaxFee}`
+                      ₦{item?.systemFeePerDisco}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionCapFee
+                        ? `₦${item?.discoSystemCommissionCapFee}`
                         : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.discoSystemCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.systemTransactions?.earningPartnerFee
+                        ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.feeDueToSystem}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.listtoken[0]}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (
@@ -2176,6 +2182,12 @@ const Tables = ({
                     DATE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    REFERENCE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    USER TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -2194,31 +2206,16 @@ const Tables = ({
                     TRANSACTION AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION TYPE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION CAP
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    SYSTEM CHARGE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    REFERENCE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    USER TYPE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    BANK COMMISSION CAP FEE
+                    BANK COMMISSION CAP
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK TAX FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMMISSION TYPE
@@ -2227,19 +2224,31 @@ const Tables = ({
                     AGENT COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    DISTRICT COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISTRICT MANAGER COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    SERVICE CHARGE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION CAP
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    EARNING PARTNER FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISPENSE TOKEN
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    EARNING MANAGER FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DISTRICT MANAGER FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    BANK TAX FEE
+                    TOKEN
                   </StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -2250,9 +2259,13 @@ const Tables = ({
                       {index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      <Moment format="YYYY-MM-DD">
-                        {item?.dispense?.updatedDate}
-                      </Moment>
+                      <Moment>{item?.dispense?.updatedDate}</Moment>
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.reference}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.userType}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.customerName}
@@ -2273,26 +2286,6 @@ const Tables = ({
                       ₦{item?.transactionAmount}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoSystemCommissionType}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.discoSystemCommissionFee}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoSystemCommissionCapFee
-                        ? `₦${item?.discoSystemCommissionCapFee}`
-                        : "not applicable"}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.systemFeePerDisco}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.reference}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.userType}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
                         ? item?.bankCommissionType
                         : "not applicable"}
@@ -2308,8 +2301,8 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.agentCommissionType
-                        ? item?.agentCommissionType
+                      {item?.dispense?.systemTransactions?.bankTaxFee
+                        ? `₦${item?.dispense?.systemTransactions?.bankTaxFee}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -2318,14 +2311,13 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.feeDueToSystem}
+                      {item?.agentCommissionType
+                        ? item?.agentCommissionType
+                        : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.listtoken[0]}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.earningPartnerFee
-                        ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
+                      {item?.managerCommissionType
+                        ? `₦${item?.managerCommissionType}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -2334,9 +2326,29 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.bankTaxFee
-                        ? `₦${item?.dispense?.systemTransactions?.bankTaxFee}`
+                      ₦{item?.systemFeePerDisco}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionCapFee
+                        ? `₦${item?.discoSystemCommissionCapFee}`
                         : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.discoSystemCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.systemTransactions?.earningPartnerFee
+                        ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.feeDueToSystem}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.listtoken[0]}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (
