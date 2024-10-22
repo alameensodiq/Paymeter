@@ -169,8 +169,8 @@ const Dashboard = ({ title }) => {
                   <span>
                     <Increase />
                   </span>
-                  <span className="text-card-user">8.5%</span>
-                  <span className="text-[9px]">Up yesterday</span>
+                  {/* <span className="text-card-user">8.5%</span>
+                  <span className="text-[9px]">Up yesterday</span> */}
                 </div>
               </div>
               <div>
@@ -287,8 +287,8 @@ const Dashboard = ({ title }) => {
                   <span>
                     <Increase />
                   </span>
-                  <span className="text-card-user">8.5%</span>
-                  <span className="text-[9px]">Up yesterday</span>
+                  {/* <span className="text-card-user">8.5%</span>
+                  <span className="text-[9px]">Up yesterday</span> */}
                 </div>
               </div>
               <div>
@@ -530,11 +530,11 @@ const Dashboard = ({ title }) => {
               className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[420px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
-              <div className="flex flex-row px-4 gap-4 items-center justify-end">
+              <div className="flex flex-row px-4 gap-4 items-center justify-center">
                 <span className="text-[14px]">Disco-Meter</span>
-                <div className="position:relative w-[120px] h-[30px] rounded-custom px-[5px] flex flex-row border items-center">
-                  {/* <input className='input' type='date' /> */}
-                  <DatePicker
+                {/* <div className="position:relative w-[120px] h-[30px] rounded-custom px-[5px] flex flex-row border items-center"> */}
+                {/* <input className='input' type='date' /> */}
+                {/* <DatePicker
                     className="text-[8px] outline-none"
                     selected={endDate}
                     onChange={(date) => dateChanger(date)}
@@ -547,8 +547,8 @@ const Dashboard = ({ title }) => {
                   <Calendar
                     className="text-[10px]"
                     onClick={() => PickDate()}
-                  />
-                </div>
+                  /> */}
+                {/* </div> */}
               </div>
               {listofmeter?.data && <Donuts data={listofmeter?.data} />}
               <div className="flex flex-col gap-3 px-[15px]">
