@@ -68,7 +68,7 @@ const UserDetails = ({ title }) => {
   useEffect(() => {
     if (sessionStorage.getItem("token") && id) {
       dispatch(UserData({ id }));
-      dispatch(UserWallet({ id }));
+      // dispatch(UserWallet({ id }));
       dispatch(GetCommission({ id }));
       return;
     } else {
@@ -77,7 +77,7 @@ const UserDetails = ({ title }) => {
     }
     if (reload && sessionStorage.getItem("token") && id) {
       dispatch(UserData({ id }));
-      dispatch(UserWallet({ id }));
+      // dispatch(UserWallet({ id }));
       dispatch(GetCommission({ id }));
     }
 
