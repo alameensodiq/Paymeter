@@ -39,6 +39,7 @@ const Sidebar = () => {
   const [isHovered14, setIsHovered14] = useState(false);
   const [isHovered15, setIsHovered15] = useState(false);
   const [isHovered16, setIsHovered16] = useState(false);
+  const [isHovered17, setIsHovered17] = useState(false);
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
@@ -527,6 +528,57 @@ const Sidebar = () => {
               }`}
             >
               API-Partner
+            </p>
+          </Link>
+          <Link
+            to="/user"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/user" ||
+              router.pathname.startsWith("/user/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered17(true)}
+            onMouseLeave={() => setIsHovered17(false)}
+          >
+            {router.pathname === "/user" ||
+            isHovered17 ||
+            router.pathname.startsWith("/user/") ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/user" ||
+            isHovered17 ||
+            router.pathname.startsWith("/user/") ? (
+              <DataColor
+                className={`${
+                  router.pathname === "/user" ||
+                  router.pathname.startsWith("/user/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Data
+                className={`${
+                  router.pathname === "/user" ||
+                  router.pathname.startsWith("/user/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/user" ||
+                router.pathname.startsWith("/user/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Users
             </p>
           </Link>
           {/* <Link

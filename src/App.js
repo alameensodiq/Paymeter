@@ -28,6 +28,7 @@ import Meter from "./MainComponents/Components/Meter";
 import DistrictManager from "./MainComponents/Components/DistrictManager";
 import { IdleTimerProvider, useIdleTimerContext } from "react-idle-timer";
 import { LogOutAuthentication } from "./MainComponents/Reusables/LogOutAuthentication";
+import Users from "./MainComponents/Components/Users";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -76,6 +77,10 @@ function App() {
               element={<UserDetails title={"Earning Partner Details"} />}
             />
             <Route
+              path="/user/:id"
+              element={<UserDetails title={"User Details"} />}
+            />
+            <Route
               path="/manager/:id"
               element={<UserDetails title={"Earning Partner Details"} />}
             />
@@ -91,6 +96,7 @@ function App() {
               path="/earning"
               element={<EarningPartner title={"Earning Partner"} />}
             />
+            <Route path="/user" element={<Users title={"Users"} />} />
             <Route
               path="/manager"
               element={<DistrictManager title={"District Manager"} />}

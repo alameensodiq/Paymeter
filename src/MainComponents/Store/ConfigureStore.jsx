@@ -39,6 +39,7 @@ import { DashboardDailyMonthlySlice } from "./Reducers/DashboardDailyMonthly";
 import { metersSlice } from "./Reducers/meters";
 import { ListofMeterSlice } from "./Reducers/Listofmeter";
 import { CreateManagerSlice } from "./Reducers/CreateManager";
+import { CustomersSlice } from "./Reducers/Customers";
 
 export default configureStore({
   reducer: {
@@ -81,6 +82,7 @@ export default configureStore({
     dashboarddailymonthly: DashboardDailyMonthlySlice?.reducer,
     meters: metersSlice?.reducer,
     listofmeter: ListofMeterSlice?.reducer,
-    managers: CreateManagerSlice?.reducer
+    managers: CreateManagerSlice?.reducer,
+    customers: CustomersSlice?.reducer
   }
 });

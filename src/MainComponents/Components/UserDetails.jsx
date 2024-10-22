@@ -84,7 +84,7 @@ const UserDetails = ({ title }) => {
     //eslint-disable-next-line
   }, [userdata?.status, reload]);
 
-  const isEarningRoute = location.pathname.startsWith("/earning/");
+  const isEarningRoute = location.pathname.startsWith("/user/");
 
   const next = userdata?.data?.meta?.next;
   const previous = userdata?.data?.meta?.prev;

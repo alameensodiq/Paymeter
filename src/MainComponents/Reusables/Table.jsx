@@ -42,7 +42,8 @@ const Tables = ({
   setsettingId,
   setNaming,
   metering,
-  manager
+  manager,
+  users
 }) => {
   const navigate = useNavigate();
   console.log(data);
@@ -2670,6 +2671,87 @@ const Tables = ({
                         color: "#000000"
                       }}
                       onClick={() => navigate(`/manager/${item?.id}`)}
+                    >
+                      View
+                    </span>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : users ? (
+        <TableContainer
+          // component={Paper}
+          style={{ boxShadow: "none" }}
+        >
+          <Table
+            sx={{ minWidth: 700, tableLayout: "auto" }}
+            aria-label="customized table"
+          >
+            <TableHead>
+              <TableRow style={{ paddingRight: "0px" }}>
+                <StyledTableCell style={{ width: "10%" }}>S/N</StyledTableCell>
+                <StyledTableCell style={{ width: "15%" }}>
+                  PARTNER NAME
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "15%" }}>
+                  EMAIL
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "15%" }}>
+                  ADDRESS
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>
+                  COMMISSION
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>
+                  DATE ADDED
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "20%" }}>
+                  TOTAL AMOUNT RECEIVED
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "5%" }}></StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.map((item, index) => (
+                <StyledTableRow
+                  onClick={() => {
+                    setStep(11);
+                    setUserIds(item?.id);
+                  }}
+                >
+                  <StyledTableCell
+                    className="text-dob"
+                    style={{ width: "10%" }}
+                  >
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {item?.firstName}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {item?.email}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {item?.address}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    N/A
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "5%" }}>
+                    <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#000000"
+                      }}
+                      onClick={() => navigate(`/user/${item?.id}`)}
                     >
                       View
                     </span>
