@@ -306,7 +306,7 @@ const UserDetails = ({ title }) => {
                       setStep={setStep}
                       setNaming={setNaming}
                       overviewcommission
-                      data={getcommission?.data?.data}
+                      data={getcommission?.data}
                     />
                   )}
                 {userdata?.data?.transactions?.meta?.totalCount === 0 &&
