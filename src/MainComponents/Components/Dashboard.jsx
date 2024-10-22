@@ -163,7 +163,7 @@ const Dashboard = ({ title }) => {
                   Today Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {dashboarddailymonthly?.data?.dailyRevenue}
+                  ₦{dashboarddailymonthly?.data?.dailyRevenue}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>{/* <Increase /> */}</span>
@@ -184,7 +184,7 @@ const Dashboard = ({ title }) => {
                   This Week Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {dashboarddailymonthly?.data?.weeklyRevenue}
+                  ₦{dashboarddailymonthly?.data?.weeklyRevenue}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -208,8 +208,7 @@ const Dashboard = ({ title }) => {
                   This Month Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {/* ₦1 */}
-                  {currentMonthRevenue}
+                  {/* ₦1 */}₦{currentMonthRevenue}
                   {/* {dashboard?.data?.totalApiPartners} */}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
@@ -233,7 +232,7 @@ const Dashboard = ({ title }) => {
                   This Year Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {dashboardyearly?.data?.totalRevenue}
+                  ₦{dashboardyearly?.data?.totalRevenue}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -256,7 +255,7 @@ const Dashboard = ({ title }) => {
                   Total Revenue
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ----
+                  ₦ ----
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
