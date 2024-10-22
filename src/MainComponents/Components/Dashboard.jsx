@@ -572,7 +572,7 @@ const Dashboard = ({ title }) => {
                         {listofmeter?.data[0]?.totalMeters}
                       </span>
                     </div>
-                    {listofmeter?.data[1]?.discoName && (
+                    {listofmeter?.data[1]?.discoName ? (
                       <div className="flex flex-row gap-1 items-center text-[12px]">
                         <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
                         <span className="text-compare-second-card">
@@ -582,13 +582,15 @@ const Dashboard = ({ title }) => {
                           {listofmeter?.data[1]?.totalMeters}
                         </span>
                       </div>
+                    ) : (
+                      ""
                     )}
                   </div>
                 ) : (
                   ""
                 )}
                 <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
-                  {listofmeter?.data[2]?.discoName && (
+                  {listofmeter?.data[2]?.discoName ? (
                     <div className="flex flex-row gap-1 items-center text-[12px]">
                       <span className="w-[15px] h-[15px] rounded-circle bg-data-bg"></span>
                       <span className="text-compare-second-card">
@@ -598,8 +600,10 @@ const Dashboard = ({ title }) => {
                         {listofmeter?.data[2]?.totalMeters}
                       </span>
                     </div>
+                  ) : (
+                    ""
                   )}
-                  {listofmeter?.data[3]?.discoName && (
+                  {listofmeter?.data[3]?.discoName ? (
                     <div className="flex flex-row gap-1 items-center text-[12px]">
                       <span className="w-[15px] h-[15px] rounded-circle bg-elect-bg"></span>
                       <span className="text-compare-second-card">
@@ -609,6 +613,8 @@ const Dashboard = ({ title }) => {
                         {listofmeter?.data[3]?.totalMeters}
                       </span>
                     </div>
+                  ) : (
+                    ""
                   )}
                 </div>
               </div>
