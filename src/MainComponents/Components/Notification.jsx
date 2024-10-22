@@ -137,6 +137,7 @@ const Notification = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
+          role1
           userIds={userIds}
           setUserIds={setUserIds}
           setStep={setStep}

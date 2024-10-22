@@ -28,6 +28,7 @@ import { Transactions } from "../Store/Apis/Transactions";
 import { DashboardSummary } from "../Store/Apis/DashboardSummary";
 import { DashboardDailyMonthly } from "../Store/Apis/DasboardDailyMonthly";
 import { ListofMeter } from "../Store/Apis/ListofMeter";
+import empty from "../../assets/empty.png";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -647,7 +648,24 @@ const Dashboard = ({ title }) => {
                 <Filtering />
                 <span className="text-[14px]">Filters</span>
               </div>
-              <Tables transfers data={transactions?.data?.data?.slice(0, 10)} />
+              {transactions?.data?.data && (
+                <Tables
+                  transfers
+                  data={transactions?.data?.data?.slice(0, 10)}
+                />
+              )}
+              {!transactions?.status && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <img src={empty} alt="empty" />
+                </div>
+              )}
             </div>
           </div>
         </div>

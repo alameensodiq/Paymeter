@@ -26,6 +26,7 @@ import { EditSettings } from "../MainComponents/Store/Apis/EditSettings";
 import { UserComEdit } from "../MainComponents/Store/Apis/UserComEdit";
 import { Discos } from "../MainComponents/Store/Apis/Discos";
 import { CreateManager } from "../MainComponents/Store/Apis/CreateManager";
+import DistrictManagerSelect from "../bits/DistrictManagerSelect";
 
 const AppUserModal = ({
   setStep,
@@ -83,7 +84,9 @@ const AppUserModal = ({
   const [itemersettings, setItemersettings] = useState("");
   const [itemerseditdisc, setItemerseditdisc] = useState("");
   const [Approved, setApproved] = useState(false);
-  const [districthead, setDistricthead] = useState("");
+  const [districthead, setDistricthead] = useState({
+    districtManagerId: ""
+  });
   const [partner, setPartner] = useState({
     name: "",
     email: "",
@@ -375,7 +378,6 @@ const AppUserModal = ({
   console.log(apiagentrole?.data?.data);
 
   const districtOptions = [
-    "District List", // Placeholder option
     ...(apiagentrole?.data?.data.map((district) => district.lastName) || [])
   ];
 
@@ -384,6 +386,14 @@ const AppUserModal = ({
     console.log(value);
     setRegbus({
       ...regbus,
+      [name]: value
+    });
+  };
+
+  const ChangeAgentDistrict = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setDistricthead({
       [name]: value
     });
   };
@@ -756,6 +766,9 @@ const AppUserModal = ({
 
   const handleCloseModal4 = () => {
     setStep(0);
+    setDistricthead({
+      districtManagerId: ""
+    });
     setApproving("");
     if (userId) {
       setuserId("");
@@ -4135,12 +4148,20 @@ const AppUserModal = ({
         // updateUserListData(update);
         // window.location.reload()
       >
-        <ModalInputSelect
+        {/* <ModalInputSelect
           name="districtManagerId"
           label="Choose District Manager"
           value={districthead}
-          onChange={(e) => setDistricthead(e)}
+          onChange={(e) => ChangeAgentDistrict(e)}
           options={districtOptions}
+        /> */}
+        <DistrictManagerSelect
+          name="districtManagerId"
+          label="Choose District Manager"
+          value={districthead?.districtManagerId}
+          onChange={(e) => ChangeAgentDistrict(e)}
+          earningPartnerId
+          options={apiagentrole?.data?.data}
         />
 
         <LargeSignInButton
@@ -4150,7 +4171,7 @@ const AppUserModal = ({
               Approve({
                 userId: userId?.user?.id,
                 notId: "approve",
-                districtManagerId: districthead,
+                districtManagerId: districthead?.districtManagerId,
                 stat,
                 items: userId
               })

@@ -200,9 +200,10 @@ const Transfers = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {transactions?.data?.data?.length >= 1 ? (
+                {transactions?.data?.data?.length >= 1 && (
                   <Tables transfers data={transactions?.data?.data} />
-                ) : transactions?.data?.data?.length === 0 ? (
+                )}{" "}
+                {!transactions?.status && (
                   <div
                     style={{
                       display: "flex",
@@ -213,8 +214,6 @@ const Transfers = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                ) : (
-                  ""
                 )}
                 {transactions?.data?.data?.length >= 1 && (
                   <Pagination

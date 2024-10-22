@@ -1393,7 +1393,10 @@ const Tables = ({
                     USER TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    COMMISSION
+                    COMMISSION FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    COMMISSION CAP FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
                     COMMISSION TYPE
@@ -1416,6 +1419,9 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
                       {item?.userType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.commissionDTO?.fee}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
                       {item?.commissionDTO?.capFee}
