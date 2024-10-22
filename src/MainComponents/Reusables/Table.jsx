@@ -260,6 +260,9 @@ const Tables = ({
                     METER NUMBER
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    RECEIVED AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     TRANSACTION AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -338,6 +341,10 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.meterNo}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {/* ₦{item?.transactionAmount} */}
+                      N/A
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.transactionAmount}
