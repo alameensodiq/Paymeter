@@ -558,7 +558,7 @@ const Dashboard = ({ title }) => {
                   /> */}
                 {/* </div> */}
               </div>
-              {listofmeter?.data && <Donuts data={listofmeter?.data} />}
+              {listofmeter?.data ? <Donuts data={listofmeter?.data} /> : ""}
               <div className="flex flex-col gap-3 px-[15px]">
                 {listofmeter?.data[0]?.discoName ? (
                   <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
