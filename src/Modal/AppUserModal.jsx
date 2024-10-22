@@ -409,22 +409,21 @@ const AppUserModal = ({
 
     // If there's more than one decimal point, keep only the first one
     if (decimalCount > 1) {
-      const firstDecimalIndex = sanitizedValue.indexOf(".");
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
 
-    // Convert the sanitized value to a number
-    const numericValue = parseFloat(sanitizedValue);
-
-    // Update the state with the numeric value if it's a valid number
-    if (!isNaN(numericValue)) {
-      setEditDisc({
-        ...editdisc,
-        [name]: numericValue
-      });
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
     }
+
+    // Update the state with the sanitized string value
+    setEditDisc({
+      ...editdisc,
+      [name]: sanitizedValue
+    });
   };
 
   const ChangeEarning = (e) => {

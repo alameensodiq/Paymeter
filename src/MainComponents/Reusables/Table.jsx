@@ -437,10 +437,10 @@ const Tables = ({
                     {item?.ussd}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    12/04/1975
+                    {/* 12/04/1975 */} ----
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    200,000
+                    {/* 200,000 */} ----
                   </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
                     <button
