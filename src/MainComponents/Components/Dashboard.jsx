@@ -166,9 +166,7 @@ const Dashboard = ({ title }) => {
                   {dashboarddailymonthly?.data?.dailyRevenue}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
-                  <span>
-                    <Increase />
-                  </span>
+                  <span>{/* <Increase /> */}</span>
                   {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
                 </div>
@@ -284,9 +282,7 @@ const Dashboard = ({ title }) => {
                   {dashboard?.data?.totalUsers}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
-                  <span>
-                    <Increase />
-                  </span>
+                  <span>{/* <Increase /> */}</span>
                   {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
                 </div>
