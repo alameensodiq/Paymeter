@@ -572,19 +572,19 @@ const Dashboard = ({ title }) => {
                         {listofmeter?.data[0]?.totalMeters}
                       </span>
                     </div>
-                    {listofmeter?.data[1]?.discoName ? (
-                      <div className="flex flex-row gap-1 items-center text-[12px]">
-                        <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
-                        <span className="text-compare-second-card">
-                          {listofmeter?.data[1]?.discoName}
-                        </span>
-                        <span className="text-circle-color">
-                          {listofmeter?.data[1]?.totalMeters}
-                        </span>
-                      </div>
-                    ) : (
-                      ""
-                    )}
+                  </div>
+                ) : (
+                  ""
+                )}
+                {listofmeter?.data[1]?.discoName ? (
+                  <div className="flex flex-row gap-1 items-center text-[12px]">
+                    <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
+                    <span className="text-compare-second-card">
+                      {listofmeter?.data[1]?.discoName}
+                    </span>
+                    <span className="text-circle-color">
+                      {listofmeter?.data[1]?.totalMeters}
+                    </span>
                   </div>
                 ) : (
                   ""
