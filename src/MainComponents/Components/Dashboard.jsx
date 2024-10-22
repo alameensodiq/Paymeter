@@ -164,9 +164,7 @@ const Dashboard = ({ title }) => {
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  Today Revenue
-                </span>
+                <span className="text-card-title text-[14px]">Today Sales</span>
                 <span className="text-color-user text-[20px] font-bold">
                   ₦
                   {formatNumberWithCommas(
@@ -189,7 +187,7 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  This Week Revenue
+                  This Week Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
                   ₦
@@ -216,7 +214,7 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  This Month Revenue
+                  This Month Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   {/* ₦1 */}₦ {formatNumberWithCommas(currentMonthRevenue)}
@@ -240,7 +238,7 @@ const Dashboard = ({ title }) => {
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
-                  This Year Revenue
+                  This Year Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   ₦{formatNumberWithCommas(dashboardyearly?.data?.totalRevenue)}
@@ -262,9 +260,7 @@ const Dashboard = ({ title }) => {
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  Total Revenue
-                </span>
+                <span className="text-card-title text-[14px]">Total Sales</span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   ₦ ----
                 </span>
