@@ -236,6 +236,9 @@ const Tables = ({
                 <TableRow style={{ paddingRight: "0px" }}>
                   <StyledTableCell style={{ width: "5%" }}>S/N</StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    DATE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -263,7 +266,7 @@ const Tables = ({
                     DISCO COMMISSION CAP
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    RRN
+                    SYSTEM CHARGE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     REFERENCE
@@ -284,7 +287,7 @@ const Tables = ({
                     AGENT COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    AGENT COMMISSION FEE
+                    AGENT COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
@@ -308,6 +311,11 @@ const Tables = ({
                   <StyledTableRow>
                     <StyledTableCell style={{ width: "5%" }}>
                       {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      <Moment format="YYYY-MM-DD">
+                        {item?.dispense?.updatedDate}
+                      </Moment>
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.customerName}
@@ -337,7 +345,7 @@ const Tables = ({
                       {item?.discoSystemCommissionCapFee}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.rrn}
+                      {item?.systemFeePerDisco}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.reference}
@@ -2147,6 +2155,9 @@ const Tables = ({
                 <TableRow style={{ paddingRight: "0px" }}>
                   <StyledTableCell style={{ width: "5%" }}>S/N</StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    DATE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -2174,7 +2185,7 @@ const Tables = ({
                     DISCO COMMISSION CAP
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    RRN
+                    SYSTEM CHARGE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     REFERENCE
@@ -2195,7 +2206,7 @@ const Tables = ({
                     AGENT COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    AGENT COMMISSION FEE
+                    AGENT COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
@@ -2219,6 +2230,11 @@ const Tables = ({
                   <StyledTableRow>
                     <StyledTableCell style={{ width: "5%" }}>
                       {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      <Moment format="YYYY-MM-DD">
+                        {item?.dispense?.updatedDate}
+                      </Moment>
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.customerName}
@@ -2248,7 +2264,7 @@ const Tables = ({
                       {item?.discoSystemCommissionCapFee}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.rrn}
+                      {item?.systemFeePerDisco}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.reference}
