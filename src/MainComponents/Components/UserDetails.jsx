@@ -294,7 +294,10 @@ const UserDetails = ({ title }) => {
               <>
                 {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
-                    <Tables overviewtransaction data={userdata?.data?.data} />
+                    <Tables
+                      overviewtransaction
+                      data={userdata?.data?.transactions?.data}
+                    />
                   )}
                 {!isEarningRoute &&
                   getcommission?.data?.length >= 1 &&
