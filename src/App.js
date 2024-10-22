@@ -26,87 +26,99 @@ import Complaints from "./MainComponents/Components/Complaints";
 import UserDetails from "./MainComponents/Components/UserDetails";
 import Meter from "./MainComponents/Components/Meter";
 import DistrictManager from "./MainComponents/Components/DistrictManager";
+import { IdleTimerProvider, useIdleTimerContext } from "react-idle-timer";
+import { LogOutAuthentication } from "./MainComponents/Reusables/LogOutAuthentication";
 
 function App() {
   const token = sessionStorage.getItem("token");
+  const idleTimerRef = useIdleTimerContext();
+  const onIdle = () => {
+    LogOutAuthentication();
+  };
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route
-        path="/payment-shift"
-        element={<PaymentShift title={"Payment and Shift"} />}
-      />
-      {token && (
-        <>
-          <Route
-            path="/dashboard"
-            element={<Dashboard title={"Dashboard"} />}
-          />
-          <Route path="/customers" element={<Customers />} />
-          <Route
-            path="/discos/:id"
-            element={<CustomerInfo title={"Meter under Discos"} />}
-          />
-          <Route
-            path="/institutions"
-            element={<Investments title={"Institutions"} />}
-          />
-          <Route
-            path="/transactions"
-            element={<Transfers title={"Transactions"} />}
-          />
-          <Route path="/agents" element={<Agents title={"Agents"} />} />
-          <Route
-            path="/agents/:id"
-            element={<UserDetails title={"Agent Details"} />}
-          />
-          <Route
-            path="/earning/:id"
-            element={<UserDetails title={"Earning Partner Details"} />}
-          />
-          <Route
-            path="/manager/:id"
-            element={<UserDetails title={"Earning Partner Details"} />}
-          />
-          <Route
-            path="/meter/:id"
-            element={<Meter title={"Meter Details"} />}
-          />
-          <Route
-            path="/api/:id"
-            element={<UserDetails title={"API Partner Details"} />}
-          />
-          <Route
-            path="/earning"
-            element={<EarningPartner title={"Earning Partner"} />}
-          />
-          <Route
-            path="/manager"
-            element={<DistrictManager title={"District Manager"} />}
-          />
-          <Route
-            path="/complaint"
-            element={<Complaints title={"Complaints"} />}
-          />
+    <IdleTimerProvider
+      ref={idleTimerRef}
+      timeout={5 * 60 * 1000}
+      onIdle={onIdle}
+    >
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/payment-shift"
+          element={<PaymentShift title={"Payment and Shift"} />}
+        />
+        {token && (
+          <>
+            <Route
+              path="/dashboard"
+              element={<Dashboard title={"Dashboard"} />}
+            />
+            <Route path="/customers" element={<Customers />} />
+            <Route
+              path="/discos/:id"
+              element={<CustomerInfo title={"Meter under Discos"} />}
+            />
+            <Route
+              path="/institutions"
+              element={<Investments title={"Institutions"} />}
+            />
+            <Route
+              path="/transactions"
+              element={<Transfers title={"Transactions"} />}
+            />
+            <Route path="/agents" element={<Agents title={"Agents"} />} />
+            <Route
+              path="/agents/:id"
+              element={<UserDetails title={"Agent Details"} />}
+            />
+            <Route
+              path="/earning/:id"
+              element={<UserDetails title={"Earning Partner Details"} />}
+            />
+            <Route
+              path="/manager/:id"
+              element={<UserDetails title={"Earning Partner Details"} />}
+            />
+            <Route
+              path="/meter/:id"
+              element={<Meter title={"Meter Details"} />}
+            />
+            <Route
+              path="/api/:id"
+              element={<UserDetails title={"API Partner Details"} />}
+            />
+            <Route
+              path="/earning"
+              element={<EarningPartner title={"Earning Partner"} />}
+            />
+            <Route
+              path="/manager"
+              element={<DistrictManager title={"District Manager"} />}
+            />
+            <Route
+              path="/complaint"
+              element={<Complaints title={"Complaints"} />}
+            />
 
-          <Route path="/api" element={<ApiPartner title={"API-Partner"} />} />
-          <Route path="/discos" element={<Loans title={"Discos"} />} />
-          <Route path="/funding" element={<Funding title={"Funding"} />} />
-          <Route path="/payment" element={<Payment title={"Payment"} />} />
-          <Route path="/setting" element={<Setting title={"Settings"} />} />
-          <Route
-            path="/notification"
-            element={<Notification title={"Agents"} />}
-          />
-        </>
-      )}
-      {/* <Route path='/audit' element={<Audit/>} />
+            <Route path="/api" element={<ApiPartner title={"API-Partner"} />} />
+            <Route path="/discos" element={<Loans title={"Discos"} />} />
+            <Route path="/funding" element={<Funding title={"Funding"} />} />
+            <Route path="/payment" element={<Payment title={"Payment"} />} />
+            <Route path="/setting" element={<Setting title={"Settings"} />} />
+            <Route
+              path="/notification"
+              element={<Notification title={"Agents"} />}
+            />
+          </>
+        )}
+        {/* <Route path='/audit' element={<Audit/>} />
       <Route path='/airtime' element={<Airtime/>} />
       <Route path='/data' element={<Data/>} />
       <Route path='/cable' element={<Cable/>} />
       <Route path='/electricity' element={<Electricity/>} />
       <Route path='/report' element={<Report/>} /> */}
-    </Routes>
+      </Routes>
+    </IdleTimerProvider>
   );
 }
 

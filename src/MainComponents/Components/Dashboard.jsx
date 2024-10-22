@@ -303,7 +303,11 @@ const Dashboard = ({ title }) => {
             </div>
             <div
               className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              style={{
+                boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
+                cursor: "pointer"
+              }}
+              onClick={() => navigate("/notification")}
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
@@ -327,7 +331,11 @@ const Dashboard = ({ title }) => {
             </div>
             <div
               className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              style={{
+                boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
+                cursor: "pointer"
+              }}
+              onClick={() => navigate("/api")}
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">
@@ -351,7 +359,11 @@ const Dashboard = ({ title }) => {
             </div>
             <div
               className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              style={{
+                boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
+                cursor: "pointer"
+              }}
+              onClick={() => navigate("/earning")}
             >
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">

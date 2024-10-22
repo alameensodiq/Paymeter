@@ -266,13 +266,16 @@ const Tables = ({
                     TRANSACTION AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    SERVICE CHARGE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    BANK COMMISSION CAP
+                    BANK COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK TAX FEE
@@ -288,9 +291,6 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     DISTRICT MANAGER COMMISSION
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    SERVICE CHARGE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION TYPE
@@ -350,6 +350,9 @@ const Tables = ({
                       ₦{item?.transactionAmount}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.systemFeePerDisco}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
                         ? item?.bankCommissionType
                         : "not applicable"}
@@ -360,8 +363,8 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionFeeCap
-                        ? `₦${item?.bankCommissionFeeCap}`
+                      {item?.bankCommission
+                        ? `₦${item?.bankCommission}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -388,9 +391,6 @@ const Tables = ({
                       {item?.dispense?.systemTransactions?.districtManagerFee
                         ? `₦${item?.dispense?.systemTransactions?.districtManagerFee}`
                         : "not applicable"}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.systemFeePerDisco}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionType}
