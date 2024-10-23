@@ -12,12 +12,16 @@ const Pagination = ({
   const [news, setNews] = useState(0);
   const [old, setOld] = useState(3);
 
-  // Ensure postsPerPage is greater than 0 to avoid division by zero
+  // Log values for debugging
+  console.log("totalPosts:", totalPosts);
+  console.log("postsPerPage:", postsPerPage);
+
   const validPostsPerPage = Math.max(1, postsPerPage);
-  const totalPages = Math.max(1, Math.ceil(totalPosts / validPostsPerPage));
+  const totalPages =
+    totalPosts > 0 ? Math.max(1, Math.ceil(totalPosts / validPostsPerPage)) : 0;
 
   const PageNumbers = [...Array(totalPages)].map((_, i) => i + 1);
-  const recent = PageNumbers.slice(news, old);
+  const recent = PageNumbers.slice(news, Math.min(old, totalPages));
 
   const backward = () => {
     if (news > 0) {
