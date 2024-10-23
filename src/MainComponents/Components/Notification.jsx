@@ -62,6 +62,8 @@ const Notification = ({ title }) => {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
       dispatch(Notifications({ status }));
       setReload(false);
+      setStatus("accepted");
+      setCurrentPage(0);
     }
     // if (reload) {
     //   //   dispatch(Banks({ startDate, searcher, currentPage }));

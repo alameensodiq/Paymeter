@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -46,6 +46,9 @@ const Tables = ({
   users
 }) => {
   const navigate = useNavigate();
+  const inputRef3 = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [indexing, setIndexing] = useState(null);
   console.log(data);
   const theme = createTheme({
     typography: {
@@ -101,6 +104,21 @@ const Tables = ({
       border: 0
     }
   }));
+
+  const handleCopy3 = (item) => {
+    const textToCopy = item; // Get the text to copy
+    if (textToCopy) {
+      navigator.clipboard
+        .writeText(textToCopy)
+        .then(() => {
+          toast.success("Copied to clipboard!");
+        })
+        .catch((err) => {
+          console.error("Failed to copy address: ", err);
+          toast.error("Failed to copy address.");
+        });
+    }
+  };
   return (
     <div>
       {customers ? (
@@ -314,6 +332,7 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -421,8 +440,36 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.feeDueToSystem}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.listtoken[0]}
+                    <StyledTableCell
+                      ref={inputRef3}
+                      onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {item?.dispense?.listtoken[0] || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{ width: "10%", position: "relative" }}
+                    >
+                      <button
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                      >
+                        Action
+                      </button>
+                      {index === indexing && open ? (
+                        <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                            <span className="text-black">Download Receipt</span>
+                            <span className="text-black">Regenerate Token</span>
+                            <span className="text-black">Resend Token</span>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {item?.paymentStatus === "successfull" ? (
@@ -2273,6 +2320,7 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -2380,8 +2428,36 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.feeDueToSystem}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.listtoken[0]}
+                    <StyledTableCell
+                      ref={inputRef3}
+                      onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {item?.dispense?.listtoken[0] || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{ width: "10%", position: "relative" }}
+                    >
+                      <button
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                      >
+                        Action
+                      </button>
+                      {index === indexing && open ? (
+                        <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                            <span className="text-black">Download Receipt</span>
+                            <span className="text-black">Regenerate Token</span>
+                            <span className="text-black">Resend Token</span>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                   {item?.paymentStatus === "successfull" ? (
