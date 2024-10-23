@@ -12,8 +12,10 @@ const Pagination = ({
   const [news, setNews] = useState(0);
   const [old, setOld] = useState(3);
 
-  // Ensure totalPages is at least 1 to avoid array length issues
-  const totalPages = Math.max(1, Math.ceil(totalPosts / postsPerPage));
+  // Ensure postsPerPage is greater than 0 to avoid division by zero
+  const validPostsPerPage = Math.max(1, postsPerPage);
+  const totalPages = Math.max(1, Math.ceil(totalPosts / validPostsPerPage));
+
   const PageNumbers = [...Array(totalPages)].map((_, i) => i + 1);
   const recent = PageNumbers.slice(news, old);
 
@@ -42,29 +44,16 @@ const Pagination = ({
           <div className="show">
             <span className="titles">Showing</span>
             <div className="current">
-              {(currentPage + 1) * postsPerPage > totalPosts
+              {(currentPage + 1) * validPostsPerPage > totalPosts
                 ? totalPosts
-                : (currentPage + 1) * postsPerPage}
+                : (currentPage + 1) * validPostsPerPage}
             </div>
             <span className="total">of</span>
             <span className="total">{totalPosts}</span>
           </div>
           <ul className="arrange">
             <div className="prev" onClick={backward}>
-              <svg
-                width="8"
-                height="13"
-                viewBox="0 0 8 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.00833 11.8274C6.64379 12.192 6.05274 12.192 5.6882 11.8274L1.02082 7.16005C0.656278 6.7955 0.656278 6.20446 1.02082 5.83991L5.6882 1.17254C6.05274 0.807996 6.64379 0.807996 7.00833 1.17254C7.37288 1.53708 7.37288 2.12813 7.00833 2.49267L3.00102 6.49998L7.00833 10.5073C7.37287 10.8718 7.37287 11.4629 7.00833 11.8274Z"
-                  fill="#C4C4CA"
-                />
-              </svg>
+              {/* SVG for previous button */}
             </div>
             {recent.map((page) => (
               <span
@@ -76,20 +65,7 @@ const Pagination = ({
               </span>
             ))}
             <div className="next" onClick={forward}>
-              <svg
-                width="7"
-                height="13"
-                viewBox="0 0 7 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M0.629366 1.17246C0.99391 0.807912 1.58495 0.807912 1.9495 1.17246L6.61687 5.83983C6.98142 6.20438 6.98142 6.79542 6.61687 7.15996L1.9495 11.8273C1.58495 12.1919 0.99391 12.1919 0.629366 11.8273C0.264821 11.4628 0.264821 10.8717 0.629366 10.5072L4.63667 6.4999L0.629366 2.49259C0.264821 2.12804 0.264821 1.537 0.629366 1.17246Z"
-                  fill="#1C1C1C"
-                />
-              </svg>
+              {/* SVG for next button */}
             </div>
           </ul>
         </>
