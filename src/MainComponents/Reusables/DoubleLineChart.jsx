@@ -86,9 +86,9 @@ function DoubleLineChart({ data }) {
       ]
     },
     yaxis: {
-      tickAmount: 5,
+      tickAmount: 10,
       min: 0,
-      max: 10 // Adjust as needed based on your data
+      max: 1000 // Adjust as needed based on your data
     },
     tooltip: {
       shared: true,
