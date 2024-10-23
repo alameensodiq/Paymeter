@@ -3205,7 +3205,7 @@ const AppUserModal = ({
             setApproved(false);
           }}
           bigger
-          title={"Submit"}
+          title={authenticatingapprove ? "Submiting....." : "Submit"}
           background
           color
         />
@@ -4179,7 +4179,7 @@ const AppUserModal = ({
             setBusstate10(true);
           }}
           bigger
-          title={"Submit"}
+          title={authenticatingapprove ? "Submiting....." : "Submit"}
           background
           color
         />
