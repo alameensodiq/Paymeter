@@ -1930,10 +1930,10 @@ const Tables = ({
             <TableBody>
               {data?.map((item, index) => (
                 <StyledTableRow
-                  onClick={() => {
-                    setStep(11);
-                    setUserIds(item?.id);
-                  }}
+                // onClick={() => {
+                //   setStep(11);
+                //   setUserIds(item?.id);
+                // }}
                 >
                   <StyledTableCell
                     className="text-dob"

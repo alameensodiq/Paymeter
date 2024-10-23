@@ -85,6 +85,7 @@ const UserDetails = ({ title }) => {
   }, [userdata?.status, reload]);
 
   const isEarningRoute = location.pathname.startsWith("/user/");
+  const isEarningRoute2 = location.pathname.startsWith("/earning/");
 
   const next = userdata?.data?.meta?.next;
   const previous = userdata?.data?.meta?.prev;
@@ -265,7 +266,7 @@ const UserDetails = ({ title }) => {
                 >
                   Transactions
                 </span>
-                {!isEarningRoute && (
+                {!isEarningRoute && !isEarningRoute2 && (
                   <span
                     onClick={() => {
                       setStatus("pending");
@@ -285,9 +286,11 @@ const UserDetails = ({ title }) => {
                 {status === "accepted" && (
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
-                {status === "pending" && !isEarningRoute && (
-                  <div className="w-[90px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[13%] sm:ml-[18%]" />
-                )}
+                {status === "pending" &&
+                  !isEarningRoute &&
+                  !isEarningRoute2 && (
+                    <div className="w-[90px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[13%] sm:ml-[18%]" />
+                  )}
               </div>
             </div>
             {loading ? (
@@ -300,6 +303,7 @@ const UserDetails = ({ title }) => {
                     />
                   )}
                 {!isEarningRoute &&
+                  !isEarningRoute2 &&
                   getcommission?.data?.length >= 1 &&
                   status === "pending" && (
                     <Tables
