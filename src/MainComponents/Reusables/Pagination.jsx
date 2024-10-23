@@ -12,7 +12,8 @@ const Pagination = ({
   const [news, setNews] = useState(0);
   const [old, setOld] = useState(3);
 
-  const totalPages = Math.ceil(totalPosts / postsPerPage);
+  // Ensure totalPages is at least 1 to avoid array length issues
+  const totalPages = Math.max(1, Math.ceil(totalPosts / postsPerPage));
   const PageNumbers = [...Array(totalPages)].map((_, i) => i + 1);
   const recent = PageNumbers.slice(news, old);
 
