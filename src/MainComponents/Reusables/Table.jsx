@@ -329,9 +329,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION TYPE
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION CAP
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION
                   </StyledTableCell>
@@ -443,11 +443,11 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionCapFee
                         ? `₦${item?.discoSystemCommissionCapFee}`
                         : "not applicable"}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.discoSystemCommissionFee}
                     </StyledTableCell>
@@ -2626,9 +2626,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION TYPE
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION CAP
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION
                   </StyledTableCell>
@@ -2740,11 +2740,11 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionCapFee
                         ? `₦${item?.discoSystemCommissionCapFee}`
                         : "not applicable"}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.discoSystemCommissionFee}
                     </StyledTableCell>
