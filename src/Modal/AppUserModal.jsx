@@ -55,6 +55,7 @@ const AppUserModal = ({
   images,
   setImages
 }) => {
+  console.log(images);
   const [searcher, setSearcher] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const [currentPage, setCurrentPage] = useState(0);
@@ -4199,7 +4200,9 @@ const AppUserModal = ({
         // updateUserListData(update);
         // window.location.reload()
       >
-        <div style={{ width: "200px", height: "400px" }}>{images}</div>
+        <div style={{ width: "400px", height: "600px" }}>
+          <image src={images} alt="images" />
+        </div>
       </AppModal>
     </div>
   );
