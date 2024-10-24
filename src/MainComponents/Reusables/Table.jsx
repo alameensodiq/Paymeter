@@ -479,7 +479,10 @@ const Tables = ({
                       {"N/A"}
                     </StyledTableCell>
                     <StyledTableCell
-                      style={{ width: "10%", position: "relative" }}
+                      style={{
+                        width: "10%",
+                        position: "relative"
+                      }}
                     >
                       {/* <button
                         onClick={() => {
@@ -491,6 +494,7 @@ const Tables = ({
                         Action
                       </button> */}
                       <svg
+                        style={{ marginLeft: "30px" }}
                         onClick={() => {
                           setOpen(!open);
                           setIndexing(index);
@@ -1763,7 +1767,9 @@ const Tables = ({
                 <StyledTableCell style={{ width: "15%" }}>
                   STATUS
                 </StyledTableCell>
-                <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>
+                  ACTIONS
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -1892,7 +1898,7 @@ const Tables = ({
                     {index === indexing2 && open2 ? (
                       <div
                         style={{ overflowY: "scroll" }}
-                        className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                        className="absolute right-40 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
                         <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
                           <span
@@ -2780,7 +2786,11 @@ const Tables = ({
                         setOpen(!open);
                         setIndexing(index);
                       }}
-                      style={{ width: "10%", position: "relative" }}
+                      style={{
+                        width: "10%",
+                        position: "relative"
+                        // justifyContent: "flex-end"
+                      }}
                     >
                       {/* <button
                         onClick={() => {
@@ -2792,6 +2802,7 @@ const Tables = ({
                         Action
                       </button> */}
                       <svg
+                        style={{ marginLeft: "30px" }}
                         onClick={() => {
                           setOpen(!open);
                           setIndexing(index);
@@ -3209,15 +3220,15 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell
                     onClick={() => {
-                      setOpen4(!open3);
+                      setOpen4(!open4);
                       setIndexing4(index);
                     }}
-                    style={{ width: "5%" }}
+                    style={{ width: "5%", position: "relative" }}
                   >
                     {/* <button
                       onClick={() => {
                         setOpen4(!open3);
-                        setIndexing4(index);
+                        setIndexing4(index); 
                       }}
                       className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
                     >
@@ -3225,7 +3236,7 @@ const Tables = ({
                     </button> */}
                     <svg
                       onClick={() => {
-                        setOpen4(!open3);
+                        setOpen4(!open4);
                         setIndexing4(index);
                       }}
                       width="4"
