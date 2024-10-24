@@ -173,7 +173,9 @@ const Dashboard = ({ title }) => {
                   )}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
-                  <span>{/* <Increase /> */}</span>
+                  <span className="text-black text-[12px]">
+                    Transaction Count:
+                  </span>
                   {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
                 </div>
@@ -196,13 +198,13 @@ const Dashboard = ({ title }) => {
                     dashboarddailymonthly?.data?.weeklyRevenue
                   )}
                 </span>
-                {/* <div className="flex flex-row gap-1 text-[10px]">
-                  <span>
-                    <Increase />
+                <div className="flex flex-row gap-1 text-[10px]">
+                  <span className="text-black text-[12px]">
+                    Transaction Count:
                   </span>
-                  <span className="text-card-user">6.5%</span>
-                  <span></span>
-                </div> */}
+                  {/* <span className="text-card-user">6.5%</span>
+                  <span></span> */}
+                </div>
               </div>
               <div>
                 <TotalBill />
@@ -221,13 +223,13 @@ const Dashboard = ({ title }) => {
                   {/* ₦1 */}₦ {formatNumberWithCommas(currentMonthRevenue)}
                   {/* {dashboard?.data?.totalApiPartners} */}
                 </span>
-                {/* <div className="flex flex-row gap-1 text-[10px]">
-                  <span>
-                    <Increase />
+                <div className="flex flex-row gap-1 text-[10px]">
+                  <span className="text-black text-[12px]">
+                    Transaction Count:
                   </span>
-                  <span className="text-card-user">6.5%</span>
-                  <span className="text-[9px]">average daily revenue</span>
-                </div> */}
+                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-[9px]">average daily revenue</span> */}
+                </div>
               </div>
               <div>
                 <TotalInvestment />
@@ -244,13 +246,13 @@ const Dashboard = ({ title }) => {
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   ₦{formatNumberWithCommas(dashboardyearly?.data?.totalRevenue)}
                 </span>
-                {/* <div className="flex flex-row gap-1 text-[10px]">
-                  <span>
-                    <Increase />
+                <div className="flex flex-row gap-1 text-[10px]">
+                  <span className="text-black text-[12px]">
+                    Transaction Count:
                   </span>
-                  <span className="text-card-user">6.5%</span>
-                  <span className="text-[9px]">average monthly revenue</span>
-                </div> */}
+                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-[9px]">average monthly revenue</span> */}
+                </div>
               </div>
               <div>
                 <TotalInvestment />
@@ -265,13 +267,13 @@ const Dashboard = ({ title }) => {
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   ₦ ----
                 </span>
-                {/* <div className="flex flex-row gap-1 text-[10px]">
-                  <span>
-                    <Increase />
+                <div className="flex flex-row gap-1 text-[10px]">
+                  <span className="text-black text-[12px]">
+                    Transaction Count:
                   </span>
-                  <span className="text-card-user">6.5%</span>
-                  <span className="text-[9px]">average yearly revenue</span>
-                </div> */}
+                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-[9px]">average yearly revenue</span> */}
+                </div>
               </div>
               <div>
                 <TotalInvestment />
@@ -407,6 +409,37 @@ const Dashboard = ({ title }) => {
               <div>
                 <TotalInvestment />
               </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-row gap-2 items-center">
+              <span className="text-circle-color font-bold">
+                Recent Transactions
+              </span>
+            </div>
+            <div className="flex flex-col border rounded-custom gap-6 py-6">
+              <div className="flex flex-row px-4 gap-4 items-center justify-end">
+                <Filtering />
+                <span className="text-[14px]">Filters</span>
+              </div>
+              {transactions?.data?.data && (
+                <Tables
+                  transfers
+                  data={transactions?.data?.data?.slice(0, 10)}
+                />
+              )}
+              {!transactions?.status && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <img src={empty} alt="empty" />
+                </div>
+              )}
             </div>
           </div>
           <div className="flex lg:flex-row md:flex-col flex-col gap-3">
@@ -657,37 +690,6 @@ const Dashboard = ({ title }) => {
                 data={dashboardsummary?.data?.monthlyRevenues}
               />
               {/* <DoubleLineChart data={dashboardsummary?.data?.monthlyRevenues} /> */}
-            </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-row gap-2 items-center">
-              <span className="text-circle-color font-bold">
-                Recent Transactions
-              </span>
-            </div>
-            <div className="flex flex-col border rounded-custom gap-6 py-6">
-              <div className="flex flex-row px-4 gap-4 items-center justify-end">
-                <Filtering />
-                <span className="text-[14px]">Filters</span>
-              </div>
-              {transactions?.data?.data && (
-                <Tables
-                  transfers
-                  data={transactions?.data?.data?.slice(0, 10)}
-                />
-              )}
-              {!transactions?.status && (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
-                  <img src={empty} alt="empty" />
-                </div>
-              )}
             </div>
           </div>
         </div>

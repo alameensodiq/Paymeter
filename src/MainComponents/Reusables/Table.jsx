@@ -58,6 +58,8 @@ const Tables = ({
   const [indexing4, setIndexing4] = useState(null);
   const [open5, setOpen5] = useState(false);
   const [indexing5, setIndexing5] = useState(null);
+  const [open6, setOpen6] = useState(false);
+  const [indexing6, setIndexing6] = useState(null);
   console.log(data);
   const theme = createTheme({
     typography: {
@@ -90,7 +92,8 @@ const Tables = ({
       fontWeight: 400,
       fontFamily: theme?.typography?.fontFamily,
       border: 0,
-      color: "rgba(90, 99, 118, 1)",
+      color: "rgba(0, 0, 0)",
+      // color: "rgba(90, 99, 118, 1)",
       flexWrap: "wrap"
     }
   }));
@@ -347,7 +350,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN DELIVERY STATUS
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACTIONS
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -476,7 +481,7 @@ const Tables = ({
                     <StyledTableCell
                       style={{ width: "10%", position: "relative" }}
                     >
-                      <button
+                      {/* <button
                         onClick={() => {
                           setOpen(!open);
                           setIndexing(index);
@@ -484,7 +489,31 @@ const Tables = ({
                         className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
                       >
                         Action
-                      </button>
+                      </button> */}
+                      <svg
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
                       {index === indexing && open ? (
                         <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
                           <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
@@ -1609,16 +1638,19 @@ const Tables = ({
           >
             <TableHead>
               <TableRow style={{ paddingRight: "0px" }}>
-                <StyledTableCell style={{ width: "25%" }}>S/N</StyledTableCell>
-                <StyledTableCell style={{ width: "25%" }}>NAME</StyledTableCell>
-                <StyledTableCell style={{ width: "25%" }}>DATE</StyledTableCell>
-                <StyledTableCell style={{ width: "25%" }}>
+                <StyledTableCell style={{ width: "20%" }}>S/N</StyledTableCell>
+                <StyledTableCell style={{ width: "20%" }}>NAME</StyledTableCell>
+                <StyledTableCell style={{ width: "20%" }}>DATE</StyledTableCell>
+                <StyledTableCell style={{ width: "20%" }}>
                   STATUS
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "20%" }}>
+                  ACTIONS
                 </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {data?.map((item) => (
+              {data?.map((item, index) => (
                 <StyledTableRow>
                   <StyledTableCell
                     className="text-dob"
@@ -1626,13 +1658,13 @@ const Tables = ({
                   >
                     {item?.id}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "25%" }}>
+                  <StyledTableCell style={{ width: "20%" }}>
                     {item?.name}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "25%" }}>
+                  <StyledTableCell style={{ width: "20%" }}>
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "25%" }}>
+                  <StyledTableCell style={{ width: "20%" }}>
                     {item?.status === "ENABLED" ? (
                       <button
                         onClick={() => Pay(item?.id, "disable")}
@@ -1647,6 +1679,57 @@ const Tables = ({
                       >
                         DISABLED
                       </button>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    onClick={() => {
+                      setOpen6(!open6);
+                      setIndexing6(index);
+                    }}
+                    style={{ width: "20%", position: "relative" }}
+                  >
+                    <svg
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
+                    {index === indexing6 && open6 ? (
+                      <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                          {item?.status === "ENABLED" ? (
+                            <span
+                              className="text-black"
+                              onClick={() => Pay(item?.id, "disable")}
+                            >
+                              ENABLED
+                            </span>
+                          ) : (
+                            <span
+                              className="text-black"
+                              onClick={() => Pay(item?.id, "enable")}
+                            >
+                              DISABLED
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      ""
                     )}
                   </StyledTableCell>
                 </StyledTableRow>
@@ -1767,9 +1850,13 @@ const Tables = ({
                     )}
                   </StyledTableCell>
                   <StyledTableCell
+                    onClick={() => {
+                      setOpen2(!open2);
+                      setIndexing2(index);
+                    }}
                     style={{ width: "10%", position: "relative" }}
                   >
-                    <button
+                    {/* <button
                       onClick={() => {
                         setOpen2(!open2);
                         setIndexing2(index);
@@ -1777,7 +1864,31 @@ const Tables = ({
                       className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
                     >
                       Action
-                    </button>
+                    </button> */}
+                    <svg
+                      onClick={() => {
+                        setOpen2(!open2);
+                        setIndexing2(index);
+                      }}
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
                     {index === indexing2 && open2 ? (
                       <div
                         style={{ overflowY: "scroll" }}
@@ -2049,7 +2160,9 @@ const Tables = ({
                 <StyledTableCell style={{ width: "20%" }}>
                   TOTAL AMOUNT RECEIVED
                 </StyledTableCell>
-                <StyledTableCell style={{ width: "5%" }}></StyledTableCell>
+                <StyledTableCell style={{ width: "5%" }}>
+                  ACTIONS
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -2080,12 +2193,16 @@ const Tables = ({
                     <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    200,000
+                    {/* 200,000 */} ---
                   </StyledTableCell>
                   <StyledTableCell
+                    onClick={() => {
+                      setOpen3(!open3);
+                      setIndexing3(index);
+                    }}
                     style={{ width: "5%", position: "relative" }}
                   >
-                    <button
+                    {/* <button
                       onClick={() => {
                         setOpen3(!open3);
                         setIndexing3(index);
@@ -2093,7 +2210,31 @@ const Tables = ({
                       className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
                     >
                       Action
-                    </button>
+                    </button> */}
+                    <svg
+                      onClick={() => {
+                        setOpen3(!open3);
+                        setIndexing3(index);
+                      }}
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
                     {index === indexing3 && open3 ? (
                       <div
                         style={{ overflowY: "scroll" }}
@@ -2151,7 +2292,7 @@ const Tables = ({
           >
             <TableHead>
               <TableRow style={{ paddingRight: "0px" }}>
-                <StyledTableCell style={{ width: "10%" }}>S/N</StyledTableCell>
+                <StyledTableCell style={{ width: "5%" }}>S/N</StyledTableCell>
                 <StyledTableCell style={{ width: "10%" }}>NAME</StyledTableCell>
                 <StyledTableCell style={{ width: "10%" }}>
                   EMAIL
@@ -2163,12 +2304,15 @@ const Tables = ({
                 <StyledTableCell style={{ width: "10%" }}>
                   ADDRESS
                 </StyledTableCell>
-                <StyledTableCell style={{ width: "20%" }}>
+                <StyledTableCell style={{ width: "15%" }}>
                   MESSAGE
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "10%" }}>DATE</StyledTableCell>
                 <StyledTableCell style={{ width: "10%" }}>
                   STATUS
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>
+                  ACTIONS
                 </StyledTableCell>
               </TableRow>
             </TableHead>
@@ -2177,83 +2321,83 @@ const Tables = ({
                 <StyledTableRow>
                   <StyledTableCell
                     className="text-dob"
-                    style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    style={{ width: "5%" }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     {item?.user?.name}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     {item?.email}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     {item?.nin}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     {item?.user?.phone}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     {item?.address}
                   </StyledTableCell>
                   <StyledTableCell
-                    style={{ width: "20%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    style={{ width: "15%" }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     {item?.message}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "10%" }}
-                    onClick={() => {
-                      setStep(39);
-                      setImages(item?.addressUrl);
-                      console.log(item?.addressUrl);
-                    }}
+                    // onClick={() => {
+                    //   setStep(39);
+                    //   setImages(item?.addressUrl);
+                    //   console.log(item?.addressUrl);
+                    // }}
                   >
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
                   </StyledTableCell>
@@ -2280,6 +2424,35 @@ const Tables = ({
                         PENDING
                       </button>
                     )}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{ width: "10%" }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
+                    }}
+                  >
+                    <svg
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -2474,7 +2647,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN DELIVERY STATUS
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACTIONS
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -2601,9 +2776,13 @@ const Tables = ({
                       {"N/A"}
                     </StyledTableCell>
                     <StyledTableCell
+                      onClick={() => {
+                        setOpen(!open);
+                        setIndexing(index);
+                      }}
                       style={{ width: "10%", position: "relative" }}
                     >
-                      <button
+                      {/* <button
                         onClick={() => {
                           setOpen(!open);
                           setIndexing(index);
@@ -2611,7 +2790,31 @@ const Tables = ({
                         className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
                       >
                         Action
-                      </button>
+                      </button> */}
+                      <svg
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
                       {index === indexing && open ? (
                         <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
                           <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
@@ -2671,7 +2874,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     COMMISSION CAP FEE
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACTIONS
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -2696,9 +2901,13 @@ const Tables = ({
                       {item?.commissions?.capFee}
                     </StyledTableCell>
                     <StyledTableCell
+                      onClick={() => {
+                        setOpen5(!open5);
+                        setIndexing5(index);
+                      }}
                       style={{ width: "10%", position: "relative" }}
                     >
-                      <button
+                      {/* <button
                         onClick={() => {
                           setOpen5(!open5);
                           setIndexing5(index);
@@ -2706,7 +2915,31 @@ const Tables = ({
                         className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
                       >
                         Action
-                      </button>
+                      </button> */}
+                      <svg
+                        onClick={() => {
+                          setOpen5(!open5);
+                          setIndexing5(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
                       {index === indexing5 && open5 ? (
                         <div
                           style={{ overflowY: "scroll" }}
@@ -2974,8 +3207,14 @@ const Tables = ({
                   <StyledTableCell style={{ width: "20%" }}>
                     200,000
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "5%" }}>
-                    <button
+                  <StyledTableCell
+                    onClick={() => {
+                      setOpen4(!open3);
+                      setIndexing4(index);
+                    }}
+                    style={{ width: "5%" }}
+                  >
+                    {/* <button
                       onClick={() => {
                         setOpen4(!open3);
                         setIndexing4(index);
@@ -2983,7 +3222,31 @@ const Tables = ({
                       className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
                     >
                       Action
-                    </button>
+                    </button> */}
+                    <svg
+                      onClick={() => {
+                        setOpen4(!open3);
+                        setIndexing4(index);
+                      }}
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
                     {index === indexing4 && open4 ? (
                       <div
                         style={{ overflowY: "scroll" }}
