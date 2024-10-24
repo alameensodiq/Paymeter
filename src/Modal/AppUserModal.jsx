@@ -4201,7 +4201,11 @@ const AppUserModal = ({
         // window.location.reload()
       >
         <div style={{ width: "400px", height: "600px" }}>
-          <image src={images} alt="images" />
+          <img
+            src={images}
+            alt="pictures"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         </div>
       </AppModal>
     </div>
