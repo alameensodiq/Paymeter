@@ -10,7 +10,8 @@ export const LargeSignInButton = ({
   large,
   big,
   onClick,
-  bigger
+  bigger,
+  disabled
 }) => {
   return (
     <Flex
@@ -22,7 +23,11 @@ export const LargeSignInButton = ({
       large={large}
       bigger={bigger}
     >
-      <button className="authenticationbutton" onClick={onClick}>
+      <button
+        className="authenticationbutton"
+        disabled={disabled}
+        onClick={onClick}
+      >
         {title}
       </button>
     </Flex>
@@ -36,7 +41,7 @@ const Flex = styled.div`
     justify-content: center;
     align-content: center;
     background-color: ${(props) =>
-      props.background ? "#999999" : props.noborder ? "#FAFAFA" : "#ffffff"};
+      props.background ? "#000000" : props.noborder ? "#FAFAFA" : "#ffffff"};
     color: ${(props) =>
       props.color ? "#FFFFFF" : props.noborder ? "#8B909A" : "#1E1B39"};
     border-radius: 5px;

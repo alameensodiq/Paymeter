@@ -113,7 +113,7 @@ const Sidebar = () => {
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
             {router.pathname === "/dashboard" || isHovered ? (
-              <DashboardColor
+              <Dashboard
                 className={`${
                   router.pathname === "/dashboard"
                     ? "fill-current text-route-color my-[9px]"
@@ -200,7 +200,7 @@ const Sidebar = () => {
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
             {router.pathname === "/institutions" || isHovered3 ? (
-              <InvestmentsColor
+              <Investments
                 className={`${
                   router.pathname === "/institutions"
                     ? "fill-current text-route-color my-[9px]"
@@ -248,7 +248,7 @@ const Sidebar = () => {
             {router.pathname === "/discos" ||
             isHovered4 ||
             router.pathname.startsWith("/discos/") ? (
-              <LoanColor
+              <Loan
                 className={`${
                   router.pathname === "/discos" ||
                   router.pathname.startsWith("/discos/")
@@ -399,7 +399,7 @@ const Sidebar = () => {
             {router.pathname === "/earning" ||
             isHovered11 ||
             router.pathname.startsWith("/earning/") ? (
-              <CableColor
+              <Cable
                 className={`${
                   router.pathname === "/agents" ||
                   router.pathname.startsWith("/agents/")
@@ -450,7 +450,7 @@ const Sidebar = () => {
             {router.pathname === "/manager" ||
             isHovered16 ||
             router.pathname.startsWith("/manager/") ? (
-              <CableColor
+              <Cable
                 className={`${
                   router.pathname === "/manager" ||
                   router.pathname.startsWith("/manager/")
@@ -500,7 +500,7 @@ const Sidebar = () => {
             {router.pathname === "/api" ||
             isHovered7 ||
             router.pathname.startsWith("/api/") ? (
-              <DataColor
+              <Data
                 className={`${
                   router.pathname === "/api" ||
                   router.pathname.startsWith("/api/")
@@ -551,7 +551,7 @@ const Sidebar = () => {
             {router.pathname === "/user" ||
             isHovered17 ||
             router.pathname.startsWith("/user/") ? (
-              <DataColor
+              <Data
                 className={`${
                   router.pathname === "/user" ||
                   router.pathname.startsWith("/user/")
@@ -696,7 +696,7 @@ const Sidebar = () => {
             {router.pathname === "/payment" ||
             isHovered12 ||
             router.pathname.startsWith("/payment/") ? (
-              <LoanColor
+              <Loan
                 className={`${
                   router.pathname === "/payment" ||
                   router.pathname.startsWith("/payment/")
@@ -742,7 +742,7 @@ const Sidebar = () => {
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
             {router.pathname === "/transactions" || isHovered2 ? (
-              <TransfersColor
+              <Transfers
                 className={`${
                   router.pathname === "/transactions"
                     ? "fill-current text-route-color my-[9px]"
@@ -785,7 +785,7 @@ const Sidebar = () => {
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
             {router.pathname === "/setting" || isHovered8 ? (
-              <SettingsColor
+              <Settings
                 className={`${
                   router.pathname === "/setting"
                     ? "fill-current text-route-color my-[9px]"

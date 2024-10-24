@@ -51,7 +51,9 @@ const AppUserModal = ({
   naming,
   setNaming,
   call,
-  role1
+  role1,
+  images,
+  setImages
 }) => {
   const [searcher, setSearcher] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
@@ -87,6 +89,7 @@ const AppUserModal = ({
   const [districthead, setDistricthead] = useState({
     districtManagerId: ""
   });
+  const [disabled, setDisabled] = useState(false);
   const [partner, setPartner] = useState({
     name: "",
     email: "",
@@ -765,6 +768,7 @@ const AppUserModal = ({
 
   const handleCloseModal4 = () => {
     setStep(0);
+    setImages("");
     setDistricthead({
       districtManagerId: ""
     });
@@ -4175,14 +4179,27 @@ const AppUserModal = ({
                 items: userId
               })
             );
+            setDisabled(true);
             setApproved(true);
             setBusstate10(true);
+            setTimeout(() => {
+              setDisabled(false);
+            }, 4000);
           }}
           bigger
           title={authenticatingapprove ? "Submiting....." : "Submit"}
           background
           color
         />
+      </AppModal>
+      <AppModal
+        step={38}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div style={{ width: "200px", height: "400px" }}>{images}</div>
       </AppModal>
     </div>
   );

@@ -43,7 +43,8 @@ const Tables = ({
   setNaming,
   metering,
   manager,
-  users
+  users,
+  setImages
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -2035,16 +2036,17 @@ const Tables = ({
               <TableRow style={{ paddingRight: "0px" }}>
                 <StyledTableCell style={{ width: "10%" }}>S/N</StyledTableCell>
                 <StyledTableCell style={{ width: "10%" }}>NAME</StyledTableCell>
-                <StyledTableCell style={{ width: "15%" }}>
+                <StyledTableCell style={{ width: "10%" }}>
                   EMAIL
                 </StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>NIN</StyledTableCell>
                 <StyledTableCell style={{ width: "15%" }}>
                   PHONE
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "20%" }}>
                   MESSAGE
                 </StyledTableCell>
-                <StyledTableCell style={{ width: "15%" }}>DATE</StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>DATE</StyledTableCell>
                 <StyledTableCell style={{ width: "15%" }}>
                   STATUS
                 </StyledTableCell>
@@ -2056,56 +2058,65 @@ const Tables = ({
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
-                    // onClick={() => {
-                    //   setStep(11);
-                    //   setUserIds(item?.id);
-                    // }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                    }}
                   >
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
-                    // onClick={() => {
-                    //   setStep(11);
-                    //   setUserIds(item?.id);
-                    // }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                    }}
                   >
                     {item?.user?.name}
                   </StyledTableCell>
                   <StyledTableCell
-                    style={{ width: "15%" }}
-                    // onClick={() => {
-                    //   setStep(11);
-                    //   setUserIds(item?.id);
-                    // }}
+                    style={{ width: "10%" }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                    }}
                   >
                     {item?.email}
                   </StyledTableCell>
                   <StyledTableCell
+                    style={{ width: "10%" }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                    }}
+                  >
+                    {item?.nin}
+                  </StyledTableCell>
+                  <StyledTableCell
                     style={{ width: "15%" }}
-                    // onClick={() => {
-                    //   setStep(11);
-                    //   setUserIds(item?.id);
-                    // }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                    }}
                   >
                     {item?.user?.phone}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "20%" }}
-                    // onClick={() => {
-                    //   setStep(11);
-                    //   setUserIds(item?.id);
-                    // }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                    }}
                   >
                     {item?.message}
                   </StyledTableCell>
                   <StyledTableCell
-                    style={{ width: "15%" }}
-                    // onClick={() => {
-                    //   setStep(11);
-                    //   setUserIds(item?.id);
-                    // }}
+                    style={{ width: "10%" }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                    }}
                   >
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
                   </StyledTableCell>

@@ -38,6 +38,7 @@ const Notification = ({ title }) => {
   const [userId, setuserId] = useState("");
   const [notId, setnotId] = useState("");
   const [stat, setstat] = useState("");
+  const [images, setImages] = useState("");
   //   const [action, setAction] = useState("disable");
   //   const [notificationsId, setnotificationsId] = useState(null);
   const [role, setRole] = useState("APIPARTNER");
@@ -139,6 +140,8 @@ const Notification = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
+          imgaes={images}
+          setImages={setImages}
           role1
           userIds={userIds}
           setUserIds={setUserIds}
@@ -313,6 +316,7 @@ const Notification = ({ title }) => {
                     <Tables
                       pending
                       Pay={Pays}
+                      setImages={setImages}
                       setUserIds={setUserIds}
                       set
                       setStep={setStep}
