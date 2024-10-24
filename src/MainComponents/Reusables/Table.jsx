@@ -2040,14 +2040,17 @@ const Tables = ({
                   EMAIL
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "10%" }}>NIN</StyledTableCell>
-                <StyledTableCell style={{ width: "15%" }}>
+                <StyledTableCell style={{ width: "10%" }}>
                   PHONE
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>
+                  ADDRESS
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "20%" }}>
                   MESSAGE
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "10%" }}>DATE</StyledTableCell>
-                <StyledTableCell style={{ width: "15%" }}>
+                <StyledTableCell style={{ width: "10%" }}>
                   STATUS
                 </StyledTableCell>
               </TableRow>
@@ -2061,6 +2064,7 @@ const Tables = ({
                     onClick={() => {
                       setStep(39);
                       setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
                     }}
                   >
                     {index + 1}
@@ -2071,6 +2075,7 @@ const Tables = ({
                     onClick={() => {
                       setStep(39);
                       setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
                     }}
                   >
                     {item?.user?.name}
@@ -2080,6 +2085,7 @@ const Tables = ({
                     onClick={() => {
                       setStep(39);
                       setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
                     }}
                   >
                     {item?.email}
@@ -2089,24 +2095,37 @@ const Tables = ({
                     onClick={() => {
                       setStep(39);
                       setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
                     }}
                   >
                     {item?.nin}
                   </StyledTableCell>
                   <StyledTableCell
-                    style={{ width: "15%" }}
+                    style={{ width: "10%" }}
                     onClick={() => {
                       setStep(39);
                       setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
                     }}
                   >
                     {item?.user?.phone}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{ width: "10%" }}
+                    onClick={() => {
+                      setStep(39);
+                      setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
+                    }}
+                  >
+                    {item?.address}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "20%" }}
                     onClick={() => {
                       setStep(39);
                       setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
                     }}
                   >
                     {item?.message}
@@ -2116,11 +2135,12 @@ const Tables = ({
                     onClick={() => {
                       setStep(39);
                       setImages(item?.addressUrl);
+                      console.log(item?.addressUrl);
                     }}
                   >
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
                     {item?.status === "ACCEPTED" ? (
                       <button
                         // onClick={() => Pay(item?.id, item?.user?.id, "decline")}

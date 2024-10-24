@@ -140,7 +140,7 @@ const Notification = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
-          imgaes={images}
+          images={images}
           setImages={setImages}
           role1
           userIds={userIds}
