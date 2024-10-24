@@ -29,6 +29,7 @@ import { DashboardSummary } from "../Store/Apis/DashboardSummary";
 import { DashboardDailyMonthly } from "../Store/Apis/DasboardDailyMonthly";
 import { ListofMeter } from "../Store/Apis/ListofMeter";
 import empty from "../../assets/empty.png";
+import DoubleBarChartReal from "../Reusables/DoubleBarChartReal";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -652,7 +653,10 @@ const Dashboard = ({ title }) => {
                   <Ellipses />
                 </div> */}
               </div>
-              <DoubleLineChart data={dashboardsummary?.data?.monthlyRevenues} />
+              <DoubleBarChartReal
+                data={dashboardsummary?.data?.monthlyRevenues}
+              />
+              {/* <DoubleLineChart data={dashboardsummary?.data?.monthlyRevenues} /> */}
             </div>
           </div>
           <div className="flex flex-col gap-3">

@@ -30,7 +30,7 @@ import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
 
-const UserDetails = ({ title }) => {
+const DistrictDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
     new Date(Date.now() + 3600 * 1000 * 24)
   );
@@ -154,12 +154,134 @@ const UserDetails = ({ title }) => {
           <>
             <div className="flex lg:flex-row flex-col md:flex-col gap-3">
               <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    Today Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold">
+                    ₦0
+                    {/* {formatNumberWithCommas(
+                    dashboarddailymonthly?.data?.dailyRevenue
+                  )} */}
+                  </span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span>{/* <Increase /> */}</span>
+                    {/* <span className="text-card-user">8.5%</span>
+                  <span className="text-[9px]">Up yesterday</span> */}
+                  </div>
+                </div>
+                <div>
+                  <User />
+                </div>
+              </div>
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Week Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold">
+                    ₦0
+                    {/* {formatNumberWithCommas(
+                    dashboarddailymonthly?.data?.weeklyRevenue
+                  )} */}
+                  </span>
+                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                  <span>
+                    <Increase />
+                  </span>
+                  <span className="text-card-user">6.5%</span>
+                  <span></span>
+                </div> */}
+                </div>
+                <div>
+                  <TotalBill />
+                  {/* <TotalTransfer /> */}
+                </div>
+              </div>
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Month Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    {/* ₦1 */}₦ 0{/* {dashboard?.data?.totalApiPartners} */}
+                  </span>
+                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                  <span>
+                    <Increase />
+                  </span>
+                  <span className="text-card-user">6.5%</span>
+                  <span className="text-[9px]">average daily revenue</span>
+                </div> */}
+                </div>
+                <div>
+                  <TotalInvestment />
+                </div>
+              </div>
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Year Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    ₦0
+                  </span>
+                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                  <span>
+                    <Increase />
+                  </span>
+                  <span className="text-card-user">6.5%</span>
+                  <span className="text-[9px]">average monthly revenue</span>
+                </div> */}
+                </div>
+                <div>
+                  <TotalInvestment />
+                </div>
+              </div>
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    Total Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    ₦ ----
+                  </span>
+                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                  <span>
+                    <Increase />
+                  </span>
+                  <span className="text-card-user">6.5%</span>
+                  <span className="text-[9px]">average yearly revenue</span>
+                </div> */}
+                </div>
+                <div>
+                  <TotalInvestment />
+                </div>
+              </div>
+            </div>
+            <div className="flex lg:flex-row flex-col md:flex-col gap-3">
+              <div
                 className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
                 <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                   <span className="text-card-title text-[14px]">
-                    Today Revenue
+                    Total Agents
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
                     ---
@@ -372,4 +494,4 @@ const UserDetails = ({ title }) => {
   );
 };
 
-export default UserDetails;
+export default DistrictDetails;

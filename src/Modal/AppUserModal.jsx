@@ -769,7 +769,9 @@ const AppUserModal = ({
 
   const handleCloseModal4 = () => {
     setStep(0);
-    setImages("");
+    if (images) {
+      setImages("");
+    }
     setDistricthead({
       districtManagerId: ""
     });

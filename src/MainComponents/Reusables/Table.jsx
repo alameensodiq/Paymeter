@@ -50,6 +50,14 @@ const Tables = ({
   const inputRef3 = useRef(null);
   const [open, setOpen] = useState(false);
   const [indexing, setIndexing] = useState(null);
+  const [open2, setOpen2] = useState(false);
+  const [indexing2, setIndexing2] = useState(null);
+  const [open3, setOpen3] = useState(false);
+  const [indexing3, setIndexing3] = useState(null);
+  const [open4, setOpen4] = useState(false);
+  const [indexing4, setIndexing4] = useState(null);
+  const [open5, setOpen5] = useState(false);
+  const [indexing5, setIndexing5] = useState(null);
   console.log(data);
   const theme = createTheme({
     typography: {
@@ -268,6 +276,9 @@ const Tables = ({
                     CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    CUSTOMER PHONE NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     BANK NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -333,6 +344,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TOKEN DELIVERY STATUS
+                  </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -353,6 +367,10 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.customerName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {/* {item?.customerName ? } */}
+                      N/A
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
@@ -447,6 +465,13 @@ const Tables = ({
                       style={{ width: "10%" }}
                     >
                       {item?.dispense?.listtoken[0] || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // ref={inputRef3}
+                      // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {"N/A"}
                     </StyledTableCell>
                     <StyledTableCell
                       style={{ width: "10%", position: "relative" }}
@@ -1662,57 +1687,57 @@ const Tables = ({
               {data?.map((item, index) => (
                 <StyledTableRow>
                   <StyledTableCell
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                     className="text-dob"
                     style={{ width: "10%" }}
                   >
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                     className="text-dob"
                     style={{ width: "10%" }}
                   >
                     {item?.user?.name}
                   </StyledTableCell>
                   <StyledTableCell
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                     style={{ width: "15%" }}
                   >
                     {item?.email}
                   </StyledTableCell>
                   <StyledTableCell
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                     style={{ width: "10%" }}
                   >
                     {item?.user?.phone}
                   </StyledTableCell>
                   <StyledTableCell
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                     style={{ width: "20%" }}
                   >
                     {item?.message}
                   </StyledTableCell>
                   <StyledTableCell
-                    onClick={() => {
-                      setStep(11);
-                      setUserIds(item?.id);
-                    }}
+                    // onClick={() => {
+                    //   setStep(11);
+                    //   setUserIds(item?.id);
+                    // }}
                     style={{ width: "10%" }}
                   >
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
@@ -1741,8 +1766,60 @@ const Tables = ({
                       </button>
                     )}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    <span
+                  <StyledTableCell
+                    style={{ width: "10%", position: "relative" }}
+                  >
+                    <button
+                      onClick={() => {
+                        setOpen2(!open2);
+                        setIndexing2(index);
+                      }}
+                      className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                    >
+                      Action
+                    </button>
+                    {index === indexing2 && open2 ? (
+                      <div
+                        style={{ overflowY: "scroll" }}
+                        className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                      >
+                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#000000"
+                            }}
+                            className="text-black"
+                            onClick={() => {
+                              navigate(`/agents/${item?.user?.id}`);
+                              setOpen2(!open2);
+                            }}
+                          >
+                            View
+                          </span>
+                          <span
+                            className="text-black"
+                            onClick={() => {
+                              setStep(11);
+                              setUserIds(item?.id);
+                              setOpen2(!open2);
+                            }}
+                          >
+                            Set Commission
+                          </span>
+                          <span className="text-black">Suspend</span>
+                          <span className="text-black">Deactivate</span>
+                          <span className="text-black">Update</span>
+                          <span className="text-black">Fund Wallet</span>
+                          <span className="text-black">Deplete Wallet</span>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {/* <span
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -1752,7 +1829,7 @@ const Tables = ({
                       onClick={() => navigate(`/agents/${item?.user?.id}`)}
                     >
                       View
-                    </span>
+                    </span> */}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -2005,8 +2082,48 @@ const Tables = ({
                   <StyledTableCell style={{ width: "20%" }}>
                     200,000
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "5%" }}>
-                    <span
+                  <StyledTableCell
+                    style={{ width: "5%", position: "relative" }}
+                  >
+                    <button
+                      onClick={() => {
+                        setOpen3(!open3);
+                        setIndexing3(index);
+                      }}
+                      className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                    >
+                      Action
+                    </button>
+                    {index === indexing3 && open3 ? (
+                      <div
+                        style={{ overflowY: "scroll" }}
+                        className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                      >
+                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#000000"
+                            }}
+                            className="text-black"
+                            onClick={() => {
+                              navigate(`/earning/${item?.id}`);
+                              setOpen3(!open3);
+                            }}
+                          >
+                            View
+                          </span>
+                          <span className="text-black">Suspend</span>
+                          <span className="text-black">Deactivate</span>
+                          <span className="text-black">Update</span>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {/* <span
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -2016,7 +2133,7 @@ const Tables = ({
                       onClick={() => navigate(`/earning/${item?.id}`)}
                     >
                       View
-                    </span>
+                    </span> */}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -2286,6 +2403,9 @@ const Tables = ({
                     CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    CUSTOMER PHONE NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     BANK NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -2351,6 +2471,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TOKEN DELIVERY STATUS
+                  </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -2371,6 +2494,10 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.customerName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {/* {item?.customerName ? } */}
+                      N/A
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
@@ -2467,6 +2594,13 @@ const Tables = ({
                       {item?.dispense?.listtoken[0] || "N/A"}
                     </StyledTableCell>
                     <StyledTableCell
+                      // ref={inputRef3}
+                      // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {"N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
                       style={{ width: "10%", position: "relative" }}
                     >
                       <button
@@ -2537,16 +2671,12 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     COMMISSION CAP FEE
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {data?.map((item, index) => (
-                  <StyledTableRow
-                    onClick={() => {
-                      setStep(33);
-                      setNaming(item);
-                    }}
-                  >
+                  <StyledTableRow>
                     <StyledTableCell style={{ width: "5%" }}>
                       {index + 1}
                     </StyledTableCell>
@@ -2564,6 +2694,56 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.commissions?.capFee}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{ width: "10%", position: "relative" }}
+                    >
+                      <button
+                        onClick={() => {
+                          setOpen5(!open5);
+                          setIndexing5(index);
+                        }}
+                        className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                      >
+                        Action
+                      </button>
+                      {index === indexing5 && open5 ? (
+                        <div
+                          style={{ overflowY: "scroll" }}
+                          className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                        >
+                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                            <span
+                              className="text-black"
+                              onClick={() => {
+                                setStep(33);
+                                setNaming(item);
+                                setOpen5(!open5);
+                              }}
+                            >
+                              Set Commission
+                            </span>
+                            {/* <span className="text-black">Suspend</span>
+                          <span className="text-black">Deactivate</span>
+                          <span className="text-black">Update</span>
+                          <span className="text-black">Fund Wallet</span>
+                          <span className="text-black">Deplete Wallet</span> */}
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      {/* <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#000000"
+                      }}
+                      onClick={() => navigate(`/agents/${item?.user?.id}`)}
+                    >
+                      View
+                    </span> */}
                     </StyledTableCell>
 
                     {/* <StyledTableCell style={{ width: "10%" }}>
@@ -2795,7 +2975,46 @@ const Tables = ({
                     200,000
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "5%" }}>
-                    <span
+                    <button
+                      onClick={() => {
+                        setOpen4(!open3);
+                        setIndexing4(index);
+                      }}
+                      className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                    >
+                      Action
+                    </button>
+                    {index === indexing4 && open4 ? (
+                      <div
+                        style={{ overflowY: "scroll" }}
+                        className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                      >
+                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#000000"
+                            }}
+                            className="text-black"
+                            onClick={() => {
+                              navigate(`/manager/${item?.id}`);
+                              setOpen4(!open4);
+                            }}
+                          >
+                            View
+                          </span>
+                          <span className="text-black">Edit Commission</span>
+                          <span className="text-black">Suspend</span>
+                          <span className="text-black">Deactivate</span>
+                          <span className="text-black">Update</span>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {/* <span
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -2805,7 +3024,7 @@ const Tables = ({
                       onClick={() => navigate(`/manager/${item?.id}`)}
                     >
                       View
-                    </span>
+                    </span> */}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
