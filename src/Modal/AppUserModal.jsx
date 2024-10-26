@@ -27,6 +27,9 @@ import { UserComEdit } from "../MainComponents/Store/Apis/UserComEdit";
 import { Discos } from "../MainComponents/Store/Apis/Discos";
 import { CreateManager } from "../MainComponents/Store/Apis/CreateManager";
 import DistrictManagerSelect from "../bits/DistrictManagerSelect";
+import { CreateCustomerCare } from "../MainComponents/Store/Apis/CreateCustomerCare";
+import { EditDetails } from "../MainComponents/Store/Apis/EditDetails";
+import { UserActioning } from "../MainComponents/Store/Apis/UserActioning";
 
 const AppUserModal = ({
   setStep,
@@ -53,7 +56,12 @@ const AppUserModal = ({
   call,
   role1,
   images,
-  setImages
+  setImages,
+  sendComplain,
+  userIding,
+  setuserIding,
+  setaction,
+  action
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -78,6 +86,9 @@ const AppUserModal = ({
   const [bustate12, setBusstate12] = useState(false);
   const [bustate13, setBusstate13] = useState(false);
   const [bustate14, setBusstate14] = useState(false);
+  const [bustate15, setBusstate15] = useState(false);
+  const [bustate16, setBusstate16] = useState(false);
+  const [bustate17, setBusstate17] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
@@ -98,6 +109,14 @@ const AppUserModal = ({
     address: "",
     password: "",
     password_confirmation: ""
+  });
+
+  const [editinguser, seteditinguser] = useState({
+    phone: "",
+    password: "",
+    NIN: "",
+    address: "",
+    name: ""
   });
 
   const [settingglobal, setSettingsGlobal] = useState({
@@ -188,6 +207,13 @@ const AppUserModal = ({
     },
     email: "",
     phone: ""
+  });
+
+  const [customer, setCustomer] = useState({
+    name: "",
+    password: "",
+    email: "",
+    phoneNo: ""
   });
 
   const [editdisc, setEditDisc] = useState({
@@ -286,6 +312,21 @@ const AppUserModal = ({
   );
   console.log(managers);
 
+  const { createcustomer, authenticatingcreatecustomer } = useSelector(
+    (state) => state?.createcustomer
+  );
+  console.log(createcustomer);
+
+  const { editdetails, authenticatingeditdetails } = useSelector(
+    (state) => state?.editdetails
+  );
+  console.log(editdetails);
+
+  const { actioning, authenticatingactioning } = useSelector(
+    (state) => state?.actioning
+  );
+  console.log(actioning);
+
   useEffect(() => {
     if (bustate && createdbank?.status) {
       setStep(3);
@@ -332,6 +373,15 @@ const AppUserModal = ({
     if (bustate14 && managers?.status) {
       setStep(37);
     }
+    if (bustate15 && createcustomer?.status) {
+      setStep(42);
+    }
+    if (bustate16 && editdetails?.status) {
+      setStep(47);
+    }
+    if (bustate17 && actioning?.status) {
+      setStep(49);
+    }
 
     console.log(update);
   }, [
@@ -354,6 +404,9 @@ const AppUserModal = ({
     bustate12,
     bustate13,
     bustate14,
+    bustate15,
+    bustate16,
+    bustate17,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -364,7 +417,10 @@ const AppUserModal = ({
     dashboarddiscomonthly?.status,
     editsettings?.status,
     usercomedit?.status,
-    managers?.status
+    managers?.status,
+    createcustomer?.status,
+    editdetails?.status,
+    actioning?.status
   ]);
 
   useEffect(() => {
@@ -391,6 +447,37 @@ const AppUserModal = ({
     setRegbus({
       ...regbus,
       [name]: value
+    });
+  };
+
+  const ChangeDetails = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    seteditinguser({
+      ...editinguser,
+      [name]: value
+    });
+  };
+
+  const ChangeDetailsNumber = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+    seteditinguser({
+      ...editinguser,
+      [name]: sanitizedValue
     });
   };
 
@@ -503,6 +590,15 @@ const AppUserModal = ({
     });
   };
 
+  const ChangeCustomer = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setCustomer({
+      ...customer,
+      [name]: value
+    });
+  };
+
   const ChangeDiscNumber = (e) => {
     const { name, value } = e.target;
 
@@ -521,6 +617,29 @@ const AppUserModal = ({
     }
 
     setDisc((prevDisc) => ({
+      ...prevDisc,
+      [name]: sanitizedValue
+    }));
+  };
+
+  const ChangeCustomerNumber = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    setCustomer((prevDisc) => ({
       ...prevDisc,
       [name]: sanitizedValue
     }));
@@ -594,6 +713,21 @@ const AppUserModal = ({
     setBusstate(true);
   };
 
+  const sendDetails = () => {
+    const { phone, NIN, address, name } = editinguser;
+    dispatch(
+      EditDetails({
+        userId: userIding,
+        phone,
+        // password,
+        NIN,
+        address,
+        name
+      })
+    );
+    setBusstate16(true);
+  };
+
   const SendDetailsDisco = () => {
     const {
       name,
@@ -650,6 +784,27 @@ const AppUserModal = ({
     );
 
     setBusstate14(true);
+  };
+
+  const SendDetailsCustomer = () => {
+    const { name, phoneNo, email, password } = customer;
+
+    // Check if the email is valid
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    dispatch(
+      CreateCustomerCare({
+        name,
+        password,
+        email,
+        phoneNo
+      })
+    );
+
+    setBusstate15(true);
   };
 
   const SendEditDisco = () => {
@@ -767,10 +922,20 @@ const AppUserModal = ({
     setBusstate13(true);
   };
 
+  const sendUserAction = () => {
+    dispatch(
+      UserActioning({
+        userId: userIding,
+        action: action
+      })
+    );
+    setBusstate17(true);
+  };
+
   const handleCloseModal4 = () => {
-    setStep(0);
     if (images) {
       setImages("");
+      setReload(true);
     }
     setDistricthead({
       districtManagerId: ""
@@ -778,12 +943,28 @@ const AppUserModal = ({
     setApproving("");
     if (userId) {
       setuserId("");
+      setReload(true);
     }
     if (stat) {
       setstat("");
+      setReload(true);
     }
+    setCustomer({
+      name: "",
+      password: "",
+      email: "",
+      phoneNo: ""
+    });
+    seteditinguser({
+      phone: "",
+      password: "",
+      NIN: "",
+      address: "",
+      name: ""
+    });
     if (settingId) {
       setsettingId("");
+      setReload(true);
     }
     setRegbus({
       name: "",
@@ -817,6 +998,10 @@ const AppUserModal = ({
         capFee: null
       }
     });
+    if (userIding) {
+      setuserIding("");
+      setReload(true);
+    }
     setPartner({
       name: "",
       email: "",
@@ -879,20 +1064,31 @@ const AppUserModal = ({
     setBusstate12(false);
     setBusstate13(false);
     setBusstate14(false);
+    setBusstate15(false);
+    setBusstate16(false);
+    setBusstate17(false);
     setApproved(false);
     setReload(true);
     setPassword("");
+    if (action) {
+      setaction("");
+      setReload(true);
+    }
     if (userIds) {
       setUserIds("");
+      setReload(true);
     }
     if (paymentMethodIds) {
       setpaymentMethodIds("");
+      setReload(true);
     }
     if (actions) {
       setActions("");
+      setReload(true);
     }
     if (real) {
       setReal("");
+      setReload(true);
     }
     setEarnings({
       email: "",
@@ -903,7 +1099,9 @@ const AppUserModal = ({
     });
     if (discname) {
       setdiscname("");
+      setReload(true);
     }
+    setStep(0);
   };
 
   const handleSubmit = () => {
@@ -2348,7 +2546,7 @@ const AppUserModal = ({
           name="userType"
           value={settingglobal?.userType}
           onChange={(e) => ChangeSettings(e)}
-          options={["User Types List", "AGENT", "APIPARTNER", "USER"]}
+          options={["User Types List", "APIPARTNER", "USER"]}
         />
         <ModalInputSelectTwo
           name="commissionType"
@@ -3490,7 +3688,7 @@ const AppUserModal = ({
           name="userType"
           value={settingglobaledit?.userType}
           onChange={(e) => ChangeSettingsEdit(e)}
-          options={["User Types List", "AGENT", "APIPARTNER"]}
+          options={["User Types List", "APIPARTNER"]}
         />
         <ModalInputSelectTwo
           name="commissionType"
@@ -4208,6 +4406,604 @@ const AppUserModal = ({
             alt="pictures"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
+        </div>
+      </AppModal>
+      <AppModal
+        step={40}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Customer"
+      >
+        <ModalInputText
+          label="Name"
+          onChange={(e) => ChangeCustomer(e)}
+          name="name"
+          value={customer?.name}
+          placeholder={`${`Enter Manager's Name`}`}
+        />
+        <ModalInputText
+          label="Email"
+          onChange={(e) => ChangeCustomer(e)}
+          name="email"
+          value={customer?.email}
+          placeholder={`${`Enter Manager's Email`}`}
+        />
+        <ModalInputText
+          label="Phone Number"
+          onChange={(e) => ChangeCustomerNumber(e)}
+          name="phoneNo"
+          value={customer?.phoneNo}
+          placeholder={`${`Enter Phone Number`}`}
+        />
+        <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeCustomer(e)}
+          name="password"
+          value={customer?.password}
+          placeholder={`${`Enter Manager's Password`}`}
+        />
+        <LargeSignInButton
+          onClick={() => {
+            const { password, name, phoneNo, email } = customer;
+            console.log({ password, name, phoneNo, email });
+            if (name && password && phoneNo && email.includes("@")) {
+              setStep(41);
+            } else {
+              toast.error("Please fill in all details correctly.");
+            }
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={41}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You are about to add a Customer care rep, Are you sure the
+            </span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => SendDetailsCustomer()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={42}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Account Created
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Added a new Customer rep</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={43}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You are about to resolve this complain, Are you sure you
+            </span>
+            <span>want to continue?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => sendComplain()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={44}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Account Created
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Resolve the complain</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={45}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Edit Details"
+      >
+        <ModalInputText
+          label="Name"
+          onChange={(e) => ChangeDetails(e)}
+          name="name"
+          value={editinguser?.name}
+          placeholder={`${`Enter New Name`}`}
+        />
+        <ModalInputText
+          label="Address"
+          onChange={(e) => ChangeDetails(e)}
+          name="address"
+          value={editinguser?.address}
+          placeholder={`${`Enter New Address`}`}
+        />
+        <ModalInputText
+          label="NIN"
+          onChange={(e) => ChangeDetails(e)}
+          name="NIN"
+          value={editinguser?.NIN}
+          placeholder={`${`Enter New NIN`}`}
+        />
+        {/* <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeDetails(e)}
+          name="password"
+          value={editinguser?.password}
+          placeholder={`${`Enter New Password`}`}
+        /> */}
+        <ModalInputText
+          label="Phone"
+          onChange={(e) => ChangeDetailsNumber(e)}
+          name="phone"
+          value={editinguser?.phone}
+          placeholder={`${`Enter New Phone Number`}`}
+        />
+        <LargeSignInButton
+          onClick={() => {
+            const { phone, password, NIN, address, name } = editinguser;
+            setStep(46);
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={46}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to edit user details, Are you sure you</span>
+            <span>want to continue?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => sendDetails()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={47}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Details Edited
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully edited user details</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={48}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You are about to trigger this {action} action, Are you sure you
+            </span>
+            <span>want to continue?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => sendUserAction()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={49}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Action Successful
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully perform the {action} action</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
         </div>
       </AppModal>
     </div>

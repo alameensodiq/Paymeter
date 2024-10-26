@@ -85,7 +85,7 @@ const UserDetails = ({ title }) => {
   }, [userdata?.status, reload]);
 
   const isEarningRoute = location.pathname.startsWith("/user/");
-  const isEarningRoute2 = location.pathname.startsWith("/earning/");
+  const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
   const next = userdata?.data?.transactions?.meta?.next;
   const previous = userdata?.data?.transactions?.meta?.prev;

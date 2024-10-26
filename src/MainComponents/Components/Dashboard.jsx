@@ -105,12 +105,19 @@ const Dashboard = ({ title }) => {
   console.log(dashboardsummary);
 
   const [revenueData, setRevenueData] = useState([]);
+  const [revenueData2, setRevenueData2] = useState([]);
 
   useEffect(() => {
     if (dashboardyearly?.data?.monthlyRevenues) {
       setRevenueData(dashboardyearly?.data.monthlyRevenues);
     }
-  }, [dashboardyearly?.data?.monthlyRevenues]);
+    if (dashboardsummary?.data?.monthlyRevenues) {
+      setRevenueData2(dashboardsummary?.data.monthlyRevenues);
+    }
+  }, [
+    dashboardyearly?.data?.monthlyRevenues,
+    dashboardsummary?.data?.monthlyRevenues
+  ]);
 
   // Function to update revenue for the current month
   const updateRevenueForCurrentMonth = () => {
@@ -126,13 +133,34 @@ const Dashboard = ({ title }) => {
     );
   };
 
+  const updateRevenueForCurrentMonth2 = () => {
+    const currentMonthIndex = new Date().getMonth(); // 0 for January, 11 for December
+
+    setRevenueData2((prevData) =>
+      prevData.map((item, index) => {
+        if (index === currentMonthIndex) {
+          return {
+            ...item,
+            totalTransactionCount: item.totalTransactionCount + 0
+          };
+        }
+        return item;
+      })
+    );
+  };
+
   useEffect(() => {
     if (revenueData.length > 0) {
       updateRevenueForCurrentMonth();
     }
-  }, [revenueData.length]);
+    if (revenueData2.length > 0) {
+      updateRevenueForCurrentMonth2();
+    }
+  }, [revenueData.length, revenueData2.length]);
 
   const currentMonthRevenue = revenueData[new Date().getMonth()]?.revenue;
+  const currentMonthRevenue2 =
+    revenueData[new Date().getMonth()]?.totalTransactionCount;
 
   const formatNumberWithCommas = (number) => {
     if (number == null) return "0"; // Handle null or undefined
@@ -174,7 +202,10 @@ const Dashboard = ({ title }) => {
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
-                    Transaction Count:
+                    Transaction Count:{" "}
+                    {formatNumberWithCommas(
+                      dashboarddailymonthly?.data?.dailyTransactionCount
+                    )}
                   </span>
                   {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
@@ -201,6 +232,9 @@ const Dashboard = ({ title }) => {
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:
+                    {formatNumberWithCommas(
+                      dashboarddailymonthly?.data?.weeklyTransactionCount
+                    )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span></span> */}
@@ -225,7 +259,8 @@ const Dashboard = ({ title }) => {
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
-                    Transaction Count:
+                    Transaction Count:{" "}
+                    {formatNumberWithCommas(currentMonthRevenue2)}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average daily revenue</span> */}
@@ -248,7 +283,10 @@ const Dashboard = ({ title }) => {
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
-                    Transaction Count:
+                    Transaction Count:{" "}
+                    {formatNumberWithCommas(
+                      dashboardsummary?.data?.totalTransactionCount
+                    )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average monthly revenue</span> */}
@@ -269,7 +307,10 @@ const Dashboard = ({ title }) => {
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
-                    Transaction Count:
+                    Transaction Count:{" "}
+                    {formatNumberWithCommas(
+                      dashboardsummary?.data?.totalTransactionCount
+                    )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span> */}

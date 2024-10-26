@@ -30,6 +30,8 @@ import { IdleTimerProvider, useIdleTimerContext } from "react-idle-timer";
 import { LogOutAuthentication } from "./MainComponents/Reusables/LogOutAuthentication";
 import Users from "./MainComponents/Components/Users";
 import DistrictDetails from "./MainComponents/Components/DistrictDetails";
+import CustomerCare from "./MainComponents/Components/CustomerCare";
+import DiscoTransactions from "./MainComponents/Components/DiscoTransactions";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -106,6 +108,10 @@ function App() {
               path="/complaint"
               element={<Complaints title={"Complaints"} />}
             />
+            <Route
+              path="/disotransactions"
+              element={<DiscoTransactions title={"Transactions"} />}
+            />
 
             <Route path="/api" element={<ApiPartner title={"API-Partner"} />} />
             <Route path="/discos" element={<Loans title={"Discos"} />} />
@@ -115,6 +121,10 @@ function App() {
             <Route
               path="/notification"
               element={<Notification title={"Agents"} />}
+            />
+            <Route
+              path="/customer"
+              element={<CustomerCare title={"Customer Care"} />}
             />
           </>
         )}

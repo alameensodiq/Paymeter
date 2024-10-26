@@ -30,6 +30,8 @@ const EarningPartner = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searcher, setSearcher] = useState("");
   const [loading, setloading] = useState(false);
+  const [userIding, setuserIding] = useState("");
+  const [actions, setaction] = useState("");
   const [role, setRole] = useState("EARNINGPARTNER");
   const [userIds, setUserIds] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
@@ -107,7 +109,11 @@ const EarningPartner = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
+          setaction={setaction}
+          action={actions}
           userIds={userIds}
+          setuserIding={setuserIding}
+          userIding={userIding}
           setUserIds={setUserIds}
           setStep={setStep}
           step={step}
@@ -182,6 +188,8 @@ const EarningPartner = ({ title }) => {
                 {apiagentrole?.data?.meta?.totalCount >= 1 ? (
                   <Tables
                     earning
+                    setaction={setaction}
+                    setuserIding={setuserIding}
                     data={apiagentrole?.data?.data}
                     setUserIds={setUserIds}
                     setStep={setStep}

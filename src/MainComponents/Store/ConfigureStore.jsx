@@ -40,6 +40,10 @@ import { metersSlice } from "./Reducers/meters";
 import { ListofMeterSlice } from "./Reducers/Listofmeter";
 import { CreateManagerSlice } from "./Reducers/CreateManager";
 import { CustomersSlice } from "./Reducers/Customers";
+import { CustomerCareSlice } from "./Reducers/CustomerCare";
+import { DiscTransactionsSlice } from "./Reducers/DiscTransactions";
+import { EditDetailsSlice } from "./Reducers/EditDetails";
+import { UserActioningSlice } from "./Reducers/UserActioning";
 
 export default configureStore({
   reducer: {
@@ -83,6 +87,10 @@ export default configureStore({
     meters: metersSlice?.reducer,
     listofmeter: ListofMeterSlice?.reducer,
     managers: CreateManagerSlice?.reducer,
-    customers: CustomersSlice?.reducer
+    customers: CustomersSlice?.reducer,
+    createcustomer: CustomerCareSlice?.reducer,
+    disctransactions: DiscTransactionsSlice?.reducer,
+    editdetails: EditDetailsSlice?.reducer,
+    actioning: UserActioningSlice?.reducer
   }
 });

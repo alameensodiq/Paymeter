@@ -18,7 +18,7 @@ import { ApiAgentRole } from "../Store/Apis/ApiAgentRoles";
 import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
 
-const DistrictManager = ({ title }) => {
+const CustomerCare = ({ title }) => {
   const [endDate, setEndDate] = useState(
     new Date(Date.now() + 3600 * 1000 * 24)
   );
@@ -33,47 +33,40 @@ const DistrictManager = ({ title }) => {
   const [role, setRole] = useState("DISTRICTMANAGER");
   const [userIds, setUserIds] = useState("");
   const [role1, setRole1] = useState(true);
-  const [userIding, setuserIding] = useState("");
-  const [actions, setaction] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && role === "DISTRICTMANAGER") {
-      dispatch(ApiAgentRole({ role1 }));
+      //   dispatch(ApiAgentRole({ role1 }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
     if (reload && role === "DISTRICTMANAGER") {
-      dispatch(ApiAgentRole({ role1 }));
+      //   dispatch(ApiAgentRole({ role1 }));
       setReload(false);
     }
 
     //eslint-disable-next-line
-  }, [reload, role, role1]);
+  }, [reload, role]);
 
-  const { apiagentrole, authenticatingapiagentrole } = useSelector(
-    (state) => state?.apiagentrole
-  );
-  console.log(apiagentrole);
+  //   const { apiagentrole, authenticatingapiagentrole } = useSelector(
+  //     (state) => state?.apiagentrole
+  //   );
+  //   console.log(apiagentrole);
 
-  const { editdetails, authenticatingeditdetails } = useSelector(
-    (state) => state?.editdetails
-  );
-  console.log(editdetails);
+  //   useEffect(() => {
+  //     setTimeout(() => {
+  //       setloading(true);
+  //     }, [3000]);
+  //   }, [apiagentrole?.data?.data]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setloading(true);
-    }, [3000]);
-  }, [apiagentrole?.data?.data]);
-
-  const next = apiagentrole?.data?.meta?.next;
-  const previous = apiagentrole?.data?.meta?.prev;
-  const totalPosts = apiagentrole?.data?.meta?.totalCount;
+  //   const next = apiagentrole?.data?.meta?.next;
+  //   const previous = apiagentrole?.data?.meta?.prev;
+  //   const totalPosts = apiagentrole?.data?.meta?.totalCount;
 
   const paginate = (number) => {
     //  setSorted(tran)
@@ -116,10 +109,6 @@ const DistrictManager = ({ title }) => {
         </div>
         <AppUserModal
           role1
-          setaction={setaction}
-          action={actions}
-          setuserIding={setuserIding}
-          userIding={userIding}
           userIds={userIds}
           setUserIds={setUserIds}
           setStep={setStep}
@@ -129,7 +118,7 @@ const DistrictManager = ({ title }) => {
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
           <div className="flex flex-row justify-between">
             <span className="text-route-name text-[28px] font-semibold">
-              District Manager
+              Customer Care
             </span>
             <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">
@@ -173,10 +162,10 @@ const DistrictManager = ({ title }) => {
                 <Calendar className="text-[10px]" onClick={() => PickDate()} />
               </div> */}
               <button
-                onClick={() => setStep(35)}
+                onClick={() => setStep(40)}
                 className="px-2 h-[35px] flex flex-row gap-1 items-center bg-route-color w-[13%] rounded-custom text-white font-semibold text-[11px]"
               >
-                Add Manager
+                Add Customer Care
               </button>
               <button
                 onClick={() => Downloading()}
@@ -190,12 +179,10 @@ const DistrictManager = ({ title }) => {
               <Filter />
               <span className="text-route-noncolor text-[12px]">Filters</span>
             </div>
-            {loading ? (
+            {!loading ? (
               <>
-                {apiagentrole?.data?.meta?.totalCount >= 1 ? (
+                {/* {apiagentrole?.data?.meta?.totalCount >= 1 ? (
                   <Tables
-                    setuserIding={setuserIding}
-                    setaction={setaction}
                     manager
                     data={apiagentrole?.data?.data}
                     setUserIds={setUserIds}
@@ -212,7 +199,7 @@ const DistrictManager = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                )}{" "}
+                )}{" "} */}
                 {/* {(apiagentrole?.error || !apiagentrole?.data?.content) && (
                   <div
                     style={{
@@ -225,7 +212,7 @@ const DistrictManager = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )} */}
-                {apiagentrole?.data?.meta?.totalCount >= 1 && (
+                {/* {apiagentrole?.data?.meta?.totalCount >= 1 && (
                   <Pagination
                     set={activater}
                     currentPage={currentPage}
@@ -235,7 +222,7 @@ const DistrictManager = ({ title }) => {
                     previous={previous}
                     next={next}
                   />
-                )}
+                )} */}
               </>
             ) : (
               <Loader />
@@ -247,4 +234,4 @@ const DistrictManager = ({ title }) => {
   );
 };
 
-export default DistrictManager;
+export default CustomerCare;

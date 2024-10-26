@@ -39,6 +39,8 @@ const Notification = ({ title }) => {
   const [notId, setnotId] = useState("");
   const [stat, setstat] = useState("");
   const [images, setImages] = useState("");
+  const [userIding, setuserIding] = useState("");
+  const [actions, setaction] = useState("");
   //   const [action, setAction] = useState("disable");
   //   const [notificationsId, setnotificationsId] = useState(null);
   const [role, setRole] = useState("APIPARTNER");
@@ -140,6 +142,10 @@ const Notification = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
+          setaction={setaction}
+          action={actions}
+          setuserIding={setuserIding}
+          userIding={userIding}
           images={images}
           setImages={setImages}
           role1
@@ -303,7 +309,9 @@ const Notification = ({ title }) => {
                 {notifications?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
+                      setaction={setaction}
                       notification
+                      setuserIding={setuserIding}
                       Pay={Pays}
                       setUserIds={setUserIds}
                       set
@@ -315,6 +323,7 @@ const Notification = ({ title }) => {
                   status === "pending" && (
                     <Tables
                       pending
+                      setuserIding={setuserIding}
                       Pay={Pays}
                       setImages={setImages}
                       setUserIds={setUserIds}

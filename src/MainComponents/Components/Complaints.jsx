@@ -30,12 +30,14 @@ const Complaints = ({ title }) => {
   const [step, setStep] = useState(0);
   const datePickerRef = useRef(null);
   const [reload, setReload] = useState(false);
+  const [reloadreal, setReloadreal] = useState(false);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [activater, setActivater] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
   const [searcher, setSearcher] = useState("");
   const [loading, setloading] = useState(false);
   const [status, setStatus] = useState("RESOLVED");
+  const [iduser, setIduser] = useState("");
   //   const [action, setAction] = useState("disable");
   //   const [notificationsId, setnotificationsId] = useState(null);
   const [role, setRole] = useState("APIPARTNER");
@@ -56,10 +58,16 @@ const Complaints = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload && complainapprove?.status) {
+    if (reloadreal && complainapprove?.status) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
+      // dispatch(Complain({ status }));
+      setStep(44);
+      // setReload(false);
+    }
+    if (reload) {
       dispatch(Complain({ status }));
       setReload(false);
+      setReloadreal(false);
     }
     // if (reload) {
     //   //   dispatch(Banks({ startDate, searcher, currentPage }));
@@ -99,8 +107,15 @@ const Complaints = ({ title }) => {
   };
 
   const Pays = (notificationsId) => {
-    dispatch(ComplainApprove({ userId: notificationsId }));
-    setReload(true);
+    setStep(43);
+    setIduser(notificationsId);
+    // dispatch(ComplainApprove({ userId: notificationsId }));
+    // setReload(true);
+  };
+
+  const sendComplain = () => {
+    dispatch(ComplainApprove({ userId: iduser }));
+    setReloadreal(true);
   };
 
   const Downloading = () => {
@@ -127,7 +142,12 @@ const Complaints = ({ title }) => {
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
         </div>
-        <AppUserModal setStep={setStep} step={step} setReload={setReload} />
+        <AppUserModal
+          sendComplain={sendComplain}
+          setStep={setStep}
+          step={step}
+          setReload={setReload}
+        />
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
           <div className="flex flex-row justify-between">
             <span className="text-route-name text-[28px] font-semibold">
@@ -192,7 +212,10 @@ const Complaints = ({ title }) => {
               <div className="flex flex-col">
                 <div className="flex flex-row gap-6 justify-center text-[14px] items-center text-route-noncolor pt-[10px] font-medium">
                   <span
-                    onClick={() => setStatus("RESOLVED")}
+                    onClick={() => {
+                      setStatus("RESOLVED");
+                      setCurrentPage(0);
+                    }}
                     className={`${
                       status === "RESOLVED"
                         ? "text-route-color cursor-pointer"
@@ -202,7 +225,10 @@ const Complaints = ({ title }) => {
                     RESOLVED
                   </span>
                   <span
-                    onClick={() => setStatus("PENDING")}
+                    onClick={() => {
+                      setStatus("PENDING");
+                      setCurrentPage(0);
+                    }}
                     className={`${
                       status === "PENDING"
                         ? "text-route-color cursor-pointer"
@@ -265,33 +291,71 @@ const Complaints = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {complain?.data?.meta?.totalCount >= 1 ? (
-                  <Tables complain Pay={Pays} set data={complain?.data?.data} />
-                ) : complain?.data?.length === 0 || complain?.error ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                ) : (
-                  ""
-                )}
-                {complain?.data?.meta?.totalCount >= 1 && (
-                  <Pagination
-                    set={activater}
-                    currentPage={currentPage}
-                    postsPerPage={postsPerPage}
-                    totalPosts={totalPosts}
-                    paginate={paginate}
-                    previous={previous}
-                    next={next}
-                  />
-                )}
+                {complain?.data?.meta?.totalCount >= 1 &&
+                  status === "RESOLVED" && (
+                    <Tables complain set data={complain?.data?.data} />
+                  )}{" "}
+                {(complain?.data?.data?.length === 0 ||
+                  complain?.error === "") &&
+                  status === "RESOLVED" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
+                {complain?.data?.meta?.totalCount >= 1 &&
+                  status === "PENDING" && (
+                    <Tables
+                      complainpending
+                      Pay={Pays}
+                      set
+                      data={complain?.data?.data}
+                    />
+                  )}{" "}
+                {(complain?.data?.data?.length === 0 ||
+                  complain?.error === "") &&
+                  status === "PENDING" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
+                {complain?.data?.meta?.totalCount >= 1 &&
+                  status === "RESOLVED" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
+                {complain?.data?.meta?.totalCount >= 1 &&
+                  status === "PENDING" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
               </>
             ) : (
               <Loader />

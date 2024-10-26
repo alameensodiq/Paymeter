@@ -44,7 +44,11 @@ const Tables = ({
   metering,
   manager,
   users,
-  setImages
+  setImages,
+  discotransactions,
+  complainpending,
+  setuserIding,
+  setaction
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -60,6 +64,10 @@ const Tables = ({
   const [indexing5, setIndexing5] = useState(null);
   const [open6, setOpen6] = useState(false);
   const [indexing6, setIndexing6] = useState(null);
+  const [open7, setOpen7] = useState(false);
+  const [indexing7, setIndexing7] = useState(null);
+  const [open8, setOpen8] = useState(false);
+  const [indexing8, setIndexing8] = useState(null);
   console.log(data);
   const theme = createTheme({
     typography: {
@@ -1276,12 +1284,7 @@ const Tables = ({
             </TableHead>
             <TableBody>
               {data?.map((item, index) => (
-                <StyledTableRow
-                  onClick={() => {
-                    setStep(11);
-                    setUserIds(item?.id);
-                  }}
-                >
+                <StyledTableRow>
                   <StyledTableCell
                     className="text-dob"
                     style={{ width: "10%" }}
@@ -1304,8 +1307,10 @@ const Tables = ({
                   <StyledTableCell style={{ width: "20%" }}>
                     200,000
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "5%" }}>
-                    <span
+                  <StyledTableCell
+                    style={{ width: "5%", position: "relative" }}
+                  >
+                    {/* <span
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -1315,7 +1320,109 @@ const Tables = ({
                       onClick={() => navigate(`/api/${item?.id}`)}
                     >
                       View
-                    </span>
+                    </span> */}
+                    <svg
+                      onClick={() => {
+                        setOpen8(!open8);
+                        setIndexing8(index);
+                      }}
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
+                    {index === indexing8 && open8 ? (
+                      <div
+                        style={{ overflowY: "scroll" }}
+                        className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                      >
+                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#000000"
+                            }}
+                            className="text-black"
+                            onClick={() => {
+                              navigate(`/api/${item?.id}`);
+                              setOpen8(!open8);
+                            }}
+                          >
+                            View
+                          </span>
+                          <span
+                            onClick={() => {
+                              setStep(11);
+                              setUserIds(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Edit Commission
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("blocked");
+                              setStep(48);
+                              setOpen8(!open8);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Blocked
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("restricted");
+                              setStep(48);
+                              setOpen8(!open8);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Restricted
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("active");
+                              setStep(48);
+                              setOpen8(!open8);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Activate
+                          </span>
+                          <span
+                            onClick={() => {
+                              setuserIding(item?.id);
+                              setStep(45);
+                              setOpen8(!open8);
+                            }}
+                            className="text-black"
+                          >
+                            Update
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -1916,7 +2023,7 @@ const Tables = ({
                           >
                             View
                           </span>
-                          <span
+                          {/* <span
                             className="text-black"
                             onClick={() => {
                               setStep(11);
@@ -1925,12 +2032,52 @@ const Tables = ({
                             }}
                           >
                             Set Commission
+                          </span> */}
+                          <span
+                            onClick={() => {
+                              setaction("blocked");
+                              setStep(48);
+                              setOpen2(!open2);
+                              setuserIding(item?.user?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Blocked
                           </span>
-                          <span className="text-black">Suspend</span>
-                          <span className="text-black">Deactivate</span>
-                          <span className="text-black">Update</span>
-                          <span className="text-black">Fund Wallet</span>
-                          <span className="text-black">Deplete Wallet</span>
+                          <span
+                            onClick={() => {
+                              setaction("restricted");
+                              setStep(48);
+                              setOpen2(!open2);
+                              setuserIding(item?.user?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Restricted
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("active");
+                              setStep(48);
+                              setOpen2(!open2);
+                              setuserIding(item?.user?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Activate
+                          </span>
+                          <span
+                            onClick={() => {
+                              setuserIding(item?.user?.id);
+                              setStep(45);
+                              setOpen2(!open2);
+                            }}
+                            className="text-black"
+                          >
+                            Update
+                          </span>
+                          {/* <span className="text-black">Fund Wallet</span>
+                          <span className="text-black">Deplete Wallet</span> */}
                         </div>
                       </div>
                     ) : (
@@ -2110,17 +2257,17 @@ const Tables = ({
                   <StyledTableCell style={{ width: "15%" }}>
                     {item?.status !== "REJECTED" ? (
                       <button
-                        onClick={() => Pay(item?.id, item?.user?.id, "decline")}
+                        // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
                         className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
                       >
-                        ACCEPETD
+                        RESOLVED
                       </button>
                     ) : item?.status === "REJECTED" ? (
                       <button
                         onClick={() => Pay(item?.id)}
                         className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
                       >
-                        DECLINED
+                        PENDING
                       </button>
                     ) : (
                       <button
@@ -2129,6 +2276,145 @@ const Tables = ({
                       >
                         PENDING
                       </button>
+                    )}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : complainpending ? (
+        <TableContainer
+          // component={Paper}
+          style={{ boxShadow: "none" }}
+        >
+          <Table
+            sx={{ minWidth: 700, tableLayout: "auto" }}
+            aria-label="customized table"
+          >
+            <TableHead>
+              <TableRow style={{ paddingRight: "0px" }}>
+                <StyledTableCell style={{ width: "10%" }}>S/N</StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>NAME</StyledTableCell>
+                <StyledTableCell style={{ width: "15%" }}>
+                  EMAIL
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "15%" }}>
+                  PHONE
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "15%" }}>
+                  MESSAGE
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>DATE</StyledTableCell>
+                <StyledTableCell style={{ width: "10%" }}>
+                  STATUS
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "15%" }}>
+                  ACTIONS
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.map((item, index) => (
+                <StyledTableRow>
+                  <StyledTableCell
+                    className="text-dob"
+                    style={{ width: "10%" }}
+                  >
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="text-dob"
+                    style={{ width: "10%" }}
+                  >
+                    {item?.customerName}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {item?.customerEmail}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {item?.customerPhone}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {item?.description}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    {item?.status !== "REJECTED" ? (
+                      <button
+                        // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
+                        className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
+                      >
+                        RESOLVED
+                      </button>
+                    ) : item?.status === "REJECTED" ? (
+                      <button
+                        onClick={() => Pay(item?.id)}
+                        className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
+                      >
+                        PENDING
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => Pay(item?.id)}
+                        className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                      >
+                        PENDING
+                      </button>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    style={{
+                      width: "15%",
+                      position: "relative"
+                    }}
+                    onClick={() => {
+                      setOpen7(!open7);
+                      setIndexing7(index);
+                    }}
+                  >
+                    <svg
+                      style={{ marginLeft: "30px" }}
+                      onClick={() => {
+                        setOpen7(!open7);
+                        setIndexing7(index);
+                      }}
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
+                    {index === indexing7 && open7 ? (
+                      <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                          <span
+                            onClick={() => Pay(item?.id)}
+                            className="text-black"
+                          >
+                            Resolve
+                          </span>
+                          {/* <span className="text-black">Regenerate Token</span>
+                            <span className="text-black">Resend Token</span> */}
+                        </div>
+                      </div>
+                    ) : (
+                      ""
                     )}
                   </StyledTableCell>
                 </StyledTableRow>
@@ -2262,9 +2548,49 @@ const Tables = ({
                           >
                             View
                           </span>
-                          <span className="text-black">Suspend</span>
-                          <span className="text-black">Deactivate</span>
-                          <span className="text-black">Update</span>
+                          <span
+                            onClick={() => {
+                              setaction("blocked");
+                              setStep(48);
+                              setOpen3(!open3);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Blocked
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("restricted");
+                              setStep(48);
+                              setOpen3(!open3);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Restricted
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("active");
+                              setStep(48);
+                              setOpen3(!open3);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Activate
+                          </span>
+                          <span
+                            onClick={() => {
+                              setuserIding(item?.id);
+                              setStep(45);
+                              setOpen3(!open3);
+                            }}
+                            className="text-black"
+                          >
+                            Update
+                          </span>
                         </div>
                       </div>
                     ) : (
@@ -3279,10 +3605,58 @@ const Tables = ({
                           >
                             View
                           </span>
-                          <span className="text-black">Edit Commission</span>
-                          <span className="text-black">Suspend</span>
-                          <span className="text-black">Deactivate</span>
-                          <span className="text-black">Update</span>
+                          <span
+                            onClick={() => {
+                              setStep(11);
+                              setUserIds(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Edit Commission
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("blocked");
+                              setStep(48);
+                              setOpen4(!open4);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Blocked
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("restricted");
+                              setStep(48);
+                              setOpen4(!open4);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Restricted
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("active");
+                              setStep(48);
+                              setOpen4(!open4);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Activate
+                          </span>
+                          <span
+                            onClick={() => {
+                              setuserIding(item?.id);
+                              setStep(45);
+                              setOpen4(!open4);
+                            }}
+                            className="text-black"
+                          >
+                            Update
+                          </span>
                         </div>
                       </div>
                     ) : (
@@ -3386,6 +3760,306 @@ const Tables = ({
             </TableBody>
           </Table>
         </TableContainer>
+      ) : discotransactions ? (
+        <ScrollableXContainer>
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+            sx={{ maxHeight: "60vh" }}
+          >
+            <Table
+              stickyHeader
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "5%" }}>S/N</StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DATE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    REFERENCE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    USER TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    CUSTOMER NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    CUSTOMER PHONE NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACCOUNT NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    METER NUMBER
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    RECEIVED AMOUNT
+                  </StyledTableCell> */}
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TRANSACTION AMOUNT
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    SERVICE CHARGE
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION TYPE
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMMISSION FEE
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    BANK TAX FEE
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMMISSION TYPE
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMMISSION
+                  </StyledTableCell> */}
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISTRICT COMMISSION TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISTRICT MANAGER COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION TYPE
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION CAP
+                  </StyledTableCell> */}
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMMISSION
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    EARNING PARTNER FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    FEE DUE TO SYSTEM
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TOKEN
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TOKEN DELIVERY STATUS
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACTIONS
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      <Moment>{item?.dispense?.updatedDate}</Moment>
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.reference}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.userType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.customerName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {/* {item?.customerName ? } */}
+                      N/A
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.accountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.meterNo}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.inputAmount
+                        ? `₦${item?.inputAmount}`
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.transactionAmount}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFee
+                        ? `${item?.bankCommissionFee}`
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.systemFeePerDisco}
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionType
+                        ? item?.bankCommissionType
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFeeValue
+                        ? `₦${item?.bankCommissionFeeValue}`
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.systemTransactions?.bankTaxFee
+                        ? `₦${item?.dispense?.systemTransactions?.bankTaxFee}`
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionFee
+                        ? `₦${item?.agentCommissionFee}`
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionType
+                        ? item?.agentCommissionType
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.managerCommissionType
+                        ? `₦${item?.managerCommissionType}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.systemTransactions?.districtManagerFee
+                        ? `₦${item?.dispense?.systemTransactions?.districtManagerFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionType}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionCapFee
+                        ? `₦${item?.discoSystemCommissionCapFee}`
+                        : "not applicable"}
+                    </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.discoSystemCommissionFee}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoAmount
+                        ? `₦${item?.item?.discoAmount}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.systemTransactions?.earningPartnerFee
+                        ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.feeDueToSystem}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      ref={inputRef3}
+                      onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {item?.dispense?.listtoken[0] || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // ref={inputRef3}
+                      // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {"N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{
+                        width: "10%",
+                        position: "relative"
+                      }}
+                      onClick={() => {
+                        setOpen(!open);
+                        setIndexing(index);
+                      }}
+                    >
+                      {/* <button
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                      >
+                        Action
+                      </button> */}
+                      <svg
+                        style={{ marginLeft: "30px" }}
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
+                      {index === indexing && open ? (
+                        <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                            <span className="text-black">Download Receipt</span>
+                            <span className="text-black">Regenerate Token</span>
+                            <span className="text-black">Resend Token</span>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                    {item?.paymentStatus === "successfull" ? (
+                      <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+                        Successful
+                      </button>
+                    ) : (
+                      <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+                        Failed
+                      </button>
+                    )}
+                  </StyledTableCell> */}
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </ScrollableXContainer>
       ) : (
         ""
       )}

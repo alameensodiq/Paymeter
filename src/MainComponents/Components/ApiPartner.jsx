@@ -32,9 +32,11 @@ const ApiPartner = ({ title }) => {
   const [loading, setloading] = useState(false);
   const [role, setRole] = useState("APIPARTNER");
   const [userIds, setUserIds] = useState("");
+  const [userIding, setuserIding] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [actions, setaction] = useState("");
   const [role2, setRole2] = useState(true);
 
   useEffect(() => {
@@ -109,6 +111,10 @@ const ApiPartner = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
+          setaction={setaction}
+          action={actions}
+          setuserIding={setuserIding}
+          userIding={userIding}
           setStep={setStep}
           userIds={userIds}
           setUserIds={setUserIds}
@@ -184,6 +190,8 @@ const ApiPartner = ({ title }) => {
                 {apiagentrole?.data?.meta?.totalCount >= 1 ? (
                   <Tables
                     apipartners
+                    setaction={setaction}
+                    setuserIding={setuserIding}
                     data={apiagentrole?.data?.data}
                     setUserIds={setUserIds}
                     setStep={setStep}

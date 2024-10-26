@@ -40,6 +40,8 @@ const Sidebar = () => {
   const [isHovered15, setIsHovered15] = useState(false);
   const [isHovered16, setIsHovered16] = useState(false);
   const [isHovered17, setIsHovered17] = useState(false);
+  const [isHovered18, setIsHovered18] = useState(false);
+  const [isHovered19, setIsHovered19] = useState(false);
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
@@ -49,8 +51,7 @@ const Sidebar = () => {
           Paymeter
         </span>
       </div>
-      {sessionStorage.getItem("roleName") !==
-      ("ADMIN" || "CUSTOMER_SERVICE") ? (
+      {sessionStorage.getItem("roleName") === "DISCO" ? (
         <div className="flex flex-col py-10 gap-4 px-4">
           <Link
             to="/complaint"
@@ -95,8 +96,59 @@ const Sidebar = () => {
               Complaints
             </p>
           </Link>
+          <Link
+            to="/disotransactions"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/disotransactions" ||
+              router.pathname.startsWith("/disotransactions/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered19(true)}
+            onMouseLeave={() => setIsHovered19(false)}
+          >
+            {router.pathname === "/disotransactions" ||
+            isHovered19 ||
+            router.pathname.startsWith("/disotransactions/") ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/disotransactions" ||
+            isHovered19 ||
+            router.pathname.startsWith("/disotransactions/") ? (
+              <Loan
+                className={`${
+                  router.pathname === "/disotransactions" ||
+                  router.pathname.startsWith("/disotransactions/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Loan
+                className={`${
+                  router.pathname === "/disotransactions" ||
+                  router.pathname.startsWith("/disotransactions/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/disotransactions" ||
+                router.pathname.startsWith("/disotransactions/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Transactions
+            </p>
+          </Link>
         </div>
-      ) : sessionStorage.getItem("roleName") === "CUSTOMER_SERVICE" ? (
+      ) : sessionStorage.getItem("roleName") === "CUSTOMERSERVICE" ? (
         <div className="flex flex-col py-10 gap-4 px-4">
           <Link
             to="/transactions"
@@ -474,6 +526,55 @@ const Sidebar = () => {
               }`}
             >
               EarningPartner
+            </p>
+          </Link>
+          <Link
+            to="/customer"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/customer" ||
+              router.pathname.startsWith("/customer/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered18(true)}
+            onMouseLeave={() => setIsHovered18(false)}
+          >
+            {router.pathname === "/customer" ||
+            router.pathname.startsWith("/customer/") ||
+            isHovered18 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/customer" || isHovered18 ? (
+              <Bill
+                className={`${
+                  router.pathname === "/customer" ||
+                  router.pathname.startsWith("/customer/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Bill
+                className={`${
+                  router.pathname === "/customer" ||
+                  router.pathname.startsWith("/customer/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/customer" ||
+                router.pathname.startsWith("/customer/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Customer Care
             </p>
           </Link>
           <Link

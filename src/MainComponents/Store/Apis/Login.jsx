@@ -32,22 +32,24 @@ export const Logins = createAsyncThunk(
         toast.error(data.message);
       }
       console.log(data);
-      //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
-      //   sessionStorage.setItem('role', data?.data?.user?.userRole);
       sessionStorage.setItem("token", data?.data?.token);
       sessionStorage.setItem("roleName", data?.data?.user?.roleName);
       if (data?.data?.token && data?.data?.user?.roleName === "ADMIN") {
         window.location.pathname = "/dashboard";
       }
-      if (data?.data?.token && data?.data?.user?.roleName !== "ADMIN") {
+      if (
+        data?.data?.token &&
+        data?.data?.user?.roleName === "CUSTOMERSERVICE"
+      ) {
+        window.location.pathname = "/transactions";
+      }
+      if (data?.data?.token && data?.data?.user?.roleName === "DISCO") {
         window.location.pathname = "/complaint";
       }
     } catch (e) {
       return thunkAPI.rejectWithValue({
         error: "Failed! To establish connection."
       });
-      // console.log('Error', e.response.data);
-      // thunkAPI.rejectWithValue(e.response.data);
     }
   }
 );

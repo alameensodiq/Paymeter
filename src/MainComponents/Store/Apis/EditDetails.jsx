@@ -1,26 +1,30 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const Complain = createAsyncThunk(
-  "complain",
-  async ({ status }, thunkAPI) => {
+export const EditDetails = createAsyncThunk(
+  "editdetails",
+  async ({ userId, phone, NIN, address, name }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
 
     const accessToken = sessionStorage.getItem("token");
-    // const data = JSON.parse(sessionStorage.getItem("data"));
-    // console.log(data);
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}disco/complaints?status=${status}`,
-        // `${process.env.REACT_APP_BASE_URL}disco/complaints?discoShortName=IKEDC&status=${status}`,
+        `${process.env.REACT_APP_BASE_URL}admin/update-user-info`,
         {
-          method: "GET",
+          method: "PATCH",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`
-          }
+          },
+          body: JSON.stringify({
+            userId,
+            phone,
+            NIN,
+            address,
+            name
+          })
         }
       );
       let data = await response.json();
