@@ -30,6 +30,7 @@ import DistrictManagerSelect from "../bits/DistrictManagerSelect";
 import { CreateCustomerCare } from "../MainComponents/Store/Apis/CreateCustomerCare";
 import { EditDetails } from "../MainComponents/Store/Apis/EditDetails";
 import { UserActioning } from "../MainComponents/Store/Apis/UserActioning";
+import { EditDisco } from "../MainComponents/Store/Apis/EditDisco";
 
 const AppUserModal = ({
   setStep,
@@ -61,7 +62,9 @@ const AppUserModal = ({
   userIding,
   setuserIding,
   setaction,
-  action
+  action,
+  short,
+  setshort
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -89,9 +92,11 @@ const AppUserModal = ({
   const [bustate15, setBusstate15] = useState(false);
   const [bustate16, setBusstate16] = useState(false);
   const [bustate17, setBusstate17] = useState(false);
+  const [bustate18, setBusstate18] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
+  const [itemerseditingdisc, setItemereditingdisc] = useState("");
   const [itemersmanager, setItemermanager] = useState("");
   const [itemersdiscoearning, setItemerdiscoearning] = useState("");
   const [itemersinst, setItemersinst] = useState("");
@@ -184,6 +189,21 @@ const AppUserModal = ({
   const [disc, setDisc] = useState({
     name: "",
     shortName: "",
+    commissionsDTO: {
+      commissionType: "",
+      fee: null,
+      capFee: null
+    },
+    systemFee: "",
+    earningPartnerId: "",
+    earningPartnerFee: "",
+    email: "",
+    logoUrl: "",
+    phone: null
+  });
+
+  const [editingdisc, seteditingdisc] = useState({
+    name: "",
     commissionsDTO: {
       commissionType: "",
       fee: null,
@@ -327,6 +347,11 @@ const AppUserModal = ({
   );
   console.log(actioning);
 
+  const { editdiscing, authenticatingeditdiscing } = useSelector(
+    (state) => state?.editdiscing
+  );
+  console.log(editdiscing);
+
   useEffect(() => {
     if (bustate && createdbank?.status) {
       setStep(3);
@@ -382,6 +407,9 @@ const AppUserModal = ({
     if (bustate17 && actioning?.status) {
       setStep(49);
     }
+    if (bustate18 && editdiscing?.status) {
+      setStep(52);
+    }
 
     console.log(update);
   }, [
@@ -407,6 +435,7 @@ const AppUserModal = ({
     bustate15,
     bustate16,
     bustate17,
+    bustate18,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -420,7 +449,8 @@ const AppUserModal = ({
     managers?.status,
     createcustomer?.status,
     editdetails?.status,
-    actioning?.status
+    actioning?.status,
+    editdiscing?.status
   ]);
 
   useEffect(() => {
@@ -581,6 +611,15 @@ const AppUserModal = ({
     });
   };
 
+  const ChangeeditDisc = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    seteditingdisc({
+      ...editingdisc,
+      [name]: value
+    });
+  };
+
   const ChangeManager = (e) => {
     const { name, value } = e.target;
     console.log(value);
@@ -617,6 +656,29 @@ const AppUserModal = ({
     }
 
     setDisc((prevDisc) => ({
+      ...prevDisc,
+      [name]: sanitizedValue
+    }));
+  };
+
+  const ChangeeditingDiscNumber = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    seteditingdisc((prevDisc) => ({
       ...prevDisc,
       [name]: sanitizedValue
     }));
@@ -922,6 +984,33 @@ const AppUserModal = ({
     setBusstate13(true);
   };
 
+  const sendDiscoeditDetails = () => {
+    const {
+      name,
+      commissionsDTO,
+      earningPartnerId,
+      earningPartnerFee,
+      email,
+      logoUrl,
+      phone,
+      systemFee
+    } = editingdisc;
+    dispatch(
+      EditDisco({
+        name,
+        shortName: short,
+        commissionsDTO,
+        earningPartnerId,
+        earningPartnerFee,
+        email,
+        logoUrl,
+        phone,
+        systemFee
+      })
+    );
+    setBusstate18(true);
+  };
+
   const sendUserAction = () => {
     dispatch(
       UserActioning({
@@ -940,6 +1029,10 @@ const AppUserModal = ({
     setDistricthead({
       districtManagerId: ""
     });
+    setBusstate18(false);
+    if (short) {
+      setshort("");
+    }
     setApproving("");
     if (userId) {
       setuserId("");
@@ -988,6 +1081,20 @@ const AppUserModal = ({
       },
       email: "",
       phone: ""
+    });
+    seteditingdisc({
+      name: "",
+      commissionsDTO: {
+        commissionType: "",
+        fee: null,
+        capFee: null
+      },
+      systemFee: "",
+      earningPartnerId: "",
+      earningPartnerFee: "",
+      email: "",
+      logoUrl: "",
+      phone: null
     });
     setSettingsGlobal({
       name: "",
@@ -1214,6 +1321,20 @@ const AppUserModal = ({
               capFee: null
             }
     }));
+    seteditingdisc((prev) => ({
+      ...prev,
+      commissionsDTO:
+        itemerseditingdisc === "Fixed"
+          ? {
+              commissionType: "FIXED",
+              fee: null
+            }
+          : {
+              commissionType: "PERCENTAGE",
+              fee: null,
+              capFee: null
+            }
+    }));
     setManager((prev) => ({
       ...prev,
       commissionsDTO:
@@ -1262,6 +1383,7 @@ const AppUserModal = ({
     itemersdisco,
     itemersinst,
     itemerseditdisc,
+    itemerseditingdisc,
     itemersettings,
     itemersedit,
     itemersmanager
@@ -1456,6 +1578,37 @@ const AppUserModal = ({
     }));
   };
 
+  const ChangeSettingsTypeUsereditDisco = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
+    seteditingdisc((prevDisc) => ({
+      ...prevDisc,
+      commissionsDTO: {
+        ...prevDisc.commissionsDTO,
+        [name]: sanitizedValue // Update with sanitized string value
+      }
+    }));
+  };
+
   const ChangeSettingsTypeUserManager = (e) => {
     const { name, value } = e.target;
 
@@ -1554,6 +1707,10 @@ const AppUserModal = ({
         console.log(parsedResult);
         setUpdate(parsedResult?.data?.logoUrl); // Update state with file name
         setDisc((prevDisc) => ({
+          ...prevDisc,
+          logoUrl: parsedResult?.data?.logoUrl
+        }));
+        seteditingdisc((prevDisc) => ({
           ...prevDisc,
           logoUrl: parsedResult?.data?.logoUrl
         }));
@@ -4986,6 +5143,324 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully perform the {action} action</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={50}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Edit Discos"
+      >
+        <ModalInputText
+          label="Name"
+          onChange={(e) => ChangeeditDisc(e)}
+          name="name"
+          value={editingdisc?.name}
+          placeholder={`${`Enter Disco Name`}`}
+        />
+        <ModalInputText
+          label="Email"
+          onChange={(e) => ChangeeditDisc(e)}
+          name="email"
+          value={editingdisc?.email}
+          placeholder={`${`Enter Disco Email`}`}
+        />
+        <EarningPartnerSelect
+          name="earningPartnerId"
+          label="Choose Earning Partner"
+          value={editingdisc?.earningPartnerId}
+          onChange={(e) => ChangeeditDisc(e)}
+          earningPartnerId
+          options={apiagentrole?.data?.data}
+        />
+        {disc?.earningPartnerId !== "" && (
+          <ModalInputText
+            label="Earning Partner Fee Percentage"
+            onChange={(e) => ChangeeditingDiscNumber(e)}
+            name="earningPartnerFee"
+            value={editingdisc?.earningPartnerFee}
+            placeholder={`${`Enter Earning Partner Percentage`}`}
+          />
+        )}
+        {/* {disc?.earningPartnerId !== "" && (
+          <>
+            <ModalInputSelectTwo
+              name="commissionsDTO"
+              label="Earning Commission"
+              // onChange={(e) => ChangeDisc(e)}
+              options={["Fixed", "Percentage"]}
+              itemer={itemersdiscoearning}
+              big
+              setItemer={setItemerdiscoearning}
+            />
+
+            {itemersdiscoearning === "Fixed" ? (
+              <ModalInputText
+                label="Fixed Commission"
+                // onChange={(e) => ChangeSettingsTypeUser(e)}
+                name="fee"
+                // value={userglobal?.commissionDetails?.fee}
+                placeholder="Enter Fixed Commission"
+              />
+            ) : itemersdiscoearning === "Percentage" ? (
+              <>
+                <ModalInputText
+                  label="Percentage Commission"
+                  // onChange={(e) => ChangeSettingsTypeUser(e)}
+                  name="fee"
+                  // value={userglobal?.commissionDetails?.fee}
+                  placeholder="Enter Percentage Commission"
+                />
+                <span style={{ color: "red", fontSize: "10px" }}>
+                  Note: Percentage must be less than or equal to Disco
+                  Percentage with Paymeter
+                </span>
+                <ModalInputText
+                  label="Cap Fee"
+                  // onChange={(e) => ChangeSettingsTypeUser(e)}
+                  name="capFee"
+                  // value={userglobal?.commissionDetails?.capFee}
+                  placeholder="Enter Cap Fee"
+                />
+              </>
+            ) : null}
+          </>
+        )} */}
+
+        {/* <ModalInputSelectTwo
+          name="commissionsDTO"
+          label="Commission DTO"
+          onChange={(e) => ChangeDisc(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemersdisco}
+          big
+          setItemer={setItemerdisco}
+        /> */}
+        <ModalInputText
+          label="System Fee"
+          onChange={(e) => ChangeeditingDiscNumber(e)}
+          name="systemFee"
+          value={editingdisc?.systemFee}
+          placeholder={`${`Enter Disco Name`}`}
+        />
+        <ModalInputText
+          label="Phone"
+          onChange={(e) => ChangeeditingDiscNumber(e)}
+          name="phone"
+          value={editingdisc?.phone}
+          placeholder={`${`Enter Disco Phone Number`}`}
+        />
+        {/* <ModalInputText
+          label="Short Name"
+          onChange={(e) => ChangeDisc(e)}
+          name="shortName"
+          value={disc?.shortName}
+          placeholder={`${`Enter Disco Short Name`}`}
+        /> */}
+        {editingdisc?.logoUrl !== "" ? (
+          <img
+            src={editingdisc?.logoUrl}
+            alt="takephoto"
+            style={{ width: "492px", height: "105px" }}
+          />
+        ) : (
+          <>
+            <input
+              type="file"
+              id="uploadFile"
+              name="avatar"
+              onChange={(e) => sendingsImage(e)}
+              accept="image/*"
+              style={{ display: "none" }}
+              className="i-none"
+              ref={datePickerRef}
+            />
+            <ModalInputText
+              onClick={() => PickDater()}
+              label="Upload Image"
+              photo
+            />
+          </>
+        )}
+        <ModalInputSelectTwo
+          name="commissionsDTO"
+          label="Commission DTO"
+          onChange={(e) => ChangeeditDisc(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemerseditingdisc}
+          big
+          setItemer={setItemereditingdisc}
+        />
+        {itemerseditingdisc === "Fixed" ? (
+          <ModalInputText
+            label="Fixed Commission"
+            onChange={(e) => ChangeSettingsTypeUsereditDisco(e)}
+            name="fee"
+            value={editingdisc?.commissionsDTO?.fee || ""}
+            placeholder={`${`Enter Fixed Commission`}`}
+          />
+        ) : itemersdisco === "Percentage" ? (
+          <>
+            <ModalInputText
+              label="Percentage Commission"
+              onChange={(e) => ChangeSettingsTypeUsereditDisco(e)}
+              name="fee"
+              value={editingdisc?.commissionsDTO?.fee || ""}
+              placeholder={`${`Enter Percentage Commission`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+            <ModalInputText
+              label="Cap Fee"
+              onChange={(e) => ChangeSettingsTypeUsereditDisco(e)}
+              name="capFee"
+              value={editingdisc?.commissionsDTO?.capFee}
+              placeholder={`${`Enter Cap Fee`}`}
+            />
+          </>
+        ) : (
+          ""
+        )}
+        <LargeSignInButton
+          onClick={() => {
+            const { name, commissionsDTO, phone, email } = disc;
+            console.log({ name, commissionsDTO });
+
+            // Check for missing values
+            const isFeeMissing = commissionsDTO?.fee === null;
+            const isCapFeeMissing = commissionsDTO?.capFee === null;
+            setStep(51);
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={51}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to Edit Disco details, Are you sure you</span>
+            <span>want to continue?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => sendDiscoeditDetails()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={52}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Details Edited
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully edited Disco details</span>
           </div>
           <div
             style={{

@@ -29,6 +29,7 @@ const Loans = ({ title }) => {
   const [loading, setloading] = useState(false);
   const [discname, setdiscname] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
+  const [short, setshort] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -107,6 +108,8 @@ const Loans = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
+          short={short}
+          setshort={setshort}
           call
           discname={discname}
           setdiscname={setdiscname}
@@ -184,6 +187,7 @@ const Loans = ({ title }) => {
                     <Tables
                       setdiscname={setdiscname}
                       loans
+                      setshort={setshort}
                       setStep={setStep}
                       data={discos?.data?.data}
                     />

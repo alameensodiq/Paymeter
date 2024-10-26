@@ -44,6 +44,7 @@ import { CustomerCareSlice } from "./Reducers/CustomerCare";
 import { DiscTransactionsSlice } from "./Reducers/DiscTransactions";
 import { EditDetailsSlice } from "./Reducers/EditDetails";
 import { UserActioningSlice } from "./Reducers/UserActioning";
+import { EditDiscoSlice } from "./Reducers/EditDisco";
 
 export default configureStore({
   reducer: {
@@ -91,6 +92,7 @@ export default configureStore({
     createcustomer: CustomerCareSlice?.reducer,
     disctransactions: DiscTransactionsSlice?.reducer,
     editdetails: EditDetailsSlice?.reducer,
-    actioning: UserActioningSlice?.reducer
+    actioning: UserActioningSlice?.reducer,
+    editdiscing: EditDiscoSlice?.reducer
   }
 });
