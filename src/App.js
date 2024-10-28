@@ -86,7 +86,7 @@ function App() {
             />
             <Route
               path="/user/:id"
-              element={<UserDetails title={"User Details"} />}
+              element={<RealUserDetails title={"User Details"} />}
             />
             <Route
               path="/manager/:id"

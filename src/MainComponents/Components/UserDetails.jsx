@@ -45,6 +45,7 @@ const UserDetails = ({ title }) => {
   const [naming, setNaming] = useState("");
   const [step, setStep] = useState(0);
   const [reload, setReload] = useState(false);
+  const [downloading, setDownload] = useState([]);
   let id = window?.location?.pathname.split("/")[2];
   console.log(id);
 
@@ -130,6 +131,8 @@ const UserDetails = ({ title }) => {
           <Navbar title={title} />
           <AppUserModal
             naming={naming}
+            setDownload={setDownload}
+            downloading={downloading}
             setNaming={setNaming}
             setStep={setStep}
             step={step}
@@ -296,6 +299,7 @@ const UserDetails = ({ title }) => {
                 {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
+                      setDownload={setDownload}
                       overviewtransaction
                       data={userdata?.data?.transactions?.data}
                     />

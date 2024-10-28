@@ -318,7 +318,7 @@ const Tables = ({
                     TRANSACTION AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    SERVICE CHARGE
+                    SYSTEM CHARGE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION TYPE
@@ -418,7 +418,7 @@ const Tables = ({
                       ₦{item?.transactionAmount}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.systemFeePerDisco}
+                      ₦{item?.systemCharge}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
@@ -2996,7 +2996,7 @@ const Tables = ({
                     TRANSACTION AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    SERVICE CHARGE
+                    SYSTEM CHARGE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK COMMISSION TYPE
@@ -3096,7 +3096,7 @@ const Tables = ({
                       ₦{item?.transactionAmount}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.systemFeePerDisco}
+                      ₦{item?.systemCharge}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
@@ -3219,7 +3219,17 @@ const Tables = ({
                       {index === indexing && open ? (
                         <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
                           <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                            <span className="text-black">Download Receipt</span>
+                            <span
+                              className="text-black"
+                              onClick={() => {
+                                setOpen(!open);
+                                setDownload(item);
+                                console.log(item);
+                                setStep(53);
+                              }}
+                            >
+                              Download Receipt
+                            </span>
                             <span className="text-black">Regenerate Token</span>
                             <span className="text-black">Resend Token</span>
                           </div>

@@ -1143,7 +1143,7 @@ const AppUserModal = ({
       earningPartnerFee: "",
       email: "",
       logoUrl: "",
-      phone: null
+      phone: ""
     });
     setPay({
       name: ""

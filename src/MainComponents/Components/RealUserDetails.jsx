@@ -45,6 +45,7 @@ const RealUserDetails = ({ title }) => {
   const [naming, setNaming] = useState("");
   const [step, setStep] = useState(0);
   const [reload, setReload] = useState(false);
+  const [downloading, setDownload] = useState([]);
   let id = window?.location?.pathname.split("/")[2];
   console.log(id);
 
@@ -82,22 +83,22 @@ const RealUserDetails = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [userdata?.status, reload]);
+  }, [getcommission?.status, reload]);
 
   //   const isEarningRoute = location.pathname.startsWith("/user/");
   //   const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  const next = getcommission.data?.transactions?.meta?.next;
-  const previous = getcommission?.data?.transactions?.meta?.prev;
-  const totalPosts = getcommission?.data?.transactions?.meta?.totalCount;
+  // const next = getcommission.data?.transactions?.meta?.next || "";
+  // const previous = getcommission?.data?.transactions?.meta?.prev || "";
+  // const totalPosts = getcommission?.data?.transactions?.meta?.totalCount || "";
 
-  const next2 = getcommission?.data?.meta?.next;
-  const previous2 = getcommission?.data?.meta?.prev;
-  const totalPosts2 = getcommission?.data?.meta?.totalCount;
+  // const next2 = getcommission?.data?.meta?.next;
+  // const previous2 = getcommission?.data?.meta?.prev;
+  // const totalPosts2 = getcommission?.data?.meta?.totalCount;
 
-  const next3 = userwallet?.data?.meta?.next;
-  const previous3 = userwallet?.data?.meta?.prev;
-  const totalPosts3 = userwallet?.data?.meta?.totalCount;
+  // const next3 = userwallet?.data?.meta?.next;
+  // const previous3 = userwallet?.data?.meta?.prev;
+  // const totalPosts3 = userwallet?.data?.meta?.totalCount;
 
   const paginate = (number) => {
     //  setSorted(tran)
@@ -129,6 +130,8 @@ const RealUserDetails = ({ title }) => {
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
           <AppUserModal
+            setDownload={setDownload}
+            downloading={downloading}
             naming={naming}
             setNaming={setNaming}
             setStep={setStep}
@@ -185,7 +188,7 @@ const RealUserDetails = ({ title }) => {
                     Total Transaction Count
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
-                    ---
+                    {getcommission?.data?.transactionCount}
                   </span>
                   {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -236,7 +239,7 @@ const RealUserDetails = ({ title }) => {
                     Total Revenue
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    ---
+                    {getcommission?.data?.totalTransactionAmount}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span>
@@ -298,6 +301,7 @@ const RealUserDetails = ({ title }) => {
                 {getcommission?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
+                      setDownload={setDownload}
                       overviewtransaction
                       data={getcommission?.data?.transactions?.data}
                     />
@@ -313,7 +317,7 @@ const RealUserDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )} */}
-                {userdata?.data?.transactions?.meta?.totalCount === 0 &&
+                {getcommission?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
                       style={{
@@ -326,19 +330,20 @@ const RealUserDetails = ({ title }) => {
                       <img src={empty} alt="empty" />
                     </div>
                   )}
-                {getcommission?.data?.length === 0 && status === "pending" && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                )}
-                {getcommission?.data?.transactions?.meta?.totalCount >= 1 &&
+                {!getcommission?.data?.transactions?.meta?.totalCount &&
+                  status === "accepted" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
+                {/* {getcommission?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}
@@ -349,7 +354,7 @@ const RealUserDetails = ({ title }) => {
                       previous={previous}
                       next={next}
                     />
-                  )}
+                  )} */}
                 {/* {getcommission?.data?.length >= 1 && (
                   <Pagination
                     set={activater}

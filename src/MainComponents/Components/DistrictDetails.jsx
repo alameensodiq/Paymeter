@@ -46,6 +46,7 @@ const DistrictDetails = ({ title }) => {
   const [naming, setNaming] = useState("");
   const [step, setStep] = useState(0);
   const [reload, setReload] = useState(false);
+  const [downloading, setDownload] = useState([]);
   let id = window?.location?.pathname.split("/")[2];
   console.log(id);
 
@@ -131,6 +132,8 @@ const DistrictDetails = ({ title }) => {
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
           <AppUserModal
+            setDownload={setDownload}
+            downloading={downloading}
             naming={naming}
             setNaming={setNaming}
             setStep={setStep}
@@ -420,6 +423,7 @@ const DistrictDetails = ({ title }) => {
                 {district?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
+                      setDownload={setDownload}
                       overviewtransaction
                       data={userdata?.data?.transactions?.data}
                     />
