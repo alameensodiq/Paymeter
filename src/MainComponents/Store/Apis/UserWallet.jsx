@@ -8,7 +8,7 @@ export const UserWallet = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/${id}/wallet`,
+        `${process.env.REACT_APP_BASE_URL}admin/user-trx/${id}`,
         {
           method: "GET",
           headers: {

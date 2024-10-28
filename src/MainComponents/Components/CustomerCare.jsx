@@ -30,43 +30,45 @@ const CustomerCare = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searcher, setSearcher] = useState("");
   const [loading, setloading] = useState(false);
-  const [role, setRole] = useState("DISTRICTMANAGER");
+  const [role, setRole] = useState("CUSTOMERSERVICE");
   const [userIds, setUserIds] = useState("");
-  const [role1, setRole1] = useState(true);
+  const [role3, setRole3] = useState(true);
+  const [userIding, setuserIding] = useState("");
+  const [actions, setaction] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") && role === "DISTRICTMANAGER") {
-      //   dispatch(ApiAgentRole({ role1 }));
+    if (sessionStorage.getItem("token") && role === "CUSTOMERSERVICE") {
+      dispatch(ApiAgentRole({ role3 }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload && role === "DISTRICTMANAGER") {
-      //   dispatch(ApiAgentRole({ role1 }));
+    if (reload && role === "CUSTOMERSERVICE") {
+      dispatch(ApiAgentRole({ role3 }));
       setReload(false);
     }
 
     //eslint-disable-next-line
   }, [reload, role]);
 
-  //   const { apiagentrole, authenticatingapiagentrole } = useSelector(
-  //     (state) => state?.apiagentrole
-  //   );
-  //   console.log(apiagentrole);
+  const { apiagentrole, authenticatingapiagentrole } = useSelector(
+    (state) => state?.apiagentrole
+  );
+  console.log(apiagentrole);
 
-  //   useEffect(() => {
-  //     setTimeout(() => {
-  //       setloading(true);
-  //     }, [3000]);
-  //   }, [apiagentrole?.data?.data]);
+  useEffect(() => {
+    setTimeout(() => {
+      setloading(true);
+    }, [3000]);
+  }, [apiagentrole?.data?.data]);
 
-  //   const next = apiagentrole?.data?.meta?.next;
-  //   const previous = apiagentrole?.data?.meta?.prev;
-  //   const totalPosts = apiagentrole?.data?.meta?.totalCount;
+  const next = apiagentrole?.data?.meta?.next;
+  const previous = apiagentrole?.data?.meta?.prev;
+  const totalPosts = apiagentrole?.data?.meta?.totalCount;
 
   const paginate = (number) => {
     //  setSorted(tran)
@@ -108,7 +110,11 @@ const CustomerCare = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
-          role1
+          // role1
+          setaction={setaction}
+          action={actions}
+          setuserIding={setuserIding}
+          userIding={userIding}
           userIds={userIds}
           setUserIds={setUserIds}
           setStep={setStep}
@@ -179,16 +185,19 @@ const CustomerCare = ({ title }) => {
               <Filter />
               <span className="text-route-noncolor text-[12px]">Filters</span>
             </div>
-            {!loading ? (
+            {loading ? (
               <>
-                {/* {apiagentrole?.data?.meta?.totalCount >= 1 ? (
+                {apiagentrole?.data?.meta?.totalCount >= 1 && (
                   <Tables
-                    manager
+                    customer
+                    setaction={setaction}
+                    setuserIding={setuserIding}
                     data={apiagentrole?.data?.data}
                     setUserIds={setUserIds}
                     setStep={setStep}
                   />
-                ) : (
+                )}
+                {!apiagentrole?.status && (
                   <div
                     style={{
                       display: "flex",
@@ -199,20 +208,8 @@ const CustomerCare = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                )}{" "} */}
-                {/* {(apiagentrole?.error || !apiagentrole?.data?.content) && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                )} */}
-                {/* {apiagentrole?.data?.meta?.totalCount >= 1 && (
+                )}
+                {apiagentrole?.data?.meta?.totalCount >= 1 && (
                   <Pagination
                     set={activater}
                     currentPage={currentPage}
@@ -222,7 +219,7 @@ const CustomerCare = ({ title }) => {
                     previous={previous}
                     next={next}
                   />
-                )} */}
+                )}
               </>
             ) : (
               <Loader />

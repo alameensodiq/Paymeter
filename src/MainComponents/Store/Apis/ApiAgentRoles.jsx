@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const ApiAgentRole = createAsyncThunk(
   "apiagent",
-  async ({ role1, role2 }, thunkAPI) => {
+  async ({ role1, role2, role3 }, thunkAPI) => {
     console.log("Base URL:", process.env.REACT_APP_BASE_URL);
 
     const accessToken = sessionStorage.getItem("token");
@@ -14,6 +14,8 @@ export const ApiAgentRole = createAsyncThunk(
       role = "DISTRICTMANAGER";
     } else if (role2) {
       role = "APIPARTNER";
+    } else if (role3) {
+      role = "CUSTOMERSERVICE";
     } else {
       role = "EARNINGPARTNER";
     }

@@ -49,7 +49,8 @@ const Tables = ({
   complainpending,
   setuserIding,
   setaction,
-  setshort
+  setshort,
+  customer
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -71,6 +72,8 @@ const Tables = ({
   const [indexing8, setIndexing8] = useState(null);
   const [open9, setOpen9] = useState(false);
   const [indexing9, setIndexing9] = useState(null);
+  const [open10, setOpen10] = useState(false);
+  const [indexing10, setIndexing10] = useState(null);
   console.log(data);
   const theme = createTheme({
     typography: {
@@ -4110,6 +4113,198 @@ const Tables = ({
             </Table>
           </TableContainer>
         </ScrollableXContainer>
+      ) : customer ? (
+        <TableContainer
+          // component={Paper}
+          style={{ boxShadow: "none" }}
+        >
+          <Table
+            sx={{ minWidth: 700, tableLayout: "auto" }}
+            aria-label="customized table"
+          >
+            <TableHead>
+              <TableRow style={{ paddingRight: "0px" }}>
+                <StyledTableCell style={{ width: "10%" }}>S/N</StyledTableCell>
+                <StyledTableCell style={{ width: "20%" }}>
+                  PARTNER NAME
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "30%" }}>
+                  EMAIL
+                </StyledTableCell>
+                {/* <StyledTableCell style={{ width: "15%" }}>
+                  ADDRESS
+                </StyledTableCell> */}
+                {/* <StyledTableCell style={{ width: "10%" }}>
+                  COMMISSION
+                </StyledTableCell> */}
+                <StyledTableCell style={{ width: "20%" }}>
+                  DATE ADDED
+                </StyledTableCell>
+                {/* <StyledTableCell style={{ width: "20%" }}>
+                  TOTAL AMOUNT RECEIVED
+                </StyledTableCell> */}
+                <StyledTableCell style={{ width: "20%" }}>
+                  ACTIONS
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.map((item, index) => (
+                <StyledTableRow
+                // onClick={() => {
+                //   setStep(11);
+                //   setUserIds(item?.id);
+                // }}
+                >
+                  <StyledTableCell
+                    className="text-dob"
+                    style={{ width: "10%" }}
+                  >
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    {item?.firstName}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "30%" }}>
+                    {item?.email}
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "15%" }}>
+                    {item?.address}
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}></StyledTableCell> */}
+                  <StyledTableCell style={{ width: "20%" }}>
+                    <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "20%" }}>
+                 
+                  </StyledTableCell> */}
+                  <StyledTableCell
+                    onClick={() => {
+                      setOpen10(!open10);
+                      setIndexing10(index);
+                    }}
+                    style={{ width: "20%", position: "relative" }}
+                  >
+                    {/* <button
+                      onClick={() => {
+                        setOpen3(!open3);
+                        setIndexing3(index);
+                      }}
+                      className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                    >
+                      Action
+                    </button> */}
+                    <svg
+                      style={{ marginLeft: "20px" }}
+                      onClick={() => {
+                        setOpen10(!open10);
+                        setIndexing10(index);
+                      }}
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
+                    {index === indexing10 && open10 ? (
+                      <div
+                        style={{ overflowY: "scroll", marginRight: "130px" }}
+                        className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                      >
+                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                          {/* <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#000000"
+                            }}
+                            className="text-black"
+                            onClick={() => {
+                              navigate(`/customer/${item?.id}`);
+                              setOpen10(!open10);
+                            }}
+                          >
+                            View
+                          </span> */}
+                          <span
+                            onClick={() => {
+                              setaction("blocked");
+                              setStep(48);
+                              setOpen10(!open10);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Blocked
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("restricted");
+                              setStep(48);
+                              setOpen10(!open10);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Restricted
+                          </span>
+                          <span
+                            onClick={() => {
+                              setaction("active");
+                              setStep(48);
+                              setOpen10(!open10);
+                              setuserIding(item?.id);
+                            }}
+                            className="text-black"
+                          >
+                            Activate
+                          </span>
+                          <span
+                            onClick={() => {
+                              setuserIding(item?.id);
+                              setStep(45);
+                              setOpen10(!open10);
+                            }}
+                            className="text-black"
+                          >
+                            Update
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {/* <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#000000"
+                      }}
+                      onClick={() => navigate(`/earning/${item?.id}`)}
+                    >
+                      View
+                    </span> */}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       ) : (
         ""
       )}

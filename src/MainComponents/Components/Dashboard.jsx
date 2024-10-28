@@ -30,6 +30,7 @@ import { DashboardDailyMonthly } from "../Store/Apis/DasboardDailyMonthly";
 import { ListofMeter } from "../Store/Apis/ListofMeter";
 import empty from "../../assets/empty.png";
 import DoubleBarChartReal from "../Reusables/DoubleBarChartReal";
+import { TotalSales } from "../Store/Apis/TotalSales";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -49,6 +50,7 @@ const Dashboard = ({ title }) => {
       dispatch(DashboardYearly());
       dispatch(DashboardSummary());
       dispatch(DashboardDailyMonthly());
+      dispatch(TotalSales());
       dispatch(ListofMeter());
       dispatch(Transactions({ startDate, searcher, currentPage }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
@@ -69,6 +71,11 @@ const Dashboard = ({ title }) => {
   const PickDate = () => {
     datePickerRef.current.setOpen(true);
   };
+
+  const { totalsales, authenticatingtotalsales } = useSelector(
+    (state) => state?.totalsales
+  );
+  console.log(totalsales);
 
   const { transactions, authenticatingtransactions } = useSelector(
     (state) => state?.transactions
@@ -303,14 +310,12 @@ const Dashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Total Sales</span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦ ----
+                  ₦{formatNumberWithCommas(totalsales?.data?.totalSales)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
-                    {formatNumberWithCommas(
-                      dashboardsummary?.data?.totalTransactionCount
-                    )}
+                    {formatNumberWithCommas(totalsales?.data?.transactionCount)}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span> */}

@@ -80,12 +80,16 @@ function App() {
               element={<UserDetails title={"Earning Partner Details"} />}
             />
             <Route
+              path="/customer/:id"
+              element={<UserDetails title={"Customer Service Details"} />}
+            />
+            <Route
               path="/user/:id"
               element={<UserDetails title={"User Details"} />}
             />
             <Route
               path="/manager/:id"
-              element={<DistrictDetails title={"Earning Partner Details"} />}
+              element={<DistrictDetails title={"District Manager Details"} />}
             />
             <Route
               path="/meter/:id"
