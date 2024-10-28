@@ -171,7 +171,9 @@ const Dashboard = ({ title }) => {
 
   const currentMonthRevenue = revenueData[new Date().getMonth()]?.revenue;
   const currentMonthRevenue2 =
-    revenueData[new Date().getMonth()]?.totalTransactionCount;
+    revenueData2[new Date().getMonth()]?.totalTransactionCount;
+
+  console.log(currentMonthRevenue2);
 
   const formatNumberWithCommas = (number) => {
     if (number == null) return "0"; // Handle null or undefined
