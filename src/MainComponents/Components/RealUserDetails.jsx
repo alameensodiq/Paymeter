@@ -30,7 +30,7 @@ import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
 
-const UserDetails = ({ title }) => {
+const RealUserDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
     new Date(Date.now() + 3600 * 1000 * 24)
   );
@@ -67,29 +67,29 @@ const UserDetails = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && id) {
-      dispatch(UserData({ id }));
-      // dispatch(UserWallet({ id }));
-      // dispatch(GetCommission({ id }));
+      //   dispatch(UserData({ id }));
+      //   dispatch(UserWallet({ id }));
+      dispatch(GetCommission({ id }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
     if (reload && sessionStorage.getItem("token") && id) {
-      dispatch(UserData({ id }));
-      // dispatch(UserWallet({ id }));
-      // dispatch(GetCommission({ id }));
+      //   dispatch(UserData({ id }));
+      //   dispatch(UserWallet({ id }));
+      dispatch(GetCommission({ id }));
     }
 
     //eslint-disable-next-line
   }, [userdata?.status, reload]);
 
-  const isEarningRoute = location.pathname.startsWith("/user/");
-  const isEarningRoute2 = location.pathname.startsWith("/agents/");
+  //   const isEarningRoute = location.pathname.startsWith("/user/");
+  //   const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  const next = userdata?.data?.transactions?.meta?.next;
-  const previous = userdata?.data?.transactions?.meta?.prev;
-  const totalPosts = userdata?.data?.transactions?.meta?.totalCount;
+  const next = getcommission.data?.transactions?.meta?.next;
+  const previous = getcommission?.data?.transactions?.meta?.prev;
+  const totalPosts = getcommission?.data?.transactions?.meta?.totalCount;
 
   const next2 = getcommission?.data?.meta?.next;
   const previous2 = getcommission?.data?.meta?.prev;
@@ -210,7 +210,9 @@ const UserDetails = ({ title }) => {
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                     {/* ₦1 */}
-                    {userdata?.data?.wallet ? userdata?.data?.wallet : 0}{" "}
+                    {getcommission?.data?.wallet
+                      ? getcommission?.data?.wallet
+                      : 0}{" "}
                     {/* {dashboard?.data?.totalRevenue?.daily?.NGN} */}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
@@ -293,14 +295,14 @@ const UserDetails = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
+                {getcommission?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       overviewtransaction
-                      data={userdata?.data?.transactions?.data}
+                      data={getcommission?.data?.transactions?.data}
                     />
                   )}
-                {!isEarningRoute &&
+                {/* {!isEarningRoute &&
                   !isEarningRoute2 &&
                   getcommission?.data?.length >= 1 &&
                   status === "pending" && (
@@ -310,7 +312,7 @@ const UserDetails = ({ title }) => {
                       overviewcommission
                       data={getcommission?.data}
                     />
-                  )}
+                  )} */}
                 {userdata?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
@@ -324,7 +326,7 @@ const UserDetails = ({ title }) => {
                       <img src={empty} alt="empty" />
                     </div>
                   )}
-                {/* {getcommission?.data?.length === 0 && status === "pending" && (
+                {getcommission?.data?.length === 0 && status === "pending" && (
                   <div
                     style={{
                       display: "flex",
@@ -335,8 +337,8 @@ const UserDetails = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                )} */}
-                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
+                )}
+                {getcommission?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}
@@ -370,4 +372,4 @@ const UserDetails = ({ title }) => {
   );
 };
 
-export default UserDetails;
+export default RealUserDetails;

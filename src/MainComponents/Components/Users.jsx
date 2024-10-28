@@ -34,6 +34,8 @@ const Users = ({ title }) => {
   const [role, setRole] = useState("EARNINGPARTNER");
   const [userIds, setUserIds] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
+  const [userIding, setuserIding] = useState("");
+  const [actions, setaction] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -108,6 +110,10 @@ const Users = ({ title }) => {
           <Navbar title={title} />
         </div>
         <AppUserModal
+          setaction={setaction}
+          action={actions}
+          setuserIding={setuserIding}
+          userIding={userIding}
           userIds={userIds}
           setUserIds={setUserIds}
           setStep={setStep}
@@ -183,6 +189,8 @@ const Users = ({ title }) => {
                 {customers?.data?.meta?.totalCount >= 1 ? (
                   <Tables
                     users
+                    setaction={setaction}
+                    setuserIding={setuserIding}
                     data={customers?.data?.data}
                     setUserIds={setUserIds}
                     setStep={setStep}

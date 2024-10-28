@@ -46,6 +46,7 @@ import { EditDetailsSlice } from "./Reducers/EditDetails";
 import { UserActioningSlice } from "./Reducers/UserActioning";
 import { EditDiscoSlice } from "./Reducers/EditDisco";
 import { TotalSalesSlice } from "./Reducers/TotalSales";
+import { DistrictSlice } from "./Reducers/District";
 
 export default configureStore({
   reducer: {
@@ -95,6 +96,7 @@ export default configureStore({
     editdetails: EditDetailsSlice?.reducer,
     actioning: UserActioningSlice?.reducer,
     editdiscing: EditDiscoSlice?.reducer,
-    totalsales: TotalSalesSlice?.reducer
+    totalsales: TotalSalesSlice?.reducer,
+    district: DistrictSlice?.reducer
   }
 });

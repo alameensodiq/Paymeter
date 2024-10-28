@@ -31,6 +31,9 @@ import { CreateCustomerCare } from "../MainComponents/Store/Apis/CreateCustomerC
 import { EditDetails } from "../MainComponents/Store/Apis/EditDetails";
 import { UserActioning } from "../MainComponents/Store/Apis/UserActioning";
 import { EditDisco } from "../MainComponents/Store/Apis/EditDisco";
+import watermark from "../assets/newlogo.png";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const AppUserModal = ({
   setStep,
@@ -64,7 +67,9 @@ const AppUserModal = ({
   setaction,
   action,
   short,
-  setshort
+  setshort,
+  setDownload,
+  downloading
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -1038,6 +1043,9 @@ const AppUserModal = ({
       setuserId("");
       setReload(true);
     }
+    if (downloading) {
+      setDownload([]);
+    }
     if (stat) {
       setstat("");
       setReload(true);
@@ -1732,6 +1740,24 @@ const AppUserModal = ({
     if (datePickerRef.current) {
       datePickerRef.current.click(); // If needed
     }
+  };
+  const DownloadReceipt = () => {
+    const input = document.getElementById("App");
+    console.log(input);
+    html2canvas(input, {
+      logging: true,
+      letterRendering: 1,
+      useCORS: true
+    }).then((canvas) => {
+      // const imgWidth = 210;
+      const imgWidth = 205;
+      // const imgHeight = 200;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL("image/jpeg", 1.2);
+      const pdf = new jsPDF("p", "mm", "a4", true);
+      pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
+      pdf.save("Receipt.pdf");
+    });
   };
 
   return (
@@ -5475,6 +5501,176 @@ const AppUserModal = ({
               title="Close"
               onClick={() => handleCloseModal4()}
               big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={53}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center"
+            // alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "15px",
+              justifyContent: "center",
+              // backgroundImage: `url(${watermark})`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              paddingBottom: "20px",
+              paddingLeft: "10px",
+              position: "relative",
+              backgroundColor: "rgba(255, 255, 255, 0.5)"
+              // opacity: 0.1
+            }}
+            id="App"
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <span
+                style={{ color: "black", fontSize: "20px", fontWeight: 700 }}
+              >
+                Paymeter
+              </span>
+              <img
+                src={watermark}
+                alt="watermark"
+                style={{
+                  width: "200px",
+                  marginLeft: "20px",
+                  marginTop: "350px",
+                  position: "absolute",
+                  opacity: 0.2
+                }}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Account Number:</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.accountNumber}
+              </span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Bank Name:</span>
+              <span style={{ fontWeight: 500 }}>{downloading?.bankName}</span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Customer Name:</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.customerName}
+              </span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Disco Name:</span>
+              <span style={{ fontWeight: 500 }}>{downloading?.discoName}</span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Meter Number:</span>
+              <span style={{ fontWeight: 500 }}>{downloading?.meterNo}</span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Transaction Amount:</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.transactionAmount}
+              </span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Transaction Reference:</span>
+              <span style={{ fontWeight: 500 }}>{downloading?.reference}</span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>User Type:</span>
+              <span style={{ fontWeight: 500 }}>{downloading?.userType}</span>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="DownloadReceipt"
+              onClick={() => DownloadReceipt()}
+              large
               background
               color
             />

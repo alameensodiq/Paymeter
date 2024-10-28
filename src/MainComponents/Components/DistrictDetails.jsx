@@ -29,6 +29,7 @@ import Pagination from "../Reusables/Pagination";
 import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
+import { District } from "../Store/Apis/District";
 
 const DistrictDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -57,28 +58,29 @@ const DistrictDetails = ({ title }) => {
     (state) => state?.getcommission
   );
   console.log(getcommission);
-  const { userwallet, authenticatinguserwallet } = useSelector(
-    (state) => state?.userwallet
+  const { district, authenticatingdistrict } = useSelector(
+    (state) => state?.district
   );
-  console.log(userwallet);
+  console.log(district);
 
   const [showCommission, setShowCommission] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && id) {
-      dispatch(UserData({ id }));
-      // dispatch(UserWallet({ id }));
-      dispatch(GetCommission({ id }));
+      // dispatch(UserData({ id }));
+      dispatch(District({ id }));
+      // dispatch(GetCommission({ id }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
     if (reload && sessionStorage.getItem("token") && id) {
-      dispatch(UserData({ id }));
+      dispatch(District({ id }));
+      // dispatch(UserData({ id }));
       // dispatch(UserWallet({ id }));
-      dispatch(GetCommission({ id }));
+      // dispatch(GetCommission({ id }));
     }
 
     //eslint-disable-next-line
@@ -95,9 +97,9 @@ const DistrictDetails = ({ title }) => {
   const previous2 = getcommission?.data?.meta?.prev;
   const totalPosts2 = getcommission?.data?.meta?.totalCount;
 
-  const next3 = userwallet?.data?.meta?.next;
-  const previous3 = userwallet?.data?.meta?.prev;
-  const totalPosts3 = userwallet?.data?.meta?.totalCount;
+  const next3 = district?.data?.meta?.next;
+  const previous3 = district?.data?.meta?.prev;
+  const totalPosts3 = district?.data?.meta?.totalCount;
 
   const paginate = (number) => {
     //  setSorted(tran)
@@ -332,9 +334,7 @@ const DistrictDetails = ({ title }) => {
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                     {/* ₦1 */}
-                    {userwallet?.data?.wallet
-                      ? userwallet?.data?.wallet
-                      : 0}{" "}
+                    {district?.data?.wallet ? district?.data?.wallet : 0}{" "}
                     {/* {dashboard?.data?.totalRevenue?.daily?.NGN} */}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
@@ -388,7 +388,7 @@ const DistrictDetails = ({ title }) => {
                 >
                   Transactions
                 </span>
-                {!isEarningRoute && !isEarningRoute2 && (
+                {/* {!isEarningRoute && !isEarningRoute2 && (
                   <span
                     onClick={() => {
                       setStatus("pending");
@@ -402,22 +402,22 @@ const DistrictDetails = ({ title }) => {
                   >
                     Commissions
                   </span>
-                )}
+                )} */}
               </div>
               <div className="gap-2">
                 {status === "accepted" && (
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
-                {status === "pending" &&
+                {/* {status === "pending" &&
                   !isEarningRoute &&
                   !isEarningRoute2 && (
                     <div className="w-[90px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[13%] sm:ml-[18%]" />
-                  )}
+                  )} */}
               </div>
             </div>
             {loading ? (
               <>
-                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
+                {district?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       overviewtransaction
@@ -435,7 +435,7 @@ const DistrictDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )}
-                {userdata?.data?.transactions?.meta?.totalCount === 0 &&
+                {district?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
                       style={{
@@ -460,7 +460,7 @@ const DistrictDetails = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )}
-                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
+                {district?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}

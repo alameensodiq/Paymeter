@@ -31,6 +31,7 @@ import { ListofMeter } from "../Store/Apis/ListofMeter";
 import empty from "../../assets/empty.png";
 import DoubleBarChartReal from "../Reusables/DoubleBarChartReal";
 import { TotalSales } from "../Store/Apis/TotalSales";
+import AppUserModal from "../../Modal/AppUserModal";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -41,6 +42,9 @@ const Dashboard = ({ title }) => {
   const navigate = useNavigate();
   const [searcher, setSearcher] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
+  const [downloading, setDownload] = useState([]);
+  const [reload, setReload] = useState(false);
+  const [step, setStep] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -185,6 +189,19 @@ const Dashboard = ({ title }) => {
       <div className="flex flex-col w-[85%] h-[100%]">
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
+          <AppUserModal
+            // setaction={setaction}
+            // action={actions}
+            // userIds={userIds}
+            // setuserIding={setuserIding}
+            // userIding={userIding}
+            // setUserIds={setUserIds}
+            setDownload={setDownload}
+            downloading={downloading}
+            setStep={setStep}
+            step={step}
+            setReload={setReload}
+          />
         </div>
         <div className="w-[100%] py-9 px-5 flex flex-col gap-7">
           {/* <div className="flex flex-row justify-start">
@@ -470,6 +487,8 @@ const Dashboard = ({ title }) => {
               </div>
               {transactions?.data?.data && (
                 <Tables
+                  setDownload={setDownload}
+                  setStep={setStep}
                   transfers
                   data={transactions?.data?.data?.slice(0, 10)}
                 />

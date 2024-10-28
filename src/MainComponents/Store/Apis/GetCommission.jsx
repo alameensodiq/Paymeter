@@ -8,7 +8,7 @@ export const GetCommission = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/${id}/commissions`,
+        `${process.env.REACT_APP_BASE_URL}admin/user-trx/${id}`,
         {
           method: "GET",
           headers: {

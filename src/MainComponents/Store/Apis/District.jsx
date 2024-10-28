@@ -1,14 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const UserData = createAsyncThunk(
-  "userdata",
+export const District = createAsyncThunk(
+  "district",
   async ({ id }, thunkAPI) => {
+    // console.log(process.env.REACT_APP_BASE_URL);
+    // const dateObj = new Date(startDate);
+
+    // const formattedDate = dateObj.toISOString().slice(0, 10);
     const accessToken = sessionStorage.getItem("token");
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}dashboard/earning-partner-summary/${id}`,
+        `${process.env.REACT_APP_BASE_URL}manager/summary/${id}`,
         {
           method: "GET",
           headers: {
