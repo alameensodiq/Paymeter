@@ -32,6 +32,7 @@ import empty from "../../assets/empty.png";
 import DoubleBarChartReal from "../Reusables/DoubleBarChartReal";
 import { TotalSales } from "../Store/Apis/TotalSales";
 import AppUserModal from "../../Modal/AppUserModal";
+import { Notifications } from "../Store/Apis/Notifications";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -57,6 +58,7 @@ const Dashboard = ({ title }) => {
       dispatch(TotalSales());
       dispatch(ListofMeter());
       dispatch(Transactions({ startDate, searcher, currentPage }));
+      dispatch(Notifications({ status: "accepted" }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
     } else {
@@ -114,6 +116,11 @@ const Dashboard = ({ title }) => {
     (state) => state?.dashboardsummary
   );
   console.log(dashboardsummary);
+
+  const { notifications, authenticatingnotifications } = useSelector(
+    (state) => state?.notifications
+  );
+  console.log(notifications);
 
   const [revenueData, setRevenueData] = useState([]);
   const [revenueData2, setRevenueData2] = useState([]);
@@ -382,7 +389,9 @@ const Dashboard = ({ title }) => {
                   Total Agents
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {formatNumberWithCommas(dashboard?.data?.totalAgents)}
+                  {formatNumberWithCommas(
+                    notifications?.data?.meta?.totalCount
+                  )}
                 </span>
                 {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>

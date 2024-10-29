@@ -48,6 +48,7 @@ import { EditDiscoSlice } from "./Reducers/EditDisco";
 import { TotalSalesSlice } from "./Reducers/TotalSales";
 import { DistrictSlice } from "./Reducers/District";
 import { UserTransactionSlice } from "./Reducers/UserTransaction";
+import { EarningTransSlice } from "./Reducers/EarningTrans";
 
 export default configureStore({
   reducer: {
@@ -99,6 +100,7 @@ export default configureStore({
     editdiscing: EditDiscoSlice?.reducer,
     totalsales: TotalSalesSlice?.reducer,
     district: DistrictSlice?.reducer,
-    usertransaction: UserTransactionSlice?.reducer
+    usertransaction: UserTransactionSlice?.reducer,
+    earningtrans: EarningTransSlice?.reducer
   }
 });

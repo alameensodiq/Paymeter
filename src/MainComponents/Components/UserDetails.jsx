@@ -7,11 +7,6 @@ import { ReactComponent as TotalTransfer } from "../../assets/totaltransfer.svg"
 import { ReactComponent as TotalInvestment } from "../../assets/totalinvestments.svg";
 import { ReactComponent as TotalBill } from "../../assets/totalbill.svg";
 import empty from "../../assets/empty.png";
-import { ReactComponent as Calendar } from "../../assets/calendar.svg";
-import { ReactComponent as Sign } from "../../assets/sign.svg";
-import { ReactComponent as Filtering } from "../../assets/filtering.svg";
-import { ReactComponent as Ellipses } from "../../assets/ellipses.svg";
-import MixedLineBarChart from "../Reusables/MixedLineBarChart";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Donuts from "../Reusables/Donuts";
@@ -29,6 +24,7 @@ import Pagination from "../Reusables/Pagination";
 import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
+import { EarningTrans } from "../Store/Apis/EarningTrans";
 
 const UserDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -46,6 +42,7 @@ const UserDetails = ({ title }) => {
   const [step, setStep] = useState(0);
   const [reload, setReload] = useState(false);
   const [downloading, setDownload] = useState([]);
+  const [searcher, setSearcher] = useState("");
   let id = window?.location?.pathname.split("/")[2];
   console.log(id);
 
@@ -63,12 +60,18 @@ const UserDetails = ({ title }) => {
   );
   console.log(userwallet);
 
+  const { earningtrans, authenticatingearningtrans } = useSelector(
+    (state) => state?.earningtrans
+  );
+  console.log(earningtrans);
+
   const [showCommission, setShowCommission] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && id) {
       dispatch(UserData({ id }));
+      dispatch(EarningTrans({ id, searcher, currentPage }));
       // dispatch(UserWallet({ id }));
       // dispatch(GetCommission({ id }));
       return;
@@ -78,19 +81,20 @@ const UserDetails = ({ title }) => {
     }
     if (reload && sessionStorage.getItem("token") && id) {
       dispatch(UserData({ id }));
+      dispatch(EarningTrans({ id, searcher, currentPage }));
       // dispatch(UserWallet({ id }));
       // dispatch(GetCommission({ id }));
     }
 
     //eslint-disable-next-line
-  }, [userdata?.status, reload]);
+  }, [earningtrans?.status, reload, searcher, currentPage]);
 
   const isEarningRoute = location.pathname.startsWith("/user/");
   const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  const next = userdata?.data?.transactions?.meta?.next;
-  const previous = userdata?.data?.transactions?.meta?.prev;
-  const totalPosts = userdata?.data?.transactions?.meta?.totalCount;
+  const next = earningtrans?.data?.transactions?.meta?.next;
+  const previous = earningtrans?.data?.transactions?.meta?.prev;
+  const totalPosts = earningtrans?.data?.transactions?.meta?.totalCount;
 
   const next2 = getcommission?.data?.meta?.next;
   const previous2 = getcommission?.data?.meta?.prev;
@@ -110,7 +114,7 @@ const UserDetails = ({ title }) => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [userdata?.data, getcommission?.data]);
+  }, [userdata?.data, earningtrans?.data]);
 
   const dateChanger = (date) => {
     console.log(date);
@@ -119,6 +123,11 @@ const UserDetails = ({ title }) => {
 
   const PickDate = () => {
     datePickerRef.current.setOpen(true);
+  };
+
+  const formatNumberWithCommas = (number) => {
+    if (number == null) return "0"; // Handle null or undefined
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (
@@ -156,7 +165,7 @@ const UserDetails = ({ title }) => {
           {/* {userdata?.data?.meta?.totalCount >= 1 ? ( */}
           <>
             <div className="flex lg:flex-row flex-col md:flex-col gap-3">
-              <div
+              {/* <div
                 className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
@@ -178,9 +187,9 @@ const UserDetails = ({ title }) => {
                 <div>
                   <User />
                 </div>
-              </div>
+              </div> */}
               <div
-                className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                className="flex flex-row lg:w-[50%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
                 <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -188,7 +197,9 @@ const UserDetails = ({ title }) => {
                     Total Transaction Count
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
-                    ---
+                    {formatNumberWithCommas(
+                      userdata?.data?.totalTransactionCount
+                    )}
                   </span>
                   {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -203,7 +214,7 @@ const UserDetails = ({ title }) => {
                   {/* <TotalTransfer /> */}
                 </div>
               </div>
-              <div
+              {/* <div
                 className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
@@ -212,9 +223,7 @@ const UserDetails = ({ title }) => {
                     Total Wallet Balance
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {/* ₦1 */}
                     {userdata?.data?.wallet ? userdata?.data?.wallet : 0}{" "}
-                    {/* {dashboard?.data?.totalRevenue?.daily?.NGN} */}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span>
@@ -227,9 +236,9 @@ const UserDetails = ({ title }) => {
                 <div>
                   <TotalInvestment />
                 </div>
-              </div>
+              </div> */}
               <div
-                className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                className="flex flex-row lg:w-[50%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
                 <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -237,15 +246,15 @@ const UserDetails = ({ title }) => {
                     Total Revenue
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    ---
+                    {formatNumberWithCommas(userdata?.data?.totalRevenue)}
                   </span>
-                  <div className="flex flex-row gap-1 text-[10px]">
+                  {/* <div className="flex flex-row gap-1 text-[10px]">
                     <span>
                       <Increase />
                     </span>
                     <span className="text-card-user">6.5%</span>
                     <span className="text-[9px]">average yearly revenue</span>
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <TotalInvestment />
@@ -296,12 +305,12 @@ const UserDetails = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
+                {earningtrans?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       setDownload={setDownload}
                       overviewtransaction
-                      data={userdata?.data?.transactions?.data}
+                      data={earningtrans?.data?.transactions?.data}
                     />
                   )}
                 {!isEarningRoute &&
@@ -315,7 +324,7 @@ const UserDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )}
-                {userdata?.data?.transactions?.meta?.totalCount === 0 &&
+                {earningtrans?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
                       style={{
@@ -340,7 +349,7 @@ const UserDetails = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )} */}
-                {userdata?.data?.transactions?.meta?.totalCount >= 1 &&
+                {earningtrans?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}

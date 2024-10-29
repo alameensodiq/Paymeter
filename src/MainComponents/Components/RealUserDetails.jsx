@@ -94,13 +94,17 @@ const RealUserDetails = ({ title }) => {
     //eslint-disable-next-line
   }, [getcommission?.status, reload, searcher, currentPage]);
 
+  const formatNumberWithCommas = (number) => {
+    if (number == null) return "0"; // Handle null or undefined
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   //   const isEarningRoute = location.pathname.startsWith("/user/");
   //   const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  const next = usertransaction.data?.transactions?.meta?.next || "";
-  const previous = usertransaction?.data?.transactions?.meta?.prev || "";
-  const totalPosts =
-    usertransaction?.data?.transactions?.meta?.totalCount || "";
+  const next = usertransaction?.data?.transactions?.meta?.next;
+  const previous = usertransaction?.data?.transactions?.meta?.prev;
+  const totalPosts = usertransaction?.data?.transactions?.meta?.totalCount;
 
   // const next2 = getcommission?.data?.meta?.next;
   // const previous2 = getcommission?.data?.meta?.prev;
@@ -198,7 +202,9 @@ const RealUserDetails = ({ title }) => {
                     Total Transaction Count
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
-                    {getcommission?.data?.transactionCount}
+                    {formatNumberWithCommas(
+                      getcommission?.data?.transactionSummary?.transactionCount
+                    )}
                   </span>
                   {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
@@ -247,15 +253,19 @@ const RealUserDetails = ({ title }) => {
                     Total Revenue
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {getcommission?.data?.totalTransactionAmount}
+                    ₦
+                    {formatNumberWithCommas(
+                      getcommission?.data?.transactionSummary
+                        ?.totalTransactionAmount
+                    )}
                   </span>
-                  <div className="flex flex-row gap-1 text-[10px]">
+                  {/* <div className="flex flex-row gap-1 text-[10px]">
                     <span>
                       <Increase />
                     </span>
                     <span className="text-card-user">6.5%</span>
                     <span className="text-[9px]">average yearly revenue</span>
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <TotalInvestment />
@@ -310,6 +320,7 @@ const RealUserDetails = ({ title }) => {
                   status === "accepted" && (
                     <Tables
                       setDownload={setDownload}
+                      setStep={setStep}
                       overviewtransaction
                       data={usertransaction?.data?.transactions?.data}
                     />
