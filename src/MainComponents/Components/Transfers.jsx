@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import Pagination from "../Reusables/Pagination";
 import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
+import AppUserModal from "../../Modal/AppUserModal";
 
 const Transfers = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
@@ -24,6 +25,9 @@ const Transfers = ({ title }) => {
   const [loading, setloading] = useState(false);
   const [searcher, setSearcher] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
+  const [downloading, setDownload] = useState([]);
+  const [reload, setReload] = useState(false);
+  const [step, setStep] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -108,6 +112,19 @@ const Transfers = ({ title }) => {
       <div className="flex flex-col w-[85%] h-[100%]">
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
+          <AppUserModal
+            // setaction={setaction}
+            // action={actions}
+            // userIds={userIds}
+            // setuserIding={setuserIding}
+            // userIding={userIding}
+            // setUserIds={setUserIds}
+            setDownload={setDownload}
+            downloading={downloading}
+            setStep={setStep}
+            step={step}
+            setReload={setReload}
+          />
         </div>
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
           <div className="flex flex-row justify-between">
@@ -201,7 +218,12 @@ const Transfers = ({ title }) => {
             {loading ? (
               <>
                 {transactions?.data?.data?.length >= 1 && (
-                  <Tables transfers data={transactions?.data?.data} />
+                  <Tables
+                    setDownload={setDownload}
+                    setStep={setStep}
+                    transfers
+                    data={transactions?.data?.data}
+                  />
                 )}{" "}
                 {!transactions?.status && (
                   <div

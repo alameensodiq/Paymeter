@@ -29,6 +29,7 @@ import Pagination from "../Reusables/Pagination";
 import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
+import { UserTransaction } from "../Store/Apis/UserTransaction";
 
 const RealUserDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -42,6 +43,7 @@ const RealUserDetails = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [status, setStatus] = useState("accepted");
   const [loading, setloading] = useState(false);
+  const [searcher, setSearcher] = useState("");
   const [naming, setNaming] = useState("");
   const [step, setStep] = useState(0);
   const [reload, setReload] = useState(false);
@@ -63,6 +65,11 @@ const RealUserDetails = ({ title }) => {
   );
   console.log(userwallet);
 
+  const { usertransaction, authenticatingusertransaction } = useSelector(
+    (state) => state?.usertransaction
+  );
+  console.log(usertransaction);
+
   const [showCommission, setShowCommission] = useState(false);
   const location = useLocation();
 
@@ -71,6 +78,7 @@ const RealUserDetails = ({ title }) => {
       //   dispatch(UserData({ id }));
       //   dispatch(UserWallet({ id }));
       dispatch(GetCommission({ id }));
+      dispatch(UserTransaction({ id, searcher, currentPage }));
       return;
     } else {
       navigate("/");
@@ -80,17 +88,19 @@ const RealUserDetails = ({ title }) => {
       //   dispatch(UserData({ id }));
       //   dispatch(UserWallet({ id }));
       dispatch(GetCommission({ id }));
+      dispatch(UserTransaction({ id, searcher, currentPage }));
     }
 
     //eslint-disable-next-line
-  }, [getcommission?.status, reload]);
+  }, [getcommission?.status, reload, searcher, currentPage]);
 
   //   const isEarningRoute = location.pathname.startsWith("/user/");
   //   const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  // const next = getcommission.data?.transactions?.meta?.next || "";
-  // const previous = getcommission?.data?.transactions?.meta?.prev || "";
-  // const totalPosts = getcommission?.data?.transactions?.meta?.totalCount || "";
+  const next = usertransaction.data?.transactions?.meta?.next || "";
+  const previous = usertransaction?.data?.transactions?.meta?.prev || "";
+  const totalPosts =
+    usertransaction?.data?.transactions?.meta?.totalCount || "";
 
   // const next2 = getcommission?.data?.meta?.next;
   // const previous2 = getcommission?.data?.meta?.prev;
@@ -156,7 +166,7 @@ const RealUserDetails = ({ title }) => {
           {/* {userdata?.data?.meta?.totalCount >= 1 ? ( */}
           <>
             <div className="flex lg:flex-row flex-col md:flex-col gap-3">
-              <div
+              {/* <div
                 className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
@@ -178,9 +188,9 @@ const RealUserDetails = ({ title }) => {
                 <div>
                   <User />
                 </div>
-              </div>
+              </div> */}
               <div
-                className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                className="flex flex-row lg:w-[50%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
                 <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -203,7 +213,7 @@ const RealUserDetails = ({ title }) => {
                   {/* <TotalTransfer /> */}
                 </div>
               </div>
-              <div
+              {/* <div
                 className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
@@ -212,11 +222,9 @@ const RealUserDetails = ({ title }) => {
                     Total Wallet Balance
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {/* ₦1 */}
                     {getcommission?.data?.wallet
                       ? getcommission?.data?.wallet
                       : 0}{" "}
-                    {/* {dashboard?.data?.totalRevenue?.daily?.NGN} */}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span>
@@ -229,9 +237,9 @@ const RealUserDetails = ({ title }) => {
                 <div>
                   <TotalInvestment />
                 </div>
-              </div>
+              </div> */}
               <div
-                className="flex flex-row lg:w-[25%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                className="flex flex-row lg:w-[50%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
                 style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
               >
                 <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -298,12 +306,12 @@ const RealUserDetails = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {getcommission?.data?.transactions?.meta?.totalCount >= 1 &&
+                {usertransaction?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       setDownload={setDownload}
                       overviewtransaction
-                      data={getcommission?.data?.transactions?.data}
+                      data={usertransaction?.data?.transactions?.data}
                     />
                   )}
                 {/* {!isEarningRoute &&
@@ -317,7 +325,7 @@ const RealUserDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )} */}
-                {getcommission?.data?.transactions?.meta?.totalCount === 0 &&
+                {usertransaction?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
                       style={{
@@ -330,7 +338,7 @@ const RealUserDetails = ({ title }) => {
                       <img src={empty} alt="empty" />
                     </div>
                   )}
-                {!getcommission?.data?.transactions?.meta?.totalCount &&
+                {/* {!usertransaction?.data?.transactions?.meta?.totalCount &&
                   status === "accepted" && (
                     <div
                       style={{
@@ -342,8 +350,8 @@ const RealUserDetails = ({ title }) => {
                     >
                       <img src={empty} alt="empty" />
                     </div>
-                  )}
-                {/* {getcommission?.data?.transactions?.meta?.totalCount >= 1 &&
+                  )} */}
+                {usertransaction?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}
@@ -354,7 +362,7 @@ const RealUserDetails = ({ title }) => {
                       previous={previous}
                       next={next}
                     />
-                  )} */}
+                  )}
                 {/* {getcommission?.data?.length >= 1 && (
                   <Pagination
                     set={activater}
