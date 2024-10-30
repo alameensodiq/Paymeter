@@ -10,6 +10,11 @@ import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import toast from "react-hot-toast";
+import { ReactComponent as View } from "../../assets/View.svg";
+import { ReactComponent as Suspend } from "../../assets/Suspend.svg";
+import { ReactComponent as Edit } from "../../assets/edit.svg";
+import { ReactComponent as Activate } from "../../assets/Activate.svg";
+import { ReactComponent as Update } from "../../assets/Update.svg";
 
 const Tables = ({
   customers,
@@ -619,21 +624,56 @@ const Tables = ({
                         />
                       </svg>
                       {index === indexing && open ? (
-                        <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
-                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                            <span
-                              className="text-black"
-                              onClick={() => {
-                                setOpen(!open);
-                                setDownload(item);
-                                console.log(item);
-                                setStep(53);
+                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                          <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
                               }}
                             >
-                              Download Receipt
-                            </span>
-                            <span className="text-black">Regenerate Token</span>
-                            <span className="text-black">Resend Token</span>
+                              <Suspend width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  setOpen(!open);
+                                  setDownload(item);
+                                  console.log(item);
+                                  setStep(53);
+                                }}
+                              >
+                                Download Receipt
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span className="text-black">
+                                Regenerate Token
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Edit />
+                              <span className="text-black">Resend Token</span>
+                            </div>
                           </div>
                         </div>
                       ) : (
@@ -1498,75 +1538,134 @@ const Tables = ({
                         style={{ overflowY: "scroll" }}
                         className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                          <span
+                        <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <View />
+                            <span
+                              className="text-black"
+                              onClick={() => {
+                                navigate(`/api/${item?.id}`);
+                                setOpen8(!open8);
+                              }}
+                            >
+                              View
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Edit />
+                            <span
+                              onClick={() => {
+                                setStep(11);
+                                setUserIds(item?.id);
+                                setOpen8(!open8);
+                              }}
+                              className="text-black"
+                            >
+                              Edit Commission
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen8(!open8);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black"
+                            >
+                              Blocked
+                            </span>
+                          </div>
+                          <div
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              justifyContent: "center",
-                              color: "#000000"
-                            }}
-                            className="text-black"
-                            onClick={() => {
-                              navigate(`/api/${item?.id}`);
-                              setOpen8(!open8);
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
                           >
-                            View
-                          </span>
-                          <span
-                            onClick={() => {
-                              setStep(11);
-                              setUserIds(item?.id);
-                              setOpen8(!open8);
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen8(!open8);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black"
+                            >
+                              Restricted
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Edit Commission
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("blocked");
-                              setStep(48);
-                              setOpen8(!open8);
-                              setuserIding(item?.id);
+                            <Activate />
+                            <span
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen8(!open8);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black"
+                            >
+                              Activate
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Blocked
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("restricted");
-                              setStep(48);
-                              setOpen8(!open8);
-                              setuserIding(item?.id);
-                            }}
-                            className="text-black"
-                          >
-                            Restricted
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("active");
-                              setStep(48);
-                              setOpen8(!open8);
-                              setuserIding(item?.id);
-                            }}
-                            className="text-black"
-                          >
-                            Activate
-                          </span>
-                          <span
-                            onClick={() => {
-                              setuserIding(item?.id);
-                              setStep(45);
-                              setOpen8(!open8);
-                            }}
-                            className="text-black"
-                          >
-                            Update
-                          </span>
+                            <Update />
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen8(!open8);
+                              }}
+                              className="text-black"
+                            >
+                              Update
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -2156,22 +2255,114 @@ const Tables = ({
                         style={{ overflowY: "scroll" }}
                         className="absolute right-40 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                          <span
+                        <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                          <div
                             style={{
                               display: "flex",
+                              flexDirection: "row",
                               alignItems: "center",
-                              justifyContent: "center",
-                              color: "#000000"
-                            }}
-                            className="text-black"
-                            onClick={() => {
-                              navigate(`/agents/${item?.user?.id}`);
-                              setOpen2(!open2);
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
                           >
-                            View
-                          </span>
+                            <View />
+                            <span
+                              className="text-black flex-row gap-1 items-center"
+                              onClick={() => {
+                                navigate(`/agents/${item?.user?.id}`);
+                                setOpen2(!open2);
+                              }}
+                            >
+                              View
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Blocked
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Restricted
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Activate />
+                            <span
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Activate
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Update />
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.user?.id);
+                                setStep(45);
+                                setOpen2(!open2);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Update
+                            </span>
+                          </div>
                           {/* <span
                             className="text-black"
                             onClick={() => {
@@ -2182,49 +2373,7 @@ const Tables = ({
                           >
                             Set Commission
                           </span> */}
-                          <span
-                            onClick={() => {
-                              setaction("blocked");
-                              setStep(48);
-                              setOpen2(!open2);
-                              setuserIding(item?.user?.id);
-                            }}
-                            className="text-black"
-                          >
-                            Blocked
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("restricted");
-                              setStep(48);
-                              setOpen2(!open2);
-                              setuserIding(item?.user?.id);
-                            }}
-                            className="text-black"
-                          >
-                            Restricted
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("active");
-                              setStep(48);
-                              setOpen2(!open2);
-                              setuserIding(item?.user?.id);
-                            }}
-                            className="text-black"
-                          >
-                            Activate
-                          </span>
-                          <span
-                            onClick={() => {
-                              setuserIding(item?.user?.id);
-                              setStep(45);
-                              setOpen2(!open2);
-                            }}
-                            className="text-black"
-                          >
-                            Update
-                          </span>
+
                           {/* <span className="text-black">Fund Wallet</span>
                           <span className="text-black">Deplete Wallet</span> */}
                         </div>
@@ -2554,9 +2703,9 @@ const Tables = ({
                         <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
                           <span
                             onClick={() => Pay(item?.id)}
-                            className="text-black"
+                            className="text-black flex-row gap-1 items-center"
                           >
-                            Resolve
+                            <Activate /> Resolve
                           </span>
                           {/* <span className="text-black">Regenerate Token</span>
                             <span className="text-black">Resend Token</span> */}
@@ -2681,65 +2830,114 @@ const Tables = ({
                         style={{ overflowY: "scroll" }}
                         className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                          <span
+                        <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                          <div
                             style={{
                               display: "flex",
+                              flexDirection: "row",
                               alignItems: "center",
-                              justifyContent: "center",
-                              color: "#000000"
-                            }}
-                            className="text-black"
-                            onClick={() => {
-                              navigate(`/earning/${item?.id}`);
-                              setOpen3(!open3);
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
                           >
-                            View
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("blocked");
-                              setStep(48);
-                              setOpen3(!open3);
-                              setuserIding(item?.id);
+                            <View />
+                            <span
+                              className="text-black flex-row gap-1 items-center"
+                              onClick={() => {
+                                navigate(`/earning/${item?.id}`);
+                                setOpen3(!open3);
+                              }}
+                            >
+                              View
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Blocked
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("restricted");
-                              setStep(48);
-                              setOpen3(!open3);
-                              setuserIding(item?.id);
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen3(!open3);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Blocked
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Restricted
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("active");
-                              setStep(48);
-                              setOpen3(!open3);
-                              setuserIding(item?.id);
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen3(!open3);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Restricted
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Activate
-                          </span>
-                          <span
-                            onClick={() => {
-                              setuserIding(item?.id);
-                              setStep(45);
-                              setOpen3(!open3);
+                            <Activate />
+                            <span
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen3(!open3);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Activate
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Update
-                          </span>
+                            <Update />
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen3(!open3);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Update
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -3123,8 +3321,8 @@ const Tables = ({
                     DISCO COMM. TYPE
                   </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
-            DISCO COMMISSION CAP
-          </StyledTableCell> */}
+        DISCO COMMISSION CAP
+      </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM.
                   </StyledTableCell>
@@ -3282,10 +3480,10 @@ const Tables = ({
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-              {item?.discoSystemCommissionCapFee
-                ? `₦${item?.discoSystemCommissionCapFee}`
-                : "not applicable"}
-            </StyledTableCell> */}
+          {item?.discoSystemCommissionCapFee
+            ? `₦${item?.discoSystemCommissionCapFee}`
+            : "not applicable"}
+        </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {/* ₦{item?.discoSystemCommissionFee} */}
                       {item?.discoSystemCommissionType === "PERCENTAGE" &&
@@ -3348,14 +3546,14 @@ const Tables = ({
                       }}
                     >
                       {/* <button
-                onClick={() => {
-                  setOpen(!open);
-                  setIndexing(index);
-                }}
-                className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
-              >
-                Action
-              </button> */}
+            onClick={() => {
+              setOpen(!open);
+              setIndexing(index);
+            }}
+            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+          >
+            Action
+          </button> */}
                       <svg
                         style={{ marginLeft: "30px" }}
                         onClick={() => {
@@ -3382,21 +3580,56 @@ const Tables = ({
                         />
                       </svg>
                       {index === indexing && open ? (
-                        <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
-                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                            <span
-                              className="text-black"
-                              onClick={() => {
-                                setOpen(!open);
-                                setDownload(item);
-                                console.log(item);
-                                setStep(53);
+                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                          <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
                               }}
                             >
-                              Download Receipt
-                            </span>
-                            <span className="text-black">Regenerate Token</span>
-                            <span className="text-black">Resend Token</span>
+                              <Suspend width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  setOpen(!open);
+                                  setDownload(item);
+                                  console.log(item);
+                                  setStep(53);
+                                }}
+                              >
+                                Download Receipt
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span className="text-black">
+                                Regenerate Token
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Edit />
+                              <span className="text-black">Resend Token</span>
+                            </div>
                           </div>
                         </div>
                       ) : (
@@ -3404,16 +3637,16 @@ const Tables = ({
                       )}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-          {item?.paymentStatus === "successfull" ? (
-            <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
-              Successful
-            </button>
-          ) : (
-            <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
-              Failed
-            </button>
-          )}
-        </StyledTableCell> */}
+      {item?.paymentStatus === "successfull" ? (
+        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+          Successful
+        </button>
+      ) : (
+        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+          Failed
+        </button>
+      )}
+    </StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -3521,17 +3754,28 @@ const Tables = ({
                           style={{ overflowY: "scroll" }}
                           className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                         >
-                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                            <span
-                              className="text-black"
-                              onClick={() => {
-                                setStep(33);
-                                setNaming(item);
-                                setOpen5(!open5);
+                          <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
                               }}
                             >
-                              Set Commission
-                            </span>
+                              <Activate />
+                              <span
+                                className="text-black flex-row gap-1 items-center"
+                                onClick={() => {
+                                  setStep(33);
+                                  setNaming(item);
+                                  setOpen5(!open5);
+                                }}
+                              >
+                                Set Commission
+                              </span>
+                            </div>
                             {/* <span className="text-black">Suspend</span>
                           <span className="text-black">Deactivate</span>
                           <span className="text-black">Update</span>
@@ -3828,74 +4072,134 @@ const Tables = ({
                         style={{ overflowY: "scroll" }}
                         className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                          <span
+                        <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                          <div
                             style={{
                               display: "flex",
+                              flexDirection: "row",
                               alignItems: "center",
-                              justifyContent: "center",
-                              color: "#000000"
-                            }}
-                            className="text-black"
-                            onClick={() => {
-                              navigate(`/manager/${item?.id}`);
-                              setOpen4(!open4);
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
                           >
-                            View
-                          </span>
-                          <span
-                            onClick={() => {
-                              setStep(11);
-                              setUserIds(item?.id);
+                            <View />
+                            <span
+                              className="text-black flex-row gap-1 items-center"
+                              onClick={() => {
+                                navigate(`/manager/${item?.id}`);
+                                setOpen4(!open4);
+                              }}
+                            >
+                              View
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Edit Commission
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("blocked");
-                              setStep(48);
-                              setOpen4(!open4);
-                              setuserIding(item?.id);
+                            <Edit />
+                            <span
+                              onClick={() => {
+                                setStep(11);
+                                setUserIds(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Edit Commission
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Blocked
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("restricted");
-                              setStep(48);
-                              setOpen4(!open4);
-                              setuserIding(item?.id);
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen4(!open4);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Blocked
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Restricted
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("active");
-                              setStep(48);
-                              setOpen4(!open4);
-                              setuserIding(item?.id);
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen4(!open4);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Restricted
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Activate
-                          </span>
-                          <span
-                            onClick={() => {
-                              setuserIding(item?.id);
-                              setStep(45);
-                              setOpen4(!open4);
+                            <Activate />
+                            <span
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen4(!open4);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Activate
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Update
-                          </span>
+                            <Update />
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen4(!open4);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Update
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -4042,65 +4346,123 @@ const Tables = ({
                         style={{ overflowY: "scroll" }}
                         className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                          <span
+                        <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                          <div
                             style={{
                               display: "flex",
+                              flexDirection: "row",
                               alignItems: "center",
-                              justifyContent: "center",
-                              color: "#000000"
-                            }}
-                            className="text-black"
-                            onClick={() => {
-                              navigate(`/user/${item?.id}`);
-                              setOpen10(!open10);
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
                           >
-                            View
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("blocked");
-                              setStep(48);
-                              setOpen10(!open10);
-                              setuserIding(item?.id);
+                            <View />
+                            <span
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                color: "#000000"
+                              }}
+                              className="text-black"
+                              onClick={() => {
+                                navigate(`/user/${item?.id}`);
+                                setOpen10(!open10);
+                              }}
+                            >
+                              View
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Blocked
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("restricted");
-                              setStep(48);
-                              setOpen10(!open10);
-                              setuserIding(item?.id);
+                            {" "}
+                            <Suspend />{" "}
+                            <span
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black"
+                            >
+                              Blocked
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Restricted
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("active");
-                              setStep(48);
-                              setOpen10(!open10);
-                              setuserIding(item?.id);
+                            <Suspend />{" "}
+                            <span
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Restricted
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Activate
-                          </span>
-                          <span
-                            onClick={() => {
-                              setuserIding(item?.id);
-                              setStep(45);
-                              setOpen10(!open10);
+                            {" "}
+                            <Activate />{" "}
+                            <span
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Activate
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Update
-                          </span>
+                            {" "}
+                            <Update />{" "}
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen10(!open10);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Update
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -4384,11 +4746,56 @@ const Tables = ({
                         />
                       </svg>
                       {index === indexing && open ? (
-                        <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
-                          <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                            <span className="text-black">Download Receipt</span>
-                            <span className="text-black">Regenerate Token</span>
-                            <span className="text-black">Resend Token</span>
+                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                          <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
+                              }}
+                            >
+                              <Suspend width={10} />
+                              <span
+                                className="text-black"
+                                //  onClick={() => {
+                                //    setOpen(!open);
+                                //    setDownload(item);
+                                //    console.log(item);
+                                //    setStep(53);
+                                //  }}
+                              >
+                                Download Receipt
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span className="text-black">
+                                Regenerate Token
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
+                              }}
+                            >
+                              <Edit />
+                              <span className="text-black">Resend Token</span>
+                            </div>
                           </div>
                         </div>
                       ) : (
@@ -4546,9 +4953,9 @@ const Tables = ({
                               setOpen10(!open10);
                               setuserIding(item?.id);
                             }}
-                            className="text-black"
+                            className="text-black flex-row gap-1 items-center"
                           >
-                            Blocked
+                            <Update /> Blocked
                           </span>
                           <span
                             onClick={() => {
@@ -4557,9 +4964,9 @@ const Tables = ({
                               setOpen10(!open10);
                               setuserIding(item?.id);
                             }}
-                            className="text-black"
+                            className="text-black flex-row gap-1 items-center"
                           >
-                            Restricted
+                            <Suspend /> Restricted
                           </span>
                           <span
                             onClick={() => {
@@ -4568,9 +4975,9 @@ const Tables = ({
                               setOpen10(!open10);
                               setuserIding(item?.id);
                             }}
-                            className="text-black"
+                            className="text-black flex-row gap-1 items-center"
                           >
-                            Activate
+                            <Activate /> Activate
                           </span>
                           <span
                             onClick={() => {
