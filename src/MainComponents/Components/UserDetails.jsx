@@ -324,19 +324,18 @@ const UserDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )}
-                {earningtrans?.data?.transactions?.meta?.totalCount === 0 &&
-                  status === "accepted" && (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center"
-                      }}
-                    >
-                      <img src={empty} alt="empty" />
-                    </div>
-                  )}
+                {!earningtrans?.data && status === "accepted" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
                 {/* {getcommission?.data?.length === 0 && status === "pending" && (
                   <div
                     style={{

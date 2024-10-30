@@ -7,11 +7,6 @@ import { ReactComponent as TotalTransfer } from "../../assets/totaltransfer.svg"
 import { ReactComponent as TotalInvestment } from "../../assets/totalinvestments.svg";
 import { ReactComponent as TotalBill } from "../../assets/totalbill.svg";
 import empty from "../../assets/empty.png";
-import { ReactComponent as Calendar } from "../../assets/calendar.svg";
-import { ReactComponent as Sign } from "../../assets/sign.svg";
-import { ReactComponent as Filtering } from "../../assets/filtering.svg";
-import { ReactComponent as Ellipses } from "../../assets/ellipses.svg";
-import MixedLineBarChart from "../Reusables/MixedLineBarChart";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Donuts from "../Reusables/Donuts";
@@ -29,9 +24,11 @@ import Pagination from "../Reusables/Pagination";
 import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
-import { UserTransaction } from "../Store/Apis/UserTransaction";
+import { EarningTrans } from "../Store/Apis/EarningTrans";
+import { AgentTrans } from "../Store/Apis/AgentTrans";
+import { Agentsdetailsrevenue } from "../Store/Apis/Agentsdetailsrevenue";
 
-const RealUserDetails = ({ title }) => {
+const AgentDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
     new Date(Date.now() + 3600 * 1000 * 24)
   );
@@ -43,18 +40,17 @@ const RealUserDetails = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [status, setStatus] = useState("accepted");
   const [loading, setloading] = useState(false);
-  const [searcher, setSearcher] = useState("");
   const [naming, setNaming] = useState("");
   const [step, setStep] = useState(0);
   const [reload, setReload] = useState(false);
   const [downloading, setDownload] = useState([]);
+  const [searcher, setSearcher] = useState("");
   let id = window?.location?.pathname.split("/")[2];
   console.log(id);
 
-  const { userdata, authenticatinguserdata } = useSelector(
-    (state) => state?.userdata
-  );
-  console.log(userdata);
+  const { agentsdetailsrevenue, authenticatingagentsdetailsrevenue } =
+    useSelector((state) => state?.agentsdetailsrevenue);
+  console.log(agentsdetailsrevenue);
 
   const { getcommission, authenticatinggetcommission } = useSelector(
     (state) => state?.getcommission
@@ -65,54 +61,49 @@ const RealUserDetails = ({ title }) => {
   );
   console.log(userwallet);
 
-  const { usertransaction, authenticatingusertransaction } = useSelector(
-    (state) => state?.usertransaction
+  const { agenttrans, authenticatingagenttrans } = useSelector(
+    (state) => state?.agenttrans
   );
-  console.log(usertransaction);
+  console.log(agenttrans);
 
   const [showCommission, setShowCommission] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && id) {
-      //   dispatch(UserData({ id }));
-      //   dispatch(UserWallet({ id }));
-      dispatch(GetCommission({ id }));
-      dispatch(UserTransaction({ id, searcher, currentPage }));
+      dispatch(Agentsdetailsrevenue({ id }));
+      dispatch(AgentTrans({ id, searcher, currentPage }));
+      // dispatch(UserWallet({ id }));
+      // dispatch(GetCommission({ id }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
     if (reload && sessionStorage.getItem("token") && id) {
-      //   dispatch(UserData({ id }));
-      //   dispatch(UserWallet({ id }));
-      dispatch(GetCommission({ id }));
-      dispatch(UserTransaction({ id, searcher, currentPage }));
+      dispatch(Agentsdetailsrevenue({ id }));
+      dispatch(AgentTrans({ id, searcher, currentPage }));
+      // dispatch(UserWallet({ id }));
+      // dispatch(GetCommission({ id }));
     }
 
     //eslint-disable-next-line
-  }, [getcommission?.status, reload, searcher, currentPage]);
+  }, [agenttrans?.status, reload, searcher, currentPage]);
 
-  const formatNumberWithCommas = (number) => {
-    if (number == null) return "0"; // Handle null or undefined
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+  const isEarningRoute = location.pathname.startsWith("/user/");
+  const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  //   const isEarningRoute = location.pathname.startsWith("/user/");
-  //   const isEarningRoute2 = location.pathname.startsWith("/agents/");
+  const next = agenttrans?.data?.transactions?.meta?.next;
+  const previous = agenttrans?.data?.transactions?.meta?.prev;
+  const totalPosts = agenttrans?.data?.transactions?.meta?.totalCount;
 
-  const next = usertransaction?.data?.transactions?.meta?.next;
-  const previous = usertransaction?.data?.transactions?.meta?.prev;
-  const totalPosts = usertransaction?.data?.transactions?.meta?.totalCount;
+  const next2 = getcommission?.data?.meta?.next;
+  const previous2 = getcommission?.data?.meta?.prev;
+  const totalPosts2 = getcommission?.data?.meta?.totalCount;
 
-  // const next2 = getcommission?.data?.meta?.next;
-  // const previous2 = getcommission?.data?.meta?.prev;
-  // const totalPosts2 = getcommission?.data?.meta?.totalCount;
-
-  // const next3 = userwallet?.data?.meta?.next;
-  // const previous3 = userwallet?.data?.meta?.prev;
-  // const totalPosts3 = userwallet?.data?.meta?.totalCount;
+  const next3 = userwallet?.data?.meta?.next;
+  const previous3 = userwallet?.data?.meta?.prev;
+  const totalPosts3 = userwallet?.data?.meta?.totalCount;
 
   const paginate = (number) => {
     //  setSorted(tran)
@@ -124,7 +115,7 @@ const RealUserDetails = ({ title }) => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [userdata?.data, getcommission?.data]);
+  }, [agentsdetailsrevenue?.data, agenttrans?.data]);
 
   const dateChanger = (date) => {
     console.log(date);
@@ -133,6 +124,11 @@ const RealUserDetails = ({ title }) => {
 
   const PickDate = () => {
     datePickerRef.current.setOpen(true);
+  };
+
+  const formatNumberWithCommas = (number) => {
+    if (number == null) return "0"; // Handle null or undefined
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (
@@ -144,9 +140,9 @@ const RealUserDetails = ({ title }) => {
         <div className="w-[100%] h-[20%]">
           <Navbar title={title} />
           <AppUserModal
+            naming={naming}
             setDownload={setDownload}
             downloading={downloading}
-            naming={naming}
             setNaming={setNaming}
             setStep={setStep}
             step={step}
@@ -203,7 +199,7 @@ const RealUserDetails = ({ title }) => {
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
                     {formatNumberWithCommas(
-                      getcommission?.data?.totalTransactionAmount
+                      agentsdetailsrevenue?.data?.totalTransactionCount
                     )}
                   </span>
                   {/* <div className="flex flex-row gap-1 text-[10px]">
@@ -228,9 +224,7 @@ const RealUserDetails = ({ title }) => {
                     Total Wallet Balance
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {getcommission?.data?.wallet
-                      ? getcommission?.data?.wallet
-                      : 0}{" "}
+                    {userdata?.data?.wallet ? userdata?.data?.wallet : 0}{" "}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span>
@@ -253,9 +247,8 @@ const RealUserDetails = ({ title }) => {
                     Total Revenue
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    ₦
                     {formatNumberWithCommas(
-                      getcommission?.data?.transactionCount
+                      agentsdetailsrevenue?.data?.totalRevenue
                     )}
                   </span>
                   {/* <div className="flex flex-row gap-1 text-[10px]">
@@ -315,16 +308,15 @@ const RealUserDetails = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {usertransaction?.data?.transactions?.meta?.totalCount >= 1 &&
+                {agenttrans?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       setDownload={setDownload}
-                      setStep={setStep}
                       overviewtransaction
-                      data={usertransaction?.data?.transactions?.data}
+                      data={agenttrans?.data?.transactions?.data}
                     />
                   )}
-                {/* {!isEarningRoute &&
+                {!isEarningRoute &&
                   !isEarningRoute2 &&
                   getcommission?.data?.length >= 1 &&
                   status === "pending" && (
@@ -334,34 +326,32 @@ const RealUserDetails = ({ title }) => {
                       overviewcommission
                       data={getcommission?.data}
                     />
-                  )} */}
-                {usertransaction?.data?.transactions?.meta?.totalCount === 0 &&
-                  status === "accepted" && (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center"
-                      }}
-                    >
-                      <img src={empty} alt="empty" />
-                    </div>
                   )}
-                {/* {!usertransaction?.data?.transactions?.meta?.totalCount &&
-                  status === "accepted" && (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center"
-                      }}
-                    >
-                      <img src={empty} alt="empty" />
-                    </div>
-                  )} */}
-                {usertransaction?.data?.transactions?.meta?.totalCount >= 1 &&
+                {!agenttrans?.status && status === "accepted" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {/* {getcommission?.data?.length === 0 && status === "pending" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )} */}
+                {agenttrans?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}
@@ -395,4 +385,4 @@ const RealUserDetails = ({ title }) => {
   );
 };
 
-export default RealUserDetails;
+export default AgentDetails;

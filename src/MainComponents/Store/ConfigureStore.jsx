@@ -49,6 +49,8 @@ import { TotalSalesSlice } from "./Reducers/TotalSales";
 import { DistrictSlice } from "./Reducers/District";
 import { UserTransactionSlice } from "./Reducers/UserTransaction";
 import { EarningTransSlice } from "./Reducers/EarningTrans";
+import { AgentTransSlice } from "./Reducers/AgentTrans";
+import { AgentsdetailsrevenueSlice } from "./Reducers/Agentsdetailsrevenue";
 
 export default configureStore({
   reducer: {
@@ -101,6 +103,8 @@ export default configureStore({
     totalsales: TotalSalesSlice?.reducer,
     district: DistrictSlice?.reducer,
     usertransaction: UserTransactionSlice?.reducer,
-    earningtrans: EarningTransSlice?.reducer
+    earningtrans: EarningTransSlice?.reducer,
+    agenttrans: AgentTransSlice?.reducer,
+    agentsdetailsrevenue: AgentsdetailsrevenueSlice?.reducer
   }
 });

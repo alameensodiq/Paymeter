@@ -109,7 +109,7 @@ function DoubleBarChart({ data }) {
     yaxis: {
       tickAmount: 10,
       min: 0,
-      max: 20000 // Adjust as needed
+      max: 200000 // Adjust as needed
     },
     fill: {
       opacity: 1

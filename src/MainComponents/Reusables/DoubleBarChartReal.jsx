@@ -100,7 +100,7 @@ function DoubleBarChartReal({ data }) {
     yaxis: {
       tickAmount: 10,
       min: 0,
-      max: 20 // Adjust this based on expected transaction counts
+      max: 2000 // Adjust this based on expected transaction counts
     },
     fill: {
       opacity: 1
