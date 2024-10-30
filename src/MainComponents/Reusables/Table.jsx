@@ -472,8 +472,8 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.earningPartnerFee
-                        ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
+                      {item?.earningPartnerFee
+                        ? `₦${item?.earningPartnerFee}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -3150,8 +3150,8 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.earningPartnerFee
-                        ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
+                      {item?.earningPartnerFee
+                        ? `₦${item?.earningPartnerFee}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
