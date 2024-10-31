@@ -4379,15 +4379,17 @@ const Tables = ({
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    {item?.firstName}
+                    {item?.name || "N/A"}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    {item?.email}
+                    {item?.email || "N/A"}
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    {item?.address}
+                    {item?.address || "N/A"}
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    N/A
+                  </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
                   </StyledTableCell>
