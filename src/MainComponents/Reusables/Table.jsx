@@ -487,7 +487,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType === "PERCENTAGE" &&
                       item?.agentCommissionPercentageTypeFeeValue
-                        ? `${item?.agentCommissionPercentageTypeFeeValue}%`
+                        ? `${item?.agentCommissionPercentageTypeFeeValue || 0}%`
                         : item?.agentCommissionType !== "PERCENTAGE"
                         ? `₦${item?.agentCommissionFee || 0}`
                         : "not applicable"}
@@ -510,9 +510,11 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType === "PERCENTAGE" &&
                       item?.managerCommissionPercentageTypeFeeValue
-                        ? `${item?.managerCommissionPercentageTypeFeeValue}%`
+                        ? `${
+                            item?.managerCommissionPercentageTypeFeeValue || 0
+                          }%`
                         : item?.managerCommissionType !== "PERCENTAGE"
-                        ? `₦${item?.districtManagerFee}`
+                        ? `₦${item?.districtManagerFee || 0}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
