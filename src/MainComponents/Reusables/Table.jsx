@@ -452,10 +452,10 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType === "PERCENTAGE" &&
                       item?.bankCommissionFeeValuePercentage
-                        ? `${item?.bankCommissionFeeValuePercentage}%`
+                        ? `${item?.bankCommissionFeeValuePercentage || 0}%`
                         : item?.bankCommissionType !== "PERCENTAGE" &&
                           item?.bankCommissionFee
-                        ? `₦${item?.bankCommissionFee}`
+                        ? `₦${item?.bankCommissionFee || 0}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -3428,8 +3428,8 @@ const Tables = ({
                     DISCO COMM. TYPE
                   </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
-        DISCO COMMISSION CAP
-      </StyledTableCell> */}
+          DISCO COMMISSION CAP
+        </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM.
                   </StyledTableCell>
@@ -3511,16 +3511,16 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType === "PERCENTAGE" &&
-                      item?.bankCommissionFee
-                        ? `${item?.bankCommissionFee}%`
+                      item?.bankCommissionFeeValuePercentage
+                        ? `${item?.bankCommissionFeeValuePercentage || 0}%`
                         : item?.bankCommissionType !== "PERCENTAGE" &&
                           item?.bankCommissionFee
-                        ? `₦${item?.bankCommissionFeeValue}`
+                        ? `₦${item?.bankCommissionFee || 0}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionFeeValue
-                        ? `₦${item?.bankCommissionFeeValue}`
+                      {item?.bankCommissionFee
+                        ? `₦${item?.bankCommissionFee}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -3547,9 +3547,9 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType === "PERCENTAGE" &&
                       item?.agentCommissionPercentageTypeFeeValue
-                        ? `${item?.agentCommissionPercentageTypeFeeValue}%`
+                        ? `${item?.agentCommissionPercentageTypeFeeValue || 0}%`
                         : item?.agentCommissionType !== "PERCENTAGE"
-                        ? `₦${item?.agentCommissionFee}`
+                        ? `₦${item?.agentCommissionFee || 0}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -3570,9 +3570,11 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType === "PERCENTAGE" &&
                       item?.managerCommissionPercentageTypeFeeValue
-                        ? `${item?.managerCommissionPercentageTypeFeeValue}%`
+                        ? `${
+                            item?.managerCommissionPercentageTypeFeeValue || 0
+                          }%`
                         : item?.managerCommissionType !== "PERCENTAGE"
-                        ? `₦${item?.districtManagerFee}`
+                        ? `₦${item?.districtManagerFee || 0}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -3587,10 +3589,10 @@ const Tables = ({
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-          {item?.discoSystemCommissionCapFee
-            ? `₦${item?.discoSystemCommissionCapFee}`
-            : "not applicable"}
-        </StyledTableCell> */}
+            {item?.discoSystemCommissionCapFee
+              ? `₦${item?.discoSystemCommissionCapFee}`
+              : "not applicable"}
+          </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {/* ₦{item?.discoSystemCommissionFee} */}
                       {item?.discoSystemCommissionType === "PERCENTAGE" &&
@@ -3653,14 +3655,14 @@ const Tables = ({
                       }}
                     >
                       {/* <button
-            onClick={() => {
-              setOpen(!open);
-              setIndexing(index);
-            }}
-            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
-          >
-            Action
-          </button> */}
+              onClick={() => {
+                setOpen(!open);
+                setIndexing(index);
+              }}
+              className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+            >
+              Action
+            </button> */}
                       <svg
                         style={{ marginLeft: "30px" }}
                         onClick={() => {
@@ -3744,16 +3746,16 @@ const Tables = ({
                       )}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-      {item?.paymentStatus === "successfull" ? (
-        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
-          Successful
-        </button>
-      ) : (
-        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
-          Failed
-        </button>
-      )}
-    </StyledTableCell> */}
+        {item?.paymentStatus === "successfull" ? (
+          <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+            Successful
+          </button>
+        ) : (
+          <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+            Failed
+          </button>
+        )}
+      </StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
