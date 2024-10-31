@@ -942,7 +942,7 @@ const Tables = ({
                               }}
                               className="text-black"
                               onClick={() => {
-                                navigate(`/discos/${item?.id}`);
+                                navigate(`/discos/${item?.shortName}`);
                                 setOpen9(!open9);
                               }}
                             >

@@ -62,7 +62,7 @@ const CustomerInfo = ({ title }) => {
       toast.error("You aren't logged in");
     }
     if (reload && id && sessionStorage.getItem("token")) {
-      dispatch(Discometer());
+      dispatch(Discometer({ id, searcher, currentPage }));
       setReload(false);
     }
 

@@ -3,20 +3,20 @@ import toast from "react-hot-toast";
 
 export const Discometer = createAsyncThunk(
   "discometer",
-  async ({id, searcher, currentPage}, thunkAPI) => {
+  async ({ id, searcher, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
-    const accessToken = sessionStorage.getItem('token')
+    const accessToken = sessionStorage.getItem("token");
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}user/meter?disco=${id}&search=${searcher}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}dashboard/meter/by-disco-shortname?discoShortname=${id}&search=${searcher}&page=${currentPage}`,
         {
           method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
+            Authorization: `Bearer ${accessToken}`
+          }
         }
       );
       let data = await response.json();
@@ -24,7 +24,7 @@ export const Discometer = createAsyncThunk(
       console.log(data);
       //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
       //   sessionStorage.setItem('role', data?.data?.user?.userRole);
-        // sessionStorage.setItem('token', data?.data?.token );
+      // sessionStorage.setItem('token', data?.data?.token );
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue({
