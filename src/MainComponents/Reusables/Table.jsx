@@ -582,7 +582,9 @@ const Tables = ({
                       // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
                       style={{ width: "10%" }}
                     >
-                      {"N/A"}
+                      {item?.smsdeliveryStatus
+                        ? item?.smsdeliveryStatus
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell
                       onClick={() => {
@@ -3647,7 +3649,9 @@ const Tables = ({
                       // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
                       style={{ width: "10%" }}
                     >
-                      {"N/A"}
+                      {item?.smsdeliveryStatus
+                        ? item?.smsdeliveryStatus
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell
                       onClick={() => {
