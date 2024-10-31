@@ -469,9 +469,10 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankTaxFee
+                      ₦0
+                      {/* {item?.bankTaxFee
                         ? `₦${item?.bankTaxFee}`
-                        : "not applicable"}
+                        : "not applicable"} */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.transactionAmount}
@@ -3533,9 +3534,10 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankTaxFee
+                      ₦0
+                      {/* {item?.bankTaxFee
                         ? `₦${item?.bankTaxFee}`
-                        : "not applicable"}
+                        : "not applicable"} */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.transactionAmount}
