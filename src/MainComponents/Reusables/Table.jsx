@@ -489,7 +489,7 @@ const Tables = ({
                       item?.agentCommissionPercentageTypeFeeValue
                         ? `${item?.agentCommissionPercentageTypeFeeValue}%`
                         : item?.agentCommissionType !== "PERCENTAGE"
-                        ? `₦${item?.agentCommissionFee}`
+                        ? `₦${item?.agentCommissionFee || 0}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>

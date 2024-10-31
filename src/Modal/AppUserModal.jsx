@@ -651,6 +651,8 @@ const AppUserModal = ({
     });
   };
 
+  console.log(editingdisc);
+
   const ChangeManager = (e) => {
     const { name, value } = e.target;
     console.log(value);
@@ -1120,6 +1122,15 @@ const AppUserModal = ({
       setsettingId("");
       setReload(true);
     }
+    seteditbank({
+      newBankName: "",
+      logoUrl: "",
+      commissions: {
+        commissionType: "",
+        fee: null,
+        capFee: null
+      }
+    });
     setRegbus({
       name: "",
       // code: "",
@@ -1432,13 +1443,13 @@ const AppUserModal = ({
     seteditbank((prev) => ({
       ...prev,
       Commissions:
-        itemerseditbank === "FIXED"
+        itemerseditbank === "Fixed"
           ? {
               CommissionType: "FIXED",
               fee: ""
             }
           : {
-              bankCommissionType: "PERCENTAGE",
+              CommissionType: "PERCENTAGE",
               capFee: "",
               fee: ""
             }
@@ -5330,7 +5341,7 @@ const AppUserModal = ({
           earningPartnerId
           options={apiagentrole?.data?.data}
         />
-        {disc?.earningPartnerId !== "" && (
+        {editingdisc?.earningPartnerId !== "" && (
           <ModalInputText
             label="Earning Partner Fee Percentage"
             onChange={(e) => ChangeeditingDiscNumber(e)}
@@ -5841,15 +5852,15 @@ const AppUserModal = ({
           </>
         )}
         <ModalInputSelectTwo
-          name="commissionsDTO"
+          name="commissions"
           label="Commission DTO"
           onChange={(e) => ChangeEditbank(e)}
-          options={["FIXED", "PERCENTAGE"]}
+          options={["Fixed", "Percentage"]}
           itemer={itemerseditbank}
           big
           setItemer={setItemereditbank}
         />
-        {itemersmanager === "FIXED" ? (
+        {itemerseditbank === "Fixed" ? (
           <ModalInputText
             label="Fixed Commission"
             onChange={(e) => ChangeSettingsTypeEditbank(e)}
@@ -5857,7 +5868,7 @@ const AppUserModal = ({
             value={editbank?.commissions?.fee || ""}
             placeholder={`${`Enter Fixed Commission`}`}
           />
-        ) : itemersmanager === "PERCENTAGE" ? (
+        ) : itemerseditbank === "Percentage" ? (
           <>
             <ModalInputText
               label="Percentage Commission"

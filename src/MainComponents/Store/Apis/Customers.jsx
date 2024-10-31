@@ -9,7 +9,7 @@ export const Customers = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}user?search=${searcher}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}/admin/allusers?search=${searcher}&page=${currentPage}`,
         {
           method: "GET",
           headers: {
