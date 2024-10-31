@@ -364,7 +364,7 @@ const Dashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Total Users</span>
                 <span className="text-color-user text-[20px] font-bold">
-                  {formatNumberWithCommas(dashboard?.data?.totalUsers)}
+                  {formatNumberWithCommas(dashboard?.data?.totalUsersRole)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span>{/* <Increase /> */}</span>

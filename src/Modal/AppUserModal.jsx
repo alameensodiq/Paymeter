@@ -34,6 +34,8 @@ import { EditDisco } from "../MainComponents/Store/Apis/EditDisco";
 import watermark from "../assets/newlogo.png";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import Moment from "react-moment";
+import { EditBanking } from "../MainComponents/Store/Apis/EditBanking";
 
 const AppUserModal = ({
   setStep,
@@ -69,7 +71,9 @@ const AppUserModal = ({
   short,
   setshort,
   setDownload,
-  downloading
+  downloading,
+  oldname,
+  setoldname
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -98,11 +102,13 @@ const AppUserModal = ({
   const [bustate16, setBusstate16] = useState(false);
   const [bustate17, setBusstate17] = useState(false);
   const [bustate18, setBusstate18] = useState(false);
+  const [bustate19, setBusstate19] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
   const [itemerseditingdisc, setItemereditingdisc] = useState("");
   const [itemersmanager, setItemermanager] = useState("");
+  const [itemerseditbank, setItemereditbank] = useState("");
   const [itemersdiscoearning, setItemerdiscoearning] = useState("");
   const [itemersinst, setItemersinst] = useState("");
   const [itemersettings, setItemersettings] = useState("");
@@ -163,6 +169,16 @@ const AppUserModal = ({
     discoName: "",
     userId: "",
     commissionDetails: {
+      commissionType: "",
+      fee: null,
+      capFee: null
+    }
+  });
+
+  const [editbank, seteditbank] = useState({
+    newBankName: "",
+    logoUrl: "",
+    commissions: {
       commissionType: "",
       fee: null,
       capFee: null
@@ -357,6 +373,11 @@ const AppUserModal = ({
   );
   console.log(editdiscing);
 
+  const { editingbank, authenticatingeditingbank } = useSelector(
+    (state) => state?.editingbank
+  );
+  console.log(editingbank);
+
   useEffect(() => {
     if (bustate && createdbank?.status) {
       setStep(3);
@@ -415,6 +436,9 @@ const AppUserModal = ({
     if (bustate18 && editdiscing?.status) {
       setStep(52);
     }
+    if (bustate19 && editingbank?.status) {
+      setStep(56);
+    }
 
     console.log(update);
   }, [
@@ -441,6 +465,7 @@ const AppUserModal = ({
     bustate16,
     bustate17,
     bustate18,
+    bustate19,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -455,7 +480,8 @@ const AppUserModal = ({
     createcustomer?.status,
     editdetails?.status,
     actioning?.status,
-    editdiscing?.status
+    editdiscing?.status,
+    editingbank?.status
   ]);
 
   useEffect(() => {
@@ -630,6 +656,15 @@ const AppUserModal = ({
     console.log(value);
     setManager({
       ...manager,
+      [name]: value
+    });
+  };
+
+  const ChangeEditbank = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    seteditbank({
+      ...editbank,
       [name]: value
     });
   };
@@ -829,6 +864,21 @@ const AppUserModal = ({
     );
 
     setBusstate2(true);
+  };
+
+  const SendDetailseditbank = () => {
+    const { newBankName, commissions, logoUrl } = editbank;
+
+    dispatch(
+      EditBanking({
+        bankName: oldname,
+        newBankName,
+        commissions,
+        logoUrl
+      })
+    );
+
+    setBusstate19(true);
   };
 
   const SendDetailsManager = () => {
@@ -1050,6 +1100,9 @@ const AppUserModal = ({
       setstat("");
       setReload(true);
     }
+    if (oldname) {
+      setoldname("");
+    }
     setCustomer({
       name: "",
       password: "",
@@ -1182,6 +1235,8 @@ const AppUserModal = ({
     setBusstate15(false);
     setBusstate16(false);
     setBusstate17(false);
+    setBusstate18(false);
+    setBusstate19(false);
     setApproved(false);
     setReload(true);
     setPassword("");
@@ -1374,6 +1429,20 @@ const AppUserModal = ({
               fee: ""
             }
     }));
+    seteditbank((prev) => ({
+      ...prev,
+      Commissions:
+        itemerseditbank === "FIXED"
+          ? {
+              CommissionType: "FIXED",
+              fee: ""
+            }
+          : {
+              bankCommissionType: "PERCENTAGE",
+              capFee: "",
+              fee: ""
+            }
+    }));
     if (itemerseditdisc === "Fixed") {
       setEditDisc({
         commissionType: "FIXED",
@@ -1394,7 +1463,8 @@ const AppUserModal = ({
     itemerseditingdisc,
     itemersettings,
     itemersedit,
-    itemersmanager
+    itemersmanager,
+    itemerseditbank
   ]);
 
   const ChangeSettings = (e) => {
@@ -1648,6 +1718,37 @@ const AppUserModal = ({
     }));
   };
 
+  const ChangeSettingsTypeEditbank = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
+    seteditbank((prevDisc) => ({
+      ...prevDisc,
+      commissions: {
+        ...prevDisc.commissions,
+        [name]: sanitizedValue // Update with sanitized string value
+      }
+    }));
+  };
+
   const ChangeSettingsTypeUserInst = (e) => {
     const { name, value } = e.target;
 
@@ -1726,6 +1827,10 @@ const AppUserModal = ({
           ...prevDisc,
           logoUrl: parsedResult?.data?.logoUrl
         }));
+        seteditbank((prevDisc) => ({
+          ...prevDisc,
+          logoUrl: parsedResult?.data?.logoUrl
+        }));
         toast.success("File uploaded");
       })
       .catch((error) => {
@@ -1753,11 +1858,16 @@ const AppUserModal = ({
       const imgWidth = 205;
       // const imgHeight = 200;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const imgData = canvas.toDataURL("image/jpeg", 1.2);
+      const imgData = canvas.toDataURL("image/jpeg", 1.4);
       const pdf = new jsPDF("p", "mm", "a4", true);
       pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
       pdf.save("Receipt.pdf");
     });
+  };
+
+  const formatNumberWithCommas = (number) => {
+    if (number == null) return "0"; // Handle null or undefined
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (
@@ -5629,7 +5739,7 @@ const AppUserModal = ({
             >
               <span style={{ color: "#898585" }}>Transaction Amount:</span>
               <span style={{ fontWeight: 500 }}>
-                {downloading?.transactionAmount}
+                ₦{formatNumberWithCommas(downloading?.transactionAmount)}
               </span>
             </div>
             <div
@@ -5652,6 +5762,18 @@ const AppUserModal = ({
               <span style={{ color: "#898585" }}>User Type:</span>
               <span style={{ fontWeight: 500 }}>{downloading?.userType}</span>
             </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <span style={{ color: "#898585" }}>Transaction Date:</span>
+              <span style={{ fontWeight: 500 }}>
+                <Moment>{downloading?.dispense?.updatedDate}</Moment>
+              </span>
+            </div>
           </div>
           <div
             style={{
@@ -5671,6 +5793,236 @@ const AppUserModal = ({
               title="DownloadReceipt"
               onClick={() => DownloadReceipt()}
               large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={54}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Edit Bank"
+      >
+        <ModalInputText
+          label="New Name"
+          onChange={(e) => ChangeEditbank(e)}
+          name="newBankName"
+          value={editbank?.newBankName}
+          placeholder={`${`Enter Bank New Name`}`}
+        />
+        {editbank?.logoUrl !== "" ? (
+          <img
+            src={editbank?.logoUrl}
+            alt="takephoto"
+            style={{ width: "492px", height: "105px" }}
+          />
+        ) : (
+          <>
+            <input
+              type="file"
+              id="uploadFile"
+              name="avatar"
+              onChange={(e) => sendingsImage(e)}
+              accept="image/*"
+              style={{ display: "none" }}
+              className="i-none"
+              ref={datePickerRef}
+            />
+            <ModalInputText
+              onClick={() => PickDater()}
+              label="Upload Image"
+              photo
+            />
+          </>
+        )}
+        <ModalInputSelectTwo
+          name="commissionsDTO"
+          label="Commission DTO"
+          onChange={(e) => ChangeEditbank(e)}
+          options={["FIXED", "PERCENTAGE"]}
+          itemer={itemerseditbank}
+          big
+          setItemer={setItemereditbank}
+        />
+        {itemersmanager === "FIXED" ? (
+          <ModalInputText
+            label="Fixed Commission"
+            onChange={(e) => ChangeSettingsTypeEditbank(e)}
+            name="fee"
+            value={editbank?.commissions?.fee || ""}
+            placeholder={`${`Enter Fixed Commission`}`}
+          />
+        ) : itemersmanager === "PERCENTAGE" ? (
+          <>
+            <ModalInputText
+              label="Percentage Commission"
+              onChange={(e) => ChangeSettingsTypeEditbank(e)}
+              name="fee"
+              value={editbank?.commissions?.fee || ""}
+              placeholder={`${`Enter Percentage Commission`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+            <ModalInputText
+              label="Cap Fee"
+              onChange={(e) => ChangeSettingsTypeEditbank(e)}
+              name="capFee"
+              value={editbank?.commissions?.capFee}
+              placeholder={`${`Enter Cap Fee`}`}
+            />
+          </>
+        ) : (
+          ""
+        )}
+        <LargeSignInButton
+          onClick={() => {
+            const { commissions, newBankName, logoUrl } = editbank;
+            console.log({ commissions, newBankName, logoUrl });
+
+            // Check for missing values
+            const isFeeMissing = commissions?.fee === null;
+            const isCapFeeMissing = commissions?.capFee === null;
+
+            if (
+              newBankName &&
+              logoUrl &&
+              (itemersmanager === "FIXED"
+                ? !isFeeMissing
+                : !isFeeMissing && !isCapFeeMissing)
+            ) {
+              setStep(55);
+            } else {
+              toast.error("Fill all details");
+            }
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={55}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to edit bank detail(s), Are you sure the</span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => SendDetailseditbank()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={56}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Account Created
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Added a new Disco</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
               background
               color
             />

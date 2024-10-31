@@ -51,6 +51,7 @@ import { UserTransactionSlice } from "./Reducers/UserTransaction";
 import { EarningTransSlice } from "./Reducers/EarningTrans";
 import { AgentTransSlice } from "./Reducers/AgentTrans";
 import { AgentsdetailsrevenueSlice } from "./Reducers/Agentsdetailsrevenue";
+import { EditBankingSlice } from "./Reducers/EditBanking";
 
 export default configureStore({
   reducer: {
@@ -105,6 +106,7 @@ export default configureStore({
     usertransaction: UserTransactionSlice?.reducer,
     earningtrans: EarningTransSlice?.reducer,
     agenttrans: AgentTransSlice?.reducer,
-    agentsdetailsrevenue: AgentsdetailsrevenueSlice?.reducer
+    agentsdetailsrevenue: AgentsdetailsrevenueSlice?.reducer,
+    editingbank: EditBankingSlice?.reducer
   }
 });

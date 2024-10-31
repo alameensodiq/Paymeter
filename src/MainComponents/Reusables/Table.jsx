@@ -56,7 +56,8 @@ const Tables = ({
   setaction,
   setshort,
   customer,
-  setDownload
+  setDownload,
+  setoldname
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -80,6 +81,8 @@ const Tables = ({
   const [indexing9, setIndexing9] = useState(null);
   const [open10, setOpen10] = useState(false);
   const [indexing10, setIndexing10] = useState(null);
+  const [open11, setOpen11] = useState(false);
+  const [indexing11, setIndexing11] = useState(null);
   console.log(data);
   const theme = createTheme({
     typography: {
@@ -422,7 +425,7 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {/* {item?.customerName ? } */}
-                      N/A
+                      {item?.phone ? item?.phone : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
@@ -721,9 +724,9 @@ const Tables = ({
                 <StyledTableCell style={{ width: "20%" }}>
                   AMOUNT RECEIVED
                 </StyledTableCell>
-                {/* <StyledTableCell style={{ width: "10%", textAlign: "center" }}>
-                  STATUS
-                </StyledTableCell> */}
+                <StyledTableCell style={{ width: "10%", textAlign: "center" }}>
+                  ACTIONS
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -747,14 +750,82 @@ const Tables = ({
                   <StyledTableCell style={{ width: "20%" }}>
                     {/* 200,000 */} ----
                   </StyledTableCell>
-                  {/* <StyledTableCell style={{ width: "10%" }}>
-                    <button
-                      // onClick={() => navigate(`/discos/${item?.id}`)}
-                      className="h-[30px] w-[100%] border border-none text-button-bg font-semibold text-[9px]"
+                  <StyledTableCell
+                    style={{
+                      width: "10%",
+                      position: "relative"
+                    }}
+                    onClick={() => {
+                      setOpen11(!open11);
+                      setIndexing11(index);
+                    }}
+                  >
+                    {/* <button
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                      >
+                        Action
+                      </button> */}
+                    <svg
+                      style={{ marginLeft: "30px" }}
+                      onClick={() => {
+                        setOpen11(!open11);
+                        setIndexing11(index);
+                      }}
+                      width="4"
+                      height="16"
+                      viewBox="0 0 4 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      View
-                    </button>
-                  </StyledTableCell> */}
+                      <path
+                        d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                        fill="#868FA0"
+                      />
+                      <path
+                        d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                        fill="#868FA0"
+                      />
+                    </svg>
+                    {index === indexing11 && open11 ? (
+                      <div className="absolute right-8 top-1 w-32 h-10 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                        <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 10
+                            }}
+                          >
+                            <Edit width={10} />
+                            <span
+                              className="text-black"
+                              onClick={() => {
+                                setOpen11(!open11);
+                                //  setDownload(item);
+                                //  console.log(item);
+                                setoldname(item?.name);
+                                setStep(54);
+                              }}
+                            >
+                              Edit Bank
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
@@ -849,42 +920,76 @@ const Tables = ({
                         style={{ overflowY: "scroll" }}
                         className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
-                          <span
+                        <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                          <div
                             style={{
                               display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "flex-start",
                               alignItems: "center",
-                              justifyContent: "center",
-                              color: "#000000"
-                            }}
-                            className="text-black"
-                            onClick={() => {
-                              navigate(`/discos/${item?.id}`);
-                              setOpen9(!open9);
+                              gap: 20
                             }}
                           >
-                            View
-                          </span>
-                          <span
-                            onClick={() => {
-                              setStep(27);
-                              setdiscname(item?.shortName);
-                              setOpen9(!open9);
+                            <View />
+                            <span
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                color: "#000000"
+                              }}
+                              className="text-black"
+                              onClick={() => {
+                                navigate(`/discos/${item?.id}`);
+                                setOpen9(!open9);
+                              }}
+                            >
+                              View
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "flex-start",
+                              alignItems: "center",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Edit Commission
-                          </span>
-                          <span
-                            onClick={() => {
-                              setshort(item?.shortName);
-                              setStep(50);
-                              setOpen9(!open9);
+                            <Edit />
+                            <span
+                              onClick={() => {
+                                setStep(27);
+                                setdiscname(item?.shortName);
+                                setOpen9(!open9);
+                              }}
+                              className="text-black text-[9px]"
+                            >
+                              Edit Commission
+                            </span>
+                          </div>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "flex-start",
+                              alignItems: "center",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Update
-                          </span>
+                            <Update />
+                            <span
+                              onClick={() => {
+                                setshort(item?.shortName);
+                                setStep(50);
+                                setOpen9(!open9);
+                              }}
+                              className="text-black"
+                            >
+                              Update
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -3378,7 +3483,7 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {/* {item?.customerName ? } */}
-                      N/A
+                      {item?.phone ? item?.phone : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
@@ -4235,7 +4340,7 @@ const Tables = ({
               <TableRow style={{ paddingRight: "0px" }}>
                 <StyledTableCell style={{ width: "10%" }}>S/N</StyledTableCell>
                 <StyledTableCell style={{ width: "15%" }}>
-                  PARTNER NAME
+                  USER NAME
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "15%" }}>
                   EMAIL
