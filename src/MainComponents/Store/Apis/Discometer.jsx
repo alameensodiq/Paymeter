@@ -9,7 +9,7 @@ export const Discometer = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}dashboard/meter/by-disco-shortname?discoShortname=${id}&search=${searcher}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}dashboard/meter/by-disco-shortname?shortName=${id}&search=${searcher}&page=${currentPage}`,
         {
           method: "GET",
           headers: {

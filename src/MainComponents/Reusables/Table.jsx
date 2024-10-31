@@ -943,6 +943,10 @@ const Tables = ({
                               className="text-black"
                               onClick={() => {
                                 navigate(`/discos/${item?.shortName}`);
+                                sessionStorage.setItem(
+                                  "discoshort",
+                                  item?.shortName
+                                );
                                 setOpen9(!open9);
                               }}
                             >

@@ -116,9 +116,6 @@ const CustomerInfo = ({ title }) => {
                   onClick={() => navigate(-1)}
                 />
               </div>
-              <span className="text-route-name text-[20px] font-semibold">
-                {discometer?.data?.data[0]?.disco?.name}
-              </span>
               {/* </div> */}
             </div>
             <div className="relative flex flex-row w-[50%]">
@@ -135,6 +132,12 @@ const CustomerInfo = ({ title }) => {
                 Search
               </button>
             </div>
+          </div>
+          <div className="flex flex-row justify-start">
+            <span className="text-route-name text-[20px] font-semibold">
+              {/* {discometer?.data?.data[0]?.disco?.name} */}
+              {sessionStorage.getItem("discoshort")}
+            </span>
           </div>
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
             <div className="flex flex-row justify-end gap-4 px-3">
@@ -200,9 +203,10 @@ const CustomerInfo = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {discometer?.data?.data?.length >= 1 ? (
+                {discometer?.data?.data?.length >= 1 && (
                   <Tables meter data={discometer?.data?.data} />
-                ) : discometer?.data?.data?.length === 0 ? (
+                )}{" "}
+                {!discometer?.data && (
                   <div
                     style={{
                       display: "flex",
@@ -213,8 +217,6 @@ const CustomerInfo = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                ) : (
-                  ""
                 )}
               </>
             ) : (
