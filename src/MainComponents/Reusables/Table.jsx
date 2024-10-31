@@ -451,16 +451,16 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType === "PERCENTAGE" &&
-                      item?.bankCommissionFee
-                        ? `${item?.bankCommissionFee}%`
+                      item?.bankCommissionFeeValuePercentage
+                        ? `${item?.bankCommissionFeeValuePercentage}%`
                         : item?.bankCommissionType !== "PERCENTAGE" &&
                           item?.bankCommissionFee
-                        ? `₦${item?.bankCommissionFeeValue}`
+                        ? `₦${item?.bankCommissionFee}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.bankCommissionFeeValue
-                        ? `₦${item?.bankCommissionFeeValue}`
+                      {item?.bankCommissionFee
+                        ? `₦${item?.bankCommissionFee}`
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
