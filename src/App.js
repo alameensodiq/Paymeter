@@ -34,6 +34,7 @@ import CustomerCare from "./MainComponents/Components/CustomerCare";
 import DiscoTransactions from "./MainComponents/Components/DiscoTransactions";
 import RealUserDetails from "./MainComponents/Components/RealUserDetails";
 import AgentDetails from "./MainComponents/Components/AgentDetails";
+import BankAccounts from "./MainComponents/Components/BankAccounts";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -88,6 +89,10 @@ function App() {
             <Route
               path="/user/:id"
               element={<RealUserDetails title={"User Details"} />}
+            />
+            <Route
+              path="/institutions/:id"
+              element={<BankAccounts title={"Bank Accounts"} />}
             />
             <Route
               path="/manager/:id"

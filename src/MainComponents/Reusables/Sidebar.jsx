@@ -286,19 +286,24 @@ const Sidebar = () => {
           <Link
             to="/institutions"
             className={`flex flex-row h-[33px] ${
-              router.pathname === "/institutions"
+              router.pathname === "/institutions" ||
+              router.pathname.startsWith("/institutions/")
                 ? "bg-route-bg gap-2 rounded-custom-router"
                 : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
             }`}
             onMouseEnter={() => setIsHovered3(true)}
             onMouseLeave={() => setIsHovered3(false)}
           >
-            {router.pathname === "/institutions" || isHovered3 ? (
+            {router.pathname === "/institutions" ||
+            router.pathname.startsWith("/institutions/") ||
+            isHovered3 ? (
               <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
             ) : (
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
-            {router.pathname === "/institutions" || isHovered3 ? (
+            {router.pathname === "/institutions" ||
+            router.pathname.startsWith("/institutions/") ||
+            isHovered3 ? (
               <Investments
                 className={`${
                   router.pathname === "/institutions"

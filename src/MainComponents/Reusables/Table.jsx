@@ -57,7 +57,8 @@ const Tables = ({
   setshort,
   customer,
   setDownload,
-  setoldname
+  setoldname,
+  bankaccountsdetails
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -823,6 +824,30 @@ const Tables = ({
                               }}
                             >
                               Edit Bank
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 10
+                            }}
+                          >
+                            <Activate width={10} />
+                            <span
+                              className="text-black"
+                              onClick={() => {
+                                setOpen11(!open11);
+                                //  setDownload(item);
+                                //  console.log(item);
+                                navigate(`/institutions/${item?.name}`);
+                                // setoldname(item?.name);
+                                // setStep(54);
+                              }}
+                            >
+                              Accounts
                             </span>
                           </div>
                         </div>
@@ -5126,6 +5151,53 @@ const Tables = ({
                     >
                       View
                     </span> */}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : bankaccountsdetails ? (
+        <TableContainer
+          // component={Paper}
+          style={{ boxShadow: "none" }}
+        >
+          <Table
+            sx={{ minWidth: 700, tableLayout: "auto" }}
+            aria-label="customized table"
+          >
+            <TableHead>
+              <TableRow style={{ paddingRight: "0px" }}>
+                <StyledTableCell style={{ width: "25%" }}>S/N</StyledTableCell>
+                <StyledTableCell style={{ width: "25%" }}>NAME</StyledTableCell>
+                <StyledTableCell style={{ width: "25%" }}>
+                  BANK NAME
+                </StyledTableCell>
+                <StyledTableCell style={{ width: "25%" }}>
+                  VIRTUAL ACCOUNT NUMBER
+                </StyledTableCell>
+                {/* <StyledTableCell style={{ width: "10%" }}>
+                DATE ADDED
+              </StyledTableCell>
+              <StyledTableCell style={{ width: "10%", textAlign: "center" }}>
+                ACTIONS
+              </StyledTableCell> */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.map((item, index) => (
+                <StyledTableRow>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    {item?.name}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    {item?.bankName}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    {item?.virtualAccountNumber}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

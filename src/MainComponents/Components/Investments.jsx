@@ -175,14 +175,15 @@ const Investments = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {banks?.data?.data?.length >= 1 ? (
+                {banks?.data?.data?.length >= 1 && (
                   <Tables
                     setStep={setStep}
                     setoldname={setoldname}
                     investments
                     data={banks?.data?.data}
                   />
-                ) : banks?.data?.data?.length === 0 ? (
+                )}{" "}
+                {!banks?.data?.data && (
                   <div
                     style={{
                       display: "flex",
@@ -193,10 +194,7 @@ const Investments = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                ) : (
-                  ""
                 )}
-
                 {banks?.data?.data >= 1 ? (
                   <Pagination
                     set={activater}
