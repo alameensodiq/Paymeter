@@ -336,7 +336,7 @@ const Tables = ({
                     BANK TAX FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    TRANSACTION AMOUNT
+                    TRANX AMOUNT.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     SERVICE CHARGE
@@ -381,7 +381,7 @@ const Tables = ({
                     DISCO COMM. CAP FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    EARNING PARTNER COMM. TYPE
+                    EP COMM. TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     EP COMM.
@@ -399,7 +399,7 @@ const Tables = ({
                     TOKEN
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    TOKEN DELIVERY STATUS
+                    TOKEN DS.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     ACTIONS
@@ -413,7 +413,9 @@ const Tables = ({
                       {index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      <Moment>{item?.dispense?.updatedDate}</Moment>
+                      <Moment format="ddd MMM DD YYYY HH:mm:ss">
+                        {item?.dispense?.updatedDate}
+                      </Moment>
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.reference}
@@ -633,7 +635,7 @@ const Tables = ({
                         />
                       </svg>
                       {index === indexing && open ? (
-                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
                           <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
                             <div
                               style={{
@@ -3427,7 +3429,7 @@ const Tables = ({
                     BANK TAX FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    TRANSACTION AMOUNT
+                    TRANX AMOUNT.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     SERVICE CHARGE
@@ -3460,8 +3462,8 @@ const Tables = ({
                     DISCO COMM. TYPE
                   </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
-        DISCO COMMISSION CAP
-      </StyledTableCell> */}
+          DISCO COMMISSION CAP
+        </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM.
                   </StyledTableCell>
@@ -3472,7 +3474,7 @@ const Tables = ({
                     DISCO COMM. CAP FEE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    EARNING PARTNER COMM. TYPE
+                    EP COMM. TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     EP COMM.
@@ -3490,7 +3492,7 @@ const Tables = ({
                     TOKEN
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    TOKEN DELIVERY STATUS
+                    TOKEN DS.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     ACTIONS
@@ -3504,7 +3506,9 @@ const Tables = ({
                       {index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      <Moment>{item?.dispense?.updatedDate}</Moment>
+                      <Moment format="ddd MMM DD YYYY HH:mm:ss">
+                        {item?.dispense?.updatedDate}
+                      </Moment>
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.reference}
@@ -3563,8 +3567,8 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦0
                       {/* {item?.bankTaxFee
-                      ? `₦${item?.bankTaxFee}`
-                      : "not applicable"} */}
+                        ? `₦${item?.bankTaxFee}`
+                        : "not applicable"} */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.transactionAmount}
@@ -3622,10 +3626,10 @@ const Tables = ({
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-          {item?.discoSystemCommissionCapFee
-            ? `₦${item?.discoSystemCommissionCapFee}`
-            : "not applicable"}
-        </StyledTableCell> */}
+            {item?.discoSystemCommissionCapFee
+              ? `₦${item?.discoSystemCommissionCapFee}`
+              : "not applicable"}
+          </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {/* ₦{item?.discoSystemCommissionFee} */}
                       {item?.discoSystemCommissionType === "PERCENTAGE" &&
@@ -3690,14 +3694,14 @@ const Tables = ({
                       }}
                     >
                       {/* <button
-            onClick={() => {
-              setOpen(!open);
-              setIndexing(index);
-            }}
-            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
-          >
-            Action
-          </button> */}
+              onClick={() => {
+                setOpen(!open);
+                setIndexing(index);
+              }}
+              className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+            >
+              Action
+            </button> */}
                       <svg
                         style={{ marginLeft: "30px" }}
                         onClick={() => {
@@ -3724,7 +3728,7 @@ const Tables = ({
                         />
                       </svg>
                       {index === indexing && open ? (
-                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
                           <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
                             <div
                               style={{
@@ -3781,16 +3785,16 @@ const Tables = ({
                       )}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-      {item?.paymentStatus === "successfull" ? (
-        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
-          Successful
-        </button>
-      ) : (
-        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
-          Failed
-        </button>
-      )}
-    </StyledTableCell> */}
+        {item?.paymentStatus === "successfull" ? (
+          <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+            Successful
+          </button>
+        ) : (
+          <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+            Failed
+          </button>
+        )}
+      </StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
