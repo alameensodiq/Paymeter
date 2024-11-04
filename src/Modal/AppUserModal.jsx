@@ -254,7 +254,8 @@ const AppUserModal = ({
     name: "",
     password: "",
     email: "",
-    phoneNo: ""
+    phoneNo: "",
+    discoId: ""
   });
 
   const [editdisc, setEditDisc] = useState({
@@ -1109,7 +1110,8 @@ const AppUserModal = ({
       name: "",
       password: "",
       email: "",
-      phoneNo: ""
+      phoneNo: "",
+      discoId: ""
     });
     seteditinguser({
       phone: "",
@@ -4751,9 +4753,9 @@ const AppUserModal = ({
         />
         <LargeSignInButton
           onClick={() => {
-            const { password, name, phoneNo, email } = customer;
-            console.log({ password, name, phoneNo, email });
-            if (name && password && phoneNo && email.includes("@")) {
+            const { password, name, phoneNo, email, discoId } = customer;
+            console.log({ password, name, phoneNo, email, discoId });
+            if (name && password && phoneNo && email.includes("@") && discoId) {
               setStep(41);
             } else {
               toast.error("Please fill in all details correctly.");

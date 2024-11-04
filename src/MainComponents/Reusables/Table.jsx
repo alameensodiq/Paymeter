@@ -5080,7 +5080,7 @@ const Tables = ({
                         style={{ overflowY: "scroll", marginRight: "130px" }}
                         className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
                       >
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                        <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
                           {/* <span
                             style={{
                               display: "flex",
@@ -5096,49 +5096,94 @@ const Tables = ({
                           >
                             View
                           </span> */}
-                          <span
-                            onClick={() => {
-                              setaction("blocked");
-                              setStep(48);
-                              setOpen10(!open10);
-                              setuserIding(item?.id);
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black flex-row gap-1 items-center"
                           >
-                            <Update /> Blocked
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("restricted");
-                              setStep(48);
-                              setOpen10(!open10);
-                              setuserIding(item?.id);
+                            <Update />{" "}
+                            <span
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Blocked
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black flex-row gap-1 items-center"
                           >
-                            <Suspend /> Restricted
-                          </span>
-                          <span
-                            onClick={() => {
-                              setaction("active");
-                              setStep(48);
-                              setOpen10(!open10);
-                              setuserIding(item?.id);
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Restricted
+                            </span>
+                          </div>
+
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black flex-row gap-1 items-center"
                           >
-                            <Activate /> Activate
-                          </span>
-                          <span
-                            onClick={() => {
-                              setuserIding(item?.id);
-                              setStep(45);
-                              setOpen10(!open10);
+                            <Activate />
+                            <span
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Activate
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
                             }}
-                            className="text-black"
                           >
-                            Update
-                          </span>
+                            <Update />
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen10(!open10);
+                              }}
+                              className="text-black"
+                            >
+                              Update
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ) : (

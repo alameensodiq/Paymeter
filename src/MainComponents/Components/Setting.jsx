@@ -107,12 +107,12 @@ const Setting = ({ title }) => {
           setReload={setReload}
         />
         <div className="w-[100%] py-9 px-5 flex flex-row gap-10">
-          <button
+          {/* <button
             onClick={() => SendForgot()}
             className="px-2 h-[35px] flex flex-row gap-1 items-center bg-route-color w-[20%] rounded-custom text-white font-semibold text-[11px] justify-center"
           >
             Forgot Password
-          </button>
+          </button> */}
           <button
             onClick={() => setStep(7)}
             className="px-2 h-[35px] flex flex-row gap-1 items-center bg-route-color w-[20%] rounded-custom text-white font-semibold text-[11px] justify-center"
