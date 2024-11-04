@@ -31,6 +31,7 @@ import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
 import { UserTransaction } from "../Store/Apis/UserTransaction";
 import { BankAccount } from "../Store/Apis/BankAccounts";
+import { BankTransaction } from "../Store/Apis/BankTransaction";
 
 const BankAccounts = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -72,6 +73,11 @@ const BankAccounts = ({ title }) => {
   );
   console.log(bankaccounts);
 
+  const { banktransactions, authenticatingbanktransactions } = useSelector(
+    (state) => state?.banktransactions
+  );
+  console.log(banktransactions);
+
   const [showCommission, setShowCommission] = useState(false);
   const location = useLocation();
 
@@ -81,6 +87,7 @@ const BankAccounts = ({ title }) => {
       //   dispatch(UserWallet({ id }));
       //   dispatch(GetCommission({ id }));
       dispatch(BankAccount({ id, searcher, currentPage }));
+      dispatch(BankTransaction({ id }));
       return;
     } else {
       navigate("/");
@@ -91,6 +98,7 @@ const BankAccounts = ({ title }) => {
       //   dispatch(UserWallet({ id }));
       //   dispatch(GetCommission({ id }));
       dispatch(BankAccount({ id, searcher, currentPage }));
+      dispatch(BankTransaction({ id }));
     }
 
     //eslint-disable-next-line
@@ -181,11 +189,17 @@ const BankAccounts = ({ title }) => {
                     Today Sales
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
-                    ₦{formatNumberWithCommas(0)}
+                    ₦
+                    {formatNumberWithCommas(
+                      banktransactions?.data?.dailyRevenue
+                    )}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span className="text-black text-[12px]">
-                      Transaction Count: {formatNumberWithCommas(0)}
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        banktransactions?.data?.dailyTransactionCount
+                      )}
                     </span>
                     {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
@@ -204,12 +218,17 @@ const BankAccounts = ({ title }) => {
                     This Week Sales
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
-                    ₦{formatNumberWithCommas(0)}
+                    ₦
+                    {formatNumberWithCommas(
+                      banktransactions?.data?.weeklyRevenue
+                    )}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span className="text-black text-[12px]">
                       Transaction Count:
-                      {formatNumberWithCommas(0)}
+                      {formatNumberWithCommas(
+                        banktransactions?.data?.weeklyTransactionCount
+                      )}
                     </span>
                     {/* <span className="text-card-user">6.5%</span>
                   <span></span> */}
@@ -229,12 +248,18 @@ const BankAccounts = ({ title }) => {
                     This Month Sales
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {/* ₦1 */}₦ {formatNumberWithCommas(0)}
+                    {/* ₦1 */}₦{" "}
+                    {formatNumberWithCommas(
+                      banktransactions?.data?.monthlyRevenue
+                    )}
                     {/* {dashboard?.data?.totalApiPartners} */}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span className="text-black text-[12px]">
-                      Transaction Count: {formatNumberWithCommas(0)}
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        banktransactions?.data?.monthlyTransactionCount
+                      )}
                     </span>
                     {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average daily revenue</span> */}
@@ -253,11 +278,17 @@ const BankAccounts = ({ title }) => {
                     This Year Sales
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    ₦{formatNumberWithCommas(0)}
+                    ₦
+                    {formatNumberWithCommas(
+                      banktransactions?.data?.yearlyRevenue
+                    )}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span className="text-black text-[12px]">
-                      Transaction Count: {formatNumberWithCommas(0)}
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        banktransactions?.data?.yearlyTransactionCount
+                      )}
                     </span>
                     {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average monthly revenue</span> */}
