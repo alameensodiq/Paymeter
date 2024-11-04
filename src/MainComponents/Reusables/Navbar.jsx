@@ -26,15 +26,14 @@ const Navbar = ({ title, remove }) => {
       </div>
       <div className="flex flex-row gap-9">
         <span>{/* <Notice /> */}</span>
-        {!remove && (
+        {/* {!remove && (
           <div className="flex flex-row gap-4 pt-2">
             <Prof />
             <span className=" text-white text-[12px] text-medium pt-1">
               Paymeter Admin
             </span>
-            <span className="pt-2">{/* <Carat /> */}</span>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

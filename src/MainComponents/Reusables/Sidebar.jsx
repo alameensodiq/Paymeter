@@ -54,6 +54,49 @@ const Sidebar = () => {
       {sessionStorage.getItem("roleName") === "DISCO" ? (
         <div className="flex flex-col py-10 gap-4 px-4">
           <Link
+            to="/dashboard"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/dashboard"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {router.pathname === "/dashboard" || isHovered ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/dashboard" || isHovered ? (
+              <Dashboard
+                className={`${
+                  router.pathname === "/dashboard"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Dashboard
+                className={`${
+                  router.pathname === "/dashboard"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/dashboard"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Overview
+            </p>
+          </Link>
+          <Link
             to="/complaint"
             className={`flex flex-row h-[33px] ${
               router.pathname === "/complaint"

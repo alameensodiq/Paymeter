@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { Logins } from "./Store/Apis/Login";
+import InputLabelPassword from "./Reusables/InputLabelPassword";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const Login = () => {
           name="phone"
           value={user?.phone}
         />
-        <InputLabel
+        <InputLabelPassword
           placeholder="Enter your Password"
           label="Password"
           onChange={(e) => Change(e)}
