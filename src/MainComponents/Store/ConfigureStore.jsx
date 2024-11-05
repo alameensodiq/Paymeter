@@ -54,6 +54,7 @@ import { AgentsdetailsrevenueSlice } from "./Reducers/Agentsdetailsrevenue";
 import { EditBankingSlice } from "./Reducers/EditBanking";
 import { BankAccountsSlice } from "./Reducers/BankAccounts";
 import { BankTransactionSlice } from "./Reducers/BankTransaction";
+import { CustomerTransactionSlice } from "./Reducers/CustomerTransactions";
 
 export default configureStore({
   reducer: {
@@ -111,6 +112,7 @@ export default configureStore({
     agentsdetailsrevenue: AgentsdetailsrevenueSlice?.reducer,
     editingbank: EditBankingSlice?.reducer,
     bankaccounts: BankAccountsSlice?.reducer,
-    banktransactions: BankTransactionSlice?.reducer
+    banktransactions: BankTransactionSlice?.reducer,
+    customertransactions: CustomerTransactionSlice?.reducer
   }
 });

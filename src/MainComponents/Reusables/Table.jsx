@@ -58,7 +58,8 @@ const Tables = ({
   customer,
   setDownload,
   setoldname,
-  bankaccountsdetails
+  bankaccountsdetails,
+  customertransfer
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -321,6 +322,12 @@ const Tables = ({
                     RECEIVED AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    TRANX AMOUNT.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    SERVICE CHARGE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     BANK COMM. TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -334,12 +341,6 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK TAX FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    TRANX AMOUNT.
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    SERVICE CHARGE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMM. TYPE
@@ -448,6 +449,12 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.transactionAmount}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.systemCharge}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
                         ? item?.bankCommissionType
                         : "not applicable"}
@@ -476,12 +483,6 @@ const Tables = ({
                       {/* {item?.bankTaxFee
                         ? `₦${item?.bankTaxFee}`
                         : "not applicable"} */}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.transactionAmount}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.systemCharge}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType
@@ -3414,6 +3415,12 @@ const Tables = ({
                     RECEIVED AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
+                    TRANX AMOUNT.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    SERVICE CHARGE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
                     BANK COMM. TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -3427,12 +3434,6 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK TAX FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    TRANX AMOUNT.
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    SERVICE CHARGE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMM. TYPE
@@ -3462,8 +3463,8 @@ const Tables = ({
                     DISCO COMM. TYPE
                   </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
-          DISCO COMMISSION CAP
-        </StyledTableCell> */}
+        DISCO COMMISSION CAP
+      </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM.
                   </StyledTableCell>
@@ -3541,6 +3542,12 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.transactionAmount}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.systemCharge}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
                         ? item?.bankCommissionType
                         : "not applicable"}
@@ -3567,14 +3574,8 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦0
                       {/* {item?.bankTaxFee
-                        ? `₦${item?.bankTaxFee}`
-                        : "not applicable"} */}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.transactionAmount}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      ₦{item?.systemCharge}
+                      ? `₦${item?.bankTaxFee}`
+                      : "not applicable"} */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType
@@ -3626,10 +3627,10 @@ const Tables = ({
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-            {item?.discoSystemCommissionCapFee
-              ? `₦${item?.discoSystemCommissionCapFee}`
-              : "not applicable"}
-          </StyledTableCell> */}
+          {item?.discoSystemCommissionCapFee
+            ? `₦${item?.discoSystemCommissionCapFee}`
+            : "not applicable"}
+        </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {/* ₦{item?.discoSystemCommissionFee} */}
                       {item?.discoSystemCommissionType === "PERCENTAGE" &&
@@ -3694,14 +3695,14 @@ const Tables = ({
                       }}
                     >
                       {/* <button
-              onClick={() => {
-                setOpen(!open);
-                setIndexing(index);
-              }}
-              className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
-            >
-              Action
-            </button> */}
+            onClick={() => {
+              setOpen(!open);
+              setIndexing(index);
+            }}
+            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+          >
+            Action
+          </button> */}
                       <svg
                         style={{ marginLeft: "30px" }}
                         onClick={() => {
@@ -3785,16 +3786,16 @@ const Tables = ({
                       )}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-        {item?.paymentStatus === "successfull" ? (
-          <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
-            Successful
-          </button>
-        ) : (
-          <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
-            Failed
-          </button>
-        )}
-      </StyledTableCell> */}
+      {item?.paymentStatus === "successfull" ? (
+        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+          Successful
+        </button>
+      ) : (
+        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+          Failed
+        </button>
+      )}
+    </StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -5253,6 +5254,439 @@ const Tables = ({
             </TableBody>
           </Table>
         </TableContainer>
+      ) : customertransfer ? (
+        <ScrollableXContainer>
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+            sx={{ maxHeight: "60vh" }}
+          >
+            <Table
+              stickyHeader
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "5%" }}>S/N</StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DATE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    REF.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    USER TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    CUS. NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    CUS. NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACC. N0
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    METER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    RECEIVED AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMM. TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMM.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMM. VALUE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK COMM. CAP FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    BANK TAX FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TRANX AMOUNT.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    SERVICE CHARGE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMM. TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMM.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMM. VALUE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    AGENT COMM. CAP FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISTRICT COMM. TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DSTM COMM.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DSTM COMM. VALUE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DSTM CAP FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMM. TYPE
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+        DISCO COMMISSION CAP
+      </StyledTableCell> */}
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMM.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO COMM. CAP FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    EP COMM. TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    EP COMM.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    EP COMM. VALUE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    EP CAP FEE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    FEE DUE TO SYSTEM
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TOKEN
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    TOKEN DS.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACTIONS
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      <Moment format="ddd MMM DD YYYY HH:mm:ss">
+                        {item?.dispense?.updatedDate}
+                      </Moment>
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.reference}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.userType}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.customerName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {/* {item?.customerName ? } */}
+                      {item?.phone ? item?.phone : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.accountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.meterNo}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.inputAmount
+                        ? `₦${item?.inputAmount}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionType
+                        ? item?.bankCommissionType
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionType === "PERCENTAGE" &&
+                      item?.bankCommissionFeeValuePercentage
+                        ? `${item?.bankCommissionFeeValuePercentage || 0}%`
+                        : item?.bankCommissionType !== "PERCENTAGE" &&
+                          item?.bankCommissionFee
+                        ? `₦${item?.bankCommissionFee || 0}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFee
+                        ? `₦${item?.bankCommissionFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.bankCommissionFeeCap
+                        ? `₦${item?.bankCommissionFeeCap}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦0
+                      {/* {item?.bankTaxFee
+                      ? `₦${item?.bankTaxFee}`
+                      : "not applicable"} */}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.transactionAmount}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.systemCharge}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionType
+                        ? item?.agentCommissionType
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionType === "PERCENTAGE" &&
+                      item?.agentCommissionPercentageTypeFeeValue
+                        ? `${item?.agentCommissionPercentageTypeFeeValue || 0}%`
+                        : item?.agentCommissionType !== "PERCENTAGE"
+                        ? `₦${item?.agentCommissionFee || 0}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionFee
+                        ? `₦${item?.agentCommissionFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.agentCommissionCapFee
+                        ? `₦${item?.agentCommissionCapFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.managerCommissionType
+                        ? `₦${item?.managerCommissionType}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.managerCommissionType === "PERCENTAGE" &&
+                      item?.managerCommissionPercentageTypeFeeValue
+                        ? `${
+                            item?.managerCommissionPercentageTypeFeeValue || 0
+                          }%`
+                        : item?.managerCommissionType !== "PERCENTAGE"
+                        ? `₦${item?.districtManagerFee || 0}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.systemTransactions?.districtManagerFee
+                        ? `₦${item?.dispense?.systemTransactions?.districtManagerFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      not applicable
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionType}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+          {item?.discoSystemCommissionCapFee
+            ? `₦${item?.discoSystemCommissionCapFee}`
+            : "not applicable"}
+        </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {/* ₦{item?.discoSystemCommissionFee} */}
+                      {item?.discoSystemCommissionType === "PERCENTAGE" &&
+                      item?.discoSystemCommissionFeePercentage
+                        ? `${item?.discoSystemCommissionFeePercentage}%`
+                        : item?.discoSystemCommissionType !== "PERCENTAGE"
+                        ? `₦${item?.discoSystemCommissionFee || 0}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionFee
+                        ? `₦${item?.discoSystemCommissionFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoSystemCommissionCapFee
+                        ? `₦${item?.discoSystemCommissionCapFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      not applicable
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      not applicable
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.earningPartnerFee
+                        ? `₦${item?.earningPartnerFee}`
+                        : "not applicable"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      not applicable
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ₦{item?.feeDueToSystem}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      ref={inputRef3}
+                      onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {item?.dispense?.listtoken[0] || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // ref={inputRef3}
+                      // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
+                      style={{ width: "10%" }}
+                    >
+                      {item?.smsdeliveryStatus
+                        ? item?.smsdeliveryStatus
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      onClick={() => {
+                        setOpen(!open);
+                        setIndexing(index);
+                      }}
+                      style={{
+                        width: "10%",
+                        position: "relative"
+                        // justifyContent: "flex-end"
+                      }}
+                    >
+                      {/* <button
+            onClick={() => {
+              setOpen(!open);
+              setIndexing(index);
+            }}
+            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+          >
+            Action
+          </button> */}
+                      <svg
+                        style={{ marginLeft: "30px" }}
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
+                      {index === indexing && open ? (
+                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+                          <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Suspend width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  setOpen(!open);
+                                  setDownload(item);
+                                  console.log(item);
+                                  setStep(53);
+                                }}
+                              >
+                                Download Receipt
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span className="text-black">
+                                Regenerate Token
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Edit />
+                              <span className="text-black">Resend Token</span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+      {item?.paymentStatus === "successfull" ? (
+        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+          Successful
+        </button>
+      ) : (
+        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+          Failed
+        </button>
+      )}
+    </StyledTableCell> */}
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </ScrollableXContainer>
       ) : (
         ""
       )}

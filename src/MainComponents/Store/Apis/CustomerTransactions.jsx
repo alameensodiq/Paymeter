@@ -1,35 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const CreateCustomerCare = createAsyncThunk(
-  "createcustomer",
-  async ({ name, email, phoneNo, password, discoId }, thunkAPI) => {
+export const CustomerTransactions = createAsyncThunk(
+  "customertransactions",
+  async ({ startDate, searcher, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
-    const accessToken = sessionStorage.getItem("token");
+    const dateObj = new Date(startDate);
 
+    const formattedDate = dateObj.toISOString().slice(0, 10);
+    const accessToken = sessionStorage.getItem("token");
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/onboard-customer-rep`,
+        `${process.env.REACT_APP_BASE_URL}customer-service/transactions?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
+        // `${process.env.REACT_APP_BASE_URL}transaction?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            phoneNo,
-            password,
-            discoId
-          })
+          }
         }
       );
       let data = await response.json();
-      if (!data?.status) {
-        toast.error(data.message);
-      }
+      // toast.success(data.message);
       console.log(data);
       return data;
     } catch (e) {

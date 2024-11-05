@@ -41,10 +41,16 @@ export const Logins = createAsyncThunk(
         data?.data?.token &&
         data?.data?.user?.roleName === "CUSTOMERSERVICE"
       ) {
-        window.location.pathname = "/transactions";
+        window.location.pathname = "/customer-transactions";
       }
       if (data?.data?.token && data?.data?.user?.roleName === "DISCO") {
         window.location.pathname = "/complaint";
+      }
+      if (
+        data?.data?.token &&
+        data?.data?.user?.roleName === "EARNINGPARTNER"
+      ) {
+        window.location.pathname = "/earning-dashboard";
       }
     } catch (e) {
       return thunkAPI.rejectWithValue({

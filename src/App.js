@@ -35,6 +35,8 @@ import DiscoTransactions from "./MainComponents/Components/DiscoTransactions";
 import RealUserDetails from "./MainComponents/Components/RealUserDetails";
 import AgentDetails from "./MainComponents/Components/AgentDetails";
 import BankAccounts from "./MainComponents/Components/BankAccounts";
+import CustomerTransfer from "./MainComponents/Components/CustomerTransfer";
+import EarningDashboard from "./MainComponents/Components/EarningDashboard";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -60,6 +62,10 @@ function App() {
               path="/dashboard"
               element={<Dashboard title={"Dashboard"} />}
             />
+            <Route
+              path="/earning-dashboard"
+              element={<EarningDashboard title={"Dashboard"} />}
+            />
             <Route path="/customers" element={<Customers />} />
             <Route
               path="/discos/:id"
@@ -72,6 +78,10 @@ function App() {
             <Route
               path="/transactions"
               element={<Transfers title={"Transactions"} />}
+            />
+            <Route
+              path="/customer-transactions"
+              element={<CustomerTransfer title={"Transactions"} />}
             />
             <Route path="/agents" element={<Agents title={"Agents"} />} />
             <Route

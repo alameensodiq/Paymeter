@@ -36,6 +36,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Moment from "react-moment";
 import { EditBanking } from "../MainComponents/Store/Apis/EditBanking";
+import ModalInputSelectID from "../bits/ModalInputSelectID";
 
 const AppUserModal = ({
   setStep,
@@ -278,6 +279,11 @@ const AppUserModal = ({
   const discoOptions = [
     "Disco List", // Placeholder option
     ...(discos?.data?.data.map((disco) => disco.shortName) || [])
+  ];
+
+  const discoOptions2 = [
+    // "Disco List", // Placeholder option
+    ...(discos?.data?.data.map((disco) => disco) || [])
   ];
 
   const { createdbank, authenticatingcreatedbank } = useSelector(
@@ -907,7 +913,7 @@ const AppUserModal = ({
   };
 
   const SendDetailsCustomer = () => {
-    const { name, phoneNo, email, password } = customer;
+    const { name, phoneNo, email, password, discoId } = customer;
 
     // Check if the email is valid
     if (!email.includes("@")) {
@@ -920,7 +926,8 @@ const AppUserModal = ({
         name,
         password,
         email,
-        phoneNo
+        phoneNo,
+        discoId
       })
     );
 
@@ -4743,6 +4750,13 @@ const AppUserModal = ({
           name="phoneNo"
           value={customer?.phoneNo}
           placeholder={`${`Enter Phone Number`}`}
+        />
+        <ModalInputSelectID
+          name="discoId"
+          label="Disco"
+          value={customer?.discoId}
+          onChange={(e) => ChangeCustomer(e)}
+          options={discoOptions2}
         />
         <ModalInputText
           label="Password"
