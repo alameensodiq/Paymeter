@@ -283,24 +283,24 @@ const Sidebar = () => {
             </p>
           </Link>
           <Link
-            to="/customer-transactions"
+            to="/earning-transactions"
             className={`flex flex-row h-[33px] ${
-              router.pathname === "/customer-transactions"
+              router.pathname === "/earning-transactions"
                 ? "bg-route-bg gap-2 rounded-custom-router"
                 : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
             }`}
             onMouseEnter={() => setIsHovered2(true)}
             onMouseLeave={() => setIsHovered2(false)}
           >
-            {router.pathname === "/customer-transactions" || isHovered2 ? (
+            {router.pathname === "/earning-transactions" || isHovered2 ? (
               <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
             ) : (
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
-            {router.pathname === "/customer-transactions" || isHovered2 ? (
+            {router.pathname === "/earning-transactions" || isHovered2 ? (
               <Transfers
                 className={`${
-                  router.pathname === "/customer-transactions"
+                  router.pathname === "/earning-transactions"
                     ? "fill-current text-route-color my-[9px]"
                     : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
                 }`}
@@ -308,7 +308,7 @@ const Sidebar = () => {
             ) : (
               <Transfers
                 className={`${
-                  router.pathname === "/customer-transactions"
+                  router.pathname === "/earning-transactions"
                     ? "fill-current text-route-color my-[9px]"
                     : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
                 }`}
@@ -317,7 +317,7 @@ const Sidebar = () => {
 
             <p
               className={`${
-                router.pathname === "/customer-transactions"
+                router.pathname === "/earning-transactions"
                   ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
                   : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
               }`}

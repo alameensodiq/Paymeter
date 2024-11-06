@@ -5284,9 +5284,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     CUS. NUMBER
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     BANK
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO
                   </StyledTableCell>
@@ -5296,7 +5296,7 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     METER
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     RECEIVED AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -5313,14 +5313,14 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK TAX FEE
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     TRANX AMOUNT.
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     SERVICE CHARGE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMM. TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -5331,7 +5331,7 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMM. CAP FEE
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISTRICT COMM. TYPE
                   </StyledTableCell>
@@ -5359,7 +5359,7 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM. CAP FEE
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     EP COMM. TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -5370,10 +5370,10 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     EP CAP FEE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  </StyledTableCell> */}
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN
                   </StyledTableCell>
@@ -5409,9 +5409,9 @@ const Tables = ({
                       {/* {item?.customerName ? } */}
                       {item?.phone ? item?.phone : "N/A"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoName}
                     </StyledTableCell>
@@ -5421,7 +5421,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.meterNo}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.inputAmount
                         ? `₦${item?.inputAmount}`
                         : "not applicable"}
@@ -5452,17 +5452,14 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦0
-                      {/* {item?.bankTaxFee
-                      ? `₦${item?.bankTaxFee}`
-                      : "not applicable"} */}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.transactionAmount}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.systemCharge}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType
                         ? item?.agentCommissionType
                         : "not applicable"}
@@ -5484,7 +5481,7 @@ const Tables = ({
                       {item?.agentCommissionCapFee
                         ? `₦${item?.agentCommissionCapFee}`
                         : "not applicable"}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType
                         ? `₦${item?.managerCommissionType}`
@@ -5535,7 +5532,7 @@ const Tables = ({
                         ? `₦${item?.discoSystemCommissionCapFee}`
                         : "not applicable"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       not applicable
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -5548,10 +5545,10 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       not applicable
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    </StyledTableCell> */}
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.feeDueToSystem}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell
                       ref={inputRef3}
                       onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
@@ -5638,7 +5635,7 @@ const Tables = ({
                                 Download Receipt
                               </span>
                             </div>
-                            <div
+                            {/* <div
                               style={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -5663,7 +5660,7 @@ const Tables = ({
                             >
                               <Edit />
                               <span className="text-black">Resend Token</span>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       ) : (

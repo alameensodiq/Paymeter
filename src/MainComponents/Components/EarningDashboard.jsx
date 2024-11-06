@@ -33,6 +33,8 @@ import DoubleBarChartReal from "../Reusables/DoubleBarChartReal";
 import { TotalSales } from "../Store/Apis/TotalSales";
 import AppUserModal from "../../Modal/AppUserModal";
 import { Notifications } from "../Store/Apis/Notifications";
+import { EarningDash } from "../Store/Apis/EarningDash";
+import { EarningCard } from "../Store/Apis/EaningCard";
 
 const EarningDashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -50,15 +52,16 @@ const EarningDashboard = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(Dashboards());
-      dispatch(DashboardDaily());
-      dispatch(DashboardYearly());
-      dispatch(DashboardSummary());
-      dispatch(DashboardDailyMonthly());
-      dispatch(TotalSales());
-      dispatch(ListofMeter());
-      dispatch(Transactions({ startDate, searcher, currentPage }));
-      dispatch(Notifications({ status: "accepted" }));
+      // dispatch(Dashboards());
+      // dispatch(DashboardDaily());
+      // dispatch(DashboardYearly());
+      // dispatch(DashboardSummary());
+      // dispatch(DashboardDailyMonthly());
+      // dispatch(TotalSales());
+      // dispatch(ListofMeter());
+      dispatch(EarningDash({ startDate, searcher, currentPage }));
+      dispatch(EarningCard());
+      // dispatch(Notifications({ status: "accepted" }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
     } else {
@@ -78,109 +81,114 @@ const EarningDashboard = ({ title }) => {
     datePickerRef.current.setOpen(true);
   };
 
-  const { totalsales, authenticatingtotalsales } = useSelector(
-    (state) => state?.totalsales
+  // const { totalsales, authenticatingtotalsales } = useSelector(
+  //   (state) => state?.totalsales
+  // );
+  // console.log(totalsales);
+
+  const { earningdash, authenticatingearningdash } = useSelector(
+    (state) => state?.earningdash
   );
-  console.log(totalsales);
+  console.log(earningdash);
 
-  const { transactions, authenticatingtransactions } = useSelector(
-    (state) => state?.transactions
+  const { earningcard, authenticatingearningcard } = useSelector(
+    (state) => state?.earningcard
   );
-  console.log(transactions);
+  console.log(earningcard);
 
-  const { listofmeter, authenticatinglistofmeter } = useSelector(
-    (state) => state?.listofmeter
-  );
-  console.log(listofmeter);
+  // const { listofmeter, authenticatinglistofmeter } = useSelector(
+  //   (state) => state?.listofmeter
+  // );
+  // console.log(listofmeter);
 
-  const { dashboarddailymonthly, authenticatingdashboarddailymonthly } =
-    useSelector((state) => state?.dashboarddailymonthly);
-  console.log(dashboarddailymonthly);
+  // const { dashboarddailymonthly, authenticatingdashboarddailymonthly } =
+  //   useSelector((state) => state?.dashboarddailymonthly);
+  // console.log(dashboarddailymonthly);
 
-  const { dashboard, authenticatingdashboard } = useSelector(
-    (state) => state?.dashboard
-  );
-  console.log(dashboard);
+  // const { dashboard, authenticatingdashboard } = useSelector(
+  //   (state) => state?.dashboard
+  // );
+  // console.log(dashboard);
 
-  const { dashboarddaily, authenticatingdashboarddaily } = useSelector(
-    (state) => state?.dashboarddaily
-  );
-  console.log(dashboarddaily);
+  // const { dashboarddaily, authenticatingdashboarddaily } = useSelector(
+  //   (state) => state?.dashboarddaily
+  // );
+  // console.log(dashboarddaily);
 
-  const { dashboardyearly, authenticatingdashboardyearly } = useSelector(
-    (state) => state?.dashboardyearly
-  );
-  console.log(dashboardyearly);
+  // const { dashboardyearly, authenticatingdashboardyearly } = useSelector(
+  //   (state) => state?.dashboardyearly
+  // );
+  // console.log(dashboardyearly);
 
-  const { dashboardsummary, authenticatingdashboardsummary } = useSelector(
-    (state) => state?.dashboardsummary
-  );
-  console.log(dashboardsummary);
+  // const { dashboardsummary, authenticatingdashboardsummary } = useSelector(
+  //   (state) => state?.dashboardsummary
+  // );
+  // console.log(dashboardsummary);
 
-  const { notifications, authenticatingnotifications } = useSelector(
-    (state) => state?.notifications
-  );
-  console.log(notifications);
+  // const { notifications, authenticatingnotifications } = useSelector(
+  //   (state) => state?.notifications
+  // );
+  // console.log(notifications);
 
-  const [revenueData, setRevenueData] = useState([]);
-  const [revenueData2, setRevenueData2] = useState([]);
+  // const [revenueData, setRevenueData] = useState([]);
+  // const [revenueData2, setRevenueData2] = useState([]);
 
-  useEffect(() => {
-    if (dashboardyearly?.data?.monthlyRevenues) {
-      setRevenueData(dashboardyearly?.data.monthlyRevenues);
-    }
-    if (dashboardsummary?.data?.monthlyRevenues) {
-      setRevenueData2(dashboardsummary?.data.monthlyRevenues);
-    }
-  }, [
-    dashboardyearly?.data?.monthlyRevenues,
-    dashboardsummary?.data?.monthlyRevenues
-  ]);
+  // useEffect(() => {
+  //   if (dashboardyearly?.data?.monthlyRevenues) {
+  //     setRevenueData(dashboardyearly?.data.monthlyRevenues);
+  //   }
+  //   if (dashboardsummary?.data?.monthlyRevenues) {
+  //     setRevenueData2(dashboardsummary?.data.monthlyRevenues);
+  //   }
+  // }, [
+  //   dashboardyearly?.data?.monthlyRevenues,
+  //   dashboardsummary?.data?.monthlyRevenues
+  // ]);
 
   // Function to update revenue for the current month
-  const updateRevenueForCurrentMonth = () => {
-    const currentMonthIndex = new Date().getMonth(); // 0 for January, 11 for December
+  // const updateRevenueForCurrentMonth = () => {
+  //   const currentMonthIndex = new Date().getMonth(); // 0 for January, 11 for December
 
-    setRevenueData((prevData) =>
-      prevData.map((item, index) => {
-        if (index === currentMonthIndex) {
-          return { ...item, revenue: item.revenue + 0 };
-        }
-        return item;
-      })
-    );
-  };
+  //   setRevenueData((prevData) =>
+  //     prevData.map((item, index) => {
+  //       if (index === currentMonthIndex) {
+  //         return { ...item, revenue: item.revenue + 0 };
+  //       }
+  //       return item;
+  //     })
+  //   );
+  // };
 
-  const updateRevenueForCurrentMonth2 = () => {
-    const currentMonthIndex = new Date().getMonth(); // 0 for January, 11 for December
+  // const updateRevenueForCurrentMonth2 = () => {
+  //   const currentMonthIndex = new Date().getMonth(); // 0 for January, 11 for December
 
-    setRevenueData2((prevData) =>
-      prevData.map((item, index) => {
-        if (index === currentMonthIndex) {
-          return {
-            ...item,
-            totalTransactionCount: item.totalTransactionCount + 0
-          };
-        }
-        return item;
-      })
-    );
-  };
+  //   setRevenueData2((prevData) =>
+  //     prevData.map((item, index) => {
+  //       if (index === currentMonthIndex) {
+  //         return {
+  //           ...item,
+  //           totalTransactionCount: item.totalTransactionCount + 0
+  //         };
+  //       }
+  //       return item;
+  //     })
+  //   );
+  // };
 
-  useEffect(() => {
-    if (revenueData.length > 0) {
-      updateRevenueForCurrentMonth();
-    }
-    if (revenueData2.length > 0) {
-      updateRevenueForCurrentMonth2();
-    }
-  }, [revenueData.length, revenueData2.length]);
+  // useEffect(() => {
+  //   if (revenueData.length > 0) {
+  //     updateRevenueForCurrentMonth();
+  //   }
+  //   if (revenueData2.length > 0) {
+  //     updateRevenueForCurrentMonth2();
+  //   }
+  // }, [revenueData.length, revenueData2.length]);
 
-  const currentMonthRevenue = revenueData[new Date().getMonth()]?.revenue;
-  const currentMonthRevenue2 =
-    revenueData2[new Date().getMonth()]?.totalTransactionCount;
+  // const currentMonthRevenue = revenueData[new Date().getMonth()]?.revenue;
+  // const currentMonthRevenue2 =
+  //   revenueData2[new Date().getMonth()]?.totalTransactionCount;
 
-  console.log(currentMonthRevenue2);
+  // console.log(currentMonthRevenue2);
 
   const formatNumberWithCommas = (number) => {
     if (number == null) return "0"; // Handle null or undefined
@@ -228,16 +236,13 @@ const EarningDashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Today Sales</span>
                 <span className="text-color-user text-[20px] font-bold">
-                  ₦
-                  {formatNumberWithCommas(
-                    dashboarddailymonthly?.data?.dailyRevenue
-                  )}
+                  ₦{formatNumberWithCommas(earningcard?.data?.todayRevenue)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
                     {formatNumberWithCommas(
-                      dashboarddailymonthly?.data?.dailyTransactionCount
+                      earningcard?.data?.todayTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">8.5%</span>
@@ -257,16 +262,13 @@ const EarningDashboard = ({ title }) => {
                   This Week Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  ₦
-                  {formatNumberWithCommas(
-                    dashboarddailymonthly?.data?.weeklyRevenue
-                  )}
+                  ₦{formatNumberWithCommas(earningcard?.data?.weeklyRevenue)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:
                     {formatNumberWithCommas(
-                      dashboarddailymonthly?.data?.weeklyTransactionCount
+                      earningcard?.data?.weeklyTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
@@ -287,13 +289,16 @@ const EarningDashboard = ({ title }) => {
                   This Month Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {/* ₦1 */}₦ {formatNumberWithCommas(currentMonthRevenue)}
+                  {/* ₦1 */}₦{" "}
+                  {formatNumberWithCommas(earningcard?.data?.monthlyRevenue)}
                   {/* {dashboard?.data?.totalApiPartners} */}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
-                    {formatNumberWithCommas(currentMonthRevenue2)}
+                    {formatNumberWithCommas(
+                      earningcard?.data?.monthlyTransactionCount
+                    )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average daily revenue</span> */}
@@ -312,13 +317,13 @@ const EarningDashboard = ({ title }) => {
                   This Year Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{formatNumberWithCommas(dashboardyearly?.data?.totalRevenue)}
+                  ₦{formatNumberWithCommas(earningcard?.data?.yearlyRevenue)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
                     {formatNumberWithCommas(
-                      dashboardsummary?.data?.totalTransactionCount
+                      earningcard?.data?.yearlyTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
@@ -336,12 +341,14 @@ const EarningDashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Total Sales</span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{formatNumberWithCommas(totalsales?.data?.totalSales)}
+                  ₦{formatNumberWithCommas(earningcard?.data?.totalSales)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
-                    {formatNumberWithCommas(totalsales?.data?.transactionCount)}
+                    {formatNumberWithCommas(
+                      earningcard?.data?.transactionCount
+                    )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span> */}
@@ -363,15 +370,15 @@ const EarningDashboard = ({ title }) => {
                 <Filtering />
                 <span className="text-[14px]">Filters</span>
               </div>
-              {transactions?.data?.data && (
+              {earningdash?.data?.data && (
                 <Tables
                   setDownload={setDownload}
                   setStep={setStep}
-                  transfers
-                  data={transactions?.data?.data?.slice(0, 10)}
+                  customertransfer
+                  data={earningdash?.data?.data?.slice(0, 10)}
                 />
               )}
-              {!transactions?.status && (
+              {!earningdash?.data?.data && (
                 <div
                   style={{
                     display: "flex",

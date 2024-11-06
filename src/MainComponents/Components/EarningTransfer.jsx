@@ -16,8 +16,9 @@ import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
 import AppUserModal from "../../Modal/AppUserModal";
 import { CustomerTransactions } from "../Store/Apis/CustomerTransactions";
+import { EarningDash } from "../Store/Apis/EarningDash";
 
-const CustomerTransfer = ({ title }) => {
+const EarningTransfer = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
   const [other, setOther] = useState(false);
   const [postsPerPage, setPostsPerPage] = useState(10);
@@ -58,7 +59,7 @@ const CustomerTransfer = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(CustomerTransactions({ startDate, searcher, currentPage }));
+      dispatch(EarningDash({ startDate, searcher, currentPage }));
       return;
     } else {
       navigate("/");
@@ -68,19 +69,20 @@ const CustomerTransfer = ({ title }) => {
     //eslint-disable-next-line
   }, [startDate, searcher, currentPage]);
 
-  const { customertransactions, authenticatingcustomertransactions } =
-    useSelector((state) => state?.customertransactions);
-  console.log(customertransactions);
+  const { earningdash, authenticatingearningdash } = useSelector(
+    (state) => state?.earningdash
+  );
+  console.log(earningdash);
 
   useEffect(() => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [customertransactions]);
+  }, [earningdash]);
 
-  const next = customertransactions?.data?.meta?.next;
-  const previous = customertransactions?.data?.meta?.prev;
-  const totalPosts = customertransactions?.data?.meta?.totalCount;
+  const next = earningdash?.data?.meta?.next;
+  const previous = earningdash?.data?.meta?.prev;
+  const totalPosts = earningdash?.data?.meta?.totalCount;
 
   const paginate = (number) => {
     //  setSorted(tran)
@@ -89,7 +91,7 @@ const CustomerTransfer = ({ title }) => {
   };
 
   const Downloading = () => {
-    const data = customertransactions?.data?.data || [];
+    const data = earningdash?.data?.data || [];
     const headers = data.length > 0 ? Object.keys(data[0]) : [];
     const objValues = data.map((item) => Object.values(item).join(","));
     const csvContent = [headers.join(","), ...objValues].join("\n");
@@ -217,15 +219,16 @@ const CustomerTransfer = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {customertransactions?.data?.data?.length >= 1 && (
+                {earningdash?.data?.data?.length >= 1 && (
                   <Tables
                     setDownload={setDownload}
                     setStep={setStep}
                     customertransfer
-                    data={customertransactions?.data?.data}
+                    // transfers
+                    data={earningdash?.data?.data}
                   />
                 )}{" "}
-                {!customertransactions?.status && (
+                {!earningdash?.status && (
                   <div
                     style={{
                       display: "flex",
@@ -237,7 +240,7 @@ const CustomerTransfer = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )}
-                {customertransactions?.data?.data?.length >= 1 && (
+                {earningdash?.data?.data?.length >= 1 && (
                   <Pagination
                     set={activater}
                     currentPage={currentPage}
@@ -259,4 +262,4 @@ const CustomerTransfer = ({ title }) => {
   );
 };
 
-export default CustomerTransfer;
+export default EarningTransfer;

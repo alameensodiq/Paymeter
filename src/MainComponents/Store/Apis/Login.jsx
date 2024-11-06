@@ -33,6 +33,7 @@ export const Logins = createAsyncThunk(
       }
       console.log(data);
       sessionStorage.setItem("token", data?.data?.token);
+      sessionStorage.setItem("realuserId", data?.data?.user?.id);
       sessionStorage.setItem("roleName", data?.data?.user?.roleName);
       if (data?.data?.token && data?.data?.user?.roleName === "ADMIN") {
         window.location.pathname = "/dashboard";

@@ -107,6 +107,7 @@ const AppUserModal = ({
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
+  const [itemerearning, setitemerearning] = useState("");
   const [itemerseditingdisc, setItemereditingdisc] = useState("");
   const [itemersmanager, setItemermanager] = useState("");
   const [itemerseditbank, setItemereditbank] = useState("");
@@ -203,7 +204,13 @@ const AppUserModal = ({
     name: "",
     address: "",
     phone: "",
-    nin: ""
+    nin: "",
+    password: "",
+    commissions: {
+      commissionType: "",
+      fee: "",
+      capFee: ""
+    }
   });
   const [pay, setPay] = useState({
     name: ""
@@ -948,14 +955,17 @@ const AppUserModal = ({
   };
 
   const SendEarningPartner = () => {
-    const { email, name, address, phone, nin } = earnings;
+    const { email, name, address, phone, nin, password, commissions } =
+      earnings;
     dispatch(
       CreateEarnings({
         email,
         name,
         address,
         phone,
-        nin
+        nin,
+        password,
+        commissions
       })
     );
     setBusstate7(true);
@@ -1285,7 +1295,13 @@ const AppUserModal = ({
       name: "",
       address: "",
       phone: "",
-      nin: ""
+      nin: "",
+      password: "",
+      commissions: {
+        commissionType: "",
+        fee: "",
+        capFee: ""
+      }
     });
     if (discname) {
       setdiscname("");
@@ -1352,6 +1368,20 @@ const AppUserModal = ({
       ...prev,
       commissions:
         itemersettings === "Fixed"
+          ? {
+              commissionType: "FIXED",
+              fee: null
+            }
+          : {
+              commissionType: "PERCENTAGE",
+              fee: null,
+              capFee: null
+            }
+    }));
+    setEarnings((prev) => ({
+      ...prev,
+      commissions:
+        itemerearning === "Fixed"
           ? {
               commissionType: "FIXED",
               fee: null
@@ -1484,7 +1514,8 @@ const AppUserModal = ({
     itemersettings,
     itemersedit,
     itemersmanager,
-    itemerseditbank
+    itemerseditbank,
+    itemerearning
   ]);
 
   const ChangeSettings = (e) => {
@@ -1545,6 +1576,36 @@ const AppUserModal = ({
     }
 
     setSettingsGlobal((prev) => ({
+      ...prev,
+      commissions: {
+        ...prev.commissions,
+        [name]: sanitizedValue // Pass the sanitized string value
+      }
+    }));
+  };
+
+  const ChangeSettingsEarningType = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
+    setEarnings((prev) => ({
       ...prev,
       commissions: {
         ...prev.commissions,
@@ -3281,17 +3342,87 @@ const AppUserModal = ({
           value={earnings?.address}
           placeholder={`${`Enter Address`}`}
         />
+        <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeEarning(e)}
+          name="password"
+          value={earnings?.password}
+          placeholder={`${`Enter Passowrd`}`}
+        />
+        <ModalInputSelectTwo
+          name="commissionType"
+          label="commission Type"
+          // onChange={(e) => ChangeDisc(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemerearning}
+          big
+          setItemer={setitemerearning}
+        />
+        {itemerearning === "Fixed" ? (
+          <>
+            <ModalInputText
+              label="Fee"
+              onChange={(e) => ChangeSettingsEarningType(e)}
+              name="fee"
+              value={earnings?.commissions?.fee}
+              placeholder={`${`Enter Fee`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+          </>
+        ) : itemerearning === "Percentage" ? (
+          <>
+            <ModalInputText
+              label="Fee"
+              onChange={(e) => ChangeSettingsEarningType(e)}
+              name="fee"
+              value={earnings?.commissions?.fee}
+              placeholder={`${`Enter Fee`}`}
+            />
+            <ModalInputText
+              label="cap Fee"
+              onChange={(e) => ChangeSettingsEarningType(e)}
+              name="capFee"
+              value={earnings?.commissions?.capFee}
+              placeholder={`${`Enter Cap Fee`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+          </>
+        ) : (
+          ""
+        )}
         <LargeSignInButton
           onClick={() => {
-            const { email, name, address, phone, nin } = earnings;
-            console.log({ email, name, address, phone, nin });
+            const { email, name, address, phone, nin, password, commissions } =
+              earnings;
+            console.log({
+              email,
+              name,
+              address,
+              phone,
+              nin,
+              password,
+              commissions
+            });
+            console.log(earnings);
+            const isFeeMissing = commissions?.fee === null;
+            const isCapFeeMissing = commissions?.capFee === null;
             if (
               name &&
               phone &&
               email &&
               nin &&
               address &&
-              email.includes("@")
+              password &&
+              email.includes("@") &&
+              (itemersmanager === "FIXED"
+                ? !isFeeMissing
+                : !isFeeMissing && !isCapFeeMissing)
             ) {
               // setStep(19);
               SendEarningPartner();

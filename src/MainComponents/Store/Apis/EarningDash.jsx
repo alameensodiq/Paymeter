@@ -1,38 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const CreateEarnings = createAsyncThunk(
-  "createearnings",
-  async (
-    { email, name, address, phone, nin, password, commissions },
-    thunkAPI
-  ) => {
+export const EarningDash = createAsyncThunk(
+  "earningdash",
+  async ({ startDate, searcher, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
-    const accessToken = sessionStorage.getItem("token");
+    const dateObj = new Date(startDate);
 
+    const formattedDate = dateObj.toISOString().slice(0, 10);
+    const accessToken = sessionStorage.getItem("token");
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/create-earningpartner`,
+        `${process.env.REACT_APP_BASE_URL}dashboard/Trx-by-earningPartner?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
+        // `${process.env.REACT_APP_BASE_URL}transaction?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`
-          },
-          body: JSON.stringify({
-            email,
-            name,
-            address,
-            phone,
-            nin,
-            password,
-            commissions
-          })
+          }
         }
       );
       let data = await response.json();
-      toast.success(data.message);
+      // toast.success(data.message);
       console.log(data);
       return data;
     } catch (e) {
