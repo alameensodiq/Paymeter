@@ -249,11 +249,11 @@ const AppUserModal = ({
   const [manager, setManager] = useState({
     name: "",
     address: "",
-    commissionsDTO: {
-      commissionType: "",
-      fee: null
-      // capFee: null
-    },
+    password: "",
+    // commissionsDTO: {
+    //   commissionType: "",
+    //   fee: null
+    // },
     email: "",
     phone: ""
   });
@@ -898,7 +898,8 @@ const AppUserModal = ({
   };
 
   const SendDetailsManager = () => {
-    const { name, phone, commissionsDTO, email, address } = manager;
+    // const { name, phone, commissionsDTO, email, address } = manager;
+    const { name, phone, password, email, address } = manager;
 
     // Check if the email is valid
     if (!email.includes("@")) {
@@ -910,7 +911,8 @@ const AppUserModal = ({
       CreateManager({
         name,
         address,
-        commissionsDTO,
+        password,
+        // commissionsDTO,
         email,
         phone
       })
@@ -1165,11 +1167,11 @@ const AppUserModal = ({
     setManager({
       name: "",
       address: "",
-      commissionsDTO: {
-        commissionType: "",
-        fee: null
-        // capFee: null
-      },
+      password: "",
+      // commissionsDTO: {
+      //   commissionType: "",
+      //   fee: null
+      // },
       email: "",
       phone: ""
     });
@@ -4598,7 +4600,14 @@ const AppUserModal = ({
           value={manager?.phone}
           placeholder={`${`Enter Phone Number`}`}
         />
-        <ModalInputSelectTwo
+        <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeManager(e)}
+          name="password"
+          value={manager?.password}
+          placeholder={`${`Enter Password`}`}
+        />
+        {/* <ModalInputSelectTwo
           name="commissionsDTO"
           label="Commission DTO"
           onChange={(e) => ChangeManager(e)}
@@ -4638,24 +4647,26 @@ const AppUserModal = ({
           </>
         ) : (
           ""
-        )}
+        )} */}
         <LargeSignInButton
           onClick={() => {
-            const { address, name, commissionsDTO, phone, email } = manager;
-            console.log({ address, name, commissionsDTO, phone, email });
+            const { address, name, password, phone, email } = manager;
+            // console.log({ address, name, commissionsDTO, phone, email });
+            console.log({ address, name, password, phone, email });
 
             // Check for missing values
-            const isFeeMissing = commissionsDTO?.fee === null;
-            const isCapFeeMissing = commissionsDTO?.capFee === null;
+            // const isFeeMissing = commissionsDTO?.fee === null;
+            // const isCapFeeMissing = commissionsDTO?.capFee === null;
 
             if (
               name &&
               address &&
               phone &&
               email &&
-              (itemersmanager === "Fixed"
-                ? !isFeeMissing
-                : !isFeeMissing && !isCapFeeMissing)
+              password
+              // (itemersmanager === "Fixed"
+              //   ? !isFeeMissing
+              //   : !isFeeMissing && !isCapFeeMissing)
             ) {
               setStep(36);
             } else {

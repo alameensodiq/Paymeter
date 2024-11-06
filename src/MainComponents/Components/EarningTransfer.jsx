@@ -17,6 +17,9 @@ import { Loader } from "./Loader";
 import AppUserModal from "../../Modal/AppUserModal";
 import { CustomerTransactions } from "../Store/Apis/CustomerTransactions";
 import { EarningDash } from "../Store/Apis/EarningDash";
+import CustomTable from "../Reusables/CustomeTable";
+import { ReactComponent as Suspend } from "../../assets/Suspend.svg";
+import Moment from "react-moment";
 
 const EarningTransfer = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
@@ -28,6 +31,8 @@ const EarningTransfer = ({ title }) => {
   const [searcher, setSearcher] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const [downloading, setDownload] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [indexing, setIndexing] = useState(null);
   const [reload, setReload] = useState(false);
   const [step, setStep] = useState(0);
   const navigate = useNavigate();
@@ -105,6 +110,200 @@ const EarningTransfer = ({ title }) => {
     document.body.removeChild(a); // Clean up
     URL.revokeObjectURL(url);
   };
+
+  const columns = [
+    {
+      title: "S.No",
+      dataIndex: "key",
+      width: "20%",
+      render: (_, record, index) => index + 1 // Automatically increments the serial number
+    },
+    {
+      title: "DATE",
+      dataIndex: "dispense.updatedDate",
+      width: "40%",
+      render: (date) => (
+        <Moment format="ddd MMM DD YYYY HH:mm:ss">{date}</Moment>
+      )
+    },
+    {
+      title: "REF.",
+      dataIndex: "reference",
+      width: "20%"
+    },
+    {
+      title: "USER TYPE",
+      dataIndex: "userType",
+      width: "20%"
+    },
+    {
+      title: "CUS. NAME",
+      dataIndex: "customerName",
+      width: "20%"
+    },
+    {
+      title: "CUS. NUMBER",
+      dataIndex: "phone",
+      width: "20%",
+      render: (phone) => phone || "N/A" // Default to "N/A" if no phone number
+    },
+    {
+      title: "DISCO",
+      dataIndex: "discoName",
+      width: "20%"
+    },
+    {
+      title: "ACC. N0",
+      dataIndex: "accountNumber",
+      width: "20%"
+    },
+    {
+      title: "METER",
+      dataIndex: "meterNo",
+      width: "20%"
+    },
+    {
+      title: "TRANX AMOUNT.",
+      dataIndex: "transactionAmount",
+      width: "20%",
+      render: (amount) => `₦${amount}` // Format currency
+    },
+    {
+      title: "DISTRICT COMM. TYPE",
+      dataIndex: "managerCommissionType",
+      width: "20%",
+      render: (type) => type || "not applicable" // Fallback text if empty
+    },
+    {
+      title: "DSTM COMM.",
+      dataIndex: "managerCommissionType",
+      width: "20%",
+      render: (type, record) =>
+        type === "PERCENTAGE"
+          ? `${record.managerCommissionPercentageTypeFeeValue}%`
+          : `₦${record.districtManagerFee ? record.districtManagerFee : 0}`
+    },
+    {
+      title: "DSTM COMM. VALUE",
+      dataIndex: "districtManagerFee",
+      width: "20%",
+      render: (fee) => `₦${fee || 0}`
+    },
+    {
+      title: "DSTM CAP FEE",
+      dataIndex: "dispense.systemTransactions.districtManagerFee",
+      width: "20%",
+      render: (fee) => (fee ? `₦${fee}` : "not applicable")
+    },
+    {
+      title: "DISCO COMM. TYPE",
+      dataIndex: "discoSystemCommissionType",
+      width: "20%"
+    },
+    {
+      title: "DISCO COMM.",
+      dataIndex: "discoSystemCommissionType",
+      width: "20%",
+      render: (type, record) =>
+        type === "PERCENTAGE"
+          ? `${record.discoSystemCommissionFeePercentage}%`
+          : `₦${record.discoSystemCommissionFee || 0}`
+    },
+    {
+      title: "DISCO AMOUNT",
+      dataIndex: "discoSystemCommissionFee",
+      width: "20%",
+      render: (fee) => `₦${fee || "not applicable"}`
+    },
+    {
+      title: "DISCO COMM. CAP FEE",
+      dataIndex: "discoSystemCommissionCapFee",
+      width: "20%",
+      render: (fee) => `₦${fee || "not applicable"}`
+    },
+    {
+      title: "TOKEN",
+      dataIndex: "dispense.listtoken",
+      width: "20%",
+      render: (token, record) => record.dispense?.listtoken || "N/A" // Assumes listtoken is an array, shows the first element
+    },
+    {
+      title: "TOKEN DS.",
+      dataIndex: "smsdeliveryStatus",
+      width: "20%",
+      render: (status) => status || "N/A" // Fallback to "N/A" if no status
+    },
+    {
+      title: "ACTIONS",
+      dataIndex: "edit",
+      width: "20%",
+      render: (edit, record, index) => (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            cursor: "pointer",
+            position: "relative"
+          }}
+          onClick={() => {
+            setOpen(!open);
+            setIndexing(index);
+          }}
+        >
+          <svg
+            style={{ marginLeft: "30px" }}
+            width="4"
+            height="16"
+            viewBox="0 0 4 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+              fill="#868FA0"
+            />
+            <path
+              d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+              fill="#868FA0"
+            />
+            <path
+              d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+              fill="#868FA0"
+            />
+          </svg>
+
+          {index === indexing && open ? (
+            <div className="absolute right-10 top-5 w-36 h-10 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+              <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    gap: 15
+                  }}
+                >
+                  <Suspend width={10} />
+                  <span
+                    className="text-black text-[8px]"
+                    onClick={() => {
+                      setOpen(!open);
+                      setDownload(record);
+                      console.log(record);
+                      setStep(53);
+                    }}
+                  >
+                    Download Receipt
+                  </span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      )
+    }
+  ];
 
   return (
     <div className="flex flex-row">
@@ -227,6 +426,15 @@ const EarningTransfer = ({ title }) => {
                     // transfers
                     data={earningdash?.data?.data}
                   />
+                  // <CustomTable
+                  //   noData={false}
+                  //   //loading={isPending || isFetching}
+                  //   Apidata={earningdash?.data?.data}
+                  //   tableColumns={columns}
+                  //   currentPage={currentPage}
+                  //   setCurrentPage={setCurrentPage}
+                  //   approvals={earningdash?.data?.meta?.totalCount}
+                  // />
                 )}{" "}
                 {!earningdash?.status && (
                   <div

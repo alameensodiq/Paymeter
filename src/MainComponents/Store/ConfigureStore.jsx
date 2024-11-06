@@ -57,6 +57,7 @@ import { BankTransactionSlice } from "./Reducers/BankTransaction";
 import { CustomerTransactionSlice } from "./Reducers/CustomerTransactions";
 import { EarningDashSlice } from "./Reducers/EarningDash";
 import { EarningCardSlice } from "./Reducers/EarningCard";
+import { ResendTokenSlice } from "./Reducers/ResendToken";
 
 export default configureStore({
   reducer: {
@@ -117,6 +118,7 @@ export default configureStore({
     banktransactions: BankTransactionSlice?.reducer,
     customertransactions: CustomerTransactionSlice?.reducer,
     earningdash: EarningDashSlice?.reducer,
-    earningcard: EarningCardSlice?.reducer
+    earningcard: EarningCardSlice?.reducer,
+    resendtoken: ResendTokenSlice?.reducer
   }
 });

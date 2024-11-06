@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Transactions } from "../Apis/Transactions";
+import { CustomerTransactions } from "../Apis/CustomerTransactions";
 
 export const CustomerTransactionSlice = createSlice({
   name: "customertransactions",
@@ -20,17 +20,17 @@ export const CustomerTransactionSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(Transactions.fulfilled, (state, action) => {
+    builder.addCase(CustomerTransactions.fulfilled, (state, action) => {
       state.customertransactions = action.payload;
       state.authenticated = false;
       state.authenticatingcustomertransactions = false;
       return state;
     });
-    builder.addCase(Transactions.pending, (state, action) => {
+    builder.addCase(CustomerTransactions.pending, (state, action) => {
       state.authenticatingcustomertransactions = true;
       state.authenticated = true;
     });
-    builder.addCase(Transactions.rejected, (state, action) => {
+    builder.addCase(CustomerTransactions.rejected, (state, action) => {
       state.errors = action.errors || action.payload;
       state.authenticated = false;
       state.authenticatingcustomertransactions = false;

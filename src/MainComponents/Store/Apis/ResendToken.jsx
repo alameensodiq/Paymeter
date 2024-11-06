@@ -1,35 +1,38 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const CreateManager = createAsyncThunk(
-  "createmanager",
-  async ({ name, address, password, email, phone }, thunkAPI) => {
+export const ResendToken = createAsyncThunk(
+  "resendtoken",
+  async ({ metertoken, phoneNo }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
+    // const dateObj = new Date(startDate);
+
+    // const formattedDate = dateObj.toISOString().slice(0, 10);
     const accessToken = sessionStorage.getItem("token");
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/onboard-manager`,
+        `${process.env.REACT_APP_BASE_URL}admin/resend-sms
+`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`
           },
           body: JSON.stringify({
-            name,
-            address,
-            password,
-            // commissionsDTO,
-            email,
-            phone
+            phoneNo,
+            token: metertoken
           })
         }
       );
       let data = await response.json();
-      toast.success(data.message);
+      // toast.success(data.message);
       console.log(data);
+      //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
+      //   sessionStorage.setItem('role', data?.data?.user?.userRole);
+      // sessionStorage.setItem('token', data?.data?.token);
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue({
