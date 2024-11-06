@@ -326,6 +326,95 @@ const Sidebar = () => {
             </p>
           </Link>
         </div>
+      ) : sessionStorage.getItem("roleName") === "DISTRICTMANAGER" ? (
+        <div className="flex flex-col py-10 gap-4 px-4">
+          <Link
+            to="/manager-dashboard"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/manager-dashboard"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {router.pathname === "/manager-dashboard" || isHovered ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/manager-dashboard" || isHovered ? (
+              <Dashboard
+                className={`${
+                  router.pathname === "/manager-dashboard"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Dashboard
+                className={`${
+                  router.pathname === "/manager-dashboard"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/manager-dashboard"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Overview
+            </p>
+          </Link>
+          <Link
+            to="/manager-transactions"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/manager-transactions"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered2(true)}
+            onMouseLeave={() => setIsHovered2(false)}
+          >
+            {router.pathname === "/manager-transactions" || isHovered2 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/manager-transactions" || isHovered2 ? (
+              <Transfers
+                className={`${
+                  router.pathname === "/manager-transactions"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Transfers
+                className={`${
+                  router.pathname === "/manager-transactions"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/manager-transactions"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Transaction
+            </p>
+          </Link>
+        </div>
       ) : sessionStorage.getItem("roleName") === "ADMIN" ? (
         <div className="flex flex-col py-10 gap-4 px-4">
           <Link

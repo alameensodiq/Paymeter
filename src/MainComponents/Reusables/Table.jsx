@@ -690,13 +690,14 @@ const Tables = ({
                               <span
                                 onClick={() => {
                                   setOpen(!open);
-                                  setStep(53);
-                                  dispatch(
-                                    ResendToken({
-                                      metertoken: item?.dispense?.listtoken[0],
-                                      phoneNo: item?.phone
-                                    })
-                                  );
+                                  // setStep(53);
+                                  console.log(item?.dispense?.listtoken[0]);
+                                  // dispatch(
+                                  //   ResendToken({
+                                  //     metertoken: item?.dispense?.listtoken[0],
+                                  //     phoneNo: item?.phone
+                                  //   })
+                                  // );
                                   // setReload(true)
                                 }}
                                 className="text-black"
@@ -3798,7 +3799,7 @@ const Tables = ({
                               <span
                                 onClick={() => {
                                   setOpen(!open);
-                                  setStep(53);
+                                  // setStep(53);
                                   dispatch(
                                     ResendToken({
                                       metertoken: item?.dispense?.listtoken[0],
@@ -4688,9 +4689,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     CUSTOMER PHONE NUMBER
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     BANK NAME
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO NAME
                   </StyledTableCell>
@@ -4727,15 +4728,15 @@ const Tables = ({
                   {/* <StyledTableCell style={{ width: "10%" }}>
                     AGENT COMMISSION
                   </StyledTableCell> */}
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DISTRICT COMMISSION TYPE
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    DST COMM. TYPE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISTRICT MANAGER COMMISSION
+                    DST MANAGER COMM.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO COMMISSION TYPE
-                  </StyledTableCell>
+                    DISCO COMM. TYPE
+                  </StyledTableCell> */}
                   {/* <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMMISSION CAP
                   </StyledTableCell> */}
@@ -4748,9 +4749,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     EARNING PARTNER FEE
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     FEE DUE TO SYSTEM
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     TOKEN
                   </StyledTableCell>
@@ -4784,9 +4785,9 @@ const Tables = ({
                       {/* {item?.customerName ? } */}
                       N/A
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoName}
                     </StyledTableCell>
@@ -4837,7 +4838,7 @@ const Tables = ({
                         ? item?.agentCommissionType
                         : "not applicable"}
                     </StyledTableCell> */}
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType
                         ? `₦${item?.managerCommissionType}`
                         : "not applicable"}
@@ -4849,7 +4850,7 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionType}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     {/* <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionCapFee
                         ? `₦${item?.discoSystemCommissionCapFee}`
@@ -4868,9 +4869,9 @@ const Tables = ({
                         ? `₦${item?.dispense?.systemTransactions?.earningPartnerFee}`
                         : "not applicable"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.feeDueToSystem}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell
                       ref={inputRef3}
                       onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
@@ -4944,6 +4945,12 @@ const Tables = ({
                               <Suspend width={10} />
                               <span
                                 className="text-black"
+                                onClick={() => {
+                                  setOpen(!open);
+                                  setDownload(item);
+                                  console.log(item);
+                                  setStep(53);
+                                }}
                                 //  onClick={() => {
                                 //    setOpen(!open);
                                 //    setDownload(item);
@@ -4954,7 +4961,7 @@ const Tables = ({
                                 Download Receipt
                               </span>
                             </div>
-                            <div
+                            {/* <div
                               style={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -4979,7 +4986,7 @@ const Tables = ({
                             >
                               <Edit />
                               <span className="text-black">Resend Token</span>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       ) : (

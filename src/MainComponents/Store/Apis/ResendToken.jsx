@@ -15,7 +15,7 @@ export const ResendToken = createAsyncThunk(
         `${process.env.REACT_APP_BASE_URL}admin/resend-sms
 `,
         {
-          method: "GET",
+          method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
