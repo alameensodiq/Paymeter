@@ -114,7 +114,7 @@ const Investments = ({ title }) => {
             <span className="text-route-name text-[28px] font-semibold">
               Institution
             </span>
-            <div className="relative flex flex-row w-[50%]">
+            {/* <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">
                 <Search />
               </div>
@@ -127,7 +127,7 @@ const Investments = ({ title }) => {
               <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
                 Search
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
             <div className="flex flex-row justify-end gap-4 px-3">
@@ -183,7 +183,7 @@ const Investments = ({ title }) => {
                     data={banks?.data?.data}
                   />
                 )}{" "}
-                {!banks?.data?.data && (
+                {(!banks?.data?.data || banks?.data?.data?.length === 0) && (
                   <div
                     style={{
                       display: "flex",

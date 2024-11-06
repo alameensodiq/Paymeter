@@ -492,10 +492,10 @@ const Dashboard = ({ title }) => {
               </span>
             </div>
             <div className="flex flex-col border rounded-custom gap-6 py-6">
-              <div className="flex flex-row px-4 gap-4 items-center justify-end">
+              {/* <div className="flex flex-row px-4 gap-4 items-center justify-end">
                 <Filtering />
                 <span className="text-[14px]">Filters</span>
-              </div>
+              </div> */}
               {transactions?.data?.data && (
                 <Tables
                   setDownload={setDownload}

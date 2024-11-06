@@ -37,6 +37,7 @@ import jsPDF from "jspdf";
 import Moment from "react-moment";
 import { EditBanking } from "../MainComponents/Store/Apis/EditBanking";
 import ModalInputSelectID from "../bits/ModalInputSelectID";
+import { UserPassword } from "../MainComponents/Store/Apis/UserPassword";
 
 const AppUserModal = ({
   setStep,
@@ -104,6 +105,7 @@ const AppUserModal = ({
   const [bustate17, setBusstate17] = useState(false);
   const [bustate18, setBusstate18] = useState(false);
   const [bustate19, setBusstate19] = useState(false);
+  const [bustate20, setBusstate20] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
@@ -215,6 +217,12 @@ const AppUserModal = ({
   const [pay, setPay] = useState({
     name: ""
   });
+
+  const [changepass, setChangepass] = useState({
+    oldPassword: "",
+    newPassword: ""
+  });
+
   const [disc, setDisc] = useState({
     name: "",
     shortName: "",
@@ -392,6 +400,13 @@ const AppUserModal = ({
   );
   console.log(editingbank);
 
+  const { passwordchange, authenticatingpasswordchange } = useSelector(
+    (state) => state?.passwordchange
+  );
+  console.log(passwordchange);
+
+  // passwordchange?.status
+
   useEffect(() => {
     if (bustate && createdbank?.status) {
       setStep(3);
@@ -453,6 +468,9 @@ const AppUserModal = ({
     if (bustate19 && editingbank?.status) {
       setStep(56);
     }
+    if (bustate20 && passwordchange?.status) {
+      setStep(58);
+    }
 
     console.log(update);
   }, [
@@ -480,6 +498,7 @@ const AppUserModal = ({
     bustate17,
     bustate18,
     bustate19,
+    bustate20,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -495,7 +514,8 @@ const AppUserModal = ({
     editdetails?.status,
     actioning?.status,
     editdiscing?.status,
-    editingbank?.status
+    editingbank?.status,
+    passwordchange?.status
   ]);
 
   useEffect(() => {
@@ -982,6 +1002,17 @@ const AppUserModal = ({
     setBusstate3(true);
   };
 
+  const SendChangePassword = () => {
+    const { oldPassword, newPassword } = changepass;
+    dispatch(
+      UserPassword({
+        oldPassword,
+        newPassword
+      })
+    );
+    setBusstate20(true);
+  };
+
   const SendPay = () => {
     dispatch(
       CreatePay({
@@ -1233,6 +1264,10 @@ const AppUserModal = ({
     setPay({
       name: ""
     });
+    setChangepass({
+      oldPassword: "",
+      newPassword: ""
+    });
     setUserGlobal({
       discoName: "",
       userId: "",
@@ -1269,6 +1304,7 @@ const AppUserModal = ({
     setBusstate17(false);
     setBusstate18(false);
     setBusstate19(false);
+    setBusstate20(false);
     setApproved(false);
     setReload(true);
     setPassword("");
@@ -1525,6 +1561,15 @@ const AppUserModal = ({
     console.log(value);
     setSettingsGlobal({
       ...settingglobal,
+      [name]: value
+    });
+  };
+
+  const ChangePassing = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setChangepass({
+      ...changepass,
       [name]: value
     });
   };
@@ -6178,6 +6223,95 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully Added a new Disco</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={57}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+        wide
+        heading="Change Password"
+      >
+        <ModalInputText
+          label="Old Password"
+          onChange={(e) => ChangePassing(e)}
+          name="oldPassword"
+          value={changepass?.oldPassword}
+          placeholder={`${`Enter New Password`}`}
+        />
+        <ModalInputText
+          label="New Password"
+          onChange={(e) => ChangePassing(e)}
+          name="newPassword"
+          value={changepass?.newPassword}
+          placeholder={`${`Enter New Password`}`}
+        />
+        <LargeSignInButton
+          onClick={() => SendChangePassword()}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={58}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Password Changed
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Changed Password</span>
           </div>
           <div
             style={{

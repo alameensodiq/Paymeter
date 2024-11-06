@@ -95,20 +95,95 @@ const EarningTransfer = ({ title }) => {
     setActivater(number);
   };
 
+  // const Downloading = () => {
+  //   const data = earningdash?.data?.data || [];
+  //   const headers = data.length > 0 ? Object.keys(data[0]) : [];
+  //   const objValues = data.map((item) => Object.values(item).join(","));
+  //   const csvContent = [headers.join(","), ...objValues].join("\n");
+  //   const blob = new Blob([csvContent], { type: "text/csv" });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement("a");
+  //   a.href = url;
+  //   a.download = "Institution.csv";
+  //   document.body.appendChild(a); // Required for Firefox
+  //   a.click();
+  //   document.body.removeChild(a); // Clean up
+  //   URL.revokeObjectURL(url);
+  // };
+
   const Downloading = () => {
+    // Get the data to be exported
     const data = earningdash?.data?.data || [];
-    const headers = data.length > 0 ? Object.keys(data[0]) : [];
-    const objValues = data.map((item) => Object.values(item).join(","));
-    const csvContent = [headers.join(","), ...objValues].join("\n");
+
+    // Specify the fields you want to include in the CSV, based on the table columns
+    const selectedFields = [
+      "updatedDate", // Date
+      "reference", // Reference
+      "userType", // User Type
+      "customerName", // Customer Name
+      "phone", // Customer Number (phone)
+      "discoName", // Disco Name
+      "accountNumber", // Account Number
+      "meterNo", // Meter Number
+      "transactionAmount", // Transaction Amount
+      "managerCommissionType", // District Commission Type
+      "districtManagerFee", // District Manager Commission Value
+      "discoSystemCommissionType", // Disco Commission Type
+      "discoSystemCommissionFee", // Disco System Commission Fee
+      "listtoken", // Token
+      "smsdeliveryStatus" // SMS Delivery Status
+    ];
+
+    // Map over the data and only include the selected fields
+    const objValues = data.map((item) => {
+      return selectedFields
+        .map((field) => {
+          // Access the field value from the item, handle nested fields like listtoken
+          if (field === "listtoken") {
+            return item?.dispense?.listtoken?.[0] || "N/A"; // Assuming listtoken is an array
+          }
+          if (field === "phone") {
+            return item?.phone || "N/A"; // Handle missing phone
+          }
+          if (field === "transactionAmount") {
+            return `₦${item?.transactionAmount || "0"}`; // Format as currency
+          }
+          if (field === "managerCommissionType") {
+            return item?.managerCommissionType || "not applicable";
+          }
+          if (field === "districtManagerFee") {
+            return item?.managerCommissionType === "PERCENTAGE" &&
+              item?.managerCommissionPercentageTypeFeeValue
+              ? `${item?.managerCommissionPercentageTypeFeeValue || 0}%`
+              : `₦${item?.districtManagerFee || 0}`;
+          }
+          if (field === "discoSystemCommissionType") {
+            return item?.discoSystemCommissionType || "not applicable";
+          }
+          if (field === "discoSystemCommissionFee") {
+            return item?.discoSystemCommissionFee
+              ? `₦${item?.discoSystemCommissionFee}`
+              : "not applicable";
+          }
+          return item?.[field] || "N/A"; // Fallback to 'N/A' if the value is missing
+        })
+        .join(",");
+    });
+
+    // Create the CSV content by joining headers and row values
+    const headers = selectedFields.join(",");
+    const csvContent = [headers, ...objValues].join("\n");
+
+    // Create the Blob and download link
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Institution.csv";
+    a.download = "Institution.csv"; // Set the filename for download
     document.body.appendChild(a); // Required for Firefox
     a.click();
-    document.body.removeChild(a); // Clean up
-    URL.revokeObjectURL(url);
+    document.body.removeChild(a); // Clean up the link element
+    URL.revokeObjectURL(url); // Clean up the object URL
   };
 
   const columns = [

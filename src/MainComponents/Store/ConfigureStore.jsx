@@ -58,6 +58,10 @@ import { CustomerTransactionSlice } from "./Reducers/CustomerTransactions";
 import { EarningDashSlice } from "./Reducers/EarningDash";
 import { EarningCardSlice } from "./Reducers/EarningCard";
 import { ResendTokenSlice } from "./Reducers/ResendToken";
+import { DiscoCardSlice } from "./Reducers/DiscoCard";
+import { DistrictAgentsSlice } from "./Reducers/DistrictAgents";
+import { AgentManagerSlice } from "./Reducers/AgentManager";
+import { UserPasswordSlice } from "./Reducers/UserPassword";
 
 export default configureStore({
   reducer: {
@@ -119,6 +123,10 @@ export default configureStore({
     customertransactions: CustomerTransactionSlice?.reducer,
     earningdash: EarningDashSlice?.reducer,
     earningcard: EarningCardSlice?.reducer,
-    resendtoken: ResendTokenSlice?.reducer
+    resendtoken: ResendTokenSlice?.reducer,
+    discocard: DiscoCardSlice?.reducer,
+    districtagents: DistrictAgentsSlice?.reducer,
+    agentmanager: AgentManagerSlice?.reducer,
+    passwordchange: UserPasswordSlice?.reducer
   }
 });

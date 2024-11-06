@@ -20,8 +20,9 @@ import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
 import { Notifications } from "../Store/Apis/Notifications";
 import { Approve } from "../Store/Apis/Approve";
+import { DistrictAgents } from "../Store/Apis/DistrictAgent";
 
-const Notification = ({ title }) => {
+const ManagerAgents = ({ title }) => {
   const [endDate, setEndDate] = useState(
     new Date(Date.now() + 3600 * 1000 * 24)
   );
@@ -55,7 +56,8 @@ const Notification = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(Notifications({ status }));
+      //   dispatch(Notifications({ status }));
+      dispatch(DistrictAgents());
       return;
     } else {
       navigate("/");
@@ -63,7 +65,8 @@ const Notification = ({ title }) => {
     }
     if (reload) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
-      dispatch(Notifications({ status }));
+      //   dispatch(Notifications({ status }));
+      dispatch(DistrictAgents());
       setReload(false);
       setStatus("accepted");
       setCurrentPage(0);
@@ -76,20 +79,20 @@ const Notification = ({ title }) => {
     //eslint-disable-next-line
   }, [reload, status, approve?.status]);
 
-  const { notifications, authenticatingnotifications } = useSelector(
-    (state) => state?.notifications
+  const { districtagents, authenticatingdistrictagents } = useSelector(
+    (state) => state?.districtagents
   );
-  console.log(notifications);
+  console.log(districtagents);
 
   useEffect(() => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [notifications?.data]);
+  }, [districtagents?.data]);
 
-  const next = notifications?.data?.meta?.next;
-  const previous = notifications?.data?.meta?.prev;
-  const totalPosts = notifications?.data?.meta?.totalCount;
+  const next = districtagents?.data?.meta?.next;
+  const previous = districtagents?.data?.meta?.prev;
+  const totalPosts = districtagents?.data?.meta?.totalCount;
   const paginate = (number) => {
     //  setSorted(tran)
     setCurrentPage(number - 1);
@@ -222,7 +225,7 @@ const Notification = ({ title }) => {
             <hr className="" />
             <div className="flex flex-row justify-between gap-4 px-3">
               <div className="flex flex-col">
-                <div className="flex flex-row gap-6 justify-center text-[14px] items-center text-route-noncolor pt-[10px] font-medium">
+                {/* <div className="flex flex-row gap-6 justify-center text-[14px] items-center text-route-noncolor pt-[10px] font-medium">
                   <span
                     onClick={() => {
                       setStatus("accepted");
@@ -262,8 +265,8 @@ const Notification = ({ title }) => {
                   >
                     Rejected
                   </span>
-                </div>
-                <div className="gap-2">
+                </div> */}
+                {/* <div className="gap-2">
                   {status === "accepted" && (
                     <div className="w-[70px] h-[2px] bg-route-color" />
                   )}
@@ -273,7 +276,7 @@ const Notification = ({ title }) => {
                   {status === "REJECTED" && (
                     <div className="w-[80px] h-[2px] bg-route-color ml-[69%]" />
                   )}
-                </div>
+                </div> */}
               </div>
               <div className="flex flex-row justify-end gap-4 px-3">
                 {/* <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
@@ -306,20 +309,20 @@ const Notification = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {notifications?.data?.meta?.totalCount >= 1 &&
+                {districtagents?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       setaction={setaction}
-                      notification
+                      manageragents
                       setuserIding={setuserIding}
                       Pay={Pays}
                       setUserIds={setUserIds}
                       set
                       setStep={setStep}
-                      data={notifications?.data?.data}
+                      data={districtagents?.data?.data}
                     />
                   )}
-                {notifications?.data?.meta?.totalCount >= 1 &&
+                {/* {notifications?.data?.meta?.totalCount >= 1 &&
                   status === "pending" && (
                     <Tables
                       pending
@@ -331,8 +334,8 @@ const Notification = ({ title }) => {
                       setStep={setStep}
                       data={notifications?.data?.data}
                     />
-                  )}
-                {notifications?.data?.meta?.totalCount >= 1 &&
+                  )} */}
+                {/* {notifications?.data?.meta?.totalCount >= 1 &&
                   status === "REJECTED" && (
                     <Tables
                       rejected
@@ -342,8 +345,22 @@ const Notification = ({ title }) => {
                       setStep={setStep}
                       data={notifications?.data?.data}
                     />
+                  )} */}
+                {(!districtagents?.status ||
+                  districtagents?.data?.data?.length === 0) &&
+                  status === "accepted" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
                   )}
-                {!notifications?.status && status === "accepted" && (
+                {/* {!notifications?.status && status === "pending" && (
                   <div
                     style={{
                       display: "flex",
@@ -354,8 +371,8 @@ const Notification = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                )}
-                {!notifications?.status && status === "pending" && (
+                )} */}
+                {/* {!notifications?.status && status === "REJECTED" && (
                   <div
                     style={{
                       display: "flex",
@@ -366,19 +383,7 @@ const Notification = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                )}
-                {!notifications?.status && status === "REJECTED" && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                )}
+                )} */}
 
                 {/* {notifications?.data?.meta?.totalCount >= 1   ? (
                   status === "accepted" ? (
@@ -424,7 +429,7 @@ const Notification = ({ title }) => {
                 ) : (
                   ""
                 )} */}
-                {notifications?.data?.meta?.totalCount >= 1 && (
+                {districtagents?.data?.meta?.totalCount >= 1 && (
                   <Pagination
                     set={activater}
                     currentPage={currentPage}
@@ -446,4 +451,4 @@ const Notification = ({ title }) => {
   );
 };
 
-export default Notification;
+export default ManagerAgents;

@@ -139,7 +139,7 @@ const Payment = ({ title }) => {
             <span className="text-route-name text-[28px] font-semibold">
               Payment
             </span>
-            <div className="relative flex flex-row w-[50%]">
+            {/* <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">
                 <Search />
               </div>
@@ -152,7 +152,7 @@ const Payment = ({ title }) => {
               <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
                 Search
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
             <div className="flex flex-row justify-end gap-4 px-3">
@@ -194,10 +194,10 @@ const Payment = ({ title }) => {
               </button> */}
             </div>
             <hr className="" />
-            <div className="flex flex-row justify-end px-8 gap-2">
+            {/* <div className="flex flex-row justify-end px-8 gap-2">
               <Filter />
               <span className="text-route-noncolor text-[12px]">Filters</span>
-            </div>
+            </div> */}
             {loading ? (
               <>
                 {paymentmethod?.data?.length >= 1 ? (

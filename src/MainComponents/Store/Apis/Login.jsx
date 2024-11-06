@@ -45,7 +45,7 @@ export const Logins = createAsyncThunk(
         window.location.pathname = "/customer-transactions";
       }
       if (data?.data?.token && data?.data?.user?.roleName === "DISCO") {
-        window.location.pathname = "/complaint";
+        window.location.pathname = "/disco-dashboard";
       }
       if (
         data?.data?.token &&

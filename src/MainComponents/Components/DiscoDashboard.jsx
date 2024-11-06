@@ -35,8 +35,10 @@ import AppUserModal from "../../Modal/AppUserModal";
 import { Notifications } from "../Store/Apis/Notifications";
 import { EarningDash } from "../Store/Apis/EarningDash";
 import { EarningCard } from "../Store/Apis/EaningCard";
+import { DiscTransactions } from "../Store/Apis/DiscTransactions";
+import { DiscoCard } from "../Store/Apis/DiscoCard";
 
-const EarningDashboard = ({ title }) => {
+const DiscoDashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
     new Date(Date.now() + 3600 * 1000 * 24)
   );
@@ -59,8 +61,8 @@ const EarningDashboard = ({ title }) => {
       // dispatch(DashboardDailyMonthly());
       // dispatch(TotalSales());
       // dispatch(ListofMeter());
-      dispatch(EarningDash({ startDate, searcher, currentPage }));
-      dispatch(EarningCard());
+      dispatch(DiscTransactions({ startDate, searcher, currentPage }));
+      dispatch(DiscoCard());
       // dispatch(Notifications({ status: "accepted" }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
@@ -86,15 +88,15 @@ const EarningDashboard = ({ title }) => {
   // );
   // console.log(totalsales);
 
-  const { earningdash, authenticatingearningdash } = useSelector(
-    (state) => state?.earningdash
+  const { disctransactions, authenticatingdisctransactions } = useSelector(
+    (state) => state?.disctransactions
   );
-  console.log(earningdash);
+  console.log(disctransactions);
 
-  const { earningcard, authenticatingearningcard } = useSelector(
-    (state) => state?.earningcard
+  const { discocard, authenticatingdiscocard } = useSelector(
+    (state) => state?.discocard
   );
-  console.log(earningcard);
+  console.log(discocard);
 
   // const { listofmeter, authenticatinglistofmeter } = useSelector(
   //   (state) => state?.listofmeter
@@ -236,13 +238,13 @@ const EarningDashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Today Sales</span>
                 <span className="text-color-user text-[20px] font-bold">
-                  ₦{formatNumberWithCommas(earningcard?.data?.todayRevenue)}
+                  ₦{formatNumberWithCommas(discocard?.data?.todayRevenue)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
                     {formatNumberWithCommas(
-                      earningcard?.data?.todayTransactionCount
+                      discocard?.data?.todayTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">8.5%</span>
@@ -262,13 +264,13 @@ const EarningDashboard = ({ title }) => {
                   This Week Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold">
-                  ₦{formatNumberWithCommas(earningcard?.data?.weeklyRevenue)}
+                  ₦{formatNumberWithCommas(discocard?.data?.weeklyRevenue)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:
                     {formatNumberWithCommas(
-                      earningcard?.data?.weeklyTransactionCount
+                      discocard?.data?.weeklyTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
@@ -290,14 +292,14 @@ const EarningDashboard = ({ title }) => {
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                   {/* ₦1 */}₦{" "}
-                  {formatNumberWithCommas(earningcard?.data?.monthlyRevenue)}
+                  {formatNumberWithCommas(discocard?.data?.monthlyRevenue)}
                   {/* {dashboard?.data?.totalApiPartners} */}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
                     {formatNumberWithCommas(
-                      earningcard?.data?.monthlyTransactionCount
+                      discocard?.data?.monthlyTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
@@ -317,13 +319,13 @@ const EarningDashboard = ({ title }) => {
                   This Year Sales
                 </span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{formatNumberWithCommas(earningcard?.data?.yearlyRevenue)}
+                  ₦{formatNumberWithCommas(discocard?.data?.yearlyRevenue)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
                     {formatNumberWithCommas(
-                      earningcard?.data?.yearlyTransactionCount
+                      discocard?.data?.yearlyTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
@@ -341,14 +343,12 @@ const EarningDashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Total Sales</span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{formatNumberWithCommas(earningcard?.data?.totalSales)}
+                  ₦{formatNumberWithCommas(discocard?.data?.totalSales)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
-                    {formatNumberWithCommas(
-                      earningcard?.data?.transactionCount
-                    )}
+                    {formatNumberWithCommas(discocard?.data?.transactionCount)}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span> */}
@@ -370,15 +370,16 @@ const EarningDashboard = ({ title }) => {
                 <Filtering />
                 <span className="text-[14px]">Filters</span>
               </div> */}
-              {earningdash?.data?.data && (
+              {disctransactions?.data?.data?.length >= 1 && (
                 <Tables
                   setDownload={setDownload}
                   setStep={setStep}
                   customertransfer
-                  data={earningdash?.data?.data?.slice(0, 10)}
+                  data={disctransactions?.data?.data?.slice(0, 10)}
                 />
               )}
-              {!earningdash?.data?.data && (
+              {(!disctransactions?.data?.data ||
+                disctransactions?.data?.data?.length === 0) && (
                 <div
                   style={{
                     display: "flex",
@@ -398,4 +399,4 @@ const EarningDashboard = ({ title }) => {
   );
 };
 
-export default EarningDashboard;
+export default DiscoDashboard;

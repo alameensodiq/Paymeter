@@ -87,19 +87,19 @@ const ApiPartner = ({ title }) => {
   };
 
   const Downloading = () => {
-    // const data = banks?.data?.data || [];
-    // const headers = data.length > 0 ? Object.keys(data[0]) : [];
-    // const objValues = data.map(item => Object.values(item).join(','));
-    // const csvContent = [headers.join(','), ...objValues].join('\n');
-    // const blob = new Blob([csvContent], { type: 'text/csv' });
-    // const url = URL.createObjectURL(blob);
-    // const a = document.createElement('a');
-    // a.href = url;
-    // a.download = 'Bank.csv';
-    // document.body.appendChild(a); // Required for Firefox
-    // a.click();
-    // document.body.removeChild(a); // Clean up
-    // URL.revokeObjectURL(url);
+    const data = apiagentrole?.data?.data || [];
+    const headers = data.length > 0 ? Object.keys(data[0]) : [];
+    const objValues = data.map((item) => Object.values(item).join(","));
+    const csvContent = [headers.join(","), ...objValues].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Bank.csv";
+    document.body.appendChild(a); // Required for Firefox
+    a.click();
+    document.body.removeChild(a); // Clean up
+    URL.revokeObjectURL(url);
   };
   return (
     <div className="flex flex-row">
@@ -126,7 +126,7 @@ const ApiPartner = ({ title }) => {
             <span className="text-route-name text-[28px] font-semibold">
               Api-Partner
             </span>
-            <div className="relative flex flex-row w-[50%]">
+            {/* <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">
                 <Search />
               </div>
@@ -139,7 +139,7 @@ const ApiPartner = ({ title }) => {
               <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
                 Search
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
             <div className="flex flex-row justify-end gap-4 px-3">

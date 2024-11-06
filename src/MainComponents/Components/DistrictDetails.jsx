@@ -425,7 +425,7 @@ const DistrictDetails = ({ title }) => {
                     <Tables
                       setDownload={setDownload}
                       overviewtransaction
-                      data={userdata?.data?.transactions?.data}
+                      data={district?.data?.transactions?.data}
                     />
                   )}
                 {!isEarningRoute &&
@@ -439,7 +439,8 @@ const DistrictDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )}
-                {district?.data?.transactions?.meta?.totalCount === 0 &&
+                {(!district?.data?.transactions?.data ||
+                  district?.data?.transactions?.data?.length === 0) &&
                   status === "accepted" && (
                     <div
                       style={{
@@ -470,10 +471,10 @@ const DistrictDetails = ({ title }) => {
                       set={activater}
                       currentPage={currentPage}
                       postsPerPage={postsPerPage}
-                      totalPosts={totalPosts}
+                      totalPosts={totalPosts3}
                       paginate={paginate}
-                      previous={previous}
-                      next={next}
+                      previous={previous3}
+                      next={next3}
                     />
                   )}
                 {/* {getcommission?.data?.length >= 1 && (

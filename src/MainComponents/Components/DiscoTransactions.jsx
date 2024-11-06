@@ -85,20 +85,70 @@ const DiscoTransactions = ({ title }) => {
     setActivater(number);
   };
 
+  // const Downloading = () => {
+  //   const data = disctransactions?.data?.data || [];
+  //   const headers = data.length > 0 ? Object.keys(data[0]) : [];
+  //   const objValues = data.map((item) => Object.values(item).join(","));
+  //   const csvContent = [headers.join(","), ...objValues].join("\n");
+  //   const blob = new Blob([csvContent], { type: "text/csv" });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement("a");
+  //   a.href = url;
+  //   a.download = "Institution.csv";
+  //   document.body.appendChild(a); // Required for Firefox
+  //   a.click();
+  //   document.body.removeChild(a); // Clean up
+  //   URL.revokeObjectURL(url);
+  // };
+
   const Downloading = () => {
+    // Get the data to be exported
     const data = disctransactions?.data?.data || [];
-    const headers = data.length > 0 ? Object.keys(data[0]) : [];
-    const objValues = data.map((item) => Object.values(item).join(","));
-    const csvContent = [headers.join(","), ...objValues].join("\n");
+
+    // Specify the fields you want to include in the CSV
+    const selectedFields = [
+      "updatedDate",
+      "reference",
+      "userType",
+      "customerName",
+      "discoName",
+      "accountNumber",
+      "meterNo",
+      "transactionAmount",
+      "discoSystemCommissionFee",
+      "discoAmount",
+      "earningPartnerFee",
+      "listtoken",
+      "smsdeliveryStatus"
+    ];
+
+    // Map over the data and only include the selected fields
+    const objValues = data.map((item) => {
+      return selectedFields
+        .map((field) => {
+          // Access the field value from the item, handle nested fields like listtoken
+          if (field === "listtoken") {
+            return item?.dispense?.listtoken?.[0] || "N/A"; // Assuming listtoken is an array
+          }
+          return item?.[field] || "N/A"; // Fallback to 'N/A' if the value is missing
+        })
+        .join(",");
+    });
+
+    // Create the CSV content by joining headers and row values
+    const headers = selectedFields.join(",");
+    const csvContent = [headers, ...objValues].join("\n");
+
+    // Create the Blob and download link
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Institution.csv";
+    a.download = "Institution.csv"; // Set the filename for download
     document.body.appendChild(a); // Required for Firefox
     a.click();
-    document.body.removeChild(a); // Clean up
-    URL.revokeObjectURL(url);
+    document.body.removeChild(a); // Clean up the link element
+    URL.revokeObjectURL(url); // Clean up the object URL
   };
 
   return (

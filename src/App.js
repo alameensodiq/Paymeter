@@ -39,6 +39,9 @@ import CustomerTransfer from "./MainComponents/Components/CustomerTransfer";
 import EarningDashboard from "./MainComponents/Components/EarningDashboard";
 import EarningTransfer from "./MainComponents/Components/EarningTransfer";
 import ManagerDashboard from "./MainComponents/Components/ManagerDashboard";
+import DiscoDashboard from "./MainComponents/Components/DiscoDashboard";
+import ManagerAgents from "./MainComponents/Components/ManagerAgents";
+import UserSetting from "./MainComponents/Components/UserSetting";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -63,6 +66,10 @@ function App() {
             <Route
               path="/dashboard"
               element={<Dashboard title={"Dashboard"} />}
+            />
+            <Route
+              path="/disco-dashboard"
+              element={<DiscoDashboard title={"Dashboard"} />}
             />
             <Route
               path="/earning-dashboard"
@@ -97,7 +104,7 @@ function App() {
 
             <Route
               path="/manager-transactions"
-              element={<EarningTransfer title={"Transactions"} />}
+              element={<ManagerAgents title={"Agents"} />}
             />
 
             <Route path="/agents" element={<Agents title={"Agents"} />} />
@@ -156,6 +163,10 @@ function App() {
             <Route path="/funding" element={<Funding title={"Funding"} />} />
             <Route path="/payment" element={<Payment title={"Payment"} />} />
             <Route path="/setting" element={<Setting title={"Settings"} />} />
+            <Route
+              path="/usersetting"
+              element={<UserSetting title={"Settings"} />}
+            />
             <Route
               path="/notification"
               element={<Notification title={"Agents"} />}

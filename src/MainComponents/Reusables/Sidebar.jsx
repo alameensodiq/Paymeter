@@ -54,24 +54,24 @@ const Sidebar = () => {
       {sessionStorage.getItem("roleName") === "DISCO" ? (
         <div className="flex flex-col py-10 gap-4 px-4">
           <Link
-            to="/dashboard"
+            to="/disco-dashboard"
             className={`flex flex-row h-[33px] ${
-              router.pathname === "/dashboard"
+              router.pathname === "/disco-dashboard"
                 ? "bg-route-bg gap-2 rounded-custom-router"
                 : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
             }`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {router.pathname === "/dashboard" || isHovered ? (
+            {router.pathname === "/disco-dashboard" || isHovered ? (
               <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
             ) : (
               <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
             )}
-            {router.pathname === "/dashboard" || isHovered ? (
+            {router.pathname === "/disco-dashboard" || isHovered ? (
               <Dashboard
                 className={`${
-                  router.pathname === "/dashboard"
+                  router.pathname === "/disco-dashboard"
                     ? "fill-current text-route-color my-[9px]"
                     : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
                 }`}
@@ -79,7 +79,7 @@ const Sidebar = () => {
             ) : (
               <Dashboard
                 className={`${
-                  router.pathname === "/dashboard"
+                  router.pathname === "/disco-dashboard"
                     ? "fill-current text-route-color my-[9px]"
                     : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
                 }`}
@@ -88,7 +88,7 @@ const Sidebar = () => {
 
             <p
               className={`${
-                router.pathname === "/dashboard"
+                router.pathname === "/disco-dashboard"
                   ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
                   : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
               }`}
@@ -190,6 +190,49 @@ const Sidebar = () => {
               Transactions
             </p>
           </Link>
+          <Link
+            to="/usersetting"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/usersetting"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered8(true)}
+            onMouseLeave={() => setIsHovered8(false)}
+          >
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/usersetting"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Setting
+            </p>
+          </Link>
         </div>
       ) : sessionStorage.getItem("roleName") === "CUSTOMERSERVICE" ? (
         <div className="flex flex-col py-10 gap-4 px-4">
@@ -234,6 +277,49 @@ const Sidebar = () => {
               }`}
             >
               Transaction
+            </p>
+          </Link>
+          <Link
+            to="/usersetting"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/usersetting"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered8(true)}
+            onMouseLeave={() => setIsHovered8(false)}
+          >
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/usersetting"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Setting
             </p>
           </Link>
         </div>
@@ -325,6 +411,49 @@ const Sidebar = () => {
               Transaction
             </p>
           </Link>
+          <Link
+            to="/usersetting"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/usersetting"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered8(true)}
+            onMouseLeave={() => setIsHovered8(false)}
+          >
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/usersetting"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Setting
+            </p>
+          </Link>
         </div>
       ) : sessionStorage.getItem("roleName") === "DISTRICTMANAGER" ? (
         <div className="flex flex-col py-10 gap-4 px-4">
@@ -411,7 +540,50 @@ const Sidebar = () => {
                   : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
               }`}
             >
-              Transaction
+              Agents
+            </p>
+          </Link>
+          <Link
+            to="/usersetting"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/usersetting"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered8(true)}
+            onMouseLeave={() => setIsHovered8(false)}
+          >
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/usersetting" || isHovered8 ? (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Settings
+                className={`${
+                  router.pathname === "/usersetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/usersetting"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Setting
             </p>
           </Link>
         </div>
