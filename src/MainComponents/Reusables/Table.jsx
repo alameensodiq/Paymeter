@@ -1627,7 +1627,7 @@ const Tables = ({
                   DATE ADDED
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "20%" }}>
-                  TOTAL AMOUNT RECEIVED
+                  PHONE NUMBER
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "5%" }}></StyledTableCell>
               </TableRow>
@@ -1655,7 +1655,7 @@ const Tables = ({
                     <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    200,000
+                    {item?.phoneNumber}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ width: "5%", position: "relative" }}
