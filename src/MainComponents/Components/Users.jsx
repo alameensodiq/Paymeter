@@ -86,19 +86,19 @@ const Users = ({ title }) => {
   };
 
   const Downloading = () => {
-    // const data = banks?.data?.data || [];
-    // const headers = data.length > 0 ? Object.keys(data[0]) : [];
-    // const objValues = data.map(item => Object.values(item).join(','));
-    // const csvContent = [headers.join(','), ...objValues].join('\n');
-    // const blob = new Blob([csvContent], { type: 'text/csv' });
-    // const url = URL.createObjectURL(blob);
-    // const a = document.createElement('a');
-    // a.href = url;
-    // a.download = 'Bank.csv';
-    // document.body.appendChild(a); // Required for Firefox
-    // a.click();
-    // document.body.removeChild(a); // Clean up
-    // URL.revokeObjectURL(url);
+    const data = customers?.data?.data || [];
+    const headers = data.length > 0 ? Object.keys(data[0]) : [];
+    const objValues = data.map((item) => Object.values(item).join(","));
+    const csvContent = [headers.join(","), ...objValues].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Bank.csv";
+    document.body.appendChild(a); // Required for Firefox
+    a.click();
+    document.body.removeChild(a); // Clean up
+    URL.revokeObjectURL(url);
   };
   return (
     <div className="flex flex-row">
