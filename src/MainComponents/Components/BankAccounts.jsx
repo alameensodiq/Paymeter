@@ -307,11 +307,17 @@ const BankAccounts = ({ title }) => {
                     Total Sales
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    ₦{formatNumberWithCommas(0)}
+                    ₦{" "}
+                    {formatNumberWithCommas(
+                      banktransactions?.data?.yearlyRevenue
+                    )}
                   </span>
                   <div className="flex flex-row gap-1 text-[10px]">
                     <span className="text-black text-[12px]">
-                      Transaction Count: {formatNumberWithCommas(0)}
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        banktransactions?.data?.yearlyTransactionCount
+                      )}
                     </span>
                     {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span> */}
