@@ -308,19 +308,19 @@ const Tables = ({
                     CUS. NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    CUS. NUMBER
+                    DISCO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO CUS NO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    METER
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
                     ACC. N0
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    METER
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     RECEIVED AMOUNT
@@ -432,20 +432,20 @@ const Tables = ({
                       {item?.customerName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {/* {item?.customerName ? } */}
                       {item?.phone ? item?.phone : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.meterNo}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoName}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.accountNumber}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.meterNo}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.inputAmount
@@ -3417,19 +3417,19 @@ const Tables = ({
                     CUS. NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    CUS. NUMBER
+                    DISCO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DISCO CUS NO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    METER
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     BANK
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
                     ACC. N0
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    METER
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     RECEIVED AMOUNT
@@ -3541,20 +3541,20 @@ const Tables = ({
                       {item?.customerName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      {item?.discoName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {/* {item?.customerName ? } */}
                       {item?.phone ? item?.phone : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.meterNo}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.discoName}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.accountNumber}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.meterNo}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.inputAmount
@@ -3801,12 +3801,13 @@ const Tables = ({
                                 onClick={() => {
                                   setOpen(!open);
                                   // setStep(53);
-                                  dispatch(
-                                    ResendToken({
-                                      metertoken: item?.dispense?.listtoken[0],
-                                      phoneNo: item?.phone
-                                    })
-                                  );
+                                  console.log(item?.dispense?.listtoken[0]);
+                                  // dispatch(
+                                  //   ResendToken({
+                                  //     metertoken: item?.dispense?.listtoken[0],
+                                  //     phoneNo: item?.phone
+                                  //   })
+                                  // );
                                   // setReload(true)
                                 }}
                                 className="text-black"
@@ -4687,9 +4688,6 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     CUSTOMER NAME
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    CUSTOMER PHONE NUMBER
-                  </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
                     BANK NAME
                   </StyledTableCell> */}
@@ -4697,10 +4695,13 @@ const Tables = ({
                     DISCO NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    ACCOUNT NUMBER
+                    DISCO CUS NO.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     METER NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACCOUNT NUMBER
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     TRANSACTION AMOUNT
@@ -4744,16 +4745,16 @@ const Tables = ({
                       {item?.customerName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      N/A
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.accountNumber}
+                      {item?.phone ? item?.phone : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.meterNo}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.accountNumber}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.transactionAmount}
@@ -5219,16 +5220,16 @@ const Tables = ({
                     CUS. NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    CUS. NUMBER
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
                     DISCO
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    ACC. N0
+                    DISCO CUS N0.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     METER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACC. N0
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     TRANX AMOUNT.
@@ -5289,16 +5290,16 @@ const Tables = ({
                       {item?.customerName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.phone ? item?.phone : "N/A"}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.accountNumber}
+                      {item?.phone ? item?.phone : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.meterNo}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.accountNumber}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{item?.transactionAmount}
