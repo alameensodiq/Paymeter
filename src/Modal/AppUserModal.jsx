@@ -5191,7 +5191,7 @@ const AppUserModal = ({
               justifyContent: "center"
             }}
           >
-            Account Created
+            Complain Resolved
           </div>
           <div
             style={{
