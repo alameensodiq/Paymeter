@@ -572,12 +572,18 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.earningPartnerCommissionType}
+                      {item?.earningPartnerCommissionType
+                        ? item?.earningPartnerCommissionType
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerCommissionType === "PERCENTAGE"
                         ? `${item?.earningFeeValue}%`
-                        : `₦${item?.earningPartnerFee || 0}`}
+                        : item?.earningPartnerCommissionType === "FIXED"
+                        ? `₦${
+                            formatNumberWithCommas(item?.earningPartnerFee) || 0
+                          }`
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerFee
@@ -3534,8 +3540,8 @@ const Tables = ({
                     DISCO COMM. TYPE
                   </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
-          DISCO COMMISSION CAP
-        </StyledTableCell> */}
+        DISCO COMMISSION CAP
+      </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM.
                   </StyledTableCell>
@@ -3647,8 +3653,8 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦0
                       {/* {item?.bankTaxFee
-                        ? `₦${item?.bankTaxFee}`
-                        : "not applicable"} */}
+                      ? `₦${item?.bankTaxFee}`
+                      : "not applicable"} */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType
@@ -3700,10 +3706,10 @@ const Tables = ({
                       {item?.discoSystemCommissionType}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-            {item?.discoSystemCommissionCapFee
-              ? `₦${item?.discoSystemCommissionCapFee}`
-              : "not applicable"}
-          </StyledTableCell> */}
+          {item?.discoSystemCommissionCapFee
+            ? `₦${item?.discoSystemCommissionCapFee}`
+            : "not applicable"}
+        </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       {/* ₦{item?.discoSystemCommissionFee} */}
                       {item?.discoSystemCommissionType === "PERCENTAGE" &&
@@ -3726,12 +3732,18 @@ const Tables = ({
                         : "not applicable"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {item?.earningPartnerCommissionType}
+                      {item?.earningPartnerCommissionType
+                        ? item?.earningPartnerCommissionType
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerCommissionType === "PERCENTAGE"
                         ? `${item?.earningFeeValue}%`
-                        : `₦${item?.earningPartnerFee || 0}`}
+                        : item?.earningPartnerCommissionType === "FIXED"
+                        ? `₦${
+                            formatNumberWithCommas(item?.earningPartnerFee) || 0
+                          }`
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerFee
@@ -3774,14 +3786,14 @@ const Tables = ({
                       }}
                     >
                       {/* <button
-              onClick={() => {
-                setOpen(!open);
-                setIndexing(index);
-              }}
-              className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
-            >
-              Action
-            </button> */}
+            onClick={() => {
+              setOpen(!open);
+              setIndexing(index);
+            }}
+            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+          >
+            Action
+          </button> */}
                       <svg
                         style={{ marginLeft: "30px" }}
                         onClick={() => {
@@ -3881,16 +3893,16 @@ const Tables = ({
                       )}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-        {item?.paymentStatus === "successfull" ? (
-          <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
-            Successful
-          </button>
-        ) : (
-          <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
-            Failed
-          </button>
-        )}
-      </StyledTableCell> */}
+      {item?.paymentStatus === "successfull" ? (
+        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+          Successful
+        </button>
+      ) : (
+        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+          Failed
+        </button>
+      )}
+    </StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
