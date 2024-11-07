@@ -2802,14 +2802,14 @@ const Tables = ({
                     <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    {item?.status !== "REJECTED" ? (
+                    {item?.status === "REJECTED" ? (
                       <button
                         // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
                         className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
                       >
                         RESOLVED
                       </button>
-                    ) : item?.status === "REJECTED" ? (
+                    ) : item?.status === "PENDING" ? (
                       <button
                         onClick={() => Pay(item?.id)}
                         className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
@@ -2817,12 +2817,13 @@ const Tables = ({
                         PENDING
                       </button>
                     ) : (
-                      <button
-                        onClick={() => Pay(item?.id)}
-                        className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
-                      >
-                        PENDING
-                      </button>
+                      ""
+                      // <button
+                      //   onClick={() => Pay(item?.id)}
+                      //   className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                      // >
+                      //   PENDING
+                      // </button>
                     )}
                   </StyledTableCell>
                   <StyledTableCell
@@ -2861,17 +2862,32 @@ const Tables = ({
                       />
                     </svg>
                     {index === indexing7 && open7 ? (
-                      <div className="absolute right-10 top-5 w-36 h-16 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
-                        <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
+                      <div className="absolute right-10 top-5 w-36 h-10 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2">
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-start",
+                            gap: 20
+                          }}
+                        >
+                          <Activate />
+                          <span
+                            onClick={() => Pay(item?.id)}
+                            className="text-black flex-row gap-1 items-center"
+                          >
+                            Resolve
+                          </span>
+                        </div>
+                        {/* <div className="flex flex-col gap-2 text-blue-600 items-center cursor-pointer">
                           <span
                             onClick={() => Pay(item?.id)}
                             className="text-black flex-row gap-1 items-center"
                           >
                             <Activate /> Resolve
                           </span>
-                          {/* <span className="text-black">Regenerate Token</span>
-                            <span className="text-black">Resend Token</span> */}
-                        </div>
+                        </div> */}
                       </div>
                     ) : (
                       ""

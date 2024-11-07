@@ -58,13 +58,15 @@ const Complaints = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reloadreal && complainapprove?.status) {
-      //   dispatch(Banks({ startDate, searcher, currentPage }));
-      // dispatch(Complain({ status }));
-      setStep(44);
-      // setReload(false);
-    }
-    if (reload) {
+    // if (reloadreal && complainapprove?.status) {
+    //   console.log(reloadreal);
+    //   console.log(complainapprove?.status);
+    //   //   dispatch(Banks({ startDate, searcher, currentPage }));
+    //   // dispatch(Complain({ status }));
+    //   setStep(44);
+    //   // setReload(false);
+    // }
+    if (reload && reloadreal) {
       dispatch(Complain({ status }));
       setReload(false);
       setReloadreal(false);
@@ -75,7 +77,7 @@ const Complaints = ({ title }) => {
     //   setReload(false);
     // }
     //eslint-disable-next-line
-  }, [reload, status, complainapprove?.status]);
+  }, [reload, status, reloadreal]);
 
   const { complain, authenticatingcomplain } = useSelector(
     (state) => state?.complain
@@ -118,6 +120,8 @@ const Complaints = ({ title }) => {
     setReloadreal(true);
   };
 
+  console.log(reloadreal);
+
   const Downloading = () => {
     // const data = banks?.data?.data || [];
     // const headers = data.length > 0 ? Object.keys(data[0]) : [];
@@ -147,13 +151,16 @@ const Complaints = ({ title }) => {
           setStep={setStep}
           step={step}
           setReload={setReload}
+          reloadreal={reloadreal}
+          setReloadreal={setReloadreal}
+          complainapprove={complainapprove?.status}
         />
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
           <div className="flex flex-row justify-between">
             <span className="text-route-name text-[28px] font-semibold">
               Complaints
             </span>
-            <div className="relative flex flex-row w-[50%]">
+            {/* <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">
                 <Search />
               </div>
@@ -166,7 +173,7 @@ const Complaints = ({ title }) => {
               <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
                 Search
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
             <div className="flex flex-row justify-end gap-4 px-3">

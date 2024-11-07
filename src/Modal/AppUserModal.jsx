@@ -75,7 +75,10 @@ const AppUserModal = ({
   setDownload,
   downloading,
   oldname,
-  setoldname
+  setoldname,
+  setReloadreal,
+  reloadreal,
+  complainapprove
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -471,6 +474,9 @@ const AppUserModal = ({
     if (bustate20 && passwordchange?.status) {
       setStep(58);
     }
+    if (reloadreal && complainapprove) {
+      setStep(44);
+    }
 
     console.log(update);
   }, [
@@ -515,7 +521,9 @@ const AppUserModal = ({
     actioning?.status,
     editdiscing?.status,
     editingbank?.status,
-    passwordchange?.status
+    passwordchange?.status,
+    reloadreal,
+    complainapprove
   ]);
 
   useEffect(() => {
@@ -1286,6 +1294,9 @@ const AppUserModal = ({
         capFee: null
       }
     });
+    if (reloadreal) {
+      setReloadreal(false);
+    }
     setBusstate(false);
     setBusstate2(false);
     setBusstate3(false);

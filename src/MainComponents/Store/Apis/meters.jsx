@@ -3,16 +3,17 @@ import toast from "react-hot-toast";
 
 export const metersing = createAsyncThunk(
   "meters",
-  async ({ startDate, searcher, currentPage, id }, thunkAPI) => {
+  async ({ id }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
-    const dateObj = new Date(startDate);
+    // const dateObj = new Date(startDate);
 
-    const formattedDate = dateObj.toISOString().slice(0, 10);
+    // const formattedDate = dateObj.toISOString().slice(0, 10);
     const accessToken = sessionStorage.getItem("token");
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}dashboard/meter-transactions/${id}?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
+        // `${process.env.REACT_APP_BASE_URL}dashboard/meter-transactions/${id}?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}dashboard/meter-transactions/${id}`,
         {
           method: "GET",
           headers: {
