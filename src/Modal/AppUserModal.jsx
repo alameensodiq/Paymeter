@@ -38,6 +38,7 @@ import Moment from "react-moment";
 import { EditBanking } from "../MainComponents/Store/Apis/EditBanking";
 import ModalInputSelectID from "../bits/ModalInputSelectID";
 import { UserPassword } from "../MainComponents/Store/Apis/UserPassword";
+import { EditingEarning } from "../MainComponents/Store/Apis/EditingEarning";
 
 const AppUserModal = ({
   setStep,
@@ -109,10 +110,12 @@ const AppUserModal = ({
   const [bustate18, setBusstate18] = useState(false);
   const [bustate19, setBusstate19] = useState(false);
   const [bustate20, setBusstate20] = useState(false);
+  const [bustate21, setBusstate21] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
   const [itemerearning, setitemerearning] = useState("");
+  const [itemerearningedit, setitemerearningedit] = useState("");
   const [itemerseditingdisc, setItemereditingdisc] = useState("");
   const [itemersmanager, setItemermanager] = useState("");
   const [itemerseditbank, setItemereditbank] = useState("");
@@ -211,6 +214,17 @@ const AppUserModal = ({
     phone: "",
     nin: "",
     password: "",
+    commissions: {
+      commissionType: "",
+      fee: "",
+      capFee: ""
+    }
+  });
+  const [editearnings, seteditEarnings] = useState({
+    email: "",
+    name: "",
+    address: "",
+    phone: "",
     commissions: {
       commissionType: "",
       fee: "",
@@ -408,6 +422,11 @@ const AppUserModal = ({
   );
   console.log(passwordchange);
 
+  const { earningediting, authenticatingearningediting } = useSelector(
+    (state) => state?.earningediting
+  );
+  console.log(passwordchange);
+
   // passwordchange?.status
 
   useEffect(() => {
@@ -474,6 +493,9 @@ const AppUserModal = ({
     if (bustate20 && passwordchange?.status) {
       setStep(58);
     }
+    if (bustate21 && earningediting?.status) {
+      setStep(60);
+    }
     if (reloadreal && complainapprove) {
       setStep(44);
     }
@@ -505,6 +527,7 @@ const AppUserModal = ({
     bustate18,
     bustate19,
     bustate20,
+    bustate21,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -523,7 +546,8 @@ const AppUserModal = ({
     editingbank?.status,
     passwordchange?.status,
     reloadreal,
-    complainapprove
+    complainapprove,
+    earningediting?.status
   ]);
 
   useEffect(() => {
@@ -625,6 +649,15 @@ const AppUserModal = ({
     console.log(value);
     setEarnings({
       ...earnings,
+      [name]: value
+    });
+  };
+
+  const ChangeEarningedit = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    seteditEarnings({
+      ...editearnings,
       [name]: value
     });
   };
@@ -837,6 +870,29 @@ const AppUserModal = ({
     }));
   };
 
+  const ChangeEarningNumberedit = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    seteditEarnings((prevDisc) => ({
+      ...editearnings,
+      [name]: sanitizedValue
+    }));
+  };
+
   const ChangePass = (e) => {
     const { name, value } = e.target;
     console.log(value);
@@ -999,6 +1055,21 @@ const AppUserModal = ({
       })
     );
     setBusstate7(true);
+  };
+
+  const SendEarningPartneredit = () => {
+    const { email, name, address, phone, commissions } = editearnings;
+    dispatch(
+      EditingEarning({
+        email,
+        name,
+        address,
+        phone,
+        commissions,
+        earningPartnerId: userIding
+      })
+    );
+    setBusstate21(true);
   };
 
   const SendPassword = () => {
@@ -1352,6 +1423,17 @@ const AppUserModal = ({
         capFee: ""
       }
     });
+    seteditEarnings({
+      email: "",
+      name: "",
+      address: "",
+      phone: "",
+      commissions: {
+        commissionType: "",
+        fee: "",
+        capFee: ""
+      }
+    });
     if (discname) {
       setdiscname("");
       setReload(true);
@@ -1431,6 +1513,20 @@ const AppUserModal = ({
       ...prev,
       commissions:
         itemerearning === "Fixed"
+          ? {
+              commissionType: "FIXED",
+              fee: null
+            }
+          : {
+              commissionType: "PERCENTAGE",
+              fee: null,
+              capFee: null
+            }
+    }));
+    seteditEarnings((prev) => ({
+      ...prev,
+      commissions:
+        itemerearningedit === "Fixed"
           ? {
               commissionType: "FIXED",
               fee: null
@@ -1564,7 +1660,8 @@ const AppUserModal = ({
     itemersedit,
     itemersmanager,
     itemerseditbank,
-    itemerearning
+    itemerearning,
+    itemerearningedit
   ]);
 
   const ChangeSettings = (e) => {
@@ -1664,6 +1761,36 @@ const AppUserModal = ({
     }
 
     setEarnings((prev) => ({
+      ...prev,
+      commissions: {
+        ...prev.commissions,
+        [name]: sanitizedValue // Pass the sanitized string value
+      }
+    }));
+  };
+
+  const ChangeSettingsEarningTypeedit = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = "0"; // Set to "0" or another default value
+    }
+
+    seteditEarnings((prev) => ({
       ...prev,
       commissions: {
         ...prev.commissions,
@@ -6323,6 +6450,192 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully Changed Password</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={59}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Edit Earning"
+      >
+        <ModalInputText
+          label="Name"
+          onChange={(e) => ChangeEarningedit(e)}
+          name="name"
+          value={editearnings?.name}
+          placeholder={`${`Enter Email`}`}
+        />
+        <ModalInputText
+          label="Email"
+          onChange={(e) => ChangeEarningedit(e)}
+          name="email"
+          value={editearnings?.email}
+          placeholder={`${`Enter Email`}`}
+        />
+        <ModalInputText
+          label="Phone"
+          onChange={(e) => ChangeEarningNumberedit(e)}
+          name="phone"
+          value={editearnings?.phone}
+          placeholder={`${`Enter Phone Number`}`}
+        />
+        <ModalInputText
+          label="Address"
+          onChange={(e) => ChangeEarningedit(e)}
+          name="address"
+          value={editearnings?.address}
+          placeholder={`${`Enter Address`}`}
+        />
+        {/* <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeEarning(e)}
+          name="password"
+          value={editearnings?.password}
+          placeholder={`${`Enter Passowrd`}`}
+        /> */}
+        <ModalInputSelectTwo
+          name="commissionType"
+          label="commission Type"
+          // onChange={(e) => ChangeDisc(e)}
+          options={["Fixed", "Percentage"]}
+          itemer={itemerearningedit}
+          big
+          setItemer={setitemerearningedit}
+        />
+        {itemerearningedit === "Fixed" ? (
+          <>
+            <ModalInputText
+              label="Fee"
+              onChange={(e) => ChangeSettingsEarningTypeedit(e)}
+              name="fee"
+              value={editearnings?.commissions?.fee}
+              placeholder={`${`Enter Fee`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+          </>
+        ) : itemerearningedit === "Percentage" ? (
+          <>
+            <ModalInputText
+              label="Fee"
+              onChange={(e) => ChangeSettingsEarningTypeedit(e)}
+              name="fee"
+              value={editearnings?.commissions?.fee}
+              placeholder={`${`Enter Fee`}`}
+            />
+            <ModalInputText
+              label="cap Fee"
+              onChange={(e) => ChangeSettingsEarningTypeedit(e)}
+              name="capFee"
+              value={editearnings?.commissions?.capFee}
+              placeholder={`${`Enter Cap Fee`}`}
+            />
+            <span style={{ color: "red", fontSize: "10px" }}>
+              Note:Percentage Must be less than or equal to Disco Percentage
+              with Paymeter
+            </span>
+          </>
+        ) : (
+          ""
+        )}
+        <LargeSignInButton
+          onClick={() => {
+            const { email, name, address, phone, commissions } = editearnings;
+            console.log({
+              email,
+              name,
+              address,
+              phone,
+              commissions
+            });
+            console.log(editearnings);
+            const isFeeMissing = commissions?.fee === null;
+            const isCapFeeMissing = commissions?.capFee === null;
+            if (
+              name &&
+              phone &&
+              email &&
+              address &&
+              email.includes("@") &&
+              (itemersmanager === "FIXED"
+                ? !isFeeMissing
+                : !isFeeMissing && !isCapFeeMissing)
+            ) {
+              // setStep(19);
+              SendEarningPartneredit();
+            } else {
+              toast.error(
+                "Fill all details correctly, including a valid email."
+              );
+            }
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={60}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Earning Partner Edited
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Edit Partner</span>
           </div>
           <div
             style={{

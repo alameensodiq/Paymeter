@@ -62,6 +62,7 @@ import { DiscoCardSlice } from "./Reducers/DiscoCard";
 import { DistrictAgentsSlice } from "./Reducers/DistrictAgents";
 import { AgentManagerSlice } from "./Reducers/AgentManager";
 import { UserPasswordSlice } from "./Reducers/UserPassword";
+import { EditingEarningSlice } from "./Reducers/EditingEarning";
 
 export default configureStore({
   reducer: {
@@ -127,6 +128,7 @@ export default configureStore({
     discocard: DiscoCardSlice?.reducer,
     districtagents: DistrictAgentsSlice?.reducer,
     agentmanager: AgentManagerSlice?.reducer,
-    passwordchange: UserPasswordSlice?.reducer
+    passwordchange: UserPasswordSlice?.reducer,
+    earningediting: EditingEarningSlice?.reducer
   }
 });

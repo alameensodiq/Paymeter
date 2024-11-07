@@ -3052,6 +3052,27 @@ const Tables = ({
                               gap: 20
                             }}
                           >
+                            <Edit />
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(59);
+                                setOpen3(!open3);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Edit
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
                             <Suspend />
                             <span
                               onClick={() => {
