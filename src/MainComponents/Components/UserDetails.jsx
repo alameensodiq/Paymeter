@@ -305,12 +305,12 @@ const UserDetails = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {earningtrans?.data?.transactions?.meta?.totalCount >= 1 &&
+                {earningtrans?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       setDownload={setDownload}
                       overviewtransaction
-                      data={earningtrans?.data?.transactions?.data}
+                      data={earningtrans?.data?.data}
                     />
                   )}
                 {!isEarningRoute &&
@@ -348,7 +348,7 @@ const UserDetails = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )} */}
-                {earningtrans?.data?.transactions?.meta?.totalCount >= 1 &&
+                {earningtrans?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}
