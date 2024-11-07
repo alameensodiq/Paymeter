@@ -341,13 +341,13 @@ const EarningDashboard = ({ title }) => {
               <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                 <span className="text-card-title text-[14px]">Total Sales</span>
                 <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{formatNumberWithCommas(earningcard?.data?.totalSales)}
+                  ₦{formatNumberWithCommas(earningcard?.data?.yearlyRevenue)}
                 </span>
                 <div className="flex flex-row gap-1 text-[10px]">
                   <span className="text-black text-[12px]">
                     Transaction Count:{" "}
                     {formatNumberWithCommas(
-                      earningcard?.data?.transactionCount
+                      earningcard?.data?.yearlyTransactionCount
                     )}
                   </span>
                   {/* <span className="text-card-user">6.5%</span>
