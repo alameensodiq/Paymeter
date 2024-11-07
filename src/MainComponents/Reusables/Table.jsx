@@ -380,7 +380,7 @@ const Tables = ({
                     DISCO COMM.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO AMOUNT
+                    DISCO COMM. VALUE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM. CAP FEE
@@ -3489,7 +3489,7 @@ const Tables = ({
                     DISCO COMM.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO AMOUNT
+                    DISCO COMM. VALUE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM. CAP FEE
@@ -4710,7 +4710,7 @@ const Tables = ({
                     DISCO COMMISSION
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO AMOUNT
+                    DISCO COMM. VALUE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     EARNING PARTNER FEE
@@ -5253,7 +5253,7 @@ const Tables = ({
                     DISCO COMM.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    DISCO AMOUNT
+                    DISCO COMM. VALUE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     DISCO COMM. CAP FEE
