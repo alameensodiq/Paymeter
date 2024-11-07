@@ -386,7 +386,8 @@ const BankAccounts = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )} */}
-                {bankaccounts?.data?.meta?.totalCount === 0 &&
+                {(bankaccounts?.data?.meta?.totalCount === 0 ||
+                  !bankaccounts?.data?.meta) &&
                   status === "accepted" && (
                     <div
                       style={{
