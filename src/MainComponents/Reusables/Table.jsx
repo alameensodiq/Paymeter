@@ -713,12 +713,12 @@ const Tables = ({
                                   setOpen(!open);
                                   // setStep(53);
                                   console.log(item?.dispense?.listtoken[0]);
-                                  // dispatch(
-                                  //   ResendToken({
-                                  //     metertoken: item?.dispense?.listtoken[0],
-                                  //     phoneNo: item?.phone
-                                  //   })
-                                  // );
+                                  dispatch(
+                                    ResendToken({
+                                      metertoken: item?.dispense?.listtoken[0],
+                                      phoneNo: item?.phone
+                                    })
+                                  );
                                   // setReload(true)
                                 }}
                                 className="text-black"
@@ -3873,12 +3873,12 @@ const Tables = ({
                                   setOpen(!open);
                                   // setStep(53);
                                   console.log(item?.dispense?.listtoken[0]);
-                                  // dispatch(
-                                  //   ResendToken({
-                                  //     metertoken: item?.dispense?.listtoken[0],
-                                  //     phoneNo: item?.phone
-                                  //   })
-                                  // );
+                                  dispatch(
+                                    ResendToken({
+                                      metertoken: item?.dispense?.listtoken[0],
+                                      phoneNo: item?.phone
+                                    })
+                                  );
                                   // setReload(true)
                                 }}
                                 className="text-black"
