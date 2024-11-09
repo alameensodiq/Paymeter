@@ -308,12 +308,12 @@ const AgentDetails = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {agenttrans?.data?.transactions?.meta?.totalCount >= 1 &&
+                {agenttrans?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
                       setDownload={setDownload}
                       overviewtransaction
-                      data={agenttrans?.data?.transactions?.data}
+                      data={agenttrans?.data?.data}
                     />
                   )}
                 {!isEarningRoute &&
@@ -327,18 +327,20 @@ const AgentDetails = ({ title }) => {
                       data={getcommission?.data}
                     />
                   )}
-                {!agenttrans?.status && status === "accepted" && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                )}
+                {(!agenttrans?.data?.data ||
+                  agenttrans?.data?.data?.length === 0) &&
+                  status === "accepted" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
                 {/* {getcommission?.data?.length === 0 && status === "pending" && (
                   <div
                     style={{
@@ -351,7 +353,7 @@ const AgentDetails = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )} */}
-                {agenttrans?.data?.transactions?.meta?.totalCount >= 1 &&
+                {agenttrans?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
                       set={activater}

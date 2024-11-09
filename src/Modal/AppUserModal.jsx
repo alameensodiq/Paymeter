@@ -689,19 +689,23 @@ const AppUserModal = ({
   const ChangePartnerNumber = (e) => {
     const { name, value } = e.target;
 
-    // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    // Remove non-numeric characters and decimal point (but allow one decimal point)
+    let sanitizedValue = value.replace(/[^0-9.]/g, "");
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
-
-    // If there's more than one decimal point, keep only the first one
     if (decimalCount > 1) {
       const firstDecimalIndex = sanitizedValue.indexOf(".");
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
+
+    // Limit to 11 characters in total (including digits before and after the decimal point)
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
+    }
+
     setPartner({
       ...partner,
       [name]: sanitizedValue
@@ -759,7 +763,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -770,6 +774,10 @@ const AppUserModal = ({
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
     }
 
     setDisc((prevDisc) => ({
@@ -782,7 +790,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -793,6 +801,9 @@ const AppUserModal = ({
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
     }
 
     seteditingdisc((prevDisc) => ({
@@ -805,7 +816,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -816,6 +827,10 @@ const AppUserModal = ({
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
     }
 
     setCustomer((prevDisc) => ({
@@ -828,7 +843,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -839,6 +854,10 @@ const AppUserModal = ({
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
     }
 
     setManager((prevDisc) => ({
@@ -851,7 +870,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -864,6 +883,10 @@ const AppUserModal = ({
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
     }
 
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
+    }
+
     setEarnings((prevDisc) => ({
       ...earnings,
       [name]: sanitizedValue
@@ -874,7 +897,7 @@ const AppUserModal = ({
     const { name, value } = e.target;
 
     // Allow only numbers and one decimal point
-    const sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
 
     // Ensure only one decimal point is allowed
     const decimalCount = (sanitizedValue.match(/\./g) || []).length;
@@ -885,6 +908,10 @@ const AppUserModal = ({
       const parts = sanitizedValue.split(".");
       sanitizedValue =
         parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
     }
 
     seteditEarnings((prevDisc) => ({
@@ -3295,8 +3322,10 @@ const AppUserModal = ({
           onClick={() => {
             if (pay?.name === "") {
               toast.error("Input Payment Name");
+              return;
+            } else {
+              setStep(15);
             }
-            setStep(15);
           }}
           bigger
           title={"Submit"}
@@ -6037,7 +6066,9 @@ const AppUserModal = ({
             >
               <span style={{ color: "#898585" }}>Account Number:</span>
               <span style={{ fontWeight: 500 }}>
-                {downloading?.accountNumber}
+                {downloading?.accountNumber
+                  ? downloading?.accountNumber
+                  : "N/A"}
               </span>
             </div>
             <div
@@ -6048,7 +6079,9 @@ const AppUserModal = ({
               }}
             >
               <span style={{ color: "#898585" }}>Bank Name:</span>
-              <span style={{ fontWeight: 500 }}>{downloading?.bankName}</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.bankName ? downloading?.bankName : "N/A"}
+              </span>
             </div>
             <div
               style={{
@@ -6059,7 +6092,7 @@ const AppUserModal = ({
             >
               <span style={{ color: "#898585" }}>Customer Name:</span>
               <span style={{ fontWeight: 500 }}>
-                {downloading?.customerName}
+                {downloading?.customerName ? downloading?.customerName : "N/A"}
               </span>
             </div>
             <div
@@ -6070,7 +6103,9 @@ const AppUserModal = ({
               }}
             >
               <span style={{ color: "#898585" }}>Disco Name:</span>
-              <span style={{ fontWeight: 500 }}>{downloading?.discoName}</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.discoName ? downloading?.discoName : "N/A"}
+              </span>
             </div>
             <div
               style={{
@@ -6080,7 +6115,9 @@ const AppUserModal = ({
               }}
             >
               <span style={{ color: "#898585" }}>Meter Number:</span>
-              <span style={{ fontWeight: 500 }}>{downloading?.meterNo}</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.meterNo ? downloading?.meterNo : "N/A"}
+              </span>
             </div>
             <div
               style={{
@@ -6091,7 +6128,12 @@ const AppUserModal = ({
             >
               <span style={{ color: "#898585" }}>Transaction Amount:</span>
               <span style={{ fontWeight: 500 }}>
-                ₦{formatNumberWithCommas(downloading?.transactionAmount)}
+                ₦
+                {formatNumberWithCommas(
+                  downloading?.transactionAmount
+                    ? downloading?.transactionAmount
+                    : "N/A"
+                )}
               </span>
             </div>
             <div
@@ -6102,7 +6144,9 @@ const AppUserModal = ({
               }}
             >
               <span style={{ color: "#898585" }}>Transaction Reference:</span>
-              <span style={{ fontWeight: 500 }}>{downloading?.reference}</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.reference ? downloading?.reference : "N/A"}
+              </span>
             </div>
             <div
               style={{
@@ -6112,7 +6156,9 @@ const AppUserModal = ({
               }}
             >
               <span style={{ color: "#898585" }}>User Type:</span>
-              <span style={{ fontWeight: 500 }}>{downloading?.userType}</span>
+              <span style={{ fontWeight: 500 }}>
+                {downloading?.userType ? downloading?.userType : "N/A"}
+              </span>
             </div>
             <div
               style={{
@@ -6123,7 +6169,11 @@ const AppUserModal = ({
             >
               <span style={{ color: "#898585" }}>Transaction Date:</span>
               <span style={{ fontWeight: 500 }}>
-                <Moment>{downloading?.dispense?.updatedDate}</Moment>
+                <Moment>
+                  {downloading?.dispense?.updatedDate
+                    ? downloading?.dispense?.updatedDate
+                    : "N/A"}
+                </Moment>
               </span>
             </div>
           </div>
