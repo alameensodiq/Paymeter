@@ -92,9 +92,9 @@ const UserDetails = ({ title }) => {
   const isEarningRoute = location.pathname.startsWith("/user/");
   const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  const next = earningtrans?.data?.transactions?.meta?.next;
-  const previous = earningtrans?.data?.transactions?.meta?.prev;
-  const totalPosts = earningtrans?.data?.transactions?.meta?.totalCount;
+  const next = earningtrans?.data?.meta?.next;
+  const previous = earningtrans?.data?.meta?.prev;
+  const totalPosts = earningtrans?.data?.meta?.totalCount;
 
   const next2 = getcommission?.data?.meta?.next;
   const previous2 = getcommission?.data?.meta?.prev;
