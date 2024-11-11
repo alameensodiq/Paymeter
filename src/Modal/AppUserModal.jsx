@@ -3132,7 +3132,7 @@ const AppUserModal = ({
           name="userType"
           value={settingglobal?.userType}
           onChange={(e) => ChangeSettings(e)}
-          options={["User Types List", "APIPARTNER", "USER"]}
+          options={["User Types List", "AGENT", "APIPARTNER", "USER"]}
         />
         <ModalInputSelectTwo
           name="commissionType"
