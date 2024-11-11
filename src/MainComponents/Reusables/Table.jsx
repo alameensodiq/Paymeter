@@ -456,7 +456,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.inputAmount
                         ? `₦${formatNumberWithCommas(item?.inputAmount)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{formatNumberWithCommas(item?.systemCharge)}
@@ -467,7 +467,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
                         ? item?.bankCommissionType
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType === "PERCENTAGE" &&
@@ -476,19 +476,19 @@ const Tables = ({
                         : item?.bankCommissionType !== "PERCENTAGE" &&
                           item?.bankCommissionFeeValue
                         ? `₦${item?.bankCommissionFeeValue || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionFeeValue
                         ? `₦${formatNumberWithCommas(
                             item?.bankCommissionFeeValue
                           )}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionFeeCap
                         ? `₦${item?.bankCommissionFeeCap}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦0
@@ -499,7 +499,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType
                         ? item?.agentCommissionType
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType === "PERCENTAGE" &&
@@ -507,22 +507,22 @@ const Tables = ({
                         ? `${item?.agentCommissionPercentageTypeFeeValue || 0}%`
                         : item?.agentCommissionType !== "PERCENTAGE"
                         ? `₦${item?.agentCommissionFee || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionFee
                         ? `₦${formatNumberWithCommas(item?.agentCommissionFee)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionCapFee
                         ? `₦${item?.agentCommissionCapFee}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType
                         ? `₦${item?.managerCommissionType}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType === "PERCENTAGE" &&
@@ -532,12 +532,12 @@ const Tables = ({
                           }%`
                         : item?.managerCommissionType !== "PERCENTAGE"
                         ? `₦${item?.districtManagerFee || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.dispense?.systemTransactions?.districtManagerFee
                         ? `₦${item?.dispense?.systemTransactions?.districtManagerFee}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       not applicable
@@ -557,19 +557,19 @@ const Tables = ({
                         ? `${item?.discoAmount}%`
                         : item?.discoSystemCommissionType !== "PERCENTAGE"
                         ? `₦${item?.discoSystemCommissionFee || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionFee
                         ? `₦${formatNumberWithCommas(
                             item?.discoSystemCommissionFee
                           )}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionCapFee
                         ? `₦${item?.discoSystemCommissionCapFee}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerCommissionType
@@ -588,7 +588,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerFee
                         ? `₦${formatNumberWithCommas(item?.earningPartnerFee)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerCapFee
@@ -3616,7 +3616,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.inputAmount
                         ? `₦${formatNumberWithCommas(item?.inputAmount)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦{formatNumberWithCommas(item?.systemCharge)}
@@ -3627,7 +3627,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType
                         ? item?.bankCommissionType
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionType === "PERCENTAGE" &&
@@ -3636,19 +3636,19 @@ const Tables = ({
                         : item?.bankCommissionType !== "PERCENTAGE" &&
                           item?.bankCommissionFeeValue
                         ? `₦${item?.bankCommissionFeeValue || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionFeeValue
                         ? `₦${formatNumberWithCommas(
                             item?.bankCommissionFeeValue
                           )}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.bankCommissionFeeCap
                         ? `₦${item?.bankCommissionFeeCap}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       ₦0
@@ -3659,7 +3659,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType
                         ? item?.agentCommissionType
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionType === "PERCENTAGE" &&
@@ -3667,22 +3667,22 @@ const Tables = ({
                         ? `${item?.agentCommissionPercentageTypeFeeValue || 0}%`
                         : item?.agentCommissionType !== "PERCENTAGE"
                         ? `₦${item?.agentCommissionFee || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionFee
                         ? `₦${formatNumberWithCommas(item?.agentCommissionFee)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.agentCommissionCapFee
                         ? `₦${item?.agentCommissionCapFee}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType
                         ? `₦${item?.managerCommissionType}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.managerCommissionType === "PERCENTAGE" &&
@@ -3692,12 +3692,12 @@ const Tables = ({
                           }%`
                         : item?.managerCommissionType !== "PERCENTAGE"
                         ? `₦${item?.districtManagerFee || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.dispense?.systemTransactions?.districtManagerFee
                         ? `₦${item?.dispense?.systemTransactions?.districtManagerFee}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       not applicable
@@ -3717,19 +3717,19 @@ const Tables = ({
                         ? `${item?.discoAmount}%`
                         : item?.discoSystemCommissionType !== "PERCENTAGE"
                         ? `₦${item?.discoSystemCommissionFee || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionFee
                         ? `₦${formatNumberWithCommas(
                             item?.discoSystemCommissionFee
                           )}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionCapFee
                         ? `₦${item?.discoSystemCommissionCapFee}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerCommissionType
@@ -3748,7 +3748,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerFee
                         ? `₦${formatNumberWithCommas(item?.earningPartnerFee)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerCapFee
@@ -4836,12 +4836,12 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoAmount
                         ? `₦${formatNumberWithCommas(item?.item?.discoAmount)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.earningPartnerFee
                         ? `₦${formatNumberWithCommas(item?.earningPartnerFee)}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell
                       ref={inputRef3}
@@ -5410,19 +5410,19 @@ const Tables = ({
                         ? `${item?.discoSystemCommissionFeePercentage}%`
                         : item?.discoSystemCommissionType !== "PERCENTAGE"
                         ? `₦${item?.discoSystemCommissionFee || 0}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionFee
                         ? `₦${formatNumberWithCommas(
                             item?.discoSystemCommissionFee
                           )}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionCapFee
                         ? `₦${item?.discoSystemCommissionCapFee}`
-                        : "not applicable"}
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell
                       ref={inputRef3}
