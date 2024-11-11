@@ -540,7 +540,7 @@ const Tables = ({
                         : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      not applicable
+                      N/A
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionType}
@@ -3700,7 +3700,7 @@ const Tables = ({
                         : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      not applicable
+                      N/A
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.discoSystemCommissionType}
