@@ -129,7 +129,7 @@ const Tables = ({
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     "&:nth-of-type(even)": {
-      backgroundColor: "#ffffff",
+      backgroundColor: "#eef0f2",
       cursor: "pointer",
       borderBottom: "1px solid #E2E8F0",
       fontFamily: theme?.typography?.fontFamily
