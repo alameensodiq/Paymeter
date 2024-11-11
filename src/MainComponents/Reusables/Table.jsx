@@ -4125,10 +4125,14 @@ const Tables = ({
                         {item?.commissions?.commissionType}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.commissions?.fee}
+                        {item?.commissions?.commissionType === "PERCENTAGE"
+                          ? `${item?.commissions?.fee}%`
+                          : `₦${formatNumberWithCommas(
+                              item?.commissions?.fee
+                            )}`}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.commissions?.capFee}
+                        ₦{formatNumberWithCommas(item?.commissions?.capFee)}
                       </StyledTableCell>
                       <StyledTableCell
                         onClick={() => {
@@ -5004,7 +5008,8 @@ const Tables = ({
                         ₦{formatNumberWithCommas(item?.transactionAmount)}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        ₦{item?.discoSystemCommissionFee}
+                        ₦
+                        {formatNumberWithCommas(item?.discoSystemCommissionFee)}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoAmount
@@ -5596,7 +5601,11 @@ const Tables = ({
                         item?.discoSystemCommissionFeePercentage
                           ? `${item?.discoSystemCommissionFeePercentage}%`
                           : item?.discoSystemCommissionType !== "PERCENTAGE"
-                          ? `₦${item?.discoSystemCommissionFee || 0}`
+                          ? `₦${
+                              formatNumberWithCommas(
+                                item?.discoSystemCommissionFee
+                              ) || 0
+                            }`
                           : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
@@ -5608,7 +5617,9 @@ const Tables = ({
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoSystemCommissionCapFee
-                          ? `₦${item?.discoSystemCommissionCapFee}`
+                          ? `₦${formatNumberWithCommas(
+                              item?.discoSystemCommissionCapFee
+                            )}`
                           : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell
