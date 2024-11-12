@@ -383,7 +383,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       AGENT COMM. CAP FEE
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       DISTRICT COMM. TYPE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -394,7 +394,7 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       DSTM CAP FEE
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       DISCO COMM. TYPE
                     </StyledTableCell>
@@ -548,7 +548,7 @@ const Tables = ({
                             )}`
                           : "N/A"}
                       </StyledTableCell>
-                      <StyledTableCell style={{ width: "10%" }}>
+                      {/* <StyledTableCell style={{ width: "10%" }}>
                         {item?.managerCommissionType
                           ? `${item?.managerCommissionType}`
                           : "N/A"}
@@ -577,7 +577,7 @@ const Tables = ({
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         N/A
-                      </StyledTableCell>
+                      </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoSystemCommissionType}
                       </StyledTableCell>
@@ -3648,7 +3648,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       AGENT COMM. CAP FEE
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       DISTRICT COMM. TYPE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -3659,7 +3659,7 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       DSTM CAP FEE
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       DISCO COMM. TYPE
                     </StyledTableCell>
@@ -3792,15 +3792,11 @@ const Tables = ({
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.agentCommissionType === "PERCENTAGE" &&
                         item?.agentCommissionPercentageTypeFeeValue
-                          ? `${
-                              item?.agentCommissionPercentageTypeFeeValue || 0
-                            }%`
-                          : item?.agentCommissionType !== "PERCENTAGE"
-                          ? `₦${
-                              formatNumberWithCommas(
-                                item?.agentCommissionFee
-                              ) || 0
-                            }`
+                          ? `${item?.agentCommissionPercentageTypeFeeValue}%`
+                          : item?.agentCommissionType === "FIXED"
+                          ? `₦${formatNumberWithCommas(
+                              item?.agentCommissionFee
+                            )}`
                           : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
@@ -3817,7 +3813,7 @@ const Tables = ({
                             )}`
                           : "N/A"}
                       </StyledTableCell>
-                      <StyledTableCell style={{ width: "10%" }}>
+                      {/* <StyledTableCell style={{ width: "10%" }}>
                         {item?.managerCommissionType
                           ? `${item?.managerCommissionType}`
                           : "N/A"}
@@ -3846,7 +3842,7 @@ const Tables = ({
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         N/A
-                      </StyledTableCell>
+                      </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoSystemCommissionType}
                       </StyledTableCell>
@@ -5493,7 +5489,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       TRANX AMOUNT.
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       DISTRICT COMM. TYPE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -5504,7 +5500,7 @@ const Tables = ({
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       DSTM CAP FEE
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       DISCO COMM. TYPE
                     </StyledTableCell>
@@ -5563,7 +5559,7 @@ const Tables = ({
                       <StyledTableCell style={{ width: "10%" }}>
                         ₦{formatNumberWithCommas(item?.transactionAmount)}
                       </StyledTableCell>
-                      <StyledTableCell style={{ width: "10%" }}>
+                      {/* <StyledTableCell style={{ width: "10%" }}>
                         {item?.managerCommissionType
                           ? `₦${item?.managerCommissionType}`
                           : "not applicable"}
@@ -5588,7 +5584,7 @@ const Tables = ({
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         not applicable
-                      </StyledTableCell>
+                      </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoSystemCommissionType}
                       </StyledTableCell>
