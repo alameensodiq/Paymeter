@@ -32,6 +32,7 @@ import { EditDetails } from "../MainComponents/Store/Apis/EditDetails";
 import { UserActioning } from "../MainComponents/Store/Apis/UserActioning";
 import { EditDisco } from "../MainComponents/Store/Apis/EditDisco";
 import watermark from "../assets/newlogo.png";
+import eko from "../assets/eko.png";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Moment from "react-moment";
@@ -6014,7 +6015,7 @@ const AppUserModal = ({
             // alignItems: "center"
           }}
         >
-          <div
+          {/* <div
             style={{
               display: "flex",
               flexDirection: "column",
@@ -6028,7 +6029,6 @@ const AppUserModal = ({
               paddingLeft: "10px",
               position: "relative",
               backgroundColor: "rgba(255, 255, 255, 0.5)"
-              // opacity: 0.1
             }}
             id="App"
           >
@@ -6143,9 +6143,12 @@ const AppUserModal = ({
                 justifyContent: "space-between"
               }}
             >
-              <span style={{ color: "#898585" }}>Transaction Reference:</span>
+              <span style={{ color: "#898585" }}>Service Charge:</span>
               <span style={{ fontWeight: 500 }}>
-                {downloading?.reference ? downloading?.reference : "N/A"}
+                ₦
+                {formatNumberWithCommas(
+                  downloading?.systemCharge ? downloading?.systemCharge : "N/A"
+                )}
               </span>
             </div>
             <div
@@ -6155,9 +6158,9 @@ const AppUserModal = ({
                 justifyContent: "space-between"
               }}
             >
-              <span style={{ color: "#898585" }}>User Type:</span>
+              <span style={{ color: "#898585" }}>Transaction Reference:</span>
               <span style={{ fontWeight: 500 }}>
-                {downloading?.userType ? downloading?.userType : "N/A"}
+                {downloading?.reference ? downloading?.reference : "N/A"}
               </span>
             </div>
             <div
@@ -6175,6 +6178,509 @@ const AppUserModal = ({
                     : "N/A"}
                 </Moment>
               </span>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="DownloadReceipt"
+              onClick={() => DownloadReceipt()}
+              large
+              background
+              color
+            />
+          </div> */}
+          <div
+            style={{
+              padding: "3px",
+              flexDirection: "column",
+              alignContent: "center"
+            }}
+            id="App"
+          >
+            <div
+              style={{
+                backgroundColor: "white",
+                width: "100%",
+                padding: "12px",
+                gap: 4
+              }}
+            >
+              <div
+                className="flex flex-row justify-center"
+                style={{
+                  textAlign: "center"
+                }}
+              >
+                <img
+                  src={eko}
+                  alt="EKO Electricity Distribution Company"
+                  style={{ height: "70px" }}
+                />
+              </div>
+
+              <div
+                style={{
+                  marginTop: "15px",
+                  marginBottom: "8px",
+                  textAlign: "center"
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "600"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  EKO ELECTRICITY DISTRIBUTION COMPANY PLC (
+                  {downloading?.discoName})
+                </p>
+              </div>
+
+              <div style={{ marginBottom: "8px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  www.ekedp.com
+                </p>
+              </div>
+
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  TEL: (+234) 07001235666
+                </p>
+              </div>
+
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <hr
+                  style={{
+                    width: "100%",
+                    textDecoration: "dotted",
+                    color: "#7A7A7A"
+                  }}
+                />
+              </div>
+
+              <div style={{ textAlign: "center" }}>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    color: "#7A7A7A"
+                  }}
+                >
+                  BILL PAYMENT RECEIPT ORIGINAL
+                </p>
+              </div>
+
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontFamily: "lucinda",
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                </p>
+              </div>
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontFamily: "lucinda",
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  _ _ _ _ _ _ _
+                </p>
+              </div>
+              <div className="gap-1 flex flex-col">
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Payment Date:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.accountNumber
+                      ? downloading?.accountNumber
+                      : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Meter Number:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.meterNo ? downloading?.meterNo : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Amount:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    ₦
+                    {formatNumberWithCommas(
+                      downloading?.transactionAmount
+                        ? downloading?.transactionAmount
+                        : "N/A"
+                    )}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Customer Name:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.customerName
+                      ? downloading?.customerName
+                      : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Address:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.address ? downloading?.address : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Bank Name:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.bankName ? downloading?.bankName : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Account:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.accountNumber
+                      ? downloading?.accountNumber
+                      : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>RRN:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.rrn ? downloading?.rrn : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Request ID:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    {downloading?.accountNumber
+                      ? downloading?.accountNumber
+                      : "N/A"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Payment Mode:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    Online
+                    {/* {downloading?.accountNumber
+                    ? downloading?.accountNumber
+                    : "N/A"} */}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span style={{ color: "#898585" }}>Sercvice Charge:-</span>
+                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                    ₦
+                    {formatNumberWithCommas(
+                      downloading?.systemCharge
+                        ? downloading?.systemCharge
+                        : "N/A"
+                    )}
+                  </span>
+                </div>
+              </div>
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                </p>
+              </div>
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontFamily: "lucinda",
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  _ _ _ _ _ _ _
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <span className="text-[14px]">Credit Token</span>
+                <span className="text-[14px] font-bold">
+                  {downloading?.dispense?.listtoken[0]
+                    ? downloading?.dispense?.listtoken[0]
+                    : "N/A"}
+                </span>
+              </div>
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                </p>
+              </div>
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p
+                  style={{
+                    fontFamily: "lucinda",
+                    fontSize: "14px",
+                    fontWeight: "400"
+                    // color: AppColors.textColor
+                  }}
+                >
+                  _ _ _ _ _ _ _
+                </p>
+              </div>
+              <div className="flex flex-col gap-1 items-center">
+                <img src={watermark} alt="watermark" className="w-[60px]" />
+                <span className="text-[16px] font-bold">THANK YOU</span>
+              </div>
+
+              {/* <div>
+          <ReceiptTile title="Payment Date" subz={formattedDate} textColor={AppColors.textColor} />
+          <ReceiptTile title="Meter Number" subz={paymeter.meterNo || ""} textColor={AppColors.textColor} />
+          <ReceiptTile
+            title="Amount"
+            subz={`N ${NumberFormat('#,##0.00').format(Number(paymeter.transactionAmount) || 0)}`}
+            textColor={AppColors.textColor}
+          />
+          <ReceiptTile title="Customer Name" subz={paymeter.customerName || ""} textColor={AppColors.textColor} />
+
+          {paymeter.address && (
+            <ReceiptTile title="Address" subz={paymeter.address} textColor={AppColors.textColor} />
+          )}
+
+          {paymeter.bankName && (
+            <ReceiptTile title="Bank Name" subz={paymeter.bankName} textColor={AppColors.textColor} />
+          )}
+
+          {paymeter.accountNumber && (
+            <ReceiptTile title="Account" subz={paymeter.accountNumber} textColor={AppColors.textColor} />
+          )}
+
+          <ReceiptTile title="RRN" subz={paymeter.rrn || ""} textColor={AppColors.textColor} />
+          <ReceiptTile title="Request ID" subz={paymeter.reference || ""} textColor={AppColors.textColor} />
+          <ReceiptTile title="Payment Mode" subz="Online" textColor={AppColors.textColor} />
+
+          <div style={{ marginBottom: "6px", textAlign: "center" }}>
+            <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
+              .....................................
+            </p>
+          </div>
+
+          {paymeter.dispense && paymeter.dispense.listtoken && paymeter.dispense.listtoken.length > 0 && (
+            <div>
+              {listTokens.map((token, index) => (
+                <div key={index} style={{ textAlign: "center" }}>
+                  <p style={{ fontFamily: "lucinda", fontSize: "13px", color: AppColors.suse, fontWeight: "400" }}>
+                    Credit Token
+                  </p>
+                  <p style={{ fontFamily: "lucinda", fontSize: "14px", color: AppColors.suse, fontWeight: "600" }}>
+                    {token}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div style={{ marginBottom: "6px", textAlign: "center" }}>
+            <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
+              .....................................
+            </p>
+          </div>
+
+          {paymeter.dispense?.tariffDescription && (
+            <div>
+              <ReceiptTile title="Tariff" subz={paymeter.dispense.tariffDescription} textColor={AppColors.textColor} />
+            </div>
+          )}
+
+          {paymeter.dispense?.debtPayment && paymeter.dispense.debtPayment !== 0 && (
+            <div>
+              <ReceiptTile
+                title="Debt Payment"
+                subz={`N ${paymeter.dispense.debtPayment}`}
+                textColor={AppColors.textColor}
+              />
+            </div>
+          )}
+
+          {paymeter.dispense?.mapUnits && paymeter.dispense.mapUnits !== 0 && (
+            <div>
+              <ReceiptTile
+                title="MAP Units"
+                subz={`${paymeter.dispense.mapUnits} ${paymeter.dispense.unitsType}`}
+                textColor={AppColors.textColor}
+              />
+            </div>
+          )}
+
+          {paymeter.dispense?.mapAmount && paymeter.dispense.mapAmount !== 0 && (
+            <div>
+              <ReceiptTile
+                title="MAP Amount"
+                subz={`N ${paymeter.dispense.mapAmount}`}
+                textColor={AppColors.textColor}
+              />
+            </div>
+          )}
+
+          {paymeter.dispense?.units !== 0 && (
+            <ReceiptTile
+              title="Units"
+              subz={`${paymeter.dispense.units} ${paymeter.dispense.unitsType}`}
+              textColor={AppColors.textColor}
+            />
+          )}
+
+          <ReceiptTile
+            title="Cost of Units"
+            subz={`N ${NumberFormat('#,##0.00').format(Number(paymeter.dispense.unitsTopUp[0]?.amount) || 0)}`}
+            textColor={AppColors.textColor}
+          />
+
+          <ReceiptTile
+            title="VAT"
+            subz={`N ${NumberFormat('#,##0.00').format(Number(paymeter.dispense.unitsTopUp[1]?.amount) || 0)}`}
+            textColor={AppColors.textColor}
+          />
+
+          {paymeter.dispense?.kctTokens && paymeter.dispense.kctTokens.length > 0 && (
+            <div>
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
+                  .....................................
+                </p>
+              </div>
+
+              {kctTokens.map((token, index) => (
+                <div key={index} style={{ textAlign: "center" }}>
+                  <p style={{ fontFamily: "lucinda", fontSize: "13px", color: AppColors.suse, fontWeight: "400" }}>
+                    KCT Token
+                  </p>
+                  <p style={{ fontFamily: "lucinda", fontSize: "14px", color: AppColors.suse, fontWeight: "600" }}>
+                    {token}
+                  </p>
+                </div>
+              ))}
+
+              <div style={{ marginBottom: "6px", textAlign: "center" }}>
+                <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
+                  .....................................
+                </p>
+              </div>
+            </div>
+          )}
+        </div> */}
             </div>
           </div>
           <div
