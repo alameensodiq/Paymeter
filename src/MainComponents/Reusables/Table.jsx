@@ -527,15 +527,11 @@ const Tables = ({
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.agentCommissionType === "PERCENTAGE" &&
                         item?.agentCommissionPercentageTypeFeeValue
-                          ? `${
-                              item?.agentCommissionPercentageTypeFeeValue || 0
-                            }%`
-                          : item?.agentCommissionType !== "PERCENTAGE"
-                          ? `₦${
-                              formatNumberWithCommas(
-                                item?.agentCommissionFee
-                              ) || 0
-                            }`
+                          ? `${item?.agentCommissionPercentageTypeFeeValue}%`
+                          : item?.agentCommissionType === "FIXED"
+                          ? `₦${formatNumberWithCommas(
+                              item?.agentCommissionFee
+                            )}`
                           : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
