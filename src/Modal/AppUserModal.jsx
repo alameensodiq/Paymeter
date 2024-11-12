@@ -6331,9 +6331,11 @@ const AppUserModal = ({
                 >
                   <span style={{ color: "#898585" }}>Payment Date:-</span>
                   <span style={{ fontWeight: 500, color: "#898585" }}>
-                    {downloading?.accountNumber
-                      ? downloading?.accountNumber
-                      : "N/A"}
+                    <Moment>
+                      {downloading?.dispense?.updatedDate
+                        ? downloading?.dispense?.updatedDate
+                        : "N/A"}
+                    </Moment>
                   </span>
                 </div>
                 <div
@@ -6544,143 +6546,6 @@ const AppUserModal = ({
                 <img src={watermark} alt="watermark" className="w-[60px]" />
                 <span className="text-[16px] font-bold">THANK YOU</span>
               </div>
-
-              {/* <div>
-          <ReceiptTile title="Payment Date" subz={formattedDate} textColor={AppColors.textColor} />
-          <ReceiptTile title="Meter Number" subz={paymeter.meterNo || ""} textColor={AppColors.textColor} />
-          <ReceiptTile
-            title="Amount"
-            subz={`N ${NumberFormat('#,##0.00').format(Number(paymeter.transactionAmount) || 0)}`}
-            textColor={AppColors.textColor}
-          />
-          <ReceiptTile title="Customer Name" subz={paymeter.customerName || ""} textColor={AppColors.textColor} />
-
-          {paymeter.address && (
-            <ReceiptTile title="Address" subz={paymeter.address} textColor={AppColors.textColor} />
-          )}
-
-          {paymeter.bankName && (
-            <ReceiptTile title="Bank Name" subz={paymeter.bankName} textColor={AppColors.textColor} />
-          )}
-
-          {paymeter.accountNumber && (
-            <ReceiptTile title="Account" subz={paymeter.accountNumber} textColor={AppColors.textColor} />
-          )}
-
-          <ReceiptTile title="RRN" subz={paymeter.rrn || ""} textColor={AppColors.textColor} />
-          <ReceiptTile title="Request ID" subz={paymeter.reference || ""} textColor={AppColors.textColor} />
-          <ReceiptTile title="Payment Mode" subz="Online" textColor={AppColors.textColor} />
-
-          <div style={{ marginBottom: "6px", textAlign: "center" }}>
-            <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
-              .....................................
-            </p>
-          </div>
-
-          {paymeter.dispense && paymeter.dispense.listtoken && paymeter.dispense.listtoken.length > 0 && (
-            <div>
-              {listTokens.map((token, index) => (
-                <div key={index} style={{ textAlign: "center" }}>
-                  <p style={{ fontFamily: "lucinda", fontSize: "13px", color: AppColors.suse, fontWeight: "400" }}>
-                    Credit Token
-                  </p>
-                  <p style={{ fontFamily: "lucinda", fontSize: "14px", color: AppColors.suse, fontWeight: "600" }}>
-                    {token}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div style={{ marginBottom: "6px", textAlign: "center" }}>
-            <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
-              .....................................
-            </p>
-          </div>
-
-          {paymeter.dispense?.tariffDescription && (
-            <div>
-              <ReceiptTile title="Tariff" subz={paymeter.dispense.tariffDescription} textColor={AppColors.textColor} />
-            </div>
-          )}
-
-          {paymeter.dispense?.debtPayment && paymeter.dispense.debtPayment !== 0 && (
-            <div>
-              <ReceiptTile
-                title="Debt Payment"
-                subz={`N ${paymeter.dispense.debtPayment}`}
-                textColor={AppColors.textColor}
-              />
-            </div>
-          )}
-
-          {paymeter.dispense?.mapUnits && paymeter.dispense.mapUnits !== 0 && (
-            <div>
-              <ReceiptTile
-                title="MAP Units"
-                subz={`${paymeter.dispense.mapUnits} ${paymeter.dispense.unitsType}`}
-                textColor={AppColors.textColor}
-              />
-            </div>
-          )}
-
-          {paymeter.dispense?.mapAmount && paymeter.dispense.mapAmount !== 0 && (
-            <div>
-              <ReceiptTile
-                title="MAP Amount"
-                subz={`N ${paymeter.dispense.mapAmount}`}
-                textColor={AppColors.textColor}
-              />
-            </div>
-          )}
-
-          {paymeter.dispense?.units !== 0 && (
-            <ReceiptTile
-              title="Units"
-              subz={`${paymeter.dispense.units} ${paymeter.dispense.unitsType}`}
-              textColor={AppColors.textColor}
-            />
-          )}
-
-          <ReceiptTile
-            title="Cost of Units"
-            subz={`N ${NumberFormat('#,##0.00').format(Number(paymeter.dispense.unitsTopUp[0]?.amount) || 0)}`}
-            textColor={AppColors.textColor}
-          />
-
-          <ReceiptTile
-            title="VAT"
-            subz={`N ${NumberFormat('#,##0.00').format(Number(paymeter.dispense.unitsTopUp[1]?.amount) || 0)}`}
-            textColor={AppColors.textColor}
-          />
-
-          {paymeter.dispense?.kctTokens && paymeter.dispense.kctTokens.length > 0 && (
-            <div>
-              <div style={{ marginBottom: "6px", textAlign: "center" }}>
-                <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
-                  .....................................
-                </p>
-              </div>
-
-              {kctTokens.map((token, index) => (
-                <div key={index} style={{ textAlign: "center" }}>
-                  <p style={{ fontFamily: "lucinda", fontSize: "13px", color: AppColors.suse, fontWeight: "400" }}>
-                    KCT Token
-                  </p>
-                  <p style={{ fontFamily: "lucinda", fontSize: "14px", color: AppColors.suse, fontWeight: "600" }}>
-                    {token}
-                  </p>
-                </div>
-              ))}
-
-              <div style={{ marginBottom: "6px", textAlign: "center" }}>
-                <p style={{ fontFamily: "lucinda", fontSize: "14px", fontWeight: "400", color: AppColors.textColor }}>
-                  .....................................
-                </p>
-              </div>
-            </div>
-          )}
-        </div> */}
             </div>
           </div>
           <div
