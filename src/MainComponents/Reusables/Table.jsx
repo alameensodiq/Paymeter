@@ -5665,7 +5665,7 @@ const Tables = ({
                           />
                         </svg>
                         {index === indexing && open ? (
-                          <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+                          <div className="absolute right-10 top-5 w-36 h-10 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
                             <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
                               <div
                                 style={{

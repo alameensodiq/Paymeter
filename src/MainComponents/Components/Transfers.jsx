@@ -15,6 +15,7 @@ import Pagination from "../Reusables/Pagination";
 import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
 import AppUserModal from "../../Modal/AppUserModal";
+import { DownloadAdminTrans } from "../Store/Apis/DownloadAdminTrans";
 
 const Transfers = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
@@ -45,19 +46,30 @@ const Transfers = ({ title }) => {
     new Date(Date.now() + 3600 * 1000 * 24)
   );
   const datePickerRef = useRef(null);
+  const datePickerRefs = useRef(null);
+
+  const dateChange = (date) => {
+    console.log(date);
+    setEndDate(date);
+  };
 
   const dateChanger = (date) => {
     console.log(date);
-    setEndDate(date);
+    setStartDate(date);
   };
 
   const PickDate = () => {
     datePickerRef.current.setOpen(true);
   };
 
+  const PickDater = () => {
+    datePickerRefs.current.setOpen(true);
+  };
+
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       dispatch(Transactions({ startDate, searcher, currentPage }));
+      dispatch(DownloadAdminTrans({ startDate, searcher, endDate }));
       return;
     } else {
       navigate("/");
@@ -65,12 +77,17 @@ const Transfers = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [startDate, searcher, currentPage]);
+  }, [startDate, searcher, currentPage, endDate]);
 
   const { transactions, authenticatingtransactions } = useSelector(
     (state) => state?.transactions
   );
   console.log(transactions);
+
+  const { downloadadmintrans, authenticatingdownloadadmintrans } = useSelector(
+    (state) => state?.downloadadmintrans
+  );
+  console.log(downloadadmintrans);
 
   useEffect(() => {
     setTimeout(() => {
@@ -89,18 +106,24 @@ const Transfers = ({ title }) => {
   };
 
   const Downloading = () => {
-    const data = transactions?.data?.data || [];
-    const headers = data.length > 0 ? Object.keys(data[0]) : [];
-    const objValues = data.map((item) => Object.values(item).join(","));
-    const csvContent = [headers.join(","), ...objValues].join("\n");
+    const data = downloadadmintrans || [];
+    if (data.length === 0) return;
+    const headers = Object.keys(data[0]);
+    const rows = data.map((item) =>
+      headers.map((header) => item[header] || "")
+    );
+    const csvContent = [
+      headers.join(","),
+      ...rows.map((row) => row.join(","))
+    ].join("\n");
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Institution.csv";
-    document.body.appendChild(a); // Required for Firefox
+    a.download = "Transactions.csv";
+    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a); // Clean up
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
 
@@ -181,10 +204,10 @@ const Transfers = ({ title }) => {
                 </div>
               </div> */}
               <div className="flex flex-row justify-end gap-4 px-3">
-                {/* <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                <div className="position:relative z-40 w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
                   <DatePicker
                     className="text-[8px] outline-none"
-                    selected={endDate}
+                    selected={startDate}
                     onChange={(date) => dateChanger(date)}
                     ref={datePickerRef}
                     showTimeSelect={false}
@@ -196,7 +219,23 @@ const Transfers = ({ title }) => {
                     className="text-[10px]"
                     onClick={() => PickDate()}
                   />
-                </div> */}
+                </div>
+                <div className="position:relative z-40 w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                  <DatePicker
+                    className="text-[8px] outline-none"
+                    selected={endDate}
+                    onChange={(date) => dateChange(date)}
+                    ref={datePickerRefs}
+                    showTimeSelect={false}
+                    dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
+                    placeholderText="13 Oct 2023"
+                    popperPlacement="bottom-start"
+                  />
+                  <Calendar
+                    className="text-[10px]"
+                    onClick={() => PickDater()}
+                  />
+                </div>
                 {/* <input
                   type="date"
                   className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"

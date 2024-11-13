@@ -63,6 +63,10 @@ import { DistrictAgentsSlice } from "./Reducers/DistrictAgents";
 import { AgentManagerSlice } from "./Reducers/AgentManager";
 import { UserPasswordSlice } from "./Reducers/UserPassword";
 import { EditingEarningSlice } from "./Reducers/EditingEarning";
+import { EarningPartCommSlice } from "./Reducers/EarningPartComm";
+import { DownloadAdminTransSlice } from "./Reducers/DownloadAdminTrans";
+import { DownloadEarningTransSlice } from "./Reducers/DownloadEarningTrans";
+import { DownloadDiscoTransSlice } from "./Reducers/DownloadDiscoTrans";
 
 export default configureStore({
   reducer: {
@@ -129,6 +133,10 @@ export default configureStore({
     districtagents: DistrictAgentsSlice?.reducer,
     agentmanager: AgentManagerSlice?.reducer,
     passwordchange: UserPasswordSlice?.reducer,
-    earningediting: EditingEarningSlice?.reducer
+    earningediting: EditingEarningSlice?.reducer,
+    earningpartcomm: EarningPartCommSlice?.reducer,
+    downloadadmintrans: DownloadAdminTransSlice?.reducer,
+    downloadearningtrans: DownloadEarningTransSlice?.reducer,
+    downloaddiscotrans: DownloadDiscoTransSlice?.reducer
   }
 });

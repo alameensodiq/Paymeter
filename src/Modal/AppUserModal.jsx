@@ -2140,6 +2140,7 @@ const AppUserModal = ({
       datePickerRef.current.click(); // If needed
     }
   };
+
   const DownloadReceipt = () => {
     const input = document.getElementById("App");
     console.log(input);

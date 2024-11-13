@@ -15,6 +15,7 @@ import Pagination from "../Reusables/Pagination";
 import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
 import { DiscTransactions } from "../Store/Apis/DiscTransactions";
+import { DownloadDiscoTrans } from "../Store/Apis/DownloadDiscoTrans";
 
 const DiscoTransactions = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
@@ -42,6 +43,7 @@ const DiscoTransactions = ({ title }) => {
     new Date(Date.now() + 3600 * 1000 * 24)
   );
   const datePickerRef = useRef(null);
+  const datePickerRefs = useRef(null);
 
   const dateChanger = (date) => {
     console.log(date);
@@ -52,9 +54,19 @@ const DiscoTransactions = ({ title }) => {
     datePickerRef.current.setOpen(true);
   };
 
+  const dateChange = (date) => {
+    console.log(date);
+    setStartDate(date);
+  };
+
+  const PickDater = () => {
+    datePickerRefs.current.setOpen(true);
+  };
+
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       dispatch(DiscTransactions({ startDate, searcher, currentPage }));
+      dispatch(DownloadDiscoTrans({ startDate, searcher, endDate }));
       return;
     } else {
       navigate("/");
@@ -62,12 +74,17 @@ const DiscoTransactions = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [startDate, searcher, currentPage]);
+  }, [startDate, searcher, currentPage, endDate]);
 
   const { disctransactions, authenticatingdisctransactions } = useSelector(
     (state) => state?.disctransactions
   );
   console.log(disctransactions);
+
+  const { downloaddiscotrans, authenticatingdownloaddiscotrans } = useSelector(
+    (state) => state?.downloaddiscotrans
+  );
+  console.log(downloaddiscotrans);
 
   useEffect(() => {
     setTimeout(() => {
@@ -103,52 +120,63 @@ const DiscoTransactions = ({ title }) => {
 
   const Downloading = () => {
     // Get the data to be exported
-    const data = disctransactions?.data?.data || [];
+    const data = downloaddiscotrans || [];
 
-    // Specify the fields you want to include in the CSV
+    // Specify the fields you want to include in the CSV (selected columns)
     const selectedFields = [
-      "updatedDate",
-      "reference",
-      "userType",
-      "customerName",
-      "discoName",
-      "accountNumber",
-      "meterNo",
-      "transactionAmount",
-      "discoSystemCommissionFee",
-      "discoAmount",
-      "earningPartnerFee",
-      "listtoken",
-      "smsdeliveryStatus"
+      "updatedDate", // Updated Date
+      "reference", // Reference
+      "userType", // User Type
+      "customerName", // Customer Name
+      "discoName", // Disco Name
+      "accountNumber", // Account Number
+      "meterNo", // Meter Number
+      "transactionAmount", // Transaction Amount
+      "discoSystemCommissionFee", // Disco System Commission Fee
+      "discoAmount", // Disco Amount
+      "earningPartnerFee", // Earning Partner Fee
+      "listtoken", // Token (nested data)
+      "smsdeliveryStatus" // SMS Delivery Status
     ];
 
-    // Map over the data and only include the selected fields
-    const objValues = data.map((item) => {
-      return selectedFields
-        .map((field) => {
-          // Access the field value from the item, handle nested fields like listtoken
-          if (field === "listtoken") {
-            return item?.dispense?.listtoken?.[0] || "N/A"; // Assuming listtoken is an array
-          }
-          return item?.[field] || "N/A"; // Fallback to 'N/A' if the value is missing
-        })
-        .join(",");
-    });
+    if (data.length === 0) return; // Exit if no data
 
-    // Create the CSV content by joining headers and row values
-    const headers = selectedFields.join(",");
-    const csvContent = [headers, ...objValues].join("\n");
+    // Create the header row (selectedFields as columns)
+    const headers = selectedFields;
+
+    // Map over the data and extract the values for each selected field
+    const rows = data.map((item) =>
+      headers.map((header) => {
+        // Handle nested field like listtoken
+        if (header === "listtoken") {
+          return item?.dispense?.listtoken?.[0] || "N/A"; // Fallback if listtoken is missing
+        }
+        return item?.[header] || "N/A"; // Fallback to "N/A" if value is missing
+      })
+    );
+
+    // Create the CSV content by joining headers and rows
+    const csvContent = [
+      headers.join(","), // Join headers with commas
+      ...rows.map((row) => row.join(",")) // Join each row's values with commas
+    ].join("\n"); // Join all rows with new lines
 
     // Create the Blob and download link
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
+
+    // Set the filename and trigger the download
     a.href = url;
-    a.download = "Institution.csv"; // Set the filename for download
-    document.body.appendChild(a); // Required for Firefox
+    a.download = "Disco_Transactions.csv"; // Set the filename for download
+
+    // Append the link to the body and trigger the click event
+    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a); // Clean up the link element
-    URL.revokeObjectURL(url); // Clean up the object URL
+
+    // Clean up the link element and object URL
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -215,7 +243,23 @@ const DiscoTransactions = ({ title }) => {
                 </div>
               </div> */}
               <div className="flex flex-row justify-end gap-4 px-3">
-                {/* <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                  <DatePicker
+                    className="text-[8px] outline-none"
+                    selected={startDate}
+                    onChange={(date) => dateChange(date)}
+                    ref={datePickerRefs}
+                    showTimeSelect={false}
+                    dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
+                    placeholderText="13 Oct 2023"
+                    popperPlacement="bottom-start"
+                  />
+                  <Calendar
+                    className="text-[10px]"
+                    onClick={() => PickDater()}
+                  />
+                </div>
+                <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
                   <DatePicker
                     className="text-[8px] outline-none"
                     selected={endDate}
@@ -230,7 +274,7 @@ const DiscoTransactions = ({ title }) => {
                     className="text-[10px]"
                     onClick={() => PickDate()}
                   />
-                </div> */}
+                </div>
                 {/* <input
                   type="date"
                   className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
