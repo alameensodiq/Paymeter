@@ -137,6 +137,7 @@ const AppUserModal = ({
     password: "",
     password_confirmation: ""
   });
+  const receiptRef = useRef();
 
   const [editinguser, seteditinguser] = useState({
     phone: "",
@@ -2163,6 +2164,41 @@ const AppUserModal = ({
   const formatNumberWithCommas = (number) => {
     if (number == null) return "0"; // Handle null or undefined
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const handlePrint = () => {
+    setTimeout(() => {
+      const input = receiptRef.current;
+      const printWindow = window.open("", "_blank");
+
+      const styles = [...document.styleSheets]
+        .map((styleSheet) => {
+          try {
+            return Array.from(styleSheet.cssRules)
+              .map((rule) => rule.cssText)
+              .join("");
+          } catch (e) {
+            return ""; // Ignore cross-origin stylesheets
+          }
+        })
+        .join("");
+
+      // Correct the line to remove the invalid character
+      printWindow.document.write("<html><head><title>Receipt</title>");
+      printWindow.document.write(`<style>${styles}</style>`); // Use correct syntax for template literals
+      printWindow.document.write("</head><body>");
+      printWindow.document.write(input.outerHTML);
+      printWindow.document.write("</body></html>");
+
+      printWindow.document.close();
+      printWindow.focus(); // Ensure the window is focused
+
+      // Wait for the content to load before printing
+      printWindow.onload = function () {
+        printWindow.print();
+        printWindow.close(); // Optionally close the window after printing
+      };
+    }, 1000);
   };
 
   return (
@@ -6210,6 +6246,7 @@ const AppUserModal = ({
               alignContent: "center"
             }}
             id="App"
+            ref={receiptRef}
           >
             <div
               style={{
@@ -6565,7 +6602,8 @@ const AppUserModal = ({
             />
             <LargeSignInButton
               title="DownloadReceipt"
-              onClick={() => DownloadReceipt()}
+              // onClick={() => DownloadReceipt()}
+              onClick={() => handlePrint()}
               large
               background
               color
