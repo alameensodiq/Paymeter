@@ -146,14 +146,15 @@ const EarningTransfer = ({ title }) => {
       "User Type", // User Type
       "Customer Name", // Customer Name
       "Phone Number", // Customer Number (phone)
-      "Disco Name", // Disco Name
       "Account Number", // Account Number
       "Meter Number", // Meter Number
       "Transaction Amount", // Transaction Amount
+      "Disco Name", // Disco Name
       "Disco Commission Type", // Disco Commission Type
       "Disco System Commission Fee", // Disco System Commission Fee
       "Disco Commission Fee Value",
       "Disco System Commission Cap Fee",
+      "Disco Amount",
       "Earning Fee Value",
       "Earning Partner Cap Fee",
       "Earning Partner Commission Type",
