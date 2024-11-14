@@ -65,7 +65,7 @@ const DiscoTransactions = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(DiscTransactions({ startDate, searcher, currentPage }));
+      dispatch(DiscTransactions({ startDate, searcher, currentPage, endDate }));
       dispatch(DownloadDiscoTrans({ startDate, searcher, endDate }));
       return;
     } else {

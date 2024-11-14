@@ -68,7 +68,7 @@ const Transfers = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(Transactions({ startDate, searcher, currentPage }));
+      dispatch(Transactions({ startDate, searcher, currentPage, endDate }));
       dispatch(DownloadAdminTrans({ startDate, searcher, endDate }));
       return;
     } else {

@@ -3,15 +3,41 @@ import toast from "react-hot-toast";
 
 export const EarningDash = createAsyncThunk(
   "earningdash",
-  async ({ startDate, searcher, currentPage }, thunkAPI) => {
+  async ({ startDate, searcher, currentPage, endDate }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const dateObj = new Date(startDate);
+    const dateObjs = new Date(endDate);
 
-    const formattedDate = dateObj.toISOString().slice(0, 10);
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed, so add 1
+    const day = String(dateObj.getDate()).padStart(2, "0");
+
+    // Get the local time components
+    const hours = String(dateObj.getHours()).padStart(2, "0");
+    const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+    const seconds = String(dateObj.getSeconds()).padStart(2, "0");
+
+    // Combine the components into the desired format
+    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+
+    const years = dateObjs.getFullYear();
+    const months = String(dateObjs.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed, so add 1
+    const days = String(dateObjs.getDate()).padStart(2, "0");
+
+    // Get the local time components
+    const hourss = String(dateObjs.getHours()).padStart(2, "0");
+    const minutess = String(dateObjs.getMinutes()).padStart(2, "0");
+    const secondss = String(dateObjs.getSeconds()).padStart(2, "0");
+
+    // Combine the components into the desired format
+    const formattedDateTimed = `${years}-${months}-${days}T${hourss}:${minutess}:${secondss}`;
+    // const dateObj = new Date(startDate);
+
+    // const formattedDate = dateObj.toISOString().slice(0, 10);
     const accessToken = sessionStorage.getItem("token");
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}dashboard/Trx-by-earningPartner?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}dashboard/Trx-by-earningPartner?search=${searcher}&startDate=${formattedDateTime}&endDate=${formattedDateTimed}&page=${currentPage}`,
         // `${process.env.REACT_APP_BASE_URL}transaction?search=${searcher}&start_date=${formattedDate}&page=${currentPage}`,
         {
           method: "GET",

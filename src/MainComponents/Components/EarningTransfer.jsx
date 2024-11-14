@@ -79,7 +79,7 @@ const EarningTransfer = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(EarningDash({ startDate, searcher, currentPage }));
+      dispatch(EarningDash({ startDate, searcher, currentPage, endDate }));
       dispatch(DownloadEarningTrans({ startDate, searcher, endDate }));
       return;
     } else {
