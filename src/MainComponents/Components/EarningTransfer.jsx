@@ -140,6 +140,7 @@ const EarningTransfer = ({ title }) => {
 
     // Specify the fields you want to include in the CSV, based on the table columns
     const selectedFields = [
+      "Transaction ID",
       "Updated Date", // Date
       "Reference", // Reference
       "User Type", // User Type
