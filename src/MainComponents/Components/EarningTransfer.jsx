@@ -129,33 +129,47 @@ const EarningTransfer = ({ title }) => {
 
   const Downloading = () => {
     // Get the data to be exported
+    console.log(downloadearningtrans);
     const data = downloadearningtrans || [];
-
-    // Specify the fields you want to include in the CSV, based on the table columns
-    const selectedFields = [
-      "updatedDate", // Date
-      "reference", // Reference
-      "userType", // User Type
-      "customerName", // Customer Name
-      "phone", // Customer Number (phone)
-      "discoName", // Disco Name
-      "accountNumber", // Account Number
-      "meterNo", // Meter Number
-      "transactionAmount", // Transaction Amount
-      "managerCommissionType", // District Commission Type
-      "districtManagerFee", // District Manager Commission Value
-      "discoSystemCommissionType", // Disco Commission Type
-      "discoSystemCommissionFee", // Disco System Commission Fee
-      "listtoken", // Token (nested field)
-      "smsdeliveryStatus" // SMS Delivery Status
-    ];
 
     if (data.length === 0) return; // Exit if no data
 
-    // Create the header row using selectedFields
-    const headers = selectedFields;
+    // Get the keys (fields) from the first item in the data array
+    const firstItem = data[0];
+    const allFields = Object.keys(firstItem); // All available fields in the first item
 
-    // Map over the data and create rows based on selected fields
+    // Specify the fields you want to include in the CSV, based on the table columns
+    const selectedFields = [
+      "Updated Date", // Date
+      "Reference", // Reference
+      "User Type", // User Type
+      "Customer Name", // Customer Name
+      "Phone Number", // Customer Number (phone)
+      "Disco Name", // Disco Name
+      "Account Number", // Account Number
+      "Meter Number", // Meter Number
+      "Transaction Amount", // Transaction Amount
+      "Disco Commission Type", // Disco Commission Type
+      "Disco System Commission Fee", // Disco System Commission Fee
+      "Disco Commission Fee Value",
+      "Disco System Commission Cap Fee",
+      "Earning Fee Value",
+      "Earning Partner Cap Fee",
+      "Earning Partner Commission Type",
+      "Earning Partner Fee",
+      "Earning Partner Name",
+      "SMS Delivery Status" // SMS Delivery Status
+    ];
+
+    // Filter selectedFields to ensure they exist in the first item (data)
+    const validFields = selectedFields.filter((field) =>
+      allFields.includes(field)
+    );
+
+    // Create the header row using validFields
+    const headers = validFields;
+
+    // Map over the data and create rows based on valid fields
     const rows = data.map((item) =>
       headers.map((header) => {
         // Handle specific fields with custom logic

@@ -120,38 +120,74 @@ const DiscoTransactions = ({ title }) => {
 
   const Downloading = () => {
     // Get the data to be exported
+    console.log(downloaddiscotrans);
     const data = downloaddiscotrans || [];
-
-    // Specify the fields you want to include in the CSV (selected columns)
-    const selectedFields = [
-      "updatedDate", // Updated Date
-      "reference", // Reference
-      "userType", // User Type
-      "customerName", // Customer Name
-      "discoName", // Disco Name
-      "accountNumber", // Account Number
-      "meterNo", // Meter Number
-      "transactionAmount", // Transaction Amount
-      "discoSystemCommissionFee", // Disco System Commission Fee
-      "discoAmount", // Disco Amount
-      "earningPartnerFee", // Earning Partner Fee
-      "listtoken", // Token (nested data)
-      "smsdeliveryStatus" // SMS Delivery Status
-    ];
 
     if (data.length === 0) return; // Exit if no data
 
-    // Create the header row (selectedFields as columns)
-    const headers = selectedFields;
+    // Get the keys (fields) from the first item in the data array
+    const firstItem = data[0];
+    const allFields = Object.keys(firstItem); // All available fields in the first item
 
-    // Map over the data and extract the values for each selected field
+    // Specify the fields you want to include in the CSV, based on the table columns
+    const selectedFields = [
+      "Transaction ID",
+      "Updated Date", // Date
+      "Reference", // Reference
+      "User Type", // User Type
+      "Customer Name", // Customer Name
+      "Phone Number", // Customer Number (phone)
+      "Disco Name", // Disco Name
+      "Account Number", // Account Number
+      "Meter Number", // Meter Number
+      "Transaction Amount", // Transaction Amount
+      "Disco Commission Type", // Disco Commission Type
+      "Disco System Commission Fee", // Disco System Commission Fee
+      "Disco Commission Fee Value",
+      "Disco System Commission Cap Fee",
+      "SMS Delivery Status" // SMS Delivery Status
+    ];
+
+    // Filter selectedFields to ensure they exist in the first item (data)
+    const validFields = selectedFields.filter((field) =>
+      allFields.includes(field)
+    );
+
+    // Create the header row using validFields
+    const headers = validFields;
+
+    // Map over the data and create rows based on valid fields
     const rows = data.map((item) =>
       headers.map((header) => {
-        // Handle nested field like listtoken
+        // Handle specific fields with custom logic
         if (header === "listtoken") {
-          return item?.dispense?.listtoken?.[0] || "N/A"; // Fallback if listtoken is missing
+          return item?.dispense?.listtoken?.[0] || "N/A"; // Assuming listtoken is an array
         }
-        return item?.[header] || "N/A"; // Fallback to "N/A" if value is missing
+        if (header === "phone") {
+          return item?.phone || "N/A"; // Handle missing phone
+        }
+        if (header === "transactionAmount") {
+          return `₦${item?.transactionAmount || "0"}`; // Format as currency
+        }
+        if (header === "managerCommissionType") {
+          return item?.managerCommissionType || "not applicable";
+        }
+        if (header === "districtManagerFee") {
+          // Check if commission type is percentage and adjust accordingly
+          return item?.managerCommissionType === "PERCENTAGE" &&
+            item?.managerCommissionPercentageTypeFeeValue
+            ? `${item?.managerCommissionPercentageTypeFeeValue || 0}%`
+            : `₦${item?.districtManagerFee || 0}`;
+        }
+        if (header === "discoSystemCommissionType") {
+          return item?.discoSystemCommissionType || "not applicable";
+        }
+        if (header === "discoSystemCommissionFee") {
+          return item?.discoSystemCommissionFee
+            ? `₦${item?.discoSystemCommissionFee}`
+            : "not applicable";
+        }
+        return item?.[header] || "N/A"; // Fallback to "N/A" if the value is missing
       })
     );
 
@@ -168,7 +204,7 @@ const DiscoTransactions = ({ title }) => {
 
     // Set the filename and trigger the download
     a.href = url;
-    a.download = "Disco_Transactions.csv"; // Set the filename for download
+    a.download = "Earning_Transactions.csv"; // Set the filename for download
 
     // Append the link to the body and trigger the click event
     document.body.appendChild(a);

@@ -16,7 +16,7 @@ export const DownloadAdminTrans = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}api/reports/api/transactions/export?search=${searcher}&start_date=${formattedDate}&end_date=${formattedDated}`,
+        `${process.env.REACT_APP_BASE_URL}reports/api/transactions/export?search=${searcher}&start_date=${formattedDate}&end_date=${formattedDated}`,
         {
           method: "GET",
           headers: {

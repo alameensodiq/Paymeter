@@ -106,6 +106,7 @@ const Transfers = ({ title }) => {
   };
 
   const Downloading = () => {
+    console.log("sodiq");
     const data = downloadadmintrans || [];
     if (data.length === 0) return;
     const headers = Object.keys(data[0]);
