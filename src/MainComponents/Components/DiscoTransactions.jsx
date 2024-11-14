@@ -122,6 +122,10 @@ const DiscoTransactions = ({ title }) => {
     // Get the data to be exported
     console.log(downloaddiscotrans);
     const data = downloaddiscotrans || [];
+    if (data.length === 0) {
+      toast.error("You can't download an empty file"); // Display the error toast
+      return; // Exit the function early if the data is empty
+    }
 
     if (data.length === 0) return; // Exit if no data
 

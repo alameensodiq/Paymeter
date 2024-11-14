@@ -131,6 +131,10 @@ const EarningTransfer = ({ title }) => {
     // Get the data to be exported
     console.log(downloadearningtrans);
     const data = downloadearningtrans || [];
+    if (data.length === 0) {
+      toast.error("You can't download an empty file"); // Display the error toast
+      return; // Exit the function early if the data is empty
+    }
 
     if (data.length === 0) return; // Exit if no data
 

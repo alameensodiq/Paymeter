@@ -108,6 +108,10 @@ const Transfers = ({ title }) => {
   const Downloading = () => {
     console.log("sodiq");
     const data = downloadadmintrans || [];
+    if (data.length === 0) {
+      toast.error("You can't download an empty file");
+      return;
+    }
     if (data.length === 0) return;
     const headers = Object.keys(data[0]);
     const rows = data.map((item) =>
