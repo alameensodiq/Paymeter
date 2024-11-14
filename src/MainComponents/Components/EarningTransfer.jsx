@@ -518,7 +518,7 @@ const EarningTransfer = ({ title }) => {
                     onClick={() => PickDater()}
                   />
                 </div>
-                <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                <div className="position:relative z-40 w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
                   <DatePicker
                     className="text-[8px] outline-none"
                     selected={endDate}
