@@ -452,7 +452,7 @@ const Tables = ({
                         </Moment>
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {item?.messageId}
+                        {item?.messageId ? item?.messageId : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.reference}
@@ -3724,7 +3724,7 @@ const Tables = ({
                         </Moment>
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {item?.messageId}
+                        {item?.messageId ? item?.messageId : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.reference}
