@@ -526,18 +526,18 @@ const Tables = ({
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.agentCommissionType === "PERCENTAGE" &&
-                        item?.agentCommissionPercentageTypeFeeValue
-                          ? `${item?.agentCommissionPercentageTypeFeeValue}%`
+                        item?.agentCommissionFee
+                          ? `${item?.agentCommissionFee}%`
                           : item?.agentCommissionType === "FIXED"
                           ? `₦${formatNumberWithCommas(
-                              item?.agentCommissionFee
+                              item?.agentCommissionPercentageTypeFeeValue
                             )}`
                           : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.agentCommissionFee
+                        {item?.agentCommissionPercentageTypeFeeValue
                           ? `₦${formatNumberWithCommas(
-                              item?.agentCommissionFee
+                              item?.agentCommissionPercentageTypeFeeValue
                             )}`
                           : "N/A"}
                       </StyledTableCell>
@@ -3791,18 +3791,18 @@ const Tables = ({
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.agentCommissionType === "PERCENTAGE" &&
-                        item?.agentCommissionPercentageTypeFeeValue
-                          ? `${item?.agentCommissionPercentageTypeFeeValue}%`
+                        item?.agentCommissionFee
+                          ? `${item?.agentCommissionFee}%`
                           : item?.agentCommissionType === "FIXED"
                           ? `₦${formatNumberWithCommas(
-                              item?.agentCommissionFee
+                              item?.agentCommissionPercentageTypeFeeValue
                             )}`
                           : "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.agentCommissionFee
+                        {item?.agentCommissionPercentageTypeFeeValue
                           ? `₦${formatNumberWithCommas(
-                              item?.agentCommissionFee
+                              item?.agentCommissionPercentageTypeFeeValue
                             )}`
                           : "N/A"}
                       </StyledTableCell>
