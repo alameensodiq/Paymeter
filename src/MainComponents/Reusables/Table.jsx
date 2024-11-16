@@ -324,6 +324,10 @@ const Tables = ({
                       DATE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      MESSAGE ID
+                    </StyledTableCell>
+
+                    <StyledTableCell style={{ width: "10%" }}>
                       REF.
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -446,6 +450,9 @@ const Tables = ({
                         <Moment format="ddd MMM DD YYYY HH:mm:ss">
                           {item?.dispense?.updatedDate}
                         </Moment>
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.messageId}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.reference}
@@ -3589,6 +3596,10 @@ const Tables = ({
                       DATE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      MESSAGE ID
+                    </StyledTableCell>
+
+                    <StyledTableCell style={{ width: "10%" }}>
                       REF.
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -3711,6 +3722,9 @@ const Tables = ({
                         <Moment format="ddd MMM DD YYYY HH:mm:ss">
                           {item?.dispense?.updatedDate}
                         </Moment>
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.messageId}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.reference}
