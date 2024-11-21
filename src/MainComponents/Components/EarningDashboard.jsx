@@ -239,270 +239,297 @@ const EarningDashboard = ({ title }) => {
               <option>Sterling bank</option>
             </select>
           </div> */}
-          <div className="flex lg:flex-row flex-col md:flex-col gap-3">
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">Today Sales</span>
-                <span className="text-color-user text-[20px] font-bold">
-                  ₦{formatNumberWithCommas(earningpartcomm?.data?.todayRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
+          <div className="flex flex-col">
+            <div className="flex flex-row gap-2 items-center mb-1">
+              <span className="text-circle-color font-bold">Sales</span>
+            </div>
+            <div className="flex lg:flex-row flex-col md:flex-col gap-3">
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    Today Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold">
+                    ₦
                     {formatNumberWithCommas(
-                      earningpartcomm?.data?.todayTransactionCount
+                      earningpartcomm?.data?.todayRevenue
                     )}
                   </span>
-                  {/* <span className="text-card-user">8.5%</span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningpartcomm?.data?.todayTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
+                  </div>
+                </div>
+                <div>
+                  <User />
                 </div>
               </div>
-              <div>
-                <User />
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  This Week Sales
-                </span>
-                <span className="text-color-user text-[20px] font-bold">
-                  ₦
-                  {formatNumberWithCommas(earningpartcomm?.data?.weeklyRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Week Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold">
+                    ₦
                     {formatNumberWithCommas(
-                      earningpartcomm?.data?.weeklyTransactionCount
+                      earningpartcomm?.data?.weeklyRevenue
                     )}
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:
+                      {formatNumberWithCommas(
+                        earningpartcomm?.data?.weeklyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span></span> */}
+                  </div>
+                </div>
+                <div>
+                  <TotalBill />
+                  {/* <TotalTransfer /> */}
                 </div>
               </div>
-              <div>
-                <TotalBill />
-                {/* <TotalTransfer /> */}
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  This Month Sales
-                </span>
-                <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {/* ₦1 */}₦{" "}
-                  {formatNumberWithCommas(
-                    earningpartcomm?.data?.monthlyRevenue
-                  )}
-                  {/* {dashboard?.data?.totalApiPartners} */}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
-                    {formatNumberWithCommas(
-                      earningpartcomm?.data?.monthlyTransactionCount
-                    )}
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Month Sales
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    {/* ₦1 */}₦{" "}
+                    {formatNumberWithCommas(
+                      earningpartcomm?.data?.monthlyRevenue
+                    )}
+                    {/* {dashboard?.data?.totalApiPartners} */}
+                  </span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningpartcomm?.data?.monthlyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average daily revenue</span> */}
+                  </div>
+                </div>
+                <div>
+                  <TotalInvestment />
                 </div>
               </div>
-              <div>
-                <TotalInvestment />
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  This Year Sales
-                </span>
-                <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦
-                  {formatNumberWithCommas(earningpartcomm?.data?.yearlyRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Year Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    ₦
                     {formatNumberWithCommas(
-                      earningpartcomm?.data?.yearlyTransactionCount
+                      earningpartcomm?.data?.yearlyRevenue
                     )}
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningpartcomm?.data?.yearlyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average monthly revenue</span> */}
+                  </div>
+                </div>
+                <div>
+                  <TotalInvestment />
                 </div>
               </div>
-              <div>
-                <TotalInvestment />
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">Total Sales</span>
-                <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦
-                  {formatNumberWithCommas(earningpartcomm?.data?.yearlyRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    Total Sales
+                  </span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    ₦
                     {formatNumberWithCommas(
-                      earningpartcomm?.data?.yearlyTransactionCount
+                      earningpartcomm?.data?.yearlyRevenue
                     )}
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningpartcomm?.data?.yearlyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span> */}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <TotalInvestment />
+                <div>
+                  <TotalInvestment />
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex lg:flex-row flex-col md:flex-col gap-3">
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">Today Comm.</span>
-                <span className="text-color-user text-[20px] font-bold">
-                  ₦{formatNumberWithCommas(earningcard?.data?.todayRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
-                    {formatNumberWithCommas(
-                      earningcard?.data?.todayTransactionCount
-                    )}
+          <div className="flex flex-col">
+            <div className="flex flex-row gap-2 items-center mb-1">
+              <span className="text-circle-color font-bold">Commissions</span>
+            </div>
+            <div className="flex lg:flex-row flex-col md:flex-col gap-3">
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    Today Comm.
                   </span>
-                  {/* <span className="text-card-user">8.5%</span>
+                  <span className="text-color-user text-[20px] font-bold">
+                    ₦{formatNumberWithCommas(earningcard?.data?.todayRevenue)}
+                  </span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningcard?.data?.todayTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
+                  </div>
+                </div>
+                <div>
+                  <User />
                 </div>
               </div>
-              <div>
-                <User />
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  This Week Comm.
-                </span>
-                <span className="text-color-user text-[20px] font-bold">
-                  ₦{formatNumberWithCommas(earningcard?.data?.weeklyRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:
-                    {formatNumberWithCommas(
-                      earningcard?.data?.weeklyTransactionCount
-                    )}
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Week Comm.
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-color-user text-[20px] font-bold">
+                    ₦{formatNumberWithCommas(earningcard?.data?.weeklyRevenue)}
+                  </span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:
+                      {formatNumberWithCommas(
+                        earningcard?.data?.weeklyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span></span> */}
+                  </div>
+                </div>
+                <div>
+                  <TotalBill />
+                  {/* <TotalTransfer /> */}
                 </div>
               </div>
-              <div>
-                <TotalBill />
-                {/* <TotalTransfer /> */}
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  This Month Comm.
-                </span>
-                <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  {/* ₦1 */}₦{" "}
-                  {formatNumberWithCommas(earningcard?.data?.monthlyRevenue)}
-                  {/* {dashboard?.data?.totalApiPartners} */}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
-                    {formatNumberWithCommas(
-                      earningcard?.data?.monthlyTransactionCount
-                    )}
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Month Comm.
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    {/* ₦1 */}₦{" "}
+                    {formatNumberWithCommas(earningcard?.data?.monthlyRevenue)}
+                    {/* {dashboard?.data?.totalApiPartners} */}
+                  </span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningcard?.data?.monthlyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average daily revenue</span> */}
+                  </div>
+                </div>
+                <div>
+                  <TotalInvestment />
                 </div>
               </div>
-              <div>
-                <TotalInvestment />
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">
-                  This Year Comm.
-                </span>
-                <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{formatNumberWithCommas(earningcard?.data?.yearlyRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
-                    {formatNumberWithCommas(
-                      earningcard?.data?.yearlyTransactionCount
-                    )}
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    This Year Comm.
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    ₦{formatNumberWithCommas(earningcard?.data?.yearlyRevenue)}
+                  </span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningcard?.data?.yearlyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average monthly revenue</span> */}
+                  </div>
+                </div>
+                <div>
+                  <TotalInvestment />
                 </div>
               </div>
-              <div>
-                <TotalInvestment />
-              </div>
-            </div>
-            <div
-              className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                <span className="text-card-title text-[14px]">Total Comm.</span>
-                <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                  ₦{formatNumberWithCommas(earningcard?.data?.yearlyRevenue)}
-                </span>
-                <div className="flex flex-row gap-1 text-[10px]">
-                  <span className="text-black text-[12px]">
-                    Transaction Count:{" "}
-                    {formatNumberWithCommas(
-                      earningcard?.data?.yearlyTransactionCount
-                    )}
+              <div
+                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+              >
+                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                  <span className="text-card-title text-[14px]">
+                    Total Comm.
                   </span>
-                  {/* <span className="text-card-user">6.5%</span>
+                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    ₦{formatNumberWithCommas(earningcard?.data?.yearlyRevenue)}
+                  </span>
+                  <div className="flex flex-row gap-1 text-[10px]">
+                    <span className="text-black text-[12px]">
+                      Transaction Count:{" "}
+                      {formatNumberWithCommas(
+                        earningcard?.data?.yearlyTransactionCount
+                      )}
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span> */}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <TotalInvestment />
+                <div>
+                  <TotalInvestment />
+                </div>
               </div>
             </div>
           </div>
@@ -518,12 +545,22 @@ const EarningDashboard = ({ title }) => {
                 <span className="text-[14px]">Filters</span>
               </div> */}
               {earningdash?.data?.data && (
-                <Tables
-                  setDownload={setDownload}
-                  setStep={setStep}
-                  customertransfer
-                  data={earningdash?.data?.data?.slice(0, 10)}
-                />
+                <>
+                  <Tables
+                    setDownload={setDownload}
+                    setStep={setStep}
+                    customertransfer
+                    data={earningdash?.data?.data?.slice(0, 10)}
+                  />
+                  <div className="flex flex-row w-[100%] justify-end pr-4">
+                    <span
+                      onClick={() => navigate("/earning-transactions")}
+                      className="text-black text-[14px] cursor-pointer"
+                    >
+                      View all
+                    </span>
+                  </div>
+                </>
               )}
               {!earningdash?.data?.data && (
                 <div

@@ -40,6 +40,7 @@ import { EditBanking } from "../MainComponents/Store/Apis/EditBanking";
 import ModalInputSelectID from "../bits/ModalInputSelectID";
 import { UserPassword } from "../MainComponents/Store/Apis/UserPassword";
 import { EditingEarning } from "../MainComponents/Store/Apis/EditingEarning";
+import QRCode from "react-qr-code";
 
 const AppUserModal = ({
   setStep,
@@ -6279,7 +6280,9 @@ const AppUserModal = ({
                 <p
                   style={{
                     fontSize: "14px",
-                    fontWeight: "600"
+                    fontWeight: "600",
+                    color: "#989898",
+                    font: "Lucida Sans Typewriter"
                     // color: AppColors.textColor
                   }}
                 >
@@ -6292,9 +6295,12 @@ const AppUserModal = ({
                 <p
                   style={{
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898",
+                    font: "Lucida Sans Typewriter"
                     // color: AppColors.textColor
                   }}
+                  className="font-lucida"
                 >
                   www.ekedp.com
                 </p>
@@ -6304,9 +6310,12 @@ const AppUserModal = ({
                 <p
                   style={{
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898",
+                    font: "Lucida Sans Typewriter"
                     // color: AppColors.textColor
                   }}
+                  className="font-lucida"
                 >
                   TEL: (+234) 07001235666
                 </p>
@@ -6317,7 +6326,7 @@ const AppUserModal = ({
                   style={{
                     width: "100%",
                     textDecoration: "dotted",
-                    color: "#7A7A7A"
+                    color: "#989898"
                   }}
                 />
               </div>
@@ -6327,8 +6336,10 @@ const AppUserModal = ({
                   style={{
                     fontSize: "14px",
                     fontWeight: "600",
-                    color: "#7A7A7A"
+                    color: "#989898",
+                    font: "Lucida Sans Typewriter"
                   }}
+                  className="font-lucida"
                 >
                   BILL PAYMENT RECEIPT ORIGINAL
                 </p>
@@ -6339,9 +6350,11 @@ const AppUserModal = ({
                   style={{
                     fontFamily: "lucinda",
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898"
                     // color: AppColors.textColor
                   }}
+                  className="font-lucida"
                 >
                   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
                 </p>
@@ -6351,9 +6364,11 @@ const AppUserModal = ({
                   style={{
                     fontFamily: "lucinda",
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898"
                     // color: AppColors.textColor
                   }}
+                  className="font-lucida"
                 >
                   _ _ _ _ _ _ _
                 </p>
@@ -6367,8 +6382,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Payment Date:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Payment Date:-
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                    className="font-lucida"
+                  >
                     <Moment>
                       {downloading?.dispense?.updatedDate
                         ? downloading?.dispense?.updatedDate
@@ -6384,8 +6407,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Meter Number:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Meter Number:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                  >
                     {downloading?.meterNo ? downloading?.meterNo : "N/A"}
                   </span>
                 </div>
@@ -6397,8 +6428,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Amount:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Amount:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                  >
                     ₦
                     {formatNumberWithCommas(
                       downloading?.transactionAmount
@@ -6415,8 +6454,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Customer Name:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Customer Name:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                  >
                     {downloading?.customerName
                       ? downloading?.customerName
                       : "N/A"}
@@ -6430,8 +6477,17 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Address:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Address:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898",
+                      font: "Lucida Sans Typewriter"
+                    }}
+                  >
                     {downloading?.address ? downloading?.address : "N/A"}
                   </span>
                 </div>
@@ -6443,8 +6499,17 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Bank Name:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Bank Name:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898",
+                      font: "Lucida Sans Typewriter"
+                    }}
+                  >
                     {downloading?.bankName ? downloading?.bankName : "N/A"}
                   </span>
                 </div>
@@ -6456,8 +6521,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Account:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Account:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                  >
                     {downloading?.accountNumber
                       ? downloading?.accountNumber
                       : "N/A"}
@@ -6471,8 +6544,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>RRN:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    RRN:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                  >
                     {downloading?.rrn ? downloading?.rrn : "N/A"}
                   </span>
                 </div>
@@ -6484,8 +6565,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Request ID:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Request ID:-
+                  </span>
+                  <span
+                    className="font-lucida"
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                  >
                     {downloading?.accountNumber
                       ? downloading?.accountNumber
                       : "N/A"}
@@ -6499,8 +6588,16 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Payment Mode:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Payment Mode:-
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                    className="font-lucida"
+                  >
                     Online
                     {/* {downloading?.accountNumber
                     ? downloading?.accountNumber
@@ -6515,8 +6612,17 @@ const AppUserModal = ({
                     paddingInline: 60
                   }}
                 >
-                  <span style={{ color: "#898585" }}>Sercvice Charge:-</span>
-                  <span style={{ fontWeight: 500, color: "#898585" }}>
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Sercvice Charge:-
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898",
+                      font: "Lucida Sans Typewriter"
+                    }}
+                    className="font-lucida"
+                  >
                     ₦
                     {formatNumberWithCommas(
                       downloading?.systemCharge
@@ -6528,9 +6634,11 @@ const AppUserModal = ({
               </div>
               <div style={{ marginBottom: "6px", textAlign: "center" }}>
                 <p
+                  className="font-lucida"
                   style={{
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898"
                     // color: AppColors.textColor
                   }}
                 >
@@ -6539,10 +6647,12 @@ const AppUserModal = ({
               </div>
               <div style={{ marginBottom: "6px", textAlign: "center" }}>
                 <p
+                  className="font-lucida"
                   style={{
                     fontFamily: "lucinda",
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898"
                     // color: AppColors.textColor
                   }}
                 >
@@ -6550,8 +6660,8 @@ const AppUserModal = ({
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <span className="text-[14px]">Credit Token</span>
-                <span className="text-[14px] font-bold">
+                <span className="text-[14px] font-lucida">Credit Token</span>
+                <span className="text-[14px] font-bold text-[#7A7A7A] font-lucida">
                   {downloading?.dispense?.listtoken[0]
                     ? downloading?.dispense?.listtoken[0]
                     : "N/A"}
@@ -6561,7 +6671,9 @@ const AppUserModal = ({
                 <p
                   style={{
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898",
+                    font: "Lucida Sans Typewriter"
                     // color: AppColors.textColor
                   }}
                 >
@@ -6573,7 +6685,9 @@ const AppUserModal = ({
                   style={{
                     fontFamily: "lucinda",
                     fontSize: "14px",
-                    fontWeight: "400"
+                    fontWeight: "400",
+                    color: "#989898",
+                    font: "Lucida Sans Typewriter"
                     // color: AppColors.textColor
                   }}
                 >
@@ -6582,7 +6696,22 @@ const AppUserModal = ({
               </div>
               <div className="flex flex-col gap-1 items-center">
                 <img src={watermark} alt="watermark" className="w-[60px]" />
-                <span className="text-[16px] font-bold">THANK YOU</span>
+                <span
+                  style={{ font: "Lucida Sans Typewriter" }}
+                  className="text-[16px] font-bold font-lucida"
+                >
+                  THANK YOU
+                </span>
+              </div>
+              <div className="flex flex-row justify-center items-center">
+                {downloading?.dispense?.listtoken[0] && (
+                  <QRCode
+                    size={200}
+                    bgColor="white"
+                    fgColor="black"
+                    value={`https://user.paymeterng.com/r/${downloading?.dispense?.listtoken[0]}`}
+                  />
+                )}
               </div>
             </div>
           </div>

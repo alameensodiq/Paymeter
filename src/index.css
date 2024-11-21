@@ -25,6 +25,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: "Lucida Sans Typewriter";
+  src: url("/src/assets/lucida-sans-webfont/LSANS.woff") format("woff"),
+  url("/src/assets/lucida-sans-webfont/LSANS.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -54,6 +54,10 @@ module.exports = {
       },
       borderWidth: {
         bdwidth: "1px"
+      },
+      fontFamily: {
+        lucida: ['"Lucida Sans Typewriter"', "monospace"], // Add fallback fonts
+        inter: ["Inter", "sans-serif"] // Include your existing fonts
       }
     }
   },

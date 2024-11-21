@@ -2,19 +2,45 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 function DoubleBarChart({ data }) {
-  // Log the input data to verify structure
   console.log("Data received:", data);
 
-  // Initialize an empty series array
-  let series = [];
+  // Extract unique disco names and assign them unique colors
+  const discoNames = Array.from(
+    new Set(
+      data.flatMap(
+        (monthData) =>
+          monthData?.discoData?.map((disco) => disco.discoName) || []
+      )
+    )
+  );
 
+  const colorPalette = [
+    "#E9EDF5",
+    "#9932CC",
+    "#c29bd6",
+    "#d81694",
+    "#1E90FF",
+    "#FF4500",
+    "#32CD32",
+    "#FFD700",
+    "#DC143C",
+    "#00BFFF"
+  ];
+
+  const discoColorMap = discoNames.reduce((acc, discoName, index) => {
+    acc[discoName] = colorPalette[index % colorPalette.length];
+    return acc;
+  }, {});
+
+  console.log("Disco color mapping:", discoColorMap);
+
+  // Generate the series data
+  let series = [];
   if (Array.isArray(data)) {
-    // Create a series for each disco in discoData for each month
     series = data
       .map((monthData) => {
         const { discoData, month } = monthData;
 
-        // Ensure discoData is defined and is an array
         if (Array.isArray(discoData)) {
           return discoData.map((disco) => ({
             name: disco.discoName,
@@ -22,7 +48,6 @@ function DoubleBarChart({ data }) {
             data: Array(12)
               .fill(0)
               .map((_, index) => {
-                // Check if this month corresponds to the current index
                 return month ===
                   [
                     "JANUARY",
@@ -43,28 +68,20 @@ function DoubleBarChart({ data }) {
               })
           }));
         }
-        return []; // Return an empty array if discoData is not valid
+        return [];
       })
-      .flat(); // Flatten the resulting arrays into a single series array
+      .flat();
   }
 
   console.log("Series prepared:", series);
 
-  // Generate unique colors for each disco based on the number of series
-  const colors = series.map((_, index) => {
-    const colorPalette = [
-      "#E9EDF5",
-      "#9932CC",
-      "#c29bd6",
-      "#d81694",
-      "#1E90FF",
-      "#FF4500"
-    ];
-    return colorPalette[index % colorPalette.length]; // Cycle through colors
-  });
+  // Assign colors to series based on discoName
+  const seriesColors = series.map(
+    (seriesItem) => discoColorMap[seriesItem.name]
+  );
 
   const options = {
-    colors: colors, // Use the dynamically generated colors
+    colors: seriesColors, // Use the dynamically mapped colors
     chart: {
       height: 220,
       type: "bar",

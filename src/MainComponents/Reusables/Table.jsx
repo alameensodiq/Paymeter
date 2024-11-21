@@ -663,9 +663,87 @@ const Tables = ({
                         // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
                         style={{ width: "10%" }}
                       >
-                        {item?.smsdeliveryStatus
-                          ? item?.smsdeliveryStatus
-                          : "N/A"}
+                        {item?.smsdeliveryStatus ? (
+                          item?.smsdeliveryStatus === "SENT" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#8a8a7d",
+                                color: "#e6df19",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#e5e999",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              SENT
+                            </button>
+                          ) : item?.smsdeliveryStatus === "DELIVERED" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "90px",
+                                height: "20px",
+                                background: "#ECFDF3",
+                                color: "#027A48",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#027A48",
+                                  fontSize: "10px",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              DELIVERED
+                            </button>
+                          ) : (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#ed7d6c",
+                                color: "#f4270b",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#f4270b",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              FAILED
+                            </button>
+                          )
+                        ) : (
+                          "N/A"
+                        )}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "5%" }}>
                         {item?.messageId ? item?.messageId : "N/A"}
@@ -3657,23 +3735,23 @@ const Tables = ({
                       AGENT COMM. CAP FEE
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-                    DISTRICT COMM. TYPE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DSTM COMM.
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DSTM COMM. VALUE
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    DSTM CAP FEE
-                  </StyledTableCell> */}
+                      DISTRICT COMM. TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DSTM COMM.
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DSTM COMM. VALUE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DSTM CAP FEE
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       DISCO COMM. TYPE
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-        DISCO COMMISSION CAP
-      </StyledTableCell> */}
+          DISCO COMMISSION CAP
+        </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       DISCO COMM.
                     </StyledTableCell>
@@ -3792,8 +3870,8 @@ const Tables = ({
                       <StyledTableCell style={{ width: "10%" }}>
                         ₦0
                         {/* {item?.bankTaxFee
-                      ? `₦${item?.bankTaxFee}`
-                      : "not applicable"} */}
+                        ? `₦${item?.bankTaxFee}`
+                        : "not applicable"} */}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.agentCommissionType
@@ -3825,43 +3903,43 @@ const Tables = ({
                           : "N/A"}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
-                      {item?.managerCommissionType
-                        ? `${item?.managerCommissionType}`
-                        : "N/A"}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.managerCommissionType === "PERCENTAGE" &&
-                      item?.managerCommissionPercentageTypeFeeValue
-                        ? `${
-                            item?.managerCommissionPercentageTypeFeeValue || 0
-                          }%`
-                        : item?.managerCommissionType !== "PERCENTAGE"
-                        ? `₦${
-                            formatNumberWithCommas(
-                              item?.districtManagerFee
-                            ) || 0
-                          }`
-                        : "N/A"}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      {item?.dispense?.systemTransactions?.districtManagerFee
-                        ? `₦${formatNumberWithCommas(
-                            item?.dispense?.systemTransactions
-                              ?.districtManagerFee
-                          )}`
-                        : "N/A"}
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      N/A
-                    </StyledTableCell> */}
+                        {item?.managerCommissionType
+                          ? `${item?.managerCommissionType}`
+                          : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.managerCommissionType === "PERCENTAGE" &&
+                        item?.managerCommissionPercentageTypeFeeValue
+                          ? `${
+                              item?.managerCommissionPercentageTypeFeeValue || 0
+                            }%`
+                          : item?.managerCommissionType !== "PERCENTAGE"
+                          ? `₦${
+                              formatNumberWithCommas(
+                                item?.districtManagerFee
+                              ) || 0
+                            }`
+                          : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.dispense?.systemTransactions?.districtManagerFee
+                          ? `₦${formatNumberWithCommas(
+                              item?.dispense?.systemTransactions
+                                ?.districtManagerFee
+                            )}`
+                          : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        N/A
+                      </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoSystemCommissionType}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
-          {item?.discoSystemCommissionCapFee
-            ? `₦${item?.discoSystemCommissionCapFee}`
-            : "not applicable"}
-        </StyledTableCell> */}
+            {item?.discoSystemCommissionCapFee
+              ? `₦${item?.discoSystemCommissionCapFee}`
+              : "not applicable"}
+          </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {/* ₦{item?.discoSystemCommissionFee} */}
                         {item?.discoSystemCommissionType === "PERCENTAGE" &&
@@ -3935,9 +4013,87 @@ const Tables = ({
                         // onClick={() => handleCopy3(item?.dispense?.listtoken[0])}
                         style={{ width: "10%" }}
                       >
-                        {item?.smsdeliveryStatus
-                          ? item?.smsdeliveryStatus
-                          : "N/A"}
+                        {item?.smsdeliveryStatus ? (
+                          item?.smsdeliveryStatus === "SENT" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#8a8a7d",
+                                color: "#e6df19",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#e5e999",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              SENT
+                            </button>
+                          ) : item?.smsdeliveryStatus === "DELIVERED" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "90px",
+                                height: "20px",
+                                background: "#ECFDF3",
+                                color: "#027A48",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#027A48",
+                                  fontSize: "10px",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              DELIVERED
+                            </button>
+                          ) : (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#ed7d6c",
+                                color: "#f4270b",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#f4270b",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              FAILED
+                            </button>
+                          )
+                        ) : (
+                          "N/A"
+                        )}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "5%" }}>
                         {item?.messageId ? item?.messageId : "N/A"}
@@ -3954,14 +4110,14 @@ const Tables = ({
                         }}
                       >
                         {/* <button
-            onClick={() => {
-              setOpen(!open);
-              setIndexing(index);
-            }}
-            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
-          >
-            Action
-          </button> */}
+              onClick={() => {
+                setOpen(!open);
+                setIndexing(index);
+              }}
+              className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+            >
+              Action
+            </button> */}
                         <svg
                           style={{ marginLeft: "30px" }}
                           onClick={() => {
@@ -4062,16 +4218,16 @@ const Tables = ({
                         )}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
-      {item?.paymentStatus === "successfull" ? (
-        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
-          Successful
-        </button>
-      ) : (
-        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
-          Failed
-        </button>
-      )}
-    </StyledTableCell> */}
+        {item?.paymentStatus === "successfull" ? (
+          <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+            Successful
+          </button>
+        ) : (
+          <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+            Failed
+          </button>
+        )}
+      </StyledTableCell> */}
                     </StyledTableRow>
                   ))}
                 </TableBody>
@@ -5638,9 +5794,87 @@ const Tables = ({
                         {item?.dispense?.listtoken[0] || "N/A"}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.smsdeliveryStatus
-                          ? item?.smsdeliveryStatus
-                          : "N/A"}
+                        {item?.smsdeliveryStatus ? (
+                          item?.smsdeliveryStatus === "SENT" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#8a8a7d",
+                                color: "#e6df19",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#e5e999",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              SENT
+                            </button>
+                          ) : item?.smsdeliveryStatus === "DELIVERED" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "90px",
+                                height: "20px",
+                                background: "#ECFDF3",
+                                color: "#027A48",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#027A48",
+                                  fontSize: "10px",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              DELIVERED
+                            </button>
+                          ) : (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#ed7d6c",
+                                color: "#f4270b",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#f4270b",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              FAILED
+                            </button>
+                          )
+                        ) : (
+                          "N/A"
+                        )}
                       </StyledTableCell>
                       <StyledTableCell
                         onClick={() => {
