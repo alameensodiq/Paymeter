@@ -285,9 +285,9 @@ const DiscoTransactions = ({ title }) => {
                 </div>
               </div> */}
               <div className="flex flex-row justify-end gap-4 px-3">
-                <div className="position:relative z-40 w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                <div className="position:relative z-40 w-[140px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
                   <DatePicker
-                    className="text-[8px] outline-none"
+                    className="text-[10px] outline-none"
                     selected={startDate}
                     onChange={(date) => dateChange(date)}
                     ref={datePickerRefs}
@@ -301,9 +301,9 @@ const DiscoTransactions = ({ title }) => {
                     onClick={() => PickDater()}
                   />
                 </div>
-                <div className="position:relative z-40 w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                <div className="position:relative z-40 w-[140px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
                   <DatePicker
-                    className="text-[8px] outline-none"
+                    className="text-[10px] outline-none"
                     selected={endDate}
                     onChange={(date) => dateChanger(date)}
                     ref={datePickerRef}
