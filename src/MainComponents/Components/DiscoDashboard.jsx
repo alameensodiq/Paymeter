@@ -61,7 +61,7 @@ const DiscoDashboard = ({ title }) => {
       // dispatch(DashboardDailyMonthly());
       // dispatch(TotalSales());
       // dispatch(ListofMeter());
-      dispatch(DiscTransactions({ startDate, searcher, currentPage }));
+      dispatch(DiscTransactions({ startDate, searcher, currentPage, endDate }));
       dispatch(DiscoCard());
       // dispatch(Notifications({ status: "accepted" }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
@@ -72,7 +72,7 @@ const DiscoDashboard = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [startDate, , searcher, currentPage]);
+  }, [startDate, , searcher, currentPage, endDate]);
 
   const dateChanger = (date) => {
     console.log(date);

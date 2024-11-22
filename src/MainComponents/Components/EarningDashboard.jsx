@@ -60,7 +60,7 @@ const EarningDashboard = ({ title }) => {
       // dispatch(DashboardDailyMonthly());
       // dispatch(TotalSales());
       // dispatch(ListofMeter());
-      dispatch(EarningDash({ startDate, searcher, currentPage }));
+      dispatch(EarningDash({ startDate, searcher, currentPage, endDate }));
       dispatch(EarningPartComm());
       dispatch(EarningCard());
       // dispatch(Notifications({ status: "accepted" }));
@@ -72,7 +72,7 @@ const EarningDashboard = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [startDate, , searcher, currentPage]);
+  }, [startDate, , searcher, currentPage, endDate]);
 
   const dateChanger = (date) => {
     console.log(date);

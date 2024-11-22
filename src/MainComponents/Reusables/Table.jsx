@@ -722,7 +722,7 @@ const Tables = ({
                                 flexDirection: "row",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                width: "80%",
+                                width: "100%",
                                 height: "20px",
                                 background: "#ed7d6c",
                                 color: "#f4270b",
@@ -735,7 +735,8 @@ const Tables = ({
                                   background: "#f4270b",
                                   width: "6px",
                                   height: "6px",
-                                  borderRadius: "50%"
+                                  borderRadius: "50%",
+                                  fontSize: "10px"
                                 }}
                               ></span>{" "}
                               FAILED
@@ -4072,7 +4073,7 @@ const Tables = ({
                                 flexDirection: "row",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                width: "80%",
+                                width: "100%",
                                 height: "20px",
                                 background: "#ed7d6c",
                                 color: "#f4270b",
@@ -4085,7 +4086,8 @@ const Tables = ({
                                   background: "#f4270b",
                                   width: "6px",
                                   height: "6px",
-                                  borderRadius: "50%"
+                                  borderRadius: "50%",
+                                  fontSize: "10px"
                                 }}
                               ></span>{" "}
                               FAILED

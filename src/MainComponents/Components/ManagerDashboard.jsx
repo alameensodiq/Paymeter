@@ -59,7 +59,7 @@ const ManagerDashboard = ({ title }) => {
       // dispatch(DashboardDailyMonthly());
       // dispatch(TotalSales());
       // dispatch(ListofMeter());
-      dispatch(EarningDash({ startDate, searcher, currentPage }));
+      dispatch(EarningDash({ startDate, searcher, currentPage, endDate }));
       dispatch(EarningCard());
       // dispatch(Notifications({ status: "accepted" }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
@@ -70,7 +70,7 @@ const ManagerDashboard = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [startDate, , searcher, currentPage]);
+  }, [startDate, , searcher, currentPage, endDate]);
 
   const dateChanger = (date) => {
     console.log(date);

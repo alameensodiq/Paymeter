@@ -57,7 +57,7 @@ const Dashboard = ({ title }) => {
       dispatch(DashboardDailyMonthly());
       dispatch(TotalSales());
       dispatch(ListofMeter());
-      dispatch(Transactions({ startDate, searcher, currentPage }));
+      dispatch(Transactions({ startDate, searcher, currentPage, endDate }));
       dispatch(Notifications({ status: "accepted" }));
       // dispatch(DashboardDiscoMonthlys({ startDate }));
       return;
@@ -67,7 +67,7 @@ const Dashboard = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [startDate, , searcher, currentPage]);
+  }, [startDate, , searcher, currentPage, endDate]);
 
   const dateChanger = (date) => {
     console.log(date);
