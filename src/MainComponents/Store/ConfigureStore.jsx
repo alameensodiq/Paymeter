@@ -67,6 +67,8 @@ import { EarningPartCommSlice } from "./Reducers/EarningPartComm";
 import { DownloadAdminTransSlice } from "./Reducers/DownloadAdminTrans";
 import { DownloadEarningTransSlice } from "./Reducers/DownloadEarningTrans";
 import { DownloadDiscoTransSlice } from "./Reducers/DownloadDiscoTrans";
+import { RegenerateTokenSlice } from "./Reducers/RegenerateToken";
+import { WithdrawalSlice } from "./Reducers/Withdrawal";
 
 export default configureStore({
   reducer: {
@@ -137,6 +139,8 @@ export default configureStore({
     earningpartcomm: EarningPartCommSlice?.reducer,
     downloadadmintrans: DownloadAdminTransSlice?.reducer,
     downloadearningtrans: DownloadEarningTransSlice?.reducer,
-    downloaddiscotrans: DownloadDiscoTransSlice?.reducer
+    downloaddiscotrans: DownloadDiscoTransSlice?.reducer,
+    regenerate: RegenerateTokenSlice?.reducer,
+    withdrawal: WithdrawalSlice?.reducer
   }
 });

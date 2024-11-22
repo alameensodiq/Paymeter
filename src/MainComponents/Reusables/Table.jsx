@@ -17,6 +17,7 @@ import { ReactComponent as Activate } from "../../assets/Activate.svg";
 import { ReactComponent as Update } from "../../assets/Update.svg";
 import { useDispatch } from "react-redux";
 import { ResendToken } from "../Store/Apis/ResendToken";
+import { RegenerateToken } from "../Store/Apis/Regenratetoken";
 
 const Tables = ({
   customers,
@@ -62,7 +63,8 @@ const Tables = ({
   setoldname,
   bankaccountsdetails,
   customertransfer,
-  manageragents
+  manageragents,
+  withdraw
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -805,17 +807,15 @@ const Tables = ({
                                   alignItems: "center",
                                   gap: 20
                                 }}
+                                onClick={() => {
+                                  setOpen(!open);
+                                  setDownload(item);
+                                  console.log(item);
+                                  setStep(53);
+                                }}
                               >
                                 <Suspend width={10} />
-                                <span
-                                  className="text-black"
-                                  onClick={() => {
-                                    setOpen(!open);
-                                    setDownload(item);
-                                    console.log(item);
-                                    setStep(53);
-                                  }}
-                                >
+                                <span className="text-black">
                                   Download Receipt
                                 </span>
                               </div>
@@ -826,6 +826,17 @@ const Tables = ({
                                   justifyContent: "flex-start",
                                   alignItems: "center",
                                   gap: 20
+                                }}
+                                onClick={() => {
+                                  setOpen(!open);
+                                  dispatch(
+                                    RegenerateToken({
+                                      customerReference: item?.meterNo,
+                                      discoShortName: item?.discoName,
+                                      phone: item?.phone,
+                                      amount: item?.transactionAmount
+                                    })
+                                  );
                                 }}
                               >
                                 <Activate width={10} />
@@ -841,26 +852,21 @@ const Tables = ({
                                   alignItems: "center",
                                   gap: 20
                                 }}
+                                onClick={() => {
+                                  setOpen(!open);
+                                  // setStep(53);
+                                  console.log(item?.dispense?.listtoken[0]);
+                                  dispatch(
+                                    ResendToken({
+                                      metertoken: item?.dispense?.listtoken[0],
+                                      phoneNo: item?.phone
+                                    })
+                                  );
+                                  // setReload(true)
+                                }}
                               >
                                 <Edit />
-                                <span
-                                  onClick={() => {
-                                    setOpen(!open);
-                                    // setStep(53);
-                                    console.log(item?.dispense?.listtoken[0]);
-                                    dispatch(
-                                      ResendToken({
-                                        metertoken:
-                                          item?.dispense?.listtoken[0],
-                                        phoneNo: item?.phone
-                                      })
-                                    );
-                                    // setReload(true)
-                                  }}
-                                  className="text-black"
-                                >
-                                  Resend Token
-                                </span>
+                                <span className="text-black">Resend Token</span>
                               </div>
                             </div>
                           </div>
@@ -3736,23 +3742,23 @@ const Tables = ({
                       AGENT COMM. CAP FEE
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-                      DISTRICT COMM. TYPE
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      DSTM COMM.
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      DSTM COMM. VALUE
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      DSTM CAP FEE
-                    </StyledTableCell> */}
+                    DISTRICT COMM. TYPE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DSTM COMM.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DSTM COMM. VALUE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DSTM CAP FEE
+                  </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       DISCO COMM. TYPE
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
-          DISCO COMMISSION CAP
-        </StyledTableCell> */}
+        DISCO COMMISSION CAP
+      </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       DISCO COMM.
                     </StyledTableCell>
@@ -3871,8 +3877,8 @@ const Tables = ({
                       <StyledTableCell style={{ width: "10%" }}>
                         ₦0
                         {/* {item?.bankTaxFee
-                        ? `₦${item?.bankTaxFee}`
-                        : "not applicable"} */}
+                      ? `₦${item?.bankTaxFee}`
+                      : "not applicable"} */}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.agentCommissionType
@@ -3904,43 +3910,43 @@ const Tables = ({
                           : "N/A"}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
-                        {item?.managerCommissionType
-                          ? `${item?.managerCommissionType}`
-                          : "N/A"}
-                      </StyledTableCell>
-                      <StyledTableCell style={{ width: "10%" }}>
-                        {item?.managerCommissionType === "PERCENTAGE" &&
-                        item?.managerCommissionPercentageTypeFeeValue
-                          ? `${
-                              item?.managerCommissionPercentageTypeFeeValue || 0
-                            }%`
-                          : item?.managerCommissionType !== "PERCENTAGE"
-                          ? `₦${
-                              formatNumberWithCommas(
-                                item?.districtManagerFee
-                              ) || 0
-                            }`
-                          : "N/A"}
-                      </StyledTableCell>
-                      <StyledTableCell style={{ width: "10%" }}>
-                        {item?.dispense?.systemTransactions?.districtManagerFee
-                          ? `₦${formatNumberWithCommas(
-                              item?.dispense?.systemTransactions
-                                ?.districtManagerFee
-                            )}`
-                          : "N/A"}
-                      </StyledTableCell>
-                      <StyledTableCell style={{ width: "10%" }}>
-                        N/A
-                      </StyledTableCell> */}
+                      {item?.managerCommissionType
+                        ? `${item?.managerCommissionType}`
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.managerCommissionType === "PERCENTAGE" &&
+                      item?.managerCommissionPercentageTypeFeeValue
+                        ? `${
+                            item?.managerCommissionPercentageTypeFeeValue || 0
+                          }%`
+                        : item?.managerCommissionType !== "PERCENTAGE"
+                        ? `₦${
+                            formatNumberWithCommas(
+                              item?.districtManagerFee
+                            ) || 0
+                          }`
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.dispense?.systemTransactions?.districtManagerFee
+                        ? `₦${formatNumberWithCommas(
+                            item?.dispense?.systemTransactions
+                              ?.districtManagerFee
+                          )}`
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      N/A
+                    </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoSystemCommissionType}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
-            {item?.discoSystemCommissionCapFee
-              ? `₦${item?.discoSystemCommissionCapFee}`
-              : "not applicable"}
-          </StyledTableCell> */}
+          {item?.discoSystemCommissionCapFee
+            ? `₦${item?.discoSystemCommissionCapFee}`
+            : "not applicable"}
+        </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {/* ₦{item?.discoSystemCommissionFee} */}
                         {item?.discoSystemCommissionType === "PERCENTAGE" &&
@@ -4112,14 +4118,14 @@ const Tables = ({
                         }}
                       >
                         {/* <button
-              onClick={() => {
-                setOpen(!open);
-                setIndexing(index);
-              }}
-              className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
-            >
-              Action
-            </button> */}
+            onClick={() => {
+              setOpen(!open);
+              setIndexing(index);
+            }}
+            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+          >
+            Action
+          </button> */}
                         <svg
                           style={{ marginLeft: "30px" }}
                           onClick={() => {
@@ -4156,17 +4162,15 @@ const Tables = ({
                                   alignItems: "center",
                                   gap: 20
                                 }}
+                                onClick={() => {
+                                  setOpen(!open);
+                                  setDownload(item);
+                                  console.log(item);
+                                  setStep(53);
+                                }}
                               >
                                 <Suspend width={10} />
-                                <span
-                                  className="text-black"
-                                  onClick={() => {
-                                    setOpen(!open);
-                                    setDownload(item);
-                                    console.log(item);
-                                    setStep(53);
-                                  }}
-                                >
+                                <span className="text-black">
                                   Download Receipt
                                 </span>
                               </div>
@@ -4177,6 +4181,17 @@ const Tables = ({
                                   justifyContent: "flex-start",
                                   alignItems: "center",
                                   gap: 20
+                                }}
+                                onClick={() => {
+                                  setOpen(!open);
+                                  dispatch(
+                                    RegenerateToken({
+                                      customerReference: item?.meterNo,
+                                      discoShortName: item?.discoName,
+                                      phone: item?.phone,
+                                      amount: item?.transactionAmount
+                                    })
+                                  );
                                 }}
                               >
                                 <Activate width={10} />
@@ -4192,26 +4207,21 @@ const Tables = ({
                                   alignItems: "center",
                                   gap: 20
                                 }}
+                                onClick={() => {
+                                  setOpen(!open);
+                                  // setStep(53);
+                                  console.log(item?.dispense?.listtoken[0]);
+                                  dispatch(
+                                    ResendToken({
+                                      metertoken: item?.dispense?.listtoken[0],
+                                      phoneNo: item?.phone
+                                    })
+                                  );
+                                  // setReload(true)
+                                }}
                               >
                                 <Edit />
-                                <span
-                                  onClick={() => {
-                                    setOpen(!open);
-                                    // setStep(53);
-                                    console.log(item?.dispense?.listtoken[0]);
-                                    dispatch(
-                                      ResendToken({
-                                        metertoken:
-                                          item?.dispense?.listtoken[0],
-                                        phoneNo: item?.phone
-                                      })
-                                    );
-                                    // setReload(true)
-                                  }}
-                                  className="text-black"
-                                >
-                                  Resend Token
-                                </span>
+                                <span className="text-black">Resend Token</span>
                               </div>
                             </div>
                           </div>
@@ -4220,16 +4230,16 @@ const Tables = ({
                         )}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
-        {item?.paymentStatus === "successfull" ? (
-          <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
-            Successful
-          </button>
-        ) : (
-          <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
-            Failed
-          </button>
-        )}
-      </StyledTableCell> */}
+      {item?.paymentStatus === "successfull" ? (
+        <button className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]">
+          Successful
+        </button>
+      ) : (
+        <button className="bg-failedbg h-[30px] w-[100%] rounded-full text-failedtext font-semibold text-[9px]">
+          Failed
+        </button>
+      )}
+    </StyledTableCell> */}
                     </StyledTableRow>
                   ))}
                 </TableBody>
@@ -6242,6 +6252,118 @@ const Tables = ({
                         </div>
                       ) : (
                         ""
+                      )}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : withdraw ? (
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+          >
+            <Table
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    S/N
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    BANK NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    ACCOUNT NO.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    BANK CODE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    STATUS
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      className="text-dob"
+                      style={{ width: "20%" }}
+                    >
+                      {item?.bankName}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      style={{ width: "20%" }}
+                    >
+                      {item?.accountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      style={{ width: "15%" }}
+                    >
+                      {item?.bankCode}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      style={{ width: "20%" }}
+                    >
+                      {item?.amount
+                        ? `₦${formatNumberWithCommas(item?.amount)}`
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.status === "PENDING" ? (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                          className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                        >
+                          PENDING
+                        </button>
+                      ) : item?.status === "REJECTED" ? (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                          className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
+                        >
+                          DECLINED
+                        </button>
+                      ) : (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
+                          className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
+                        >
+                          ACTIVE
+                        </button>
                       )}
                     </StyledTableCell>
                   </StyledTableRow>

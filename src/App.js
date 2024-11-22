@@ -42,6 +42,7 @@ import ManagerDashboard from "./MainComponents/Components/ManagerDashboard";
 import DiscoDashboard from "./MainComponents/Components/DiscoDashboard";
 import ManagerAgents from "./MainComponents/Components/ManagerAgents";
 import UserSetting from "./MainComponents/Components/UserSetting";
+import WithdrawalsRequest from "./MainComponents/Components/WithdrawalsRequest";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -80,6 +81,7 @@ function App() {
               element={<ManagerDashboard title={"Dashboard"} />}
             />
             <Route path="/customers" element={<Customers />} />
+            <Route path="/withdrawals" element={<WithdrawalsRequest />} />
             <Route
               path="/discos/:id"
               element={<CustomerInfo title={"Meter under Discos"} />}
