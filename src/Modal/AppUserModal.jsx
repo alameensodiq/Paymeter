@@ -6575,9 +6575,7 @@ const AppUserModal = ({
                       color: "#989898"
                     }}
                   >
-                    {downloading?.accountNumber
-                      ? downloading?.accountNumber
-                      : "N/A"}
+                    {downloading?.requestID ? downloading?.requestID : "N/A"}
                   </span>
                 </div>
                 <div
