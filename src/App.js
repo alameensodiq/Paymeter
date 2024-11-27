@@ -43,6 +43,10 @@ import DiscoDashboard from "./MainComponents/Components/DiscoDashboard";
 import ManagerAgents from "./MainComponents/Components/ManagerAgents";
 import UserSetting from "./MainComponents/Components/UserSetting";
 import WithdrawalsRequest from "./MainComponents/Components/WithdrawalsRequest";
+import AgentTransfer from "./MainComponents/Components/AgentTransfer";
+import AgentMeter from "./MainComponents/Components/AgentMeter";
+import AgentDashboard from "./MainComponents/Components/AgentDashboard";
+import AgentSetting from "./MainComponents/Components/AgentSetting";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -77,6 +81,10 @@ function App() {
               element={<EarningDashboard title={"Dashboard"} />}
             />
             <Route
+              path="/agent-dashboard"
+              element={<AgentDashboard title={"Dashboard"} />}
+            />
+            <Route
               path="/manager-dashboard"
               element={<ManagerDashboard title={"Dashboard"} />}
             />
@@ -102,6 +110,11 @@ function App() {
             <Route
               path="/earning-transactions"
               element={<EarningTransfer title={"Transactions"} />}
+            />
+
+            <Route
+              path="/agent-transactions"
+              element={<AgentTransfer title={"Transactions"} />}
             />
 
             <Route
@@ -139,6 +152,10 @@ function App() {
               element={<Meter title={"Meter Details"} />}
             />
             <Route
+              path="/agentmeters"
+              element={<AgentMeter title={"Meters"} />}
+            />
+            <Route
               path="/api/:id"
               element={<UserDetails title={"API Partner Details"} />}
             />
@@ -168,6 +185,10 @@ function App() {
             <Route
               path="/usersetting"
               element={<UserSetting title={"Settings"} />}
+            />
+            <Route
+              path="/agentsetting"
+              element={<AgentSetting title={"Settings"} />}
             />
             <Route
               path="/notification"

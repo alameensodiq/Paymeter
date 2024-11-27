@@ -63,8 +63,10 @@ const Tables = ({
   setoldname,
   bankaccountsdetails,
   customertransfer,
+  agenttransfer,
   manageragents,
-  withdraw
+  withdraw,
+  meterss
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -90,6 +92,10 @@ const Tables = ({
   const [indexing10, setIndexing10] = useState(null);
   const [open11, setOpen11] = useState(false);
   const [indexing11, setIndexing11] = useState(null);
+  const [open12, setOpen12] = useState(false);
+  const [indexing12, setIndexing12] = useState(null);
+  const [open13, setOpen13] = useState(false);
+  const [indexing13, setIndexing13] = useState(null);
   const dispatch = useDispatch();
   console.log(data);
 
@@ -3532,14 +3538,22 @@ const Tables = ({
                       )}
                     </StyledTableCell>
                     <StyledTableCell
-                      style={{ width: "10%" }}
+                      style={{
+                        width: "10%",
+                        position: "relative"
+                        // justifyContent: "flex-end"
+                      }}
                       onClick={() => {
-                        setStep(39);
-                        setImages(item?.addressUrl);
-                        console.log(item?.addressUrl);
+                        setOpen13(!open13);
+                        setIndexing13(index);
+                        console.log("sodiq");
                       }}
                     >
                       <svg
+                        onClick={() => {
+                          setOpen13(!open13);
+                          setIndexing13(index);
+                        }}
                         width="4"
                         height="16"
                         viewBox="0 0 4 16"
@@ -3559,6 +3573,58 @@ const Tables = ({
                           fill="#868FA0"
                         />
                       </svg>
+                      {index === indexing13 && open13 ? (
+                        <div className="absolute right-20 top-15 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white z-10">
+                          <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Suspend width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  setStep(39);
+                                  setImages(item?.addressUrl);
+                                  setOpen13(!open13);
+                                  console.log(item?.addressUrl);
+                                }}
+                              >
+                                Doc Uploaded
+                              </span>
+                            </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  console.log(item);
+                                  Pay(item, item?.user?.id, "approve");
+                                  setOpen13(!open13);
+                                }}
+                              >
+                                Approve Agent
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -4559,6 +4625,222 @@ const Tables = ({
                       </button>
                     )}
                   </StyledTableCell> */}
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </ScrollableXContainer>
+        ) : meterss ? (
+          <ScrollableXContainer>
+            <TableContainer
+              // component={Paper}
+              style={{ boxShadow: "none" }}
+              sx={{ maxHeight: "60vh" }}
+            >
+              <Table
+                stickyHeader
+                sx={{ minWidth: 700, tableLayout: "auto" }}
+                aria-label="customized table"
+              >
+                <TableHead>
+                  <TableRow style={{ paddingRight: "0px" }}>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      S/N
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      CUSTOMER NAME
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      BANK NAME
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DISCO NAME
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ACCOUNT NUMBER
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      METER NUMBER
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      TRANSACTION AMOUNT
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DISCO COMMISSION TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DISCO COMMISSION
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DISCO COMMISSION CAP
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      RRN
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      REFERENCE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      USER TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      BANK COMMISSION TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      BANK COMMISSION FEE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      BANK COMMISSION CAP FEE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      AGENT COMMISSION TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      AGENT COMMISSION FEE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      FEE DUE TO SYSTEM
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ACTIONS
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data?.map((item, index) => (
+                    <StyledTableRow>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {index + 1}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.customerName}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.bankName}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.discoName}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.accountNumber}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.meterNo}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.transactionAmount}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.discoSystemCommissionType}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.discoSystemCommissionFee}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.discoSystemCommissionCapFee}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.rrn}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.reference}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.userType}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.bankCommissionType}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.bankCommissionFee}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.bankCommissionFeeCap}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.agentCommissionType}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.agentCommissionFee}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.feeDueToSystem}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        style={{
+                          width: "10%",
+                          position: "relative"
+                          // justifyContent: "flex-end"
+                        }}
+                      >
+                        {/* <button
+            onClick={() => {
+              setOpen(!open);
+              setIndexing(index);
+            }}
+            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+          >
+            Action
+          </button> */}
+                        <svg
+                          style={{ marginLeft: "30px" }}
+                          onClick={() => {
+                            setOpen12(!open12);
+                            setIndexing12(index);
+                          }}
+                          width="4"
+                          height="16"
+                          viewBox="0 0 4 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                            fill="#868FA0"
+                          />
+                          <path
+                            d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                            fill="#868FA0"
+                          />
+                          <path
+                            d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                            fill="#868FA0"
+                          />
+                        </svg>
+                        {index === indexing12 && open12 ? (
+                          <div className="absolute right-10 top-5 w-36 h-10 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+                            <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  justifyContent: "flex-start",
+                                  alignItems: "center",
+                                  gap: 20
+                                }}
+                                onClick={() => {
+                                  setOpen12(!open12);
+                                  // setDownload(item);
+                                  console.log(item);
+                                  // setStep(53);
+                                }}
+                              >
+                                <Suspend width={10} />
+                                <span className="text-black">
+                                  Send Payment Reminder
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
@@ -6371,6 +6653,340 @@ const Tables = ({
               </TableBody>
             </Table>
           </TableContainer>
+        ) : agenttransfer ? (
+          <ScrollableXContainer>
+            <TableContainer
+              // component={Paper}
+              style={{ boxShadow: "none" }}
+              sx={{ maxHeight: "60vh" }}
+            >
+              <Table
+                stickyHeader
+                sx={{ minWidth: 700, tableLayout: "auto" }}
+                aria-label="customized table"
+              >
+                <TableHead>
+                  <TableRow style={{ paddingRight: "0px" }}>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      S/N
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DATE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      REF.
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      USER TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      CUS. NAME
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DISCO
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DISCO CUS N0.
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      METER NO.
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      BANK ACCT NO
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      TRANX AMOUNT.
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      DISTRICT COMM. TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DSTM COMM.
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DSTM COMM. VALUE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      DSTM CAP FEE
+                    </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      AGENT COMM. TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      AGENT COMM.
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      AGENT COMM. VALUE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      AGENT COMM. CAP FEE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      TOKEN
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      TOKEN DS.
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ACTIONS
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data?.map((item, index) => (
+                    <StyledTableRow>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {index + 1}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        <Moment format="ddd MMM DD YYYY HH:mm:ss">
+                          {item?.dispense?.updatedDate}
+                        </Moment>
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.reference}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.userType}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.customerName}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.discoName}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.phone ? item?.phone : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.meterNo}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.accountNumber}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        ₦{formatNumberWithCommas(item?.transactionAmount)}
+                      </StyledTableCell>
+                      {/* <StyledTableCell style={{ width: "10%" }}>
+                        {item?.managerCommissionType
+                          ? `₦${item?.managerCommissionType}`
+                          : "not applicable"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.managerCommissionType === "PERCENTAGE" &&
+                        item?.managerCommissionPercentageTypeFeeValue
+                          ? `${
+                              item?.managerCommissionPercentageTypeFeeValue || 0
+                            }%`
+                          : item?.managerCommissionType !== "PERCENTAGE"
+                          ? `₦${item?.districtManagerFee || 0}`
+                          : "not applicable"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.dispense?.systemTransactions?.districtManagerFee
+                          ? `₦${formatNumberWithCommas(
+                              item?.dispense?.systemTransactions
+                                ?.districtManagerFee
+                            )}`
+                          : "not applicable"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        not applicable
+                      </StyledTableCell> */}
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.agentCommissionType
+                          ? item?.agentCommissionType
+                          : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.agentCommissionType === "PERCENTAGE" &&
+                        item?.agentCommissionFee
+                          ? `${item?.agentCommissionFee}%`
+                          : item?.agentCommissionType === "FIXED"
+                          ? `₦${formatNumberWithCommas(
+                              item?.agentCommissionPercentageTypeFeeValue
+                            )}`
+                          : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.agentCommissionPercentageTypeFeeValue
+                          ? `₦${formatNumberWithCommas(
+                              item?.agentCommissionPercentageTypeFeeValue
+                            )}`
+                          : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.agentCommissionCapFee
+                          ? `₦${formatNumberWithCommas(
+                              item?.agentCommissionCapFee
+                            )}`
+                          : "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        ref={inputRef3}
+                        onClick={() =>
+                          handleCopy3(item?.dispense?.listtoken[0])
+                        }
+                        style={{ width: "10%" }}
+                      >
+                        {item?.dispense?.listtoken[0] || "N/A"}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.smsdeliveryStatus ? (
+                          item?.smsdeliveryStatus === "SENT" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#8a8a7d",
+                                color: "#e6df19",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#e5e999",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              SENT
+                            </button>
+                          ) : item?.smsdeliveryStatus === "DELIVERED" ? (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "90px",
+                                height: "20px",
+                                background: "#ECFDF3",
+                                color: "#027A48",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#027A48",
+                                  fontSize: "10px",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              DELIVERED
+                            </button>
+                          ) : (
+                            <button
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "80%",
+                                height: "20px",
+                                background: "#ed7d6c",
+                                color: "#f4270b",
+                                gap: "6px",
+                                borderRadius: "6px"
+                              }}
+                            >
+                              <span
+                                style={{
+                                  background: "#f4270b",
+                                  width: "6px",
+                                  height: "6px",
+                                  borderRadius: "50%"
+                                }}
+                              ></span>{" "}
+                              FAILED
+                            </button>
+                          )
+                        ) : (
+                          "N/A"
+                        )}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        onClick={() => {
+                          setOpen(!open);
+                          setIndexing(index);
+                        }}
+                        style={{
+                          width: "10%",
+                          position: "relative"
+                          // justifyContent: "flex-end"
+                        }}
+                      >
+                        <svg
+                          style={{ marginLeft: "30px" }}
+                          onClick={() => {
+                            setOpen(!open);
+                            setIndexing(index);
+                          }}
+                          width="4"
+                          height="16"
+                          viewBox="0 0 4 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                            fill="#868FA0"
+                          />
+                          <path
+                            d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                            fill="#868FA0"
+                          />
+                          <path
+                            d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                            fill="#868FA0"
+                          />
+                        </svg>
+                        {index === indexing && open ? (
+                          <div className="absolute right-10 top-5 w-36 h-10 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+                            <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  justifyContent: "flex-start",
+                                  alignItems: "center",
+                                  gap: 20
+                                }}
+                              >
+                                <Suspend width={10} />
+                                <span
+                                  className="text-black"
+                                  onClick={() => {
+                                    setOpen(!open);
+                                    setDownload(item);
+                                    console.log(item);
+                                    setStep(53);
+                                  }}
+                                >
+                                  Download Receipt
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </ScrollableXContainer>
         ) : (
           ""
         )}

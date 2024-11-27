@@ -43,6 +43,10 @@ const Sidebar = () => {
   const [isHovered18, setIsHovered18] = useState(false);
   const [isHovered19, setIsHovered19] = useState(false);
   const [isHovered20, setIsHovered20] = useState(false);
+  const [isHovered21, setIsHovered21] = useState(false);
+  const [isHovered22, setIsHovered22] = useState(false);
+  const [isHovered23, setIsHovered23] = useState(false);
+  const [isHovered28, setIsHovered28] = useState(false);
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
@@ -1403,6 +1407,187 @@ const Sidebar = () => {
             <p
               className={`${
                 router.pathname === "/setting"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Setting
+            </p>
+          </Link>
+        </div>
+      ) : sessionStorage.getItem("roleName") === "AGENT" ? (
+        <div className="flex flex-col py-10 gap-4 px-4">
+          <Link
+            to="/agent-dashboard"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/agent-dashboard"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered21(true)}
+            onMouseLeave={() => setIsHovered21(false)}
+          >
+            {router.pathname === "/agent-dashboard" || isHovered21 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/agent-dashboard" || isHovered21 ? (
+              <Dashboard
+                className={`${
+                  router.pathname === "/agent-dashboard"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Dashboard
+                className={`${
+                  router.pathname === "/agent-dashboard"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/agent-dashboard"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Overview
+            </p>
+          </Link>
+          <Link
+            to="/agentmeters"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/agentmeters" ||
+              router.pathname.startsWith("/agentmeters/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered23(true)}
+            onMouseLeave={() => setIsHovered23(false)}
+          >
+            {router.pathname === "/agentmeters" ||
+            router.pathname.startsWith("/agentmeters/") ||
+            isHovered23 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/agentmeters" || isHovered23 ? (
+              <Bill
+                className={`${
+                  router.pathname === "/notification" ||
+                  router.pathname.startsWith("/agentmeters/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Bill
+                className={`${
+                  router.pathname === "/agentmeters" ||
+                  router.pathname.startsWith("/agentmeters/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/agentmeters" ||
+                router.pathname.startsWith("/agentmeters/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Meters
+            </p>
+          </Link>
+          <Link
+            to="/agent-transactions"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/agent-transactions"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered22(true)}
+            onMouseLeave={() => setIsHovered22(false)}
+          >
+            {router.pathname === "/agent-transactions" || isHovered22 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/agent-transactions" || isHovered22 ? (
+              <Transfers
+                className={`${
+                  router.pathname === "/agent-transactions"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Transfers
+                className={`${
+                  router.pathname === "/agent-transactions"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/agent-transactions"
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Transaction
+            </p>
+          </Link>
+          <Link
+            to="/agentsetting"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/agentsetting"
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered28(true)}
+            onMouseLeave={() => setIsHovered28(false)}
+          >
+            {router.pathname === "/agentsetting" || isHovered28 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/agentsetting" || isHovered28 ? (
+              <Settings
+                className={`${
+                  router.pathname === "/agentsetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Settings
+                className={`${
+                  router.pathname === "/agentsetting"
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/agentsetting"
                   ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
                   : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
               }`}

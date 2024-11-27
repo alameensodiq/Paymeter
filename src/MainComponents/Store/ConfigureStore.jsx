@@ -69,6 +69,11 @@ import { DownloadEarningTransSlice } from "./Reducers/DownloadEarningTrans";
 import { DownloadDiscoTransSlice } from "./Reducers/DownloadDiscoTrans";
 import { RegenerateTokenSlice } from "./Reducers/RegenerateToken";
 import { WithdrawalSlice } from "./Reducers/Withdrawal";
+import { AgentmeteringSlice } from "./Reducers/Agentmetering";
+import { AgentTransactionsSlice } from "./Reducers/AgentTransactions";
+import { AgentSummarySlice } from "./Reducers/AgentSummary";
+import { AvailableBanksSlice } from "./Reducers/AvailableBanks";
+import { SavedBanksSlice } from "./Reducers/SavedBanks";
 
 export default configureStore({
   reducer: {
@@ -141,6 +146,11 @@ export default configureStore({
     downloadearningtrans: DownloadEarningTransSlice?.reducer,
     downloaddiscotrans: DownloadDiscoTransSlice?.reducer,
     regenerate: RegenerateTokenSlice?.reducer,
-    withdrawal: WithdrawalSlice?.reducer
+    withdrawal: WithdrawalSlice?.reducer,
+    agentmeters: AgentmeteringSlice?.reducer,
+    agenttransactions: AgentTransactionsSlice?.reducer,
+    agentsummary: AgentSummarySlice?.reducer,
+    availablebanks: AvailableBanksSlice?.reducer,
+    savedbanks: SavedBanksSlice?.reducer
   }
 });

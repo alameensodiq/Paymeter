@@ -41,6 +41,9 @@ import ModalInputSelectID from "../bits/ModalInputSelectID";
 import { UserPassword } from "../MainComponents/Store/Apis/UserPassword";
 import { EditingEarning } from "../MainComponents/Store/Apis/EditingEarning";
 import QRCode from "react-qr-code";
+import ModalInputSelectBank from "../bits/ModalInputSelectBank";
+import { AvailableBanks } from "../MainComponents/Store/Apis/AvailableBanks";
+import { SavedBanks } from "../MainComponents/Store/Apis/SavedBanks";
 
 const AppUserModal = ({
   setStep,
@@ -139,6 +142,12 @@ const AppUserModal = ({
     password_confirmation: ""
   });
   const receiptRef = useRef();
+
+  const [addbank, setAddbank] = useState({
+    bankCode: "",
+    bankName: "",
+    AccountNumber: ""
+  });
 
   const [editinguser, seteditinguser] = useState({
     phone: "",
@@ -304,6 +313,8 @@ const AppUserModal = ({
 
   useEffect(() => {
     dispatch(Discos({ startDate, searcher, currentPage }));
+    dispatch(AvailableBanks());
+    dispatch(SavedBanks());
   }, []);
 
   const { discos, authenticatingdiscos } = useSelector(
@@ -320,6 +331,16 @@ const AppUserModal = ({
     // "Disco List", // Placeholder option
     ...(discos?.data?.data.map((disco) => disco) || [])
   ];
+
+  const { availablebanks, authenticatingavailablebanks } = useSelector(
+    (state) => state?.availablebanks
+  );
+  console.log(availablebanks);
+
+  const { savedbanks, authenticatingsavedbanks } = useSelector(
+    (state) => state?.savedbanks
+  );
+  console.log(savedbanks);
 
   const { createdbank, authenticatingcreatedbank } = useSelector(
     (state) => state?.createdbank
@@ -1699,6 +1720,15 @@ const AppUserModal = ({
     console.log(value);
     setSettingsGlobal({
       ...settingglobal,
+      [name]: value
+    });
+  };
+
+  const ChangeAddBank = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setAddbank({
+      ...addbank,
       [name]: value
     });
   };
@@ -7225,6 +7255,132 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully Edit Partner</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={61}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Add Bank"
+      >
+        <ModalInputSelectBank
+          label="Banks"
+          name="userType"
+          value={addbank?.bankName}
+          onChange={(e) => ChangeAddBank(e)}
+          options={["Globus Bank", "Sterling Bank"]}
+        />
+        <ModalInputText
+          label="Account Number"
+          onChange={(e) => ChangeAddBank(e)}
+          name="AccountNumber"
+          value={addbank?.AccountNumber}
+          placeholder={`${`Enter Account Number`}`}
+        />
+
+        {/* <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeEarning(e)}
+          name="password"
+          value={editearnings?.password}
+          placeholder={`${`Enter Passowrd`}`}
+        /> */}
+        <LargeSignInButton
+          onClick={() => {
+            const { email, name, address, phone, commissions } = editearnings;
+            console.log({
+              email,
+              name,
+              address,
+              phone,
+              commissions
+            });
+            console.log(editearnings);
+            const isFeeMissing = commissions?.fee === null;
+            const isCapFeeMissing = commissions?.capFee === null;
+            if (
+              name &&
+              phone &&
+              email &&
+              address &&
+              email.includes("@") &&
+              (itemersmanager === "FIXED"
+                ? !isFeeMissing
+                : !isFeeMissing && !isCapFeeMissing)
+            ) {
+              // setStep(19);
+              SendEarningPartneredit();
+            } else {
+              toast.error(
+                "Fill all details correctly, including a valid email."
+              );
+            }
+          }}
+          bigger
+          title={"Add Bank Details"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={62}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Bank Details Added
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully Add a Bank detail</span>
           </div>
           <div
             style={{
