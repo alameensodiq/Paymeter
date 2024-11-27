@@ -6755,9 +6755,12 @@ const AppUserModal = ({
             }}
           >
             <LargeSignInButton
-              title="Cancel"
+              title="Send to Email"
+              // onClick={() => DownloadReceipt()}
+              onClick={() => toast.success("Email sent")}
               large
-              onClick={() => setStep(0)}
+              background
+              color
             />
             <LargeSignInButton
               title="DownloadReceipt"
@@ -6766,6 +6769,21 @@ const AppUserModal = ({
               large
               background
               color
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
             />
           </div>
         </div>
