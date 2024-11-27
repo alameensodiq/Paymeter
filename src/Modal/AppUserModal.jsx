@@ -84,7 +84,9 @@ const AppUserModal = ({
   setoldname,
   setReloadreal,
   reloadreal,
-  complainapprove
+  complainapprove,
+  setdecliner,
+  decliner
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -1260,6 +1262,9 @@ const AppUserModal = ({
   };
 
   const handleCloseModal4 = () => {
+    if (decliner) {
+      setdecliner(false);
+    }
     if (images) {
       setImages("");
       setReload(true);

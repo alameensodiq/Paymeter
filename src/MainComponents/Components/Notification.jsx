@@ -41,6 +41,7 @@ const Notification = ({ title }) => {
   const [images, setImages] = useState("");
   const [userIding, setuserIding] = useState("");
   const [actions, setaction] = useState("");
+  const [decliner, setdecliner] = useState(false);
   //   const [action, setAction] = useState("disable");
   //   const [notificationsId, setnotificationsId] = useState(null);
   const [role, setRole] = useState("APIPARTNER");
@@ -67,6 +68,7 @@ const Notification = ({ title }) => {
       setReload(false);
       setStatus("accepted");
       setCurrentPage(0);
+      setdecliner(false);
     }
     // if (reload) {
     //   //   dispatch(Banks({ startDate, searcher, currentPage }));
@@ -112,9 +114,23 @@ const Notification = ({ title }) => {
     setuserId(notificationsId);
     setnotId(notId);
     setstat(action);
+
+    setStep(24);
     // dispatch(Approve({ userId: notificationsId, notId, stat: action }));
     // setReload(true);
-    setStep(24);
+  };
+
+  const Payser = (notificationsId, notId, action) => {
+    console.log(notificationsId);
+    console.log(notId);
+    console.log(action);
+    setuserId(notificationsId);
+    setnotId(notId);
+    setstat(action);
+    setStep(25);
+
+    // dispatch(Approve({ userId: notificationsId, notId, stat: action }));
+    // setReload(true);
   };
 
   const Downloading = () => {
@@ -143,6 +159,8 @@ const Notification = ({ title }) => {
         </div>
         <AppUserModal
           setaction={setaction}
+          setdecliner={setdecliner}
+          decliner={decliner}
           action={actions}
           setuserIding={setuserIding}
           userIding={userIding}
@@ -227,6 +245,7 @@ const Notification = ({ title }) => {
                     onClick={() => {
                       setStatus("accepted");
                       setCurrentPage(0);
+                      // setdecliner(false);
                     }}
                     className={`${
                       status === "accepted"
@@ -240,6 +259,7 @@ const Notification = ({ title }) => {
                     onClick={() => {
                       setStatus("pending");
                       setCurrentPage(0);
+                      // setdecliner(true);
                     }}
                     className={`${
                       status === "pending"
@@ -253,6 +273,7 @@ const Notification = ({ title }) => {
                     onClick={() => {
                       setStatus("REJECTED");
                       setCurrentPage(0);
+                      // setdecliner(false);
                     }}
                     className={`${
                       status === "REJECTED"
@@ -325,6 +346,9 @@ const Notification = ({ title }) => {
                       pending
                       setuserIding={setuserIding}
                       Pay={Pays}
+                      Payer={Payser}
+                      setdecliner={setdecliner}
+                      decliner={decliner}
                       setImages={setImages}
                       setUserIds={setUserIds}
                       set
