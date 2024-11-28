@@ -44,6 +44,9 @@ import QRCode from "react-qr-code";
 import ModalInputSelectBank from "../bits/ModalInputSelectBank";
 import { AvailableBanks } from "../MainComponents/Store/Apis/AvailableBanks";
 import { SavedBanks } from "../MainComponents/Store/Apis/SavedBanks";
+import { AddBank } from "../MainComponents/Store/Apis/AddBank";
+import { NameEnquiry } from "../MainComponents/Store/Apis/NameEnquiry";
+import { Withdrawing } from "../MainComponents/Store/Apis/Withdrawing";
 
 const AppUserModal = ({
   setStep,
@@ -118,6 +121,8 @@ const AppUserModal = ({
   const [bustate19, setBusstate19] = useState(false);
   const [bustate20, setBusstate20] = useState(false);
   const [bustate21, setBusstate21] = useState(false);
+  const [bustate22, setBusstate22] = useState(false);
+  const [bustate23, setBusstate23] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
@@ -144,6 +149,13 @@ const AppUserModal = ({
     password_confirmation: ""
   });
   const receiptRef = useRef();
+
+  const [savingbank, setsavingbank] = useState({
+    bankCode: "",
+    bankName: "",
+    accountNumber: "",
+    amount: ""
+  });
 
   const [addbank, setAddbank] = useState({
     bankCode: "",
@@ -344,6 +356,21 @@ const AppUserModal = ({
   );
   console.log(savedbanks);
 
+  const { nameenquiry, authenticatingnameenquiry } = useSelector(
+    (state) => state?.nameenquiry
+  );
+  console.log(nameenquiry);
+
+  const { addbanks, authenticatingaddbanks } = useSelector(
+    (state) => state?.addbanks
+  );
+  console.log(addbanks);
+
+  const { withdrawing, authenticatingwithdrawing } = useSelector(
+    (state) => state?.withdrawing
+  );
+  console.log(withdrawing);
+
   const { createdbank, authenticatingcreatedbank } = useSelector(
     (state) => state?.createdbank
   );
@@ -525,6 +552,12 @@ const AppUserModal = ({
     if (reloadreal && complainapprove) {
       setStep(44);
     }
+    if (addbanks?.status && bustate22) {
+      setStep(62);
+    }
+    if (withdrawing?.status && bustate23) {
+      setStep(64);
+    }
 
     console.log(update);
   }, [
@@ -554,6 +587,8 @@ const AppUserModal = ({
     bustate19,
     bustate20,
     bustate21,
+    bustate22,
+    bustate23,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -573,7 +608,9 @@ const AppUserModal = ({
     passwordchange?.status,
     reloadreal,
     complainapprove,
-    earningediting?.status
+    earningediting?.status,
+    addbanks?.status,
+    withdrawing?.status
   ]);
 
   useEffect(() => {
@@ -1376,6 +1413,17 @@ const AppUserModal = ({
       password: "",
       password_confirmation: ""
     });
+    setAddbank({
+      bankCode: "",
+      bankName: "",
+      AccountNumber: ""
+    });
+    setsavingbank({
+      bankCode: "",
+      bankName: "",
+      accountNumber: "",
+      amount: ""
+    });
     setItemer("");
     setItemersinst("");
     setItemerseditdisc("");
@@ -1443,6 +1491,9 @@ const AppUserModal = ({
     setBusstate18(false);
     setBusstate19(false);
     setBusstate20(false);
+    setBusstate21(false);
+    setBusstate22(false);
+    setBusstate23(false);
     setApproved(false);
     setReload(true);
     setPassword("");
@@ -1729,13 +1780,83 @@ const AppUserModal = ({
     });
   };
 
+  const ChangeSavedBank = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+
+    // Find the selected bank's details
+    const selectedBank = savedbanks?.data?.bankAccounts?.find(
+      (item) => item?.bankName === value
+    );
+
+    // Update the state with both `bankName` and `bankCode`
+    setsavingbank((prevState) => ({
+      ...prevState,
+      bankName: value,
+      bankCode: selectedBank?.bankCode,
+      accountNumber: selectedBank?.accountNumber // Safely access `bankCode` if it exists
+    }));
+  };
+
+  const ChangeSavedBankNumber = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+
+    // Update the state with both `bankName` and `bankCode`
+    setsavingbank((prevState) => ({
+      ...prevState,
+      amount: value
+    }));
+  };
+
   const ChangeAddBank = (e) => {
     const { name, value } = e.target;
     console.log(value);
-    setAddbank({
-      ...addbank,
-      [name]: value
-    });
+
+    // Find the selected bank's details
+    const selectedBank = availablebanks?.data?.find(
+      (item) => item?.bankName === value
+    );
+
+    // Update the state with both `bankName` and `bankCode`
+    setAddbank((prevState) => ({
+      ...prevState,
+      bankName: value,
+      bankCode: selectedBank?.bankCode // Safely access `bankCode` if it exists
+    }));
+
+    // Dispatch NameEnquiry if both conditions are met
+    if (selectedBank?.bankCode && addbank?.AccountNumber?.length === 10) {
+      dispatch(
+        NameEnquiry({
+          bankCode: selectedBank?.bankCode,
+          AccountNumber: addbank?.AccountNumber
+        })
+      );
+    }
+  };
+
+  console.log(availablebanks?.data);
+
+  const ChangeAddBankNumber = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+
+    // Update the `addbank` state
+    setAddbank((prevState) => ({
+      ...prevState,
+      AccountNumber: value
+    }));
+
+    // Use the current `value` for the condition instead of relying on `addbank`
+    if (addbank?.bankCode && value.length === 10) {
+      dispatch(
+        NameEnquiry({
+          bankCode: addbank?.bankCode,
+          AccountNumber: value // Use the value directly
+        })
+      );
+    }
   };
 
   const ChangePassing = (e) => {
@@ -7309,18 +7430,19 @@ const AppUserModal = ({
       >
         <ModalInputSelectBank
           label="Banks"
-          name="userType"
+          name="bankName"
           value={addbank?.bankName}
           onChange={(e) => ChangeAddBank(e)}
-          options={["Globus Bank", "Sterling Bank"]}
+          options={availablebanks?.data?.map((item) => item?.bankName)}
         />
         <ModalInputText
           label="Account Number"
-          onChange={(e) => ChangeAddBank(e)}
+          onChange={(e) => ChangeAddBankNumber(e)}
           name="AccountNumber"
           value={addbank?.AccountNumber}
           placeholder={`${`Enter Account Number`}`}
         />
+        {nameenquiry && <span>{nameenquiry?.data?.result?.accountname}</span>}
 
         {/* <ModalInputText
           label="Password"
@@ -7331,33 +7453,19 @@ const AppUserModal = ({
         /> */}
         <LargeSignInButton
           onClick={() => {
-            const { email, name, address, phone, commissions } = editearnings;
-            console.log({
-              email,
-              name,
-              address,
-              phone,
-              commissions
-            });
-            console.log(editearnings);
-            const isFeeMissing = commissions?.fee === null;
-            const isCapFeeMissing = commissions?.capFee === null;
-            if (
-              name &&
-              phone &&
-              email &&
-              address &&
-              email.includes("@") &&
-              (itemersmanager === "FIXED"
-                ? !isFeeMissing
-                : !isFeeMissing && !isCapFeeMissing)
-            ) {
-              // setStep(19);
-              SendEarningPartneredit();
-            } else {
-              toast.error(
-                "Fill all details correctly, including a valid email."
+            const { bankName, AccountNumber, bankCode } = addbank;
+            if (bankName && AccountNumber) {
+              dispatch(
+                AddBank({
+                  bankCode: bankCode,
+                  bankName: bankName,
+                  AccountNumber: AccountNumber
+                })
               );
+              setBusstate22(true);
+            } else {
+              console.log(addbank);
+              toast.error("Some details are missing");
             }
           }}
           bigger
@@ -7404,6 +7512,132 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully Add a Bank detail</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={63}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Withdrawal"
+      >
+        <ModalInputSelectBank
+          label="Banks"
+          name="bankName"
+          value={savingbank?.bankName}
+          onChange={(e) => ChangeSavedBank(e)}
+          options={savedbanks?.data?.bankAccounts?.map(
+            (item) => item?.bankName
+          )}
+        />
+        <ModalInputText
+          label="Account Number"
+          onChange={(e) => ChangeAddBankNumber(e)}
+          name="accountNumber"
+          disabled
+          value={savingbank?.accountNumber}
+          placeholder={`${savingbank?.accountNumber}`}
+        />
+        {nameenquiry && (
+          <span>Commission balance: {savedbanks?.data?.commissionBalance}</span>
+        )}
+        <ModalInputText
+          label="Amount"
+          onChange={(e) => ChangeSavedBankNumber(e)}
+          name="amount"
+          value={savingbank?.amount}
+          placeholder={`${`Enter Account Number`}`}
+        />
+
+        {/* <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeEarning(e)}
+          name="password"
+          value={editearnings?.password}
+          placeholder={`${`Enter Passowrd`}`}
+        /> */}
+        <LargeSignInButton
+          onClick={() => {
+            const { bankName, bankCode, accountNumber, amount } = savingbank;
+            if (bankName && accountNumber) {
+              dispatch(
+                Withdrawing({
+                  bankCode: bankCode,
+                  bankName: bankName,
+                  accountNumber: accountNumber,
+                  amount: amount
+                })
+              );
+              setBusstate23(true);
+            } else {
+              console.log(savingbank);
+              toast.error("Some details are missing");
+            }
+          }}
+          bigger
+          title={"Withdraw"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={64}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Withdrawal Request
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully withdraw</span>
           </div>
           <div
             style={{

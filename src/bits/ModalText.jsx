@@ -10,7 +10,8 @@ const ModalText = ({
   name,
   value,
   onChange,
-  logo
+  logo,
+  disabled
 }) => {
   console.log(auth);
   return (
@@ -18,6 +19,7 @@ const ModalText = ({
       {/* {logo ? <Email  className="close" /> : ""} */}
       <input
         name={name}
+        disabled={disabled}
         value={value}
         onChange={(e) => onChange(e)}
         placeholder={placeholder}
@@ -33,7 +35,7 @@ const Flex = styled.div`
   position: relative;
 
   .input {
-    border: 1px solid #E2E8F0;
+    border: 1px solid #e2e8f0;
     box-shadow: 0px 1px 2px 0px #1018280d;
     width: ${(props) =>
       props?.reduce ? "400px" : props?.auth ? "430px" : "500px"};
@@ -41,8 +43,9 @@ const Flex = styled.div`
     padding-left: 20px;
     outline: none;
     color: #999999;
-    background: #FFFFFF;
-    height: ${(props) => (props?.reduce ? "40px" : props?.auth ? "45px" : "45px")};
+    background: #ffffff;
+    height: ${(props) =>
+      props?.reduce ? "40px" : props?.auth ? "45px" : "45px"};
     font-size: ${(props) =>
       props?.reduce ? "15px" : props?.auth ? "14px" : "10px"};
   }
@@ -67,8 +70,8 @@ const Flex = styled.div`
       width: ${(props) => (props?.fixedWidth ? "530px" : "500px")};
       height: 40px;
       outline: none;
-      color: #1C1C1C;
-      background: #F6F6F7;
+      color: #1c1c1c;
+      background: #f6f6f7;
       border-radius: 8px;
       padding-left: 20px;
       font-size: 20px;

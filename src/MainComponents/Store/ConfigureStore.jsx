@@ -74,6 +74,9 @@ import { AgentTransactionsSlice } from "./Reducers/AgentTransactions";
 import { AgentSummarySlice } from "./Reducers/AgentSummary";
 import { AvailableBanksSlice } from "./Reducers/AvailableBanks";
 import { SavedBanksSlice } from "./Reducers/SavedBanks";
+import { AddBankSlice } from "./Reducers/AddBank";
+import { NameEnquirySlice } from "./Reducers/NameEnquiry";
+import { WithdrawingSlice } from "./Reducers/Withdrawing";
 
 export default configureStore({
   reducer: {
@@ -151,6 +154,9 @@ export default configureStore({
     agenttransactions: AgentTransactionsSlice?.reducer,
     agentsummary: AgentSummarySlice?.reducer,
     availablebanks: AvailableBanksSlice?.reducer,
-    savedbanks: SavedBanksSlice?.reducer
+    savedbanks: SavedBanksSlice?.reducer,
+    addbanks: AddBankSlice?.reducer,
+    nameenquiry: NameEnquirySlice?.reducer,
+    withdrawing: WithdrawingSlice?.reducer
   }
 });

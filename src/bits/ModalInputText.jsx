@@ -9,6 +9,7 @@ const ModalInputText = ({
   placeholder,
   auth,
   name,
+  disabled,
   value,
   onChange,
   logo,
@@ -29,6 +30,7 @@ const ModalInputText = ({
           </div>
         ) : (
           <ModalText
+            disabled={disabled}
             name={name}
             value={value}
             onChange={onChange}

@@ -10,13 +10,10 @@ const ModalSelectBank = ({
   value,
   name
 }) => {
-  const handleChange = (e) => {
-    setItemer(e.target.value);
-  };
-
   return (
     <Flex>
       <select name={name} value={value} onChange={onChange} className="input">
+        <option>Select Banks</option>
         {options?.map((item, index) => (
           <option key={item} value={item}>
             {item}

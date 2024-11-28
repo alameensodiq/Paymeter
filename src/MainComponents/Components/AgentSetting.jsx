@@ -125,12 +125,12 @@ const AgentSetting = ({ title }) => {
           >
             Add Bank
           </button>
-          {/* <button
-            onClick={() => setStep(57)}
+          <button
+            onClick={() => setStep(63)}
             className="px-2 h-[35px] flex flex-row gap-1 items-center bg-route-color w-[20%] rounded-custom text-white font-semibold text-[11px] justify-center"
           >
             Request Withdrawal
-          </button> */}
+          </button>
         </div>
       </div>
     </div>
