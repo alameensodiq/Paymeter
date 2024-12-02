@@ -12,7 +12,7 @@ export const AvailableBanks = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}agent/all-withdrawal-banks`,
+        `${process.env.REACT_APP_BASE_URL}agent/banks`,
         {
           method: "GET",
           headers: {

@@ -1814,22 +1814,22 @@ const AppUserModal = ({
     console.log(value);
 
     // Find the selected bank's details
-    const selectedBank = availablebanks?.data?.find(
-      (item) => item?.bankName === value
+    const selectedBank = availablebanks?.data?.result?.find(
+      (item) => item?.bank_name === value
     );
 
     // Update the state with both `bankName` and `bankCode`
     setAddbank((prevState) => ({
       ...prevState,
       bankName: value,
-      bankCode: selectedBank?.bankCode // Safely access `bankCode` if it exists
+      bankCode: selectedBank?.bank_code // Safely access `bankCode` if it exists
     }));
 
     // Dispatch NameEnquiry if both conditions are met
-    if (selectedBank?.bankCode && addbank?.AccountNumber?.length === 10) {
+    if (selectedBank?.bank_code && addbank?.AccountNumber?.length === 10) {
       dispatch(
         NameEnquiry({
-          bankCode: selectedBank?.bankCode,
+          bankCode: selectedBank?.bank_code,
           AccountNumber: addbank?.AccountNumber
         })
       );
@@ -7433,7 +7433,7 @@ const AppUserModal = ({
           name="bankName"
           value={addbank?.bankName}
           onChange={(e) => ChangeAddBank(e)}
-          options={availablebanks?.data?.map((item) => item?.bankName)}
+          options={availablebanks?.data?.result?.map((item) => item?.bank_name)}
         />
         <ModalInputText
           label="Account Number"
