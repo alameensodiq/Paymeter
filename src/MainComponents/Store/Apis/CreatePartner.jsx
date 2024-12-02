@@ -3,10 +3,7 @@ import toast from "react-hot-toast";
 
 export const CreatePartner = createAsyncThunk(
   "createpartner",
-  async (
-    { name, email, phone, address, password, password_confirmation },
-    thunkAPI
-  ) => {
+  async ({ name, email, phone, address, password }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const accessToken = sessionStorage.getItem("token");
 
@@ -25,8 +22,8 @@ export const CreatePartner = createAsyncThunk(
             email,
             phone,
             address,
-            password,
-            password_confirmation
+            password
+            // password_confirmation
           })
         }
       );

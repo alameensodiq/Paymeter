@@ -13,7 +13,8 @@ export const CreatedDisco = createAsyncThunk(
       email,
       logoUrl,
       phone,
-      systemFee
+      systemFee,
+      password
     },
     thunkAPI
   ) => {
@@ -38,7 +39,8 @@ export const CreatedDisco = createAsyncThunk(
             email,
             logoUrl,
             systemFee,
-            phone
+            phone,
+            password
           })
         }
       );

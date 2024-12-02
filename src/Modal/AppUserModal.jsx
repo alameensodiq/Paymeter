@@ -279,7 +279,8 @@ const AppUserModal = ({
     earningPartnerFee: "",
     email: "",
     logoUrl: "",
-    phone: null
+    phone: null,
+    password: ""
   });
 
   const [editingdisc, seteditingdisc] = useState({
@@ -1030,7 +1031,8 @@ const AppUserModal = ({
       email,
       logoUrl,
       phone,
-      systemFee
+      systemFee,
+      password
     } = disc;
 
     // Check if the email is valid
@@ -1049,7 +1051,8 @@ const AppUserModal = ({
         email,
         systemFee: parseFloat(systemFee),
         logoUrl,
-        phone
+        phone,
+        password
       })
     );
 
@@ -1201,8 +1204,8 @@ const AppUserModal = ({
         email,
         phone,
         address,
-        password,
-        password_confirmation
+        password
+        // password_confirmation
       })
     );
     setBusstate4(true);
@@ -2748,6 +2751,13 @@ const AppUserModal = ({
           value={disc?.shortName}
           placeholder={`${`Enter Disco Short Name`}`}
         />
+        <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeDisc(e)}
+          name="password"
+          value={disc?.password}
+          placeholder={`${`Enter Password`}`}
+        />
         {disc?.logoUrl !== "" ? (
           <img
             src={disc?.logoUrl}
@@ -2816,7 +2826,8 @@ const AppUserModal = ({
         )}
         <LargeSignInButton
           onClick={() => {
-            const { shortName, name, commissionsDTO, phone, email } = disc;
+            const { shortName, name, commissionsDTO, phone, email, password } =
+              disc;
             console.log({ name, shortName, commissionsDTO });
 
             // Check for missing values
@@ -2828,6 +2839,7 @@ const AppUserModal = ({
               shortName &&
               phone &&
               email &&
+              password &&
               (itemers === "Fixed"
                 ? !isFeeMissing
                 : !isFeeMissing && !isCapFeeMissing)
@@ -3090,13 +3102,13 @@ const AppUserModal = ({
           value={partner?.password}
           placeholder={`${`Enter Password`}`}
         />
-        <ModalInputText
+        {/* <ModalInputText
           label="Confirm Password"
           onChange={(e) => ChangePartner(e)}
           name="password_confirmation"
           value={partner?.password_confirmation}
           placeholder={`${`Confirm Passowrd`}`}
-        />
+        /> */}
         <LargeSignInButton
           onClick={() => handleSubmit()}
           bigger
