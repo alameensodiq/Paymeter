@@ -867,8 +867,10 @@ const Tables = ({
                                   console.log(item?.dispense?.listtoken[0]);
                                   dispatch(
                                     ResendToken({
-                                      metertoken: item?.dispense?.listtoken[0],
-                                      phoneNo: item?.phone
+                                      // metertoken: item?.dispense?.listtoken[0],
+                                      phoneNo: item?.phone,
+                                      meterNo: item?.meterNo,
+                                      dispenseId: item?.dispense?.id
                                     })
                                   );
                                   // setReload(true)
@@ -4305,8 +4307,10 @@ const Tables = ({
                                   console.log(item?.dispense?.listtoken[0]);
                                   dispatch(
                                     ResendToken({
-                                      metertoken: item?.dispense?.listtoken[0],
-                                      phoneNo: item?.phone
+                                      // metertoken: item?.dispense?.listtoken[0],
+                                      phoneNo: item?.phone,
+                                      meterNo: item?.meterNo,
+                                      dispenseId: item?.dispense?.id
                                     })
                                   );
                                   // setReload(true)

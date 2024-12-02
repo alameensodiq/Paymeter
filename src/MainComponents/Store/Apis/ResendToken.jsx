@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const ResendToken = createAsyncThunk(
   "resendtoken",
-  async ({ metertoken, phoneNo }, thunkAPI) => {
+  async ({ phoneNo, meterNo, dispenseId }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     // const dateObj = new Date(startDate);
 
@@ -23,7 +23,9 @@ export const ResendToken = createAsyncThunk(
           },
           body: JSON.stringify({
             phoneNo,
-            token: metertoken
+            // token: metertoken,
+            meterNo: meterNo,
+            dispenseId: dispenseId
           })
         }
       );
