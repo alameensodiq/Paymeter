@@ -1555,14 +1555,7 @@ const AppUserModal = ({
     // Destructure partner object
     const { name, email, phone, address, password, password_confirmation } =
       partner;
-    if (
-      !name ||
-      !email ||
-      !phone ||
-      !address ||
-      !password ||
-      !password_confirmation
-    ) {
+    if (!name || !email || !phone || !address || !password) {
       toast.error("Input all variables");
       return;
     }
@@ -1570,10 +1563,10 @@ const AppUserModal = ({
       toast.error("Add @ to your email input");
       return;
     }
-    if (password !== password_confirmation) {
-      toast.error("Password and Confirm Password must be the same");
-      return;
-    }
+    // if (password !== password_confirmation) {
+    //   toast.error("Password and Confirm Password must be the same");
+    //   return;
+    // }
 
     // Proceed to next step if all validations pass
     setStep(10);
