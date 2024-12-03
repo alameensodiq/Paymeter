@@ -129,7 +129,7 @@ const DistrictManager = ({ title }) => {
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
           <div className="flex flex-row justify-between">
             <span className="text-route-name text-[28px] font-semibold">
-              District Manager
+              District
             </span>
             {/* <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">

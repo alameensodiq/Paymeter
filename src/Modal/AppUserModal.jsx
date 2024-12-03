@@ -47,6 +47,7 @@ import { SavedBanks } from "../MainComponents/Store/Apis/SavedBanks";
 import { AddBank } from "../MainComponents/Store/Apis/AddBank";
 import { NameEnquiry } from "../MainComponents/Store/Apis/NameEnquiry";
 import { Withdrawing } from "../MainComponents/Store/Apis/Withdrawing";
+import DiscoSelect from "../bits/DiscoSelect";
 
 const AppUserModal = ({
   setStep,
@@ -300,6 +301,7 @@ const AppUserModal = ({
 
   const [manager, setManager] = useState({
     name: "",
+    discoId: "",
     address: "",
     password: "",
     // commissionsDTO: {
@@ -1076,16 +1078,21 @@ const AppUserModal = ({
 
   const SendDetailsManager = () => {
     // const { name, phone, commissionsDTO, email, address } = manager;
-    const { name, phone, password, email, address } = manager;
+    const { name, phone, password, email, address, discoId } = manager;
 
     // Check if the email is valid
     if (!email.includes("@")) {
       toast.error("Please enter a valid email address.");
       return;
     }
+    if (!name || !phone || !password || !email || !address || !discoId) {
+      toast.error("One or more details is missing");
+    }
+    console.log(name, phone, password, email, address, discoId);
 
     dispatch(
       CreateManager({
+        discoId,
         name,
         address,
         password,
@@ -1374,6 +1381,7 @@ const AppUserModal = ({
       name: "",
       address: "",
       password: "",
+      discoId: "",
       // commissionsDTO: {
       //   commissionType: "",
       //   fee: null
@@ -4991,6 +4999,13 @@ const AppUserModal = ({
           value={manager?.name}
           placeholder={`${`Enter Manager's Name`}`}
         />
+        <DiscoSelect
+          name="discoId"
+          label="Choose Disco"
+          value={manager?.discoId}
+          onChange={(e) => ChangeManager(e)}
+          options={discoOptions2}
+        />
         <ModalInputText
           label="Email"
           onChange={(e) => ChangeManager(e)}
@@ -5062,7 +5077,7 @@ const AppUserModal = ({
         )} */}
         <LargeSignInButton
           onClick={() => {
-            const { address, name, password, phone, email } = manager;
+            const { address, name, password, phone, email, discoId } = manager;
             // console.log({ address, name, commissionsDTO, phone, email });
             console.log({ address, name, password, phone, email });
 
@@ -5075,7 +5090,8 @@ const AppUserModal = ({
               address &&
               phone &&
               email &&
-              password
+              password &&
+              discoId
               // (itemersmanager === "Fixed"
               //   ? !isFeeMissing
               //   : !isFeeMissing && !isCapFeeMissing)

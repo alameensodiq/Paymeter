@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const CreateManager = createAsyncThunk(
   "createmanager",
-  async ({ name, address, password, email, phone }, thunkAPI) => {
+  async ({ name, address, password, email, phone, discoId }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const accessToken = sessionStorage.getItem("token");
 
@@ -23,7 +23,8 @@ export const CreateManager = createAsyncThunk(
             password,
             // commissionsDTO,
             email,
-            phone
+            phone,
+            discoId
           })
         }
       );
