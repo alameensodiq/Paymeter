@@ -5244,7 +5244,7 @@ const AppUserModal = ({
         /> */}
         <DistrictManagerSelect
           name="districtManagerId"
-          label="Choose District Manager"
+          label="Choose District"
           value={districthead?.districtManagerId}
           onChange={(e) => ChangeAgentDistrict(e)}
           earningPartnerId
