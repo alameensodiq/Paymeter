@@ -7679,6 +7679,119 @@ const AppUserModal = ({
           </div>
         </div>
       </AppModal>
+      <AppModal
+        step={65}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You are about to accept Agent Notification, Are you sure the
+            </span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Reject"
+              large
+              onClick={() => handleCloseModal4()}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => setStep(66)}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={66}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        {/* <ModalInputSelect
+          name="districtManagerId"
+          label="Choose District Manager"
+          value={districthead}
+          onChange={(e) => ChangeAgentDistrict(e)}
+          options={districtOptions}
+        /> */}
+        <DistrictManagerSelect
+          name="districtManagerId"
+          label="Choose District"
+          value={districthead?.districtManagerId}
+          onChange={(e) => ChangeAgentDistrict(e)}
+          earningPartnerId
+          options={apiagentrole?.data?.data}
+        />
+
+        <LargeSignInButton
+          onClick={() => {
+            console.log(paymentMethodIds, actions, real);
+            dispatch(
+              Approve({
+                userId: userId?.user?.id,
+                notId: "re-approve",
+                districtManagerId: districthead?.districtManagerId,
+                stat,
+                items: userId
+              })
+            );
+            setDisabled(true);
+            setApproved(true);
+            setBusstate10(true);
+            setTimeout(() => {
+              setDisabled(false);
+            }, 4000);
+          }}
+          bigger
+          title={authenticatingapprove ? "Submiting....." : "Submit"}
+          background
+          color
+        />
+      </AppModal>
     </div>
   );
 };

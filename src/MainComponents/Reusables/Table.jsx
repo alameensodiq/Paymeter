@@ -69,7 +69,8 @@ const Tables = ({
   withdraw,
   meterss,
   setdecliner,
-  decliner
+  decliner,
+  Payreject
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -99,6 +100,8 @@ const Tables = ({
   const [indexing12, setIndexing12] = useState(null);
   const [open13, setOpen13] = useState(false);
   const [indexing13, setIndexing13] = useState(null);
+  const [open14, setOpen14] = useState(false);
+  const [indexing14, setIndexing14] = useState(null);
   const dispatch = useDispatch();
   console.log(data);
 
@@ -3676,10 +3679,10 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     NAME
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
                     EMAIL
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
                     PHONE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
@@ -3690,6 +3693,9 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     STATUS
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACTIONS
                   </StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -3713,10 +3719,10 @@ const Tables = ({
                     >
                       {item?.user?.name}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "15%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.email}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "15%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.user?.phone}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
@@ -3747,6 +3753,118 @@ const Tables = ({
                         >
                           PENDING
                         </button>
+                      )}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      style={{
+                        width: "10%",
+                        position: "relative"
+                        // justifyContent: "flex-end"
+                      }}
+                      onClick={() => {
+                        setOpen14(!open14);
+                        setIndexing14(index);
+                        console.log("sodiq");
+                      }}
+                    >
+                      <svg
+                        onClick={() => {
+                          setOpen14(!open14);
+                          setIndexing14(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
+                      {index === indexing14 && open14 ? (
+                        <div className="absolute right-20 top-15 w-36 h-20 rounded-lg px-2 py-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white z-10">
+                          <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Suspend width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  setStep(39);
+                                  setImages(item?.addressUrl);
+                                  setOpen13(!open13);
+                                  console.log(item?.addressUrl);
+                                }}
+                              >
+                                Doc Uploaded
+                              </span>
+                            </div> */}
+
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  console.log(item);
+                                  // setdecliner(decliner);
+                                  Payreject(item, item?.user?.id, "re-approve");
+                                  setOpen14(!open14);
+                                }}
+                              >
+                                Re-approve Agent
+                              </span>
+                            </div>
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span
+                                className="text-black"
+                                onClick={() => {
+                                  console.log(item);
+                                  // setdecliner(!decliner);
+                                  Payer(item, item?.user?.id, "approve");
+                                  setOpen13(!open13);
+                                }}
+                              >
+                                Decline Agent
+                              </span>
+                            </div> */}
+                          </div>
+                        </div>
+                      ) : (
+                        ""
                       )}
                     </StyledTableCell>
                   </StyledTableRow>

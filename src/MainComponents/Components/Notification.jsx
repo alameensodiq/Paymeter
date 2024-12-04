@@ -120,6 +120,19 @@ const Notification = ({ title }) => {
     // setReload(true);
   };
 
+  const Payreject = (notificationsId, notId, action) => {
+    console.log(notificationsId);
+    console.log(notId);
+    console.log(action);
+    setuserId(notificationsId);
+    setnotId(notId);
+    setstat(action);
+
+    setStep(65);
+    // dispatch(Approve({ userId: notificationsId, notId, stat: action }));
+    // setReload(true);
+  };
+
   const Payser = (notificationsId, notId, action) => {
     console.log(notificationsId);
     console.log(notId);
@@ -360,7 +373,7 @@ const Notification = ({ title }) => {
                   status === "REJECTED" && (
                     <Tables
                       rejected
-                      Pay={Pays}
+                      Payreject={Payreject}
                       setUserIds={setUserIds}
                       set
                       setStep={setStep}
