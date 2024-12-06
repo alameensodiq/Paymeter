@@ -46,11 +46,13 @@ const Sidebar = () => {
   const [isHovered21, setIsHovered21] = useState(false);
   const [isHovered22, setIsHovered22] = useState(false);
   const [isHovered23, setIsHovered23] = useState(false);
+  const [isHovered24, setIsHovered24] = useState(false);
+  const [isHovered25, setIsHovered25] = useState(false);
   const [isHovered28, setIsHovered28] = useState(false);
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
-    <div className="bg-white flex flex-col border-r border pt-3 h-[100vh]">
+    <div className="bg-white flex flex-col border-r border pt-3 h-[115vh]">
       <div className="flex flex-row pt-[65px] justify-center">
         <span className="text-route-color font-bold text-[10px] lg:text-[30px] md:text-[20px]">
           Paymeter
@@ -978,6 +980,104 @@ const Sidebar = () => {
               }`}
             >
               Customer Care
+            </p>
+          </Link>
+          <Link
+            to="/systemcare"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/systemcare" ||
+              router.pathname.startsWith("/systemcare/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered24(true)}
+            onMouseLeave={() => setIsHovered24(false)}
+          >
+            {router.pathname === "/systemcare" ||
+            router.pathname.startsWith("/systemcare/") ||
+            isHovered24 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/systemcare" || isHovered24 ? (
+              <Bill
+                className={`${
+                  router.pathname === "/systemcare" ||
+                  router.pathname.startsWith("/systemcare/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Bill
+                className={`${
+                  router.pathname === "/systemcare" ||
+                  router.pathname.startsWith("/systemcare/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/systemcare" ||
+                router.pathname.startsWith("/systemcare/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              System Care
+            </p>
+          </Link>
+          <Link
+            to="/accountant"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/accountant" ||
+              router.pathname.startsWith("/accountant/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered25(true)}
+            onMouseLeave={() => setIsHovered25(false)}
+          >
+            {router.pathname === "/accountant" ||
+            router.pathname.startsWith("/accountant/") ||
+            isHovered25 ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/accountant" || isHovered25 ? (
+              <Bill
+                className={`${
+                  router.pathname === "/accountant" ||
+                  router.pathname.startsWith("/accountant/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Bill
+                className={`${
+                  router.pathname === "/accountant" ||
+                  router.pathname.startsWith("/accountant/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/accountant" ||
+                router.pathname.startsWith("/accountant/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Accountant
             </p>
           </Link>
           <Link

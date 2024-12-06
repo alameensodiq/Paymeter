@@ -30,6 +30,7 @@ import { UserWallet } from "../Store/Apis/UserWallet";
 import { GetCommission } from "../Store/Apis/GetCommission";
 import AppUserModal from "../../Modal/AppUserModal";
 import { UserTransaction } from "../Store/Apis/UserTransaction";
+import { UserMeters } from "../Store/Apis/UserMeters";
 
 const RealUserDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -60,6 +61,12 @@ const RealUserDetails = ({ title }) => {
     (state) => state?.getcommission
   );
   console.log(getcommission);
+
+  const { usermeters, authenticatingusermeters } = useSelector(
+    (state) => state?.usermeters
+  );
+  console.log(usermeters);
+
   const { userwallet, authenticatinguserwallet } = useSelector(
     (state) => state?.userwallet
   );
@@ -79,6 +86,7 @@ const RealUserDetails = ({ title }) => {
       //   dispatch(UserWallet({ id }));
       dispatch(GetCommission({ id }));
       dispatch(UserTransaction({ id, searcher, currentPage }));
+      dispatch(UserMeters({ id }));
       return;
     } else {
       navigate("/");
@@ -89,6 +97,7 @@ const RealUserDetails = ({ title }) => {
       //   dispatch(UserWallet({ id }));
       dispatch(GetCommission({ id }));
       dispatch(UserTransaction({ id, searcher, currentPage }));
+      dispatch(UserMeters({ id }));
     }
 
     //eslint-disable-next-line
@@ -106,9 +115,9 @@ const RealUserDetails = ({ title }) => {
   const previous = usertransaction?.data?.transactions?.meta?.prev;
   const totalPosts = usertransaction?.data?.transactions?.meta?.totalCount;
 
-  // const next2 = getcommission?.data?.meta?.next;
-  // const previous2 = getcommission?.data?.meta?.prev;
-  // const totalPosts2 = getcommission?.data?.meta?.totalCount;
+  const next2 = usermeters?.data?.meta?.next;
+  const previous2 = usermeters?.data?.meta?.prev;
+  const totalPosts2 = usermeters?.data?.meta?.totalCount;
 
   // const next3 = userwallet?.data?.meta?.next;
   // const previous3 = userwallet?.data?.meta?.prev;
@@ -124,7 +133,7 @@ const RealUserDetails = ({ title }) => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [userdata?.data, getcommission?.data]);
+  }, [userdata?.data, getcommission?.data, usermeters?.data]);
 
   const dateChanger = (date) => {
     console.log(date);
@@ -286,31 +295,27 @@ const RealUserDetails = ({ title }) => {
                 >
                   Transactions
                 </span>
-                {/* {!isEarningRoute && !isEarningRoute2 && (
-                  <span
-                    onClick={() => {
-                      setStatus("pending");
-                      setCurrentPage(0);
-                    }}
-                    className={`${
-                      status === "pending"
-                        ? "text-route-color cursor-pointer"
-                        : "text-route-noncolor cursor-pointer"
-                    }`}
-                  >
-                    Commissions
-                  </span>
-                )} */}
+                <span
+                  onClick={() => {
+                    setStatus("pending");
+                    setCurrentPage(0);
+                  }}
+                  className={`${
+                    status === "pending"
+                      ? "text-route-color cursor-pointer"
+                      : "text-route-noncolor cursor-pointer"
+                  }`}
+                >
+                  Meters
+                </span>
               </div>
               <div className="gap-2">
                 {status === "accepted" && (
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
-                {/* {status === "pending" &&
-                  !isEarningRoute &&
-                  !isEarningRoute2 && (
-                    <div className="w-[90px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[13%] sm:ml-[18%]" />
-                  )} */}
+                {status === "pending" && (
+                  <div className="w-[60px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[13%] sm:ml-[18%]" />
+                )}
               </div>
             </div>
             {loading ? (
@@ -324,17 +329,14 @@ const RealUserDetails = ({ title }) => {
                       data={usertransaction?.data?.transactions?.data}
                     />
                   )}
-                {/* {!isEarningRoute &&
-                  !isEarningRoute2 &&
-                  getcommission?.data?.length >= 1 &&
-                  status === "pending" && (
-                    <Tables
-                      setStep={setStep}
-                      setNaming={setNaming}
-                      overviewcommission
-                      data={getcommission?.data}
-                    />
-                  )} */}
+                {usermeters?.data?.length >= 1 && status === "pending" && (
+                  <Tables
+                    setStep={setStep}
+                    setNaming={setNaming}
+                    overviewcommission
+                    data={usermeters?.data}
+                  />
+                )}
                 {usertransaction?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
@@ -348,19 +350,18 @@ const RealUserDetails = ({ title }) => {
                       <img src={empty} alt="empty" />
                     </div>
                   )}
-                {/* {!usertransaction?.data?.transactions?.meta?.totalCount &&
-                  status === "accepted" && (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center"
-                      }}
-                    >
-                      <img src={empty} alt="empty" />
-                    </div>
-                  )} */}
+                {usermeters?.data?.length === 0 && status === "pending" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
                 {usertransaction?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination
@@ -373,7 +374,7 @@ const RealUserDetails = ({ title }) => {
                       next={next}
                     />
                   )}
-                {/* {getcommission?.data?.length >= 1 && (
+                {/* {usermeters?.data?.length >= 1 && (
                   <Pagination
                     set={activater}
                     currentPage={currentPage}

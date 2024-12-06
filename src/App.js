@@ -47,6 +47,9 @@ import AgentTransfer from "./MainComponents/Components/AgentTransfer";
 import AgentMeter from "./MainComponents/Components/AgentMeter";
 import AgentDashboard from "./MainComponents/Components/AgentDashboard";
 import AgentSetting from "./MainComponents/Components/AgentSetting";
+import MeterVirtual from "./MainComponents/Components/MeterVirtual";
+import SystemCare from "./MainComponents/Components/SystemCare";
+import Accountant from "./MainComponents/Components/Accountant";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -152,6 +155,10 @@ function App() {
               element={<Meter title={"Meter Details"} />}
             />
             <Route
+              path="/virtualmeter/:id"
+              element={<MeterVirtual title={"Meter Details"} />}
+            />
+            <Route
               path="/agentmeters"
               element={<AgentMeter title={"Meters"} />}
             />
@@ -197,6 +204,14 @@ function App() {
             <Route
               path="/customer"
               element={<CustomerCare title={"Customer Care"} />}
+            />
+            <Route
+              path="/systemcare"
+              element={<SystemCare title={"System Care"} />}
+            />
+            <Route
+              path="/accountant"
+              element={<Accountant title={"Accountant"} />}
             />
           </>
         )}

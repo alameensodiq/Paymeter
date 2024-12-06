@@ -48,6 +48,8 @@ import { AddBank } from "../MainComponents/Store/Apis/AddBank";
 import { NameEnquiry } from "../MainComponents/Store/Apis/NameEnquiry";
 import { Withdrawing } from "../MainComponents/Store/Apis/Withdrawing";
 import DiscoSelect from "../bits/DiscoSelect";
+import { SystemCare } from "../MainComponents/Store/Apis/SystemCare";
+import { Accountant } from "../MainComponents/Store/Apis/Accountant";
 
 const AppUserModal = ({
   setStep,
@@ -90,7 +92,8 @@ const AppUserModal = ({
   reloadreal,
   complainapprove,
   setdecliner,
-  decliner
+  decliner,
+  systemstate
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -124,6 +127,7 @@ const AppUserModal = ({
   const [bustate21, setBusstate21] = useState(false);
   const [bustate22, setBusstate22] = useState(false);
   const [bustate23, setBusstate23] = useState(false);
+  const [bustate24, setBusstate24] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
@@ -320,6 +324,14 @@ const AppUserModal = ({
     discoId: ""
   });
 
+  const [system, setSystem] = useState({
+    name: "",
+    password: "",
+    email: "",
+    phone: "",
+    address: ""
+  });
+
   const [editdisc, setEditDisc] = useState({
     commissionType: "",
     fee: null,
@@ -483,6 +495,16 @@ const AppUserModal = ({
   );
   console.log(passwordchange);
 
+  const { systemcares, authenticatingsystemcares } = useSelector(
+    (state) => state?.systemcares
+  );
+  console.log(systemcares);
+
+  const { accountants, authenticatingaccountants } = useSelector(
+    (state) => state?.accountants
+  );
+  console.log(accountants);
+
   // passwordchange?.status
 
   useEffect(() => {
@@ -561,6 +583,12 @@ const AppUserModal = ({
     if (withdrawing?.status && bustate23) {
       setStep(64);
     }
+    if (systemcares?.status && bustate24) {
+      setStep(69);
+    }
+    if (accountants?.status && bustate24) {
+      setStep(69);
+    }
 
     console.log(update);
   }, [
@@ -613,7 +641,9 @@ const AppUserModal = ({
     complainapprove,
     earningediting?.status,
     addbanks?.status,
-    withdrawing?.status
+    withdrawing?.status,
+    systemcares?.status,
+    accountants?.status
   ]);
 
   useEffect(() => {
@@ -825,6 +855,15 @@ const AppUserModal = ({
     });
   };
 
+  const ChangeSystem = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    setSystem({
+      ...system,
+      [name]: value
+    });
+  };
+
   const ChangeDiscNumber = (e) => {
     const { name, value } = e.target;
 
@@ -900,6 +939,33 @@ const AppUserModal = ({
     }
 
     setCustomer((prevDisc) => ({
+      ...prevDisc,
+      [name]: sanitizedValue
+    }));
+  };
+
+  const ChangeSystemNumber = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    if (sanitizedValue.replace(".", "").length > 11) {
+      sanitizedValue = sanitizedValue.slice(0, 11); // This will limit it to 11 digits max
+    }
+
+    setSystem((prevDisc) => ({
       ...prevDisc,
       [name]: sanitizedValue
     }));
@@ -1127,6 +1193,50 @@ const AppUserModal = ({
     setBusstate15(true);
   };
 
+  const SendDetailsSystem = () => {
+    const { name, phone, email, password, address } = system;
+
+    // Check if the email is valid
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    dispatch(
+      SystemCare({
+        name,
+        password,
+        email,
+        phone,
+        address
+      })
+    );
+
+    setBusstate24(true);
+  };
+
+  const SendDetailsAccountant = () => {
+    const { name, phone, email, password, address } = system;
+
+    // Check if the email is valid
+    if (!email.includes("@")) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    dispatch(
+      Accountant({
+        name,
+        password,
+        email,
+        phone,
+        address
+      })
+    );
+
+    setBusstate24(true);
+  };
+
   const SendEditDisco = () => {
     const { commissionType } = editdisc;
     console.log(discname);
@@ -1338,6 +1448,13 @@ const AppUserModal = ({
     if (oldname) {
       setoldname("");
     }
+    setSystem({
+      name: "",
+      password: "",
+      email: "",
+      phone: "",
+      address: ""
+    });
     setCustomer({
       name: "",
       password: "",
@@ -1505,6 +1622,7 @@ const AppUserModal = ({
     setBusstate21(false);
     setBusstate22(false);
     setBusstate23(false);
+    setBusstate24(false);
     setApproved(false);
     setReload(true);
     setPassword("");
@@ -7791,6 +7909,199 @@ const AppUserModal = ({
           background
           color
         />
+      </AppModal>
+      <AppModal
+        step={67}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading={`Add ${systemstate ? "System" : "Accountant"}`}
+      >
+        <ModalInputText
+          label="Name"
+          onChange={(e) => ChangeSystem(e)}
+          name="name"
+          value={system?.name}
+          placeholder={`${`Enter  Name`}`}
+        />
+        <ModalInputText
+          label="Email"
+          onChange={(e) => ChangeSystem(e)}
+          name="email"
+          value={system?.email}
+          placeholder={`${`Enter  Email`}`}
+        />
+        <ModalInputText
+          label="Phone Number"
+          onChange={(e) => ChangeSystemNumber(e)}
+          name="phone"
+          value={system?.phone}
+          placeholder={`${`Enter Phone Number`}`}
+        />
+        <ModalInputText
+          label="Address"
+          onChange={(e) => ChangeSystem(e)}
+          name="address"
+          value={system?.address}
+          placeholder={`${`Enter  Address`}`}
+        />
+        <ModalInputText
+          label="Password"
+          onChange={(e) => ChangeSystem(e)}
+          name="password"
+          value={system?.password}
+          placeholder={`${`Enter  Password`}`}
+        />
+        <LargeSignInButton
+          onClick={() => {
+            const { password, name, phone, email, address } = system;
+            console.log({ password, name, phone, email, address });
+            if (name && password && phone && email.includes("@") && address) {
+              setStep(68);
+            } else {
+              toast.error("Please fill in all details correctly.");
+            }
+          }}
+          bigger
+          title={"Submit"}
+          background
+          color
+        />
+      </AppModal>
+      <AppModal
+        step={68}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Changes
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You are about to add new{" "}
+              {systemstate ? "System Care" : "Accountant"}, Are you sure the
+            </span>
+            <span>details are accurate?</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => {
+                if (systemstate) {
+                  SendDetailsSystem();
+                } else {
+                  SendDetailsAccountant();
+                }
+              }}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={69}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Account Created
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You have successfully Added a new{" "}
+              {systemstate ? "System Care" : "Accountant"}
+            </span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
       </AppModal>
     </div>
   );

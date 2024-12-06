@@ -77,6 +77,10 @@ import { SavedBanksSlice } from "./Reducers/SavedBanks";
 import { AddBankSlice } from "./Reducers/AddBank";
 import { NameEnquirySlice } from "./Reducers/NameEnquiry";
 import { WithdrawingSlice } from "./Reducers/Withdrawing";
+import { UserMetersSlice } from "./Reducers/Usermeters";
+import { VirtualmeterSlice } from "./Reducers/Virtualmeter";
+import { SystemCareSlice } from "./Reducers/SystemCare";
+import { AccountantSlice } from "./Reducers/Accountants";
 
 export default configureStore({
   reducer: {
@@ -157,6 +161,10 @@ export default configureStore({
     savedbanks: SavedBanksSlice?.reducer,
     addbanks: AddBankSlice?.reducer,
     nameenquiry: NameEnquirySlice?.reducer,
-    withdrawing: WithdrawingSlice?.reducer
+    withdrawing: WithdrawingSlice?.reducer,
+    usermeters: UserMetersSlice?.reducer,
+    virtual: VirtualmeterSlice?.reducer,
+    systemcares: SystemCareSlice?.reducer,
+    accountants: AccountantSlice?.reducer
   }
 });
