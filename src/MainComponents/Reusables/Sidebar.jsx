@@ -52,7 +52,7 @@ const Sidebar = () => {
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
-    <div className="bg-white flex flex-col border-r border pt-3 h-[115vh]">
+    <div className="bg-white flex flex-col border-r border pt-3 h-[109vh]">
       <div className="flex flex-row pt-[65px] justify-center">
         <span className="text-route-color font-bold text-[10px] lg:text-[30px] md:text-[20px]">
           Paymeter
@@ -1326,7 +1326,7 @@ const Sidebar = () => {
               Funding Request
             </p>
           </Link> */}
-          <Link
+          {/* <Link
             to="/payment"
             className={`flex flex-row h-[33px] ${
               router.pathname === "/payment" ||
@@ -1376,7 +1376,7 @@ const Sidebar = () => {
             >
               Payment Method
             </p>
-          </Link>
+          </Link> */}
           <Link
             to="/withdrawals"
             className={`flex flex-row h-[33px] ${

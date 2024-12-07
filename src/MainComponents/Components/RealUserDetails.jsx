@@ -350,7 +350,7 @@ const RealUserDetails = ({ title }) => {
                       <img src={empty} alt="empty" />
                     </div>
                   )}
-                {usermeters?.data?.length === 0 && status === "pending" && (
+                {!usermeters?.status && status === "pending" && (
                   <div
                     style={{
                       display: "flex",
