@@ -2583,6 +2583,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "20%" }}>
                     MESSAGE
                   </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    COMMISSION
+                  </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
                     DATE
                   </StyledTableCell>
@@ -2649,6 +2652,15 @@ const Tables = ({
                       //   setStep(11);
                       //   setUserIds(item?.id);
                       // }}
+                      style={{ width: "15%" }}
+                    >
+                      {"N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
                       style={{ width: "10%" }}
                     >
                       <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment>
@@ -2657,9 +2669,9 @@ const Tables = ({
                       {item?.status === "ACCEPTED" ? (
                         <button
                           // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
-                          className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
+                          className="bg-successbg h-[30px] w-[90%] rounded-full text-successtext font-semibold text-[9px]"
                         >
-                          ACCEPETD
+                          ACCEPTED
                         </button>
                       ) : item?.status === "REJECTED" ? (
                         <button
@@ -3234,7 +3246,7 @@ const Tables = ({
                     S/N
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    PARTNER NAME
+                    NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     EMAIL
@@ -3279,7 +3291,9 @@ const Tables = ({
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.address}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {"N/A"}
+                    </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
                     </StyledTableCell>
@@ -5184,7 +5198,7 @@ const Tables = ({
                     S/N
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    PARTNER NAME
+                    NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     EMAIL
@@ -5192,9 +5206,9 @@ const Tables = ({
                   <StyledTableCell style={{ width: "15%" }}>
                     ADDRESS
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     COMMISSION
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DATE ADDED
                   </StyledTableCell>
@@ -5227,7 +5241,9 @@ const Tables = ({
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.address}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}></StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      {"N/A"}
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
                     </StyledTableCell>
@@ -5452,14 +5468,14 @@ const Tables = ({
                   <StyledTableCell style={{ width: "15%" }}>
                     ADDRESS
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "10%" }}>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
                     COMMISSION
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell style={{ width: "10%" }}>
                     DATE ADDED
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    TOTAL AMOUNT RECEIVED
+                    TOTAL TRANSACTION COUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "5%" }}>
                     ACTION
@@ -5489,9 +5505,9 @@ const Tables = ({
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.address || "N/A"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       N/A
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       <Moment format="DD-MM-YYYY">{item?.dateJoined}</Moment>
                     </StyledTableCell>
@@ -5555,7 +5571,7 @@ const Tables = ({
                       {index === indexing10 && open10 ? (
                         <div
                           style={{ overflowY: "scroll" }}
-                          className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                          className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 z-20"
                         >
                           <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
                             <div

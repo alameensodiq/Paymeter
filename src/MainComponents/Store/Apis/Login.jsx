@@ -62,6 +62,12 @@ export const Logins = createAsyncThunk(
       if (data?.data?.token && data?.data?.user?.roleName === "AGENT") {
         window.location.pathname = "/agent-dashboard";
       }
+      if (data?.data?.token && data?.data?.user?.roleName === "SYSTEMCARE") {
+        window.location.pathname = "/dashboard";
+      }
+      if (data?.data?.token && data?.data?.user?.roleName === "ACCOUNTANT") {
+        window.location.pathname = "/dashboard";
+      }
     } catch (e) {
       return thunkAPI.rejectWithValue({
         error: "Failed! To establish connection."

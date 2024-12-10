@@ -302,7 +302,7 @@ const RealUserDetails = ({ title }) => {
                   }}
                   className={`${
                     status === "pending"
-                      ? "text-route-color cursor-pointer"
+                      ? "text-route-color cursor-pointer relative"
                       : "text-route-noncolor cursor-pointer"
                   }`}
                 >
@@ -314,7 +314,7 @@ const RealUserDetails = ({ title }) => {
                   <div className="w-[80px] h-[2px] bg-route-color" />
                 )}
                 {status === "pending" && (
-                  <div className="w-[60px] h-[2px] bg-route-color lg:ml-[9%] md:ml-[13%] sm:ml-[18%]" />
+                  <div className="w-[60px] absolute h-[2px] bg-route-color ml-[22%] lg:ml-[7.5%] md:ml-[13%] sm:ml-[18%]" />
                 )}
               </div>
             </div>
@@ -350,7 +350,7 @@ const RealUserDetails = ({ title }) => {
                       <img src={empty} alt="empty" />
                     </div>
                   )}
-                {!usermeters?.status && status === "pending" && (
+                {usermeters?.data?.length === 0 && status === "pending" && (
                   <div
                     style={{
                       display: "flex",

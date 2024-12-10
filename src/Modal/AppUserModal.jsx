@@ -1422,6 +1422,7 @@ const AppUserModal = ({
     if (decliner) {
       setdecliner(false);
     }
+    setReload(true);
     if (images) {
       setImages("");
       setReload(true);
@@ -1624,7 +1625,6 @@ const AppUserModal = ({
     setBusstate23(false);
     setBusstate24(false);
     setApproved(false);
-    setReload(true);
     setPassword("");
     if (action) {
       setaction("");
@@ -2035,7 +2035,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     setSettingsGlobal((prev) => ({
@@ -2065,7 +2065,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     setEarnings((prev) => ({
@@ -2095,7 +2095,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     seteditEarnings((prev) => ({
@@ -2125,7 +2125,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     setSettingsGlobaledit((prev) => ({
@@ -2155,7 +2155,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     // Update the state with the sanitized string value
@@ -2187,7 +2187,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     setUserGlobaledit((prev) => ({
@@ -2218,7 +2218,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     setDisc((prevDisc) => ({
@@ -2249,7 +2249,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     seteditingdisc((prevDisc) => ({
@@ -2280,7 +2280,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     setManager((prevDisc) => ({
@@ -2311,7 +2311,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     seteditbank((prevDisc) => ({
@@ -2342,7 +2342,7 @@ const AppUserModal = ({
 
     // If the input is empty, set the value to "0"
     if (sanitizedValue === "") {
-      sanitizedValue = "0"; // Set to "0" or another default value
+      sanitizedValue = ""; // Set to "0" or another default value
     }
 
     setRegbus((prev) => ({

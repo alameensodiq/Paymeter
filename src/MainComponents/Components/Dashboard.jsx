@@ -377,148 +377,153 @@ const Dashboard = ({ title }) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col">
-            <div className="flex flex-row gap-2 items-center mb-1">
-              <span className="text-circle-color font-bold">User Roles</span>
-            </div>
-            <div className="flex lg:flex-row flex-col md:flex-col gap-3">
-              <div
-                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
-                style={{
-                  boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
-                  cursor: "pointer"
-                }}
-                onClick={() => navigate("/user")}
-              >
-                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                  <span className="text-card-title text-[14px]">
-                    Total Users
-                  </span>
-                  <span className="text-color-user text-[20px] font-bold">
-                    {formatNumberWithCommas(dashboard?.data?.totalUsersRole)}
-                  </span>
-                  <div className="flex flex-row gap-1 text-[10px]">
-                    <span>{/* <Increase /> */}</span>
-                    {/* <span className="text-card-user">8.5%</span>
+          {sessionStorage.getItem("roleName") === "ADMIN" && (
+            <div className="flex flex-col">
+              <div className="flex flex-row gap-2 items-center mb-1">
+                <span className="text-circle-color font-bold">User Roles</span>
+              </div>
+              <div className="flex lg:flex-row flex-col md:flex-col gap-3">
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  style={{
+                    boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
+                    cursor: "pointer"
+                  }}
+                  onClick={() => navigate("/user")}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Total Users
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold">
+                      {formatNumberWithCommas(dashboard?.data?.totalUsersRole)}
+                    </span>
+                    <div className="flex flex-row gap-1 text-[10px]">
+                      <span>{/* <Increase /> */}</span>
+                      {/* <span className="text-card-user">8.5%</span>
                   <span className="text-[9px]">Up yesterday</span> */}
+                    </div>
+                  </div>
+                  <div>
+                    <User />
                   </div>
                 </div>
-                <div>
-                  <User />
-                </div>
-              </div>
-              <div
-                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-                style={{
-                  boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
-                  cursor: "pointer"
-                }}
-                onClick={() => navigate("/notification")}
-              >
-                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                  <span className="text-card-title text-[14px]">
-                    Total Agents
-                  </span>
-                  <span className="text-color-user text-[20px] font-bold">
-                    {formatNumberWithCommas(
-                      notifications?.data?.meta?.totalCount
-                    )}
-                  </span>
-                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                  style={{
+                    boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
+                    cursor: "pointer"
+                  }}
+                  onClick={() => navigate("/notification")}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Total Agents
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold">
+                      {formatNumberWithCommas(
+                        notifications?.data?.meta?.totalCount
+                      )}
+                    </span>
+                    {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
                     <Increase />
                   </span>
                   <span className="text-card-user">6.5%</span>
                   <span></span>
                 </div> */}
+                  </div>
+                  <div>
+                    <TotalBill />
+                    {/* <TotalTransfer /> */}
+                  </div>
                 </div>
-                <div>
-                  <TotalBill />
-                  {/* <TotalTransfer /> */}
-                </div>
-              </div>
-              <div
-                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
-                style={{
-                  boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
-                  cursor: "pointer"
-                }}
-                onClick={() => navigate("/api")}
-              >
-                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                  <span className="text-card-title text-[14px]">
-                    Total API-Partners
-                  </span>
-                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {/* ₦1 */}
-                    {formatNumberWithCommas(dashboard?.data?.totalApiPartners)}
-                  </span>
-                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  style={{
+                    boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
+                    cursor: "pointer"
+                  }}
+                  onClick={() => navigate("/api")}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Total API-Partners
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      {/* ₦1 */}
+                      {formatNumberWithCommas(
+                        dashboard?.data?.totalApiPartners
+                      )}
+                    </span>
+                    {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
                     <Increase />
                   </span>
                   <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average daily revenue</span>
                 </div> */}
+                  </div>
+                  <div>
+                    <TotalInvestment />
+                  </div>
                 </div>
-                <div>
-                  <TotalInvestment />
-                </div>
-              </div>
-              <div
-                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-                style={{
-                  boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
-                  cursor: "pointer"
-                }}
-                onClick={() => navigate("/earning")}
-              >
-                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                  <span className="text-card-title text-[14px]">
-                    Total Earning Partner
-                  </span>
-                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {formatNumberWithCommas(
-                      dashboard?.data?.totalEarningPartners
-                    )}
-                  </span>
-                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                  style={{
+                    boxShadow: "7.5px 7.5px 67.5px 0px #0000000D",
+                    cursor: "pointer"
+                  }}
+                  onClick={() => navigate("/earning")}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Total Earning Partner
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      {formatNumberWithCommas(
+                        dashboard?.data?.totalEarningPartners
+                      )}
+                    </span>
+                    {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
                     <Increase />
                   </span>
                   <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average monthly revenue</span>
                 </div> */}
+                  </div>
+                  <div>
+                    <TotalInvestment />
+                  </div>
                 </div>
-                <div>
-                  <TotalInvestment />
-                </div>
-              </div>
-              <div
-                className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
-                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-              >
-                <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                  <span className="text-card-title text-[14px]">
-                    Total Admin
-                  </span>
-                  <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                    {/* {dashboardyearly?.data?.totalRevenue} */} 1
-                  </span>
-                  {/* <div className="flex flex-row gap-1 text-[10px]">
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded rounded-custom"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Total Admin
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      {/* {dashboardyearly?.data?.totalRevenue} */} 1
+                    </span>
+                    {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
                     <Increase />
                   </span>
                   <span className="text-card-user">6.5%</span>
                   <span className="text-[9px]">average yearly revenue</span>
                 </div> */}
-                </div>
-                <div>
-                  <TotalInvestment />
+                  </div>
+                  <div>
+                    <TotalInvestment />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
+
           <div className="flex flex-col gap-3">
             <div className="flex flex-row gap-2 items-center">
               <span className="text-circle-color font-bold">
@@ -562,15 +567,16 @@ const Dashboard = ({ title }) => {
               )}
             </div>
           </div>
-          <div className="flex flex-col">
-            <div className="flex flex-row gap-2 items-center mb-2">
-              <span className="text-circle-color font-bold">
-                Monthly Revenue Per Discos Overview
-              </span>
-              <Sign />
-            </div>
-            <div className="flex lg:flex-row md:flex-col flex-col gap-3">
-              {/* <div
+          {sessionStorage.getItem("roleName") === "ADMIN" && (
+            <div className="flex flex-col">
+              <div className="flex flex-row gap-2 items-center mb-2">
+                <span className="text-circle-color font-bold">
+                  Monthly Revenue Per Discos Overview
+                </span>
+                <Sign />
+              </div>
+              <div className="flex lg:flex-row md:flex-col flex-col gap-3">
+                {/* <div
               className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
               style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
             >
@@ -593,11 +599,208 @@ const Dashboard = ({ title }) => {
                 </button>
               </div>
             </div> */}
-              <div
-                className="flex flex-col lg:w-[75%] md:w-[100%] sm:w-[100%] h-[420px] py-4 bg-white border rounded-custom gap-2"
-                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-              >
-                {/* <div className="flex flex-col border rounded-custom gap-2 pt-3"> */}
+                <div
+                  className="flex flex-col lg:w-[75%] md:w-[100%] sm:w-[100%] h-[420px] py-4 bg-white border rounded-custom gap-2"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  {/* <div className="flex flex-col border rounded-custom gap-2 pt-3"> */}
+                  <div className="flex flex-row px-4 gap-4 items-center justify-between">
+                    <div className="flex flex-row gap-4 items-center">
+                      {discoNames[0] && (
+                        <>
+                          <span className="w-[10px] h-[10px] rounded-circle bg-[#E9EDF5]"></span>
+                          {discoNames[0]}
+                        </>
+                      )}
+                      {discoNames[1] && (
+                        <>
+                          <span className="w-[10px] h-[10px] rounded-circle bg-[#9932CC]"></span>
+                          {discoNames[1]}
+                        </>
+                      )}
+                      {discoNames[2] && (
+                        <>
+                          <span className="w-[10px] h-[10px] rounded-circle bg-[#c29bd6]"></span>
+                          {discoNames[2]}
+                        </>
+                      )}
+                      {discoNames[3] && (
+                        <>
+                          <span className="w-[10px] h-[10px] rounded-circle bg-[#d81694]"></span>
+                          {discoNames[3]}
+                        </>
+                      )}
+                      {discoNames[4] && (
+                        <>
+                          <span className="w-[10px] h-[10px] rounded-circle bg-[#1E90FF]"></span>
+                          {discoNames[4]}
+                        </>
+                      )}
+                      {/* <span className="w-[10px] h-[10px] rounded-circle bg-discos"></span> IBEDC */}
+                    </div>
+                    {/* <div className="flex flex-row gap-4 items-center">
+                  <span className="text-[14px]">Previous Month</span>
+                  <div className="position:relative w-[120px] h-[30px] rounded-custom px-[4px] flex flex-row border items-center">
+                    <DatePicker
+                      className="text-[8px] outline-none"
+                      selected={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      ref={datePickerRef}
+                      showTimeSelect={false}
+                      dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
+                      placeholderText="13 Oct 2023"
+                      popperPlacement="bottom-start"
+                    />
+                    <Calendar
+                      className="text-[10px]"
+                      onClick={() => PickDate()}
+                    />
+                  </div>
+                  <Ellipses />
+                </div> */}
+                  </div>
+                  <DoubleBarChart
+                    data={
+                      dashboardsummary?.data?.monthlyRevenues
+                        ? dashboardsummary?.data?.monthlyRevenues
+                        : []
+                    }
+                  />
+                  {/* </div> */}
+                  {/* <div className="flex flex-row justify-center">
+                <span className="text-second-card-text">Monthly Revenue</span>
+              </div>
+              <MixedLineBarChart
+                color={"#05B2FA"}
+                background={"#c3e2f0"}
+                data={dashboardyearly?.data?.monthlyRevenues}
+              />
+              <div className="flex flex-row justify-center gap-2">
+                <span className="text-second-card-text text-[16px]">44%</span>
+                <div className="flex flex-col text-compare-second-card text-[10px]">
+                  <span>Your performance is 44%</span>
+                  <span>better compare to last month</span>
+                </div>
+              </div>
+              <div className="flex -flex-row justify-center">
+                <button className="bg-details-colortwo w-[180px] text-[12px] h-[40px] text-details-bgtwo rounded-custom">
+                  Details
+                </button>
+              </div> */}
+                </div>
+                {/* <div
+              className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
+              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+            >
+              <div className="flex flex-row justify-center">
+                <span className="text-second-card-text">Daily Revenue</span>
+              </div>
+              <MixedLineBarChart
+                color={"rgba(255, 160, 81, 1)"}
+                background={"rgba(255, 160, 81, 0.2)"}
+                daily
+              />
+              <div className="flex flex-row justify-center gap-2">
+                <span className="text-second-card-text text-[16px]">44%</span>
+                <div className="flex flex-col text-compare-second-card text-[10px]">
+                  <span>Your performance is 44%</span>
+                  <span>better compare to last month</span>
+                </div>
+              </div>
+              <div className="flex -flex-row justify-center">
+                <button className="bg-details-loanbg w-[180px] text-[12px] h-[40px] text-details-loancolor rounded-custom">
+                  Details
+                </button>
+              </div>
+            </div> */}
+                <div
+                  className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[420px] py-4 bg-white border rounded-custom gap-2"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  <div className="flex flex-row px-4 gap-4 items-center justify-center">
+                    <span className="text-[14px]">Disco-Meter</span>
+                    {/* <div className="position:relative w-[120px] h-[30px] rounded-custom px-[5px] flex flex-row border items-center"> */}
+                  </div>
+                  {listofmeter?.data ? <Donuts data={listofmeter?.data} /> : ""}
+                  <div className="flex flex-col gap-3 px-[15px]">
+                    {listofmeter?.data &&
+                    listofmeter.data.length > 0 &&
+                    listofmeter.data[0]?.discoName ? (
+                      <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
+                        <div className="flex flex-row gap-1 items-center text-[12px]">
+                          <span className="w-[15px] h-[15px] rounded-circle bg-details-color"></span>
+                          <span className="text-compare-second-card">
+                            {listofmeter.data[0].discoName}
+                          </span>
+                          <span className="text-circle-color">
+                            {listofmeter.data[0]?.totalMeters ?? 0}{" "}
+                            {/* Default to 0 if undefined */}
+                          </span>
+                        </div>
+                      </div>
+                    ) : null}
+
+                    {listofmeter?.data &&
+                    listofmeter.data.length > 1 &&
+                    listofmeter.data[1]?.discoName ? (
+                      <div className="flex flex-row gap-1 items-center text-[12px]">
+                        <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
+                        <span className="text-compare-second-card">
+                          {listofmeter.data[1].discoName}
+                        </span>
+                        <span className="text-circle-color">
+                          {listofmeter.data[1]?.totalMeters ?? 0}{" "}
+                          {/* Default to 0 if undefined */}
+                        </span>
+                      </div>
+                    ) : null}
+
+                    <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
+                      {listofmeter?.data &&
+                      listofmeter.data.length > 2 &&
+                      listofmeter.data[2]?.discoName ? (
+                        <div className="flex flex-row gap-1 items-center text-[12px]">
+                          <span className="w-[15px] h-[15px] rounded-circle bg-data-bg"></span>
+                          <span className="text-compare-second-card">
+                            {listofmeter.data[2].discoName}
+                          </span>
+                          <span className="text-circle-color">
+                            {listofmeter.data[2]?.totalMeters ?? 0}{" "}
+                            {/* Default to 0 if undefined */}
+                          </span>
+                        </div>
+                      ) : null}
+
+                      {listofmeter?.data &&
+                      listofmeter.data.length > 3 &&
+                      listofmeter.data[3]?.discoName ? (
+                        <div className="flex flex-row gap-1 items-center text-[12px]">
+                          <span className="w-[15px] h-[15px] rounded-circle bg-elect-bg"></span>
+                          <span className="text-compare-second-card">
+                            {listofmeter.data[3].discoName}
+                          </span>
+                          <span className="text-circle-color">
+                            {listofmeter.data[3]?.totalMeters ?? 0}{" "}
+                            {/* Default to 0 if undefined */}
+                          </span>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {sessionStorage.getItem("roleName") === "ADMIN" && (
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-row gap-2 items-center">
+                <span className="text-circle-color font-bold">
+                  Monthly Transaction Count Per Disco Overview
+                </span>
+                <Sign />
+              </div>
+              <div className="flex flex-col border rounded-custom gap-2 pt-3">
                 <div className="flex flex-row px-4 gap-4 items-center justify-between">
                   <div className="flex flex-row gap-4 items-center">
                     {discoNames[0] && (
@@ -653,206 +856,13 @@ const Dashboard = ({ title }) => {
                   <Ellipses />
                 </div> */}
                 </div>
-                <DoubleBarChart
-                  data={
-                    dashboardsummary?.data?.monthlyRevenues
-                      ? dashboardsummary?.data?.monthlyRevenues
-                      : []
-                  }
+                <DoubleBarChartReal
+                  data={dashboardsummary?.data?.monthlyRevenues}
                 />
-                {/* </div> */}
-                {/* <div className="flex flex-row justify-center">
-                <span className="text-second-card-text">Monthly Revenue</span>
-              </div>
-              <MixedLineBarChart
-                color={"#05B2FA"}
-                background={"#c3e2f0"}
-                data={dashboardyearly?.data?.monthlyRevenues}
-              />
-              <div className="flex flex-row justify-center gap-2">
-                <span className="text-second-card-text text-[16px]">44%</span>
-                <div className="flex flex-col text-compare-second-card text-[10px]">
-                  <span>Your performance is 44%</span>
-                  <span>better compare to last month</span>
-                </div>
-              </div>
-              <div className="flex -flex-row justify-center">
-                <button className="bg-details-colortwo w-[180px] text-[12px] h-[40px] text-details-bgtwo rounded-custom">
-                  Details
-                </button>
-              </div> */}
-              </div>
-              {/* <div
-              className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[320px] py-4 bg-white border rounded-custom gap-2"
-              style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-            >
-              <div className="flex flex-row justify-center">
-                <span className="text-second-card-text">Daily Revenue</span>
-              </div>
-              <MixedLineBarChart
-                color={"rgba(255, 160, 81, 1)"}
-                background={"rgba(255, 160, 81, 0.2)"}
-                daily
-              />
-              <div className="flex flex-row justify-center gap-2">
-                <span className="text-second-card-text text-[16px]">44%</span>
-                <div className="flex flex-col text-compare-second-card text-[10px]">
-                  <span>Your performance is 44%</span>
-                  <span>better compare to last month</span>
-                </div>
-              </div>
-              <div className="flex -flex-row justify-center">
-                <button className="bg-details-loanbg w-[180px] text-[12px] h-[40px] text-details-loancolor rounded-custom">
-                  Details
-                </button>
-              </div>
-            </div> */}
-              <div
-                className="flex flex-col lg:w-[25%] md:w-[100%] sm:w-[100%] h-[420px] py-4 bg-white border rounded-custom gap-2"
-                style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-              >
-                <div className="flex flex-row px-4 gap-4 items-center justify-center">
-                  <span className="text-[14px]">Disco-Meter</span>
-                  {/* <div className="position:relative w-[120px] h-[30px] rounded-custom px-[5px] flex flex-row border items-center"> */}
-                </div>
-                {listofmeter?.data ? <Donuts data={listofmeter?.data} /> : ""}
-                <div className="flex flex-col gap-3 px-[15px]">
-                  {listofmeter?.data &&
-                  listofmeter.data.length > 0 &&
-                  listofmeter.data[0]?.discoName ? (
-                    <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
-                      <div className="flex flex-row gap-1 items-center text-[12px]">
-                        <span className="w-[15px] h-[15px] rounded-circle bg-details-color"></span>
-                        <span className="text-compare-second-card">
-                          {listofmeter.data[0].discoName}
-                        </span>
-                        <span className="text-circle-color">
-                          {listofmeter.data[0]?.totalMeters ?? 0}{" "}
-                          {/* Default to 0 if undefined */}
-                        </span>
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {listofmeter?.data &&
-                  listofmeter.data.length > 1 &&
-                  listofmeter.data[1]?.discoName ? (
-                    <div className="flex flex-row gap-1 items-center text-[12px]">
-                      <span className="w-[15px] h-[15px] rounded-circle bg-cable-bg"></span>
-                      <span className="text-compare-second-card">
-                        {listofmeter.data[1].discoName}
-                      </span>
-                      <span className="text-circle-color">
-                        {listofmeter.data[1]?.totalMeters ?? 0}{" "}
-                        {/* Default to 0 if undefined */}
-                      </span>
-                    </div>
-                  ) : null}
-
-                  <div className="flex lg:flex-row md:flex-row sm:flex-row lg:gap-20 md:gap-20 sm:gap-6">
-                    {listofmeter?.data &&
-                    listofmeter.data.length > 2 &&
-                    listofmeter.data[2]?.discoName ? (
-                      <div className="flex flex-row gap-1 items-center text-[12px]">
-                        <span className="w-[15px] h-[15px] rounded-circle bg-data-bg"></span>
-                        <span className="text-compare-second-card">
-                          {listofmeter.data[2].discoName}
-                        </span>
-                        <span className="text-circle-color">
-                          {listofmeter.data[2]?.totalMeters ?? 0}{" "}
-                          {/* Default to 0 if undefined */}
-                        </span>
-                      </div>
-                    ) : null}
-
-                    {listofmeter?.data &&
-                    listofmeter.data.length > 3 &&
-                    listofmeter.data[3]?.discoName ? (
-                      <div className="flex flex-row gap-1 items-center text-[12px]">
-                        <span className="w-[15px] h-[15px] rounded-circle bg-elect-bg"></span>
-                        <span className="text-compare-second-card">
-                          {listofmeter.data[3].discoName}
-                        </span>
-                        <span className="text-circle-color">
-                          {listofmeter.data[3]?.totalMeters ?? 0}{" "}
-                          {/* Default to 0 if undefined */}
-                        </span>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
+                {/* <DoubleLineChart data={dashboardsummary?.data?.monthlyRevenues} /> */}
               </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-row gap-2 items-center">
-              <span className="text-circle-color font-bold">
-                Monthly Transaction Count Per Disco Overview
-              </span>
-              <Sign />
-            </div>
-            <div className="flex flex-col border rounded-custom gap-2 pt-3">
-              <div className="flex flex-row px-4 gap-4 items-center justify-between">
-                <div className="flex flex-row gap-4 items-center">
-                  {discoNames[0] && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#E9EDF5]"></span>
-                      {discoNames[0]}
-                    </>
-                  )}
-                  {discoNames[1] && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#9932CC]"></span>
-                      {discoNames[1]}
-                    </>
-                  )}
-                  {discoNames[2] && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#c29bd6]"></span>
-                      {discoNames[2]}
-                    </>
-                  )}
-                  {discoNames[3] && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#d81694]"></span>
-                      {discoNames[3]}
-                    </>
-                  )}
-                  {discoNames[4] && (
-                    <>
-                      <span className="w-[10px] h-[10px] rounded-circle bg-[#1E90FF]"></span>
-                      {discoNames[4]}
-                    </>
-                  )}
-                  {/* <span className="w-[10px] h-[10px] rounded-circle bg-discos"></span> IBEDC */}
-                </div>
-                {/* <div className="flex flex-row gap-4 items-center">
-                  <span className="text-[14px]">Previous Month</span>
-                  <div className="position:relative w-[120px] h-[30px] rounded-custom px-[4px] flex flex-row border items-center">
-                    <DatePicker
-                      className="text-[8px] outline-none"
-                      selected={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                      ref={datePickerRef}
-                      showTimeSelect={false}
-                      dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
-                      placeholderText="13 Oct 2023"
-                      popperPlacement="bottom-start"
-                    />
-                    <Calendar
-                      className="text-[10px]"
-                      onClick={() => PickDate()}
-                    />
-                  </div>
-                  <Ellipses />
-                </div> */}
-              </div>
-              <DoubleBarChartReal
-                data={dashboardsummary?.data?.monthlyRevenues}
-              />
-              {/* <DoubleLineChart data={dashboardsummary?.data?.monthlyRevenues} /> */}
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

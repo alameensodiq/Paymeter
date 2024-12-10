@@ -3,14 +3,14 @@ import toast from "react-hot-toast";
 
 export const Notifications = createAsyncThunk(
   "notifications",
-  async ({ status }, thunkAPI) => {
+  async ({ status, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
 
     const accessToken = sessionStorage.getItem("token");
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}overview/notification?status=${status}`,
+        `${process.env.REACT_APP_BASE_URL}overview/notification?status=${status}&page=${currentPage}`,
         {
           method: "GET",
           headers: {

@@ -56,7 +56,7 @@ const Notification = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(Notifications({ status }));
+      dispatch(Notifications({ status, currentPage }));
       return;
     } else {
       navigate("/");
@@ -64,7 +64,7 @@ const Notification = ({ title }) => {
     }
     if (reload) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
-      dispatch(Notifications({ status }));
+      dispatch(Notifications({ status, currentPage }));
       setReload(false);
       setStatus("accepted");
       setCurrentPage(0);
@@ -76,7 +76,7 @@ const Notification = ({ title }) => {
     //   setReload(false);
     // }
     //eslint-disable-next-line
-  }, [reload, status, approve?.status]);
+  }, [reload, status, approve?.status, currentPage]);
 
   const { notifications, authenticatingnotifications } = useSelector(
     (state) => state?.notifications
@@ -258,6 +258,7 @@ const Notification = ({ title }) => {
                     onClick={() => {
                       setStatus("accepted");
                       setCurrentPage(0);
+                      setActivater(1);
                       // setdecliner(false);
                     }}
                     className={`${
@@ -272,6 +273,7 @@ const Notification = ({ title }) => {
                     onClick={() => {
                       setStatus("pending");
                       setCurrentPage(0);
+                      setActivater(1);
                       // setdecliner(true);
                     }}
                     className={`${
@@ -286,6 +288,7 @@ const Notification = ({ title }) => {
                     onClick={() => {
                       setStatus("REJECTED");
                       setCurrentPage(0);
+                      setActivater(1);
                       // setdecliner(false);
                     }}
                     className={`${

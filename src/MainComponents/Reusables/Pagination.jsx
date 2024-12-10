@@ -10,7 +10,7 @@ const Pagination = ({
   support
 }) => {
   const [news, setNews] = useState(0);
-  const [old, setOld] = useState(3);
+  const [old, setOld] = useState(10);
 
   // Log values for debugging
   console.log("totalPosts:", totalPosts);
@@ -25,17 +25,17 @@ const Pagination = ({
 
   const backward = () => {
     if (news > 0) {
-      const newNews = Math.max(0, news - 3);
+      const newNews = Math.max(0, news - 10);
       setNews(newNews);
-      setOld(Math.min(newNews + 3, totalPages));
+      setOld(Math.min(newNews + 10, totalPages));
     }
   };
 
   const forward = () => {
     if (old < totalPages) {
-      const newNews = Math.min(totalPages - 3, news + 3);
+      const newNews = Math.min(totalPages - 10, news + 10);
       setNews(newNews);
-      setOld(Math.min(newNews + 3, totalPages));
+      setOld(Math.min(newNews + 10, totalPages));
     }
   };
 

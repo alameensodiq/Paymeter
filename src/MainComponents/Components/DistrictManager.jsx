@@ -53,7 +53,7 @@ const DistrictManager = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [reload, role, role1]);
+  }, [reload, role]);
 
   const { apiagentrole, authenticatingapiagentrole } = useSelector(
     (state) => state?.apiagentrole
