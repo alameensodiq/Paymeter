@@ -27,6 +27,7 @@ import AppUserModal from "../../Modal/AppUserModal";
 import { EarningTrans } from "../Store/Apis/EarningTrans";
 import { AgentTrans } from "../Store/Apis/AgentTrans";
 import { Agentsdetailsrevenue } from "../Store/Apis/Agentsdetailsrevenue";
+import { Adminagentmeter } from "../Store/Apis/Adminagentmeter";
 
 const AgentDetails = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -66,6 +67,11 @@ const AgentDetails = ({ title }) => {
   );
   console.log(agenttrans);
 
+  const { adminagentmeter, authenticatingadminagentmeter } = useSelector(
+    (state) => state?.adminagentmeter
+  );
+  console.log(adminagentmeter);
+
   const [showCommission, setShowCommission] = useState(false);
   const location = useLocation();
 
@@ -73,7 +79,7 @@ const AgentDetails = ({ title }) => {
     if (sessionStorage.getItem("token") && id) {
       dispatch(Agentsdetailsrevenue({ id }));
       dispatch(AgentTrans({ id, searcher, currentPage }));
-      // dispatch(UserWallet({ id }));
+      dispatch(Adminagentmeter({ agentId: id }));
       // dispatch(GetCommission({ id }));
       return;
     } else {
@@ -83,12 +89,13 @@ const AgentDetails = ({ title }) => {
     if (reload && sessionStorage.getItem("token") && id) {
       dispatch(Agentsdetailsrevenue({ id }));
       dispatch(AgentTrans({ id, searcher, currentPage }));
+      dispatch(Adminagentmeter({ agentId: id }));
       // dispatch(UserWallet({ id }));
       // dispatch(GetCommission({ id }));
     }
 
     //eslint-disable-next-line
-  }, [agenttrans?.status, reload, searcher, currentPage]);
+  }, [agenttrans?.status, reload, searcher, currentPage, id]);
 
   const isEarningRoute = location.pathname.startsWith("/user/");
   const isEarningRoute2 = location.pathname.startsWith("/agents/");
@@ -279,6 +286,20 @@ const AgentDetails = ({ title }) => {
                 >
                   Transactions
                 </span>
+                <span
+                  onClick={() => {
+                    setStatus("pending");
+                    setCurrentPage(0);
+                  }}
+                  className={`${
+                    status === "pending"
+                      ? "text-route-color cursor-pointer relative"
+                      : "text-route-noncolor cursor-pointer"
+                  }`}
+                >
+                  Meters
+                </span>
+
                 {/* {!isEarningRoute && !isEarningRoute2 && (
                   <span
                     onClick={() => {
@@ -298,6 +319,9 @@ const AgentDetails = ({ title }) => {
               <div className="gap-2">
                 {status === "accepted" && (
                   <div className="w-[80px] h-[2px] bg-route-color" />
+                )}
+                {status === "pending" && (
+                  <div className="w-[60px] absolute h-[2px] bg-route-color ml-[22%] lg:ml-[7.5%] md:ml-[13%] sm:ml-[18%]" />
                 )}
                 {/* {status === "pending" &&
                   !isEarningRoute &&

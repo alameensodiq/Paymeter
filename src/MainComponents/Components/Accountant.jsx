@@ -168,7 +168,7 @@ const Accountant = ({ title }) => {
                 <Calendar className="text-[10px]" onClick={() => PickDate()} />
               </div> */}
               <button
-                onClick={() => setStep(40)}
+                onClick={() => setStep(67)}
                 className="px-2 h-[35px] flex flex-row gap-1 items-center bg-route-color w-[13%] rounded-custom text-white font-semibold text-[11px]"
               >
                 Accountant

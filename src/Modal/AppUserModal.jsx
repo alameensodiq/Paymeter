@@ -7917,7 +7917,7 @@ const AppUserModal = ({
         // updateUserListData(update);
         // window.location.reload()
 
-        heading={`Add ${systemstate ? "System" : "Accountant"}`}
+        heading={`${systemstate ? "Add  System" : "Accountant"}`}
       >
         <ModalInputText
           label="Name"

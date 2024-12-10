@@ -81,6 +81,7 @@ import { UserMetersSlice } from "./Reducers/Usermeters";
 import { VirtualmeterSlice } from "./Reducers/Virtualmeter";
 import { SystemCareSlice } from "./Reducers/SystemCare";
 import { AccountantSlice } from "./Reducers/Accountants";
+import { AdminagentmeterSlice } from "./Reducers/Adminagentmeter";
 
 export default configureStore({
   reducer: {
@@ -165,6 +166,7 @@ export default configureStore({
     usermeters: UserMetersSlice?.reducer,
     virtual: VirtualmeterSlice?.reducer,
     systemcares: SystemCareSlice?.reducer,
-    accountants: AccountantSlice?.reducer
+    accountants: AccountantSlice?.reducer,
+    adminagentmeter: AdminagentmeterSlice?.reducer
   }
 });
