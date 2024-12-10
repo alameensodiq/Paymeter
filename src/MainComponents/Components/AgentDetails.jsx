@@ -104,9 +104,9 @@ const AgentDetails = ({ title }) => {
   const previous = agenttrans?.data?.transactions?.meta?.prev;
   const totalPosts = agenttrans?.data?.transactions?.meta?.totalCount;
 
-  const next2 = getcommission?.data?.meta?.next;
-  const previous2 = getcommission?.data?.meta?.prev;
-  const totalPosts2 = getcommission?.data?.meta?.totalCount;
+  const next2 = adminagentmeter?.data?.meta?.next;
+  const previous2 = adminagentmeter?.data?.meta?.prev;
+  const totalPosts2 = adminagentmeter?.data?.meta?.totalCount;
 
   const next3 = userwallet?.data?.meta?.next;
   const previous3 = userwallet?.data?.meta?.prev;
@@ -340,16 +340,28 @@ const AgentDetails = ({ title }) => {
                       data={agenttrans?.data?.data}
                     />
                   )}
-                {!isEarningRoute &&
-                  !isEarningRoute2 &&
-                  getcommission?.data?.length >= 1 &&
+                {adminagentmeter?.data?.data?.length >= 1 &&
                   status === "pending" && (
                     <Tables
                       setStep={setStep}
                       setNaming={setNaming}
-                      overviewcommission
-                      data={getcommission?.data}
+                      virtualagenting
+                      data={adminagentmeter?.data?.data}
                     />
+                  )}
+                {(!adminagentmeter?.data?.data ||
+                  adminagentmeter?.data?.data?.length === 0) &&
+                  status === "pending" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
                   )}
                 {(!agenttrans?.data?.data ||
                   agenttrans?.data?.data?.length === 0) &&
@@ -389,17 +401,18 @@ const AgentDetails = ({ title }) => {
                       next={next}
                     />
                   )}
-                {/* {getcommission?.data?.length >= 1 && (
-                  <Pagination
-                    set={activater}
-                    currentPage={currentPage}
-                    postsPerPage={postsPerPage}
-                    totalPosts={totalPosts2}
-                    paginate={paginate}
-                    previous={previous2}
-                    next={next2}
-                  />
-                )} */}
+                {adminagentmeter?.data?.data?.length >= 1 &&
+                  status === "pending" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts2}
+                      paginate={paginate}
+                      previous={previous2}
+                      next={next2}
+                    />
+                  )}
               </>
             ) : (
               <Loader />

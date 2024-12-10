@@ -329,14 +329,15 @@ const RealUserDetails = ({ title }) => {
                       data={usertransaction?.data?.transactions?.data}
                     />
                   )}
-                {usermeters?.data?.length >= 1 && status === "pending" && (
-                  <Tables
-                    setStep={setStep}
-                    setNaming={setNaming}
-                    overviewcommission
-                    data={usermeters?.data}
-                  />
-                )}
+                {usermeters?.data?.data?.length >= 1 &&
+                  status === "pending" && (
+                    <Tables
+                      setStep={setStep}
+                      setNaming={setNaming}
+                      agentvirtualmeter
+                      data={usermeters?.data?.data}
+                    />
+                  )}
                 {usertransaction?.data?.transactions?.meta?.totalCount === 0 &&
                   status === "accepted" && (
                     <div
@@ -350,18 +351,19 @@ const RealUserDetails = ({ title }) => {
                       <img src={empty} alt="empty" />
                     </div>
                   )}
-                {usermeters?.data?.length === 0 && status === "pending" && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <img src={empty} alt="empty" />
-                  </div>
-                )}
+                {usermeters?.data?.data?.length === 0 &&
+                  status === "pending" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
                 {usertransaction?.data?.transactions?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Pagination

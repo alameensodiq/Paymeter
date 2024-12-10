@@ -70,7 +70,10 @@ const Tables = ({
   meterss,
   setdecliner,
   decliner,
-  Payreject
+  Payreject,
+  agentvirtualmeter,
+  virt,
+  virtualagenting
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -4817,6 +4820,51 @@ const Tables = ({
               </Table>
             </TableContainer>
           </ScrollableXContainer>
+        ) : virt ? (
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+          >
+            <Table
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    S/N
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    DISCO
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <StyledTableRow
+                // onClick={() => {
+                //   setStep(11);
+                //   setUserIds(item?.id);
+                // }}
+                >
+                  <StyledTableCell
+                    className="text-dob"
+                    style={{ width: "10%" }}
+                  >
+                    {1}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {data?.bankAccount}
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    {data?.bankName}
+                  </StyledTableCell>
+                </StyledTableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
         ) : metering ? (
           <ScrollableXContainer>
             <TableContainer
@@ -6190,6 +6238,362 @@ const Tables = ({
                     >
                       View
                     </span> */}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : agentvirtualmeter ? (
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+          >
+            <Table
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    S/N
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    DISCO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    ADDRESS
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                  COMMISSION
+                </StyledTableCell> */}
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DATE ADDED
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    CUS. REF.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "5%" }}></StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow
+                  // onClick={() => {
+                  //   setStep(11);
+                  //   setUserIds(item?.id);
+                  // }}
+                  >
+                    <StyledTableCell
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.accountName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.disco?.shortName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.address}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                    {"N/A"}
+                  </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      <Moment format="DD-MM-YYYY">{item?.createdAt}</Moment>
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.customerReference}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      onClick={() => {
+                        setOpen4(!open4);
+                        setIndexing4(index);
+                      }}
+                      style={{ width: "5%", position: "relative" }}
+                    >
+                      {/* <button
+                    onClick={() => {
+                      setOpen4(!open3);
+                      setIndexing4(index); 
+                    }}
+                    className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                  >
+                    Action
+                  </button> */}
+                      <svg
+                        onClick={() => {
+                          setOpen4(!open4);
+                          setIndexing4(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
+                      {index === indexing4 && open4 ? (
+                        <div
+                          style={{ overflowY: "scroll" }}
+                          className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                        >
+                          <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                            {/* <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-start",
+                            gap: 20
+                          }}
+                        >
+                          <View />
+                          <span
+                            className="text-black flex-row gap-1 items-center"
+                            onClick={() => {
+                              navigate(`/manager/${item?.id}`);
+                              setOpen4(!open4);
+                            }}
+                          >
+                            View
+                          </span>
+                        </div> */}
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
+                              }}
+                            >
+                              <Edit />
+                              <span
+                                onClick={() => {
+                                  // setStep(11);
+                                  // setUserIds(item?.id);
+                                  navigate(
+                                    `/virtualmeter/${item?.customerReference}`
+                                  );
+                                }}
+                                className="text-black flex-row gap-1 items-center"
+                              >
+                                View
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      {/* <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000"
+                    }}
+                    onClick={() => navigate(`/manager/${item?.id}`)}
+                  >
+                    View
+                  </span> */}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : virtualagenting ? (
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+          >
+            <Table
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    S/N
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    DISCO ACCOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    ADDRESS
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                COMMISSION
+              </StyledTableCell> */}
+                  <StyledTableCell style={{ width: "10%" }}>
+                    DATE ADDED
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    CUS. REF.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "5%" }}></StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow
+                  // onClick={() => {
+                  //   setStep(11);
+                  //   setUserIds(item?.id);
+                  // }}
+                  >
+                    <StyledTableCell
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.name}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.discoAccount}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.address}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                  {"N/A"}
+                </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      <Moment format="DD-MM-YYYY">{item?.createdAt}</Moment>
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.customerReference}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      onClick={() => {
+                        setOpen4(!open4);
+                        setIndexing4(index);
+                      }}
+                      style={{ width: "5%", position: "relative" }}
+                    >
+                      {/* <button
+                  onClick={() => {
+                    setOpen4(!open3);
+                    setIndexing4(index); 
+                  }}
+                  className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                >
+                  Action
+                </button> */}
+                      <svg
+                        onClick={() => {
+                          setOpen4(!open4);
+                          setIndexing4(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
+                      {index === indexing4 && open4 ? (
+                        <div
+                          style={{ overflowY: "scroll" }}
+                          className="absolute right-20 top-0 w-36 h-30 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                        >
+                          <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                            {/* <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "flex-start",
+                          gap: 20
+                        }}
+                      >
+                        <View />
+                        <span
+                          className="text-black flex-row gap-1 items-center"
+                          onClick={() => {
+                            navigate(`/manager/${item?.id}`);
+                            setOpen4(!open4);
+                          }}
+                        >
+                          View
+                        </span>
+                      </div> */}
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
+                              }}
+                            >
+                              <Edit />
+                              <span
+                                onClick={() => {
+                                  // setStep(11);
+                                  // setUserIds(item?.id);
+                                  navigate(
+                                    `/virtualmeter/${item?.customerReference}`
+                                  );
+                                }}
+                                className="text-black flex-row gap-1 items-center"
+                              >
+                                View
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      {/* <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#000000"
+                  }}
+                  onClick={() => navigate(`/manager/${item?.id}`)}
+                >
+                  View
+                </span> */}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

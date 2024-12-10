@@ -123,7 +123,7 @@ const MeterVirtual = ({ title }) => {
           <div>
             <Goback
               style={{ cursor: "pointer" }}
-              onClick={() => navigate("/discos")}
+              onClick={() => navigate(-1)}
             />
           </div>
           <div className="flex flex-row justify-between">
@@ -184,15 +184,15 @@ const MeterVirtual = ({ title }) => {
             </div>
             {loading ? (
               <>
-                {virtual?.data?.data?.length >= 1 && (
+                {virtual?.data && (
                   <>
                     <Tables
                       setdiscname={setdiscname}
-                      metering
+                      virt
                       setStep={setStep}
-                      data={virtual?.data?.data}
+                      data={virtual?.data ? virtual?.data : []}
                     />
-                    <Pagination
+                    {/* <Pagination
                       set={activater}
                       currentPage={currentPage}
                       postsPerPage={postsPerPage}
@@ -200,7 +200,7 @@ const MeterVirtual = ({ title }) => {
                       paginate={paginate}
                       previous={previous}
                       next={next}
-                    />
+                    /> */}
                   </>
                 )}
                 {!virtual?.status && (
