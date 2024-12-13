@@ -421,9 +421,7 @@ const Dashboard = ({ title }) => {
                       Total Agents
                     </span>
                     <span className="text-color-user text-[20px] font-bold">
-                      {formatNumberWithCommas(
-                        notifications?.data?.meta?.totalCount
-                      )}
+                      {formatNumberWithCommas(dashboard?.data?.totalAgents)}
                     </span>
                     {/* <div className="flex flex-row gap-1 text-[10px]">
                   <span>
