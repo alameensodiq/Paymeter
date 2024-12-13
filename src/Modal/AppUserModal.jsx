@@ -93,7 +93,8 @@ const AppUserModal = ({
   complainapprove,
   setdecliner,
   decliner,
-  systemstate
+  systemstate,
+  reload
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");

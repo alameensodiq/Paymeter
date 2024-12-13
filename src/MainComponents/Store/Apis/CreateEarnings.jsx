@@ -34,6 +34,13 @@ export const CreateEarnings = createAsyncThunk(
       let data = await response.json();
       toast.success(data.message);
       console.log(data);
+      if (!data?.status) {
+        toast.error(data.message);
+      }
+      console.log(data);
+      if (data?.status) {
+        // toast.success(data.message);
+      }
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue({

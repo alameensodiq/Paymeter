@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const ApiAgentRole = createAsyncThunk(
   "apiagent",
-  async ({ role1, role2, role3, role4, role5 }, thunkAPI) => {
+  async ({ role1, role2, role3, role4, role5, currentPage }, thunkAPI) => {
     console.log("Base URL:", process.env.REACT_APP_BASE_URL);
 
     const accessToken = sessionStorage.getItem("token");
@@ -25,23 +25,37 @@ export const ApiAgentRole = createAsyncThunk(
     }
 
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/byrole?roleName=${role}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`
-          }
+      // Construct the base URL with the roleName
+      let url = `${process.env.REACT_APP_BASE_URL}admin/byrole?roleName=${role}`;
+
+      // Append currentPage if it is provided
+      if (currentPage) {
+        url += `&page=${currentPage}`;
+      }
+
+      console.log("Final API URL:", url);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`
         }
-      );
+      });
 
       const data = await response.json();
       console.log("API Response:", data);
 
       // Uncomment and use toast for user feedback if needed
       // toast.success(data.message);
+      if (!data?.status) {
+        toast.error(data.message);
+      }
+      console.log(data);
+      if (data?.status) {
+        // toast.success(data.message);
+      }
 
       return data; // Return the data on success
     } catch (e) {

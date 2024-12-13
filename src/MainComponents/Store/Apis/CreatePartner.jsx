@@ -32,6 +32,9 @@ export const CreatePartner = createAsyncThunk(
         toast.error(data.message);
       }
       console.log(data);
+      if (data?.status) {
+        // toast.success(data.message);
+      }
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue({

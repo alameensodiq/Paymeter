@@ -34,6 +34,13 @@ export const UserActioning = createAsyncThunk(
       //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
       //   sessionStorage.setItem('role', data?.data?.user?.userRole);
       // sessionStorage.setItem('token', data?.data?.token );
+      if (!data?.status) {
+        toast.error(data.message);
+      }
+      console.log(data);
+      if (data?.status) {
+        // toast.success(data.message);
+      }
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue({

@@ -26,6 +26,13 @@ export const AgentTransactions = createAsyncThunk(
       let data = await response.json();
       // toast.success(data.message);
       console.log(data);
+      if (!data?.status) {
+        toast.error(data.message);
+      }
+      console.log(data);
+      if (data?.status) {
+        // toast.success(data.message);
+      }
       //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
       //   sessionStorage.setItem('role', data?.data?.user?.userRole);
       // sessionStorage.setItem('token', data?.data?.token);

@@ -27,10 +27,12 @@ export const Accountant = createAsyncThunk(
         }
       );
       let data = await response.json();
+      if (!data?.status) {
+        toast.error(data.message);
+      }
+      console.log(data);
       if (data?.status) {
-        toast.success(data.message);
-      } else {
-        toast.error(data?.message);
+        // toast.success(data.message);
       }
       console.log(data);
       return data;

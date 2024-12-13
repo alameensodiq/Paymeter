@@ -25,8 +25,9 @@ export const TogglePay = createAsyncThunk(
       if (!data?.status) {
         toast.error(data.message);
       }
+      console.log(data);
       if (data?.status) {
-        toast.success(data.message);
+        // toast.success(data.message);
       }
       console.log(data);
       //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);

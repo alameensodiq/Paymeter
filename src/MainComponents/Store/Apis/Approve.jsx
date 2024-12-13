@@ -49,6 +49,13 @@ export const Approve = createAsyncThunk(
 
       let data = await response.json();
       console.log(data);
+      if (!data?.status) {
+        toast.error(data.message);
+      }
+      console.log(data);
+      if (data?.status) {
+        // toast.success(data.message);
+      }
       return data;
     } catch (e) {
       console.error("API call failed:", e);

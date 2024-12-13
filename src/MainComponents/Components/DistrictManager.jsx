@@ -41,19 +41,19 @@ const DistrictManager = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token") && role === "DISTRICTMANAGER") {
-      dispatch(ApiAgentRole({ role1 }));
+      dispatch(ApiAgentRole({ role1, currentPage }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
     if (reload && role === "DISTRICTMANAGER") {
-      dispatch(ApiAgentRole({ role1 }));
+      dispatch(ApiAgentRole({ role1, currentPage }));
       setReload(false);
     }
 
     //eslint-disable-next-line
-  }, [reload, role]);
+  }, [reload, role, currentPage]);
 
   const { apiagentrole, authenticatingapiagentrole } = useSelector(
     (state) => state?.apiagentrole
