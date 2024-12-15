@@ -26,7 +26,7 @@ export const AvailableBanks = createAsyncThunk(
       // toast.success(data.message);
       console.log(data);
       if (!data?.status) {
-        toast.error(data.message);
+        // toast.error(data.message);
       }
       console.log(data);
       if (data?.status) {
