@@ -50,6 +50,7 @@ import AgentSetting from "./MainComponents/Components/AgentSetting";
 import MeterVirtual from "./MainComponents/Components/MeterVirtual";
 import SystemCare from "./MainComponents/Components/SystemCare";
 import Accountant from "./MainComponents/Components/Accountant";
+import EarningUserDetails from "./MainComponents/Components/EarningUserDetails";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -132,7 +133,7 @@ function App() {
             />
             <Route
               path="/earning/:id"
-              element={<UserDetails title={"Earning Partner Details"} />}
+              element={<EarningUserDetails title={"Earning Partner Details"} />}
             />
             <Route
               path="/customer/:id"
