@@ -100,9 +100,9 @@ const AgentDetails = ({ title }) => {
   const isEarningRoute = location.pathname.startsWith("/user/");
   const isEarningRoute2 = location.pathname.startsWith("/agents/");
 
-  const next = agenttrans?.data?.transactions?.meta?.next;
-  const previous = agenttrans?.data?.transactions?.meta?.prev;
-  const totalPosts = agenttrans?.data?.transactions?.meta?.totalCount;
+  const next = agenttrans?.data?.meta?.next;
+  const previous = agenttrans?.data?.meta?.prev;
+  const totalPosts = agenttrans?.data?.meta?.totalCount;
 
   const next2 = adminagentmeter?.data?.meta?.next;
   const previous2 = adminagentmeter?.data?.meta?.prev;
@@ -206,7 +206,7 @@ const AgentDetails = ({ title }) => {
                   </span>
                   <span className="text-color-user text-[20px] font-bold">
                     {formatNumberWithCommas(
-                      agentsdetailsrevenue?.data?.totalTransactionCount
+                      agentsdetailsrevenue?.data?.transactionCount
                     )}
                   </span>
                   {/* <div className="flex flex-row gap-1 text-[10px]">
@@ -255,7 +255,7 @@ const AgentDetails = ({ title }) => {
                   </span>
                   <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                     {formatNumberWithCommas(
-                      agentsdetailsrevenue?.data?.totalRevenue
+                      agentsdetailsrevenue?.data?.transactionSum
                     )}
                   </span>
                   {/* <div className="flex flex-row gap-1 text-[10px]">
