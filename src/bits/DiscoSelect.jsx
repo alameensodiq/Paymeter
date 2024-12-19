@@ -4,6 +4,7 @@ import ModalText from "./ModalText";
 import ModalSelect from "./ModalSelect";
 import EarningSelect from "./EarningSelect";
 import DiscoSelectInput from "./DiscoSelectInput";
+import DiscoSelectInputName from "./DiscoSelectInputName";
 // import {ReactComponent as Take} from '../assets/take.svg'
 
 const DiscoSelect = ({
@@ -17,6 +18,7 @@ const DiscoSelect = ({
   photo,
   onClick,
   options,
+  naming,
   big,
   itemer,
   setItemer
@@ -30,19 +32,35 @@ const DiscoSelect = ({
           <span className="asterik">*</span>
         </span>
 
-        <DiscoSelectInput
-          big
-          itemer
-          setItemer
-          options={options}
-          name={name}
-          value={value}
-          onChange={onChange}
-          auth={auth}
-          fixedWidth
-          placeholder={placeholder}
-          logo={logo}
-        />
+        {naming ? (
+          <DiscoSelectInputName
+            big
+            itemer
+            setItemer
+            options={options}
+            name={name}
+            value={value}
+            onChange={onChange}
+            auth={auth}
+            fixedWidth
+            placeholder={placeholder}
+            logo={logo}
+          />
+        ) : (
+          <DiscoSelectInput
+            big
+            itemer
+            setItemer
+            options={options}
+            name={name}
+            value={value}
+            onChange={onChange}
+            auth={auth}
+            fixedWidth
+            placeholder={placeholder}
+            logo={logo}
+          />
+        )}
       </div>
     </Flex>
   );

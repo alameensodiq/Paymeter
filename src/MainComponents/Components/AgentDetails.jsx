@@ -79,7 +79,7 @@ const AgentDetails = ({ title }) => {
     if (sessionStorage.getItem("token") && id) {
       dispatch(Agentsdetailsrevenue({ id }));
       dispatch(AgentTrans({ id, searcher, currentPage }));
-      dispatch(Adminagentmeter({ agentId: id }));
+      dispatch(Adminagentmeter({ agentId: id, currentPage }));
       // dispatch(GetCommission({ id }));
       return;
     } else {
@@ -89,7 +89,7 @@ const AgentDetails = ({ title }) => {
     if (reload && sessionStorage.getItem("token") && id) {
       dispatch(Agentsdetailsrevenue({ id }));
       dispatch(AgentTrans({ id, searcher, currentPage }));
-      dispatch(Adminagentmeter({ agentId: id }));
+      dispatch(Adminagentmeter({ agentId: id, currentPage }));
       // dispatch(UserWallet({ id }));
       // dispatch(GetCommission({ id }));
     }

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const Adminagentmeter = createAsyncThunk(
   "adminagentmeter",
-  async ({ agentId }, thunkAPI) => {
+  async ({ agentId, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     // const dateObj = new Date(startDate);
 
@@ -12,7 +12,7 @@ export const Adminagentmeter = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}agent/${agentId}/all-meters`,
+        `${process.env.REACT_APP_BASE_URL}agent/${agentId}/all-meters?page=${currentPage}`,
         {
           method: "GET",
           headers: {
@@ -25,9 +25,9 @@ export const Adminagentmeter = createAsyncThunk(
       let data = await response.json();
       // toast.success(data.message);
       console.log(data);
-      if (!data?.status) {
-        toast.error(data.message);
-      }
+      // if (!data?.status) {
+      //   toast.error(data.message);
+      // }
       console.log(data);
       if (data?.status) {
         // toast.success(data.message);

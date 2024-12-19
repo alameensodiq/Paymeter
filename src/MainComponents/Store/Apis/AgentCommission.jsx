@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const AgentTrans = createAsyncThunk(
-  "agenttrans",
-  async ({ searcher, currentPage, id }, thunkAPI) => {
+export const AgentCommission = createAsyncThunk(
+  "agentcommission",
+  async ({ id }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     // const dateObj = new Date(startDate);
 
@@ -12,7 +12,7 @@ export const AgentTrans = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}dashboard/Trx-by-agentId/${id}?search=${searcher}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}admin/${id}/commissions`,
         {
           method: "GET",
           headers: {
@@ -25,9 +25,9 @@ export const AgentTrans = createAsyncThunk(
       let data = await response.json();
       // toast.success(data.message);
       console.log(data);
-      // if (!data?.status) {
-      //   toast.error(data.message);
-      // }
+      if (!data?.status) {
+        toast.error(data.message);
+      }
       console.log(data);
       if (data?.status) {
         // toast.success(data.message);

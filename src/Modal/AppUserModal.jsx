@@ -50,6 +50,8 @@ import { Withdrawing } from "../MainComponents/Store/Apis/Withdrawing";
 import DiscoSelect from "../bits/DiscoSelect";
 import { SystemCare } from "../MainComponents/Store/Apis/SystemCare";
 import { Accountant } from "../MainComponents/Store/Apis/Accountant";
+import { AgentCommission } from "../MainComponents/Store/Apis/AgentCommission";
+import { EditAgentComm } from "../MainComponents/Store/Apis/EditAgentComm";
 
 const AppUserModal = ({
   setStep,
@@ -129,9 +131,11 @@ const AppUserModal = ({
   const [bustate22, setBusstate22] = useState(false);
   const [bustate23, setBusstate23] = useState(false);
   const [bustate24, setBusstate24] = useState(false);
+  const [bustate25, setBusstate25] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
+  const [itemersagentcomm, setitemersagentcomm] = useState("");
   const [itemerearning, setitemerearning] = useState("");
   const [itemerearningedit, setitemerearningedit] = useState("");
   const [itemerseditingdisc, setItemereditingdisc] = useState("");
@@ -289,6 +293,16 @@ const AppUserModal = ({
     password: ""
   });
 
+  const [editagentcomm, seteditagentcomm] = useState({
+    discoName: "",
+    commissionDetails: {
+      commissionType: "",
+      fee: null,
+      capFee: null
+    },
+    commId: ""
+  });
+
   const [editingdisc, seteditingdisc] = useState({
     name: "",
     commissionsDTO: {
@@ -345,7 +359,10 @@ const AppUserModal = ({
     dispatch(Discos({ startDate, searcher, currentPage }));
     dispatch(AvailableBanks());
     dispatch(SavedBanks());
-  }, []);
+    if (userIding) {
+      dispatch(AgentCommission({ id: userIding }));
+    }
+  }, [userIding]);
 
   const { discos, authenticatingdiscos } = useSelector(
     (state) => state?.discos
@@ -447,6 +464,11 @@ const AppUserModal = ({
   );
   console.log(approve);
 
+  const { agentcommissions, authenticatingagentcommissions } = useSelector(
+    (state) => state?.agentcommissions
+  );
+  console.log(agentcommissions);
+
   const { dashboarddiscomonthly, authenticatingdashboarddiscomonthly } =
     useSelector((state) => state?.dashboarddiscomonthly);
   console.log(dashboarddiscomonthly);
@@ -505,6 +527,11 @@ const AppUserModal = ({
     (state) => state?.accountants
   );
   console.log(accountants);
+
+  const { editagentcommissioning, authenticatingeditagentcommissioning } =
+    useSelector((state) => state?.editagentcommissioning);
+  console.log(editagentcommissioning);
+  console.log(editagentcommissioning?.status);
 
   // passwordchange?.status
 
@@ -590,6 +617,9 @@ const AppUserModal = ({
     if (accountants?.status && bustate24) {
       setStep(69);
     }
+    if (bustate25 && editagentcommissioning?.status) {
+      setStep(71);
+    }
 
     console.log(update);
   }, [
@@ -621,6 +651,8 @@ const AppUserModal = ({
     bustate21,
     bustate22,
     bustate23,
+    bustate24,
+    bustate25,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -644,7 +676,8 @@ const AppUserModal = ({
     addbanks?.status,
     withdrawing?.status,
     systemcares?.status,
-    accountants?.status
+    accountants?.status,
+    editagentcommissioning?.status
   ]);
 
   useEffect(() => {
@@ -813,6 +846,15 @@ const AppUserModal = ({
     const { name, value } = e.target;
     console.log(value);
     setDisc({
+      ...disc,
+      [name]: value
+    });
+  };
+
+  const ChangeDiscEditComm = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    seteditagentcomm({
       ...disc,
       [name]: value
     });
@@ -1432,6 +1474,7 @@ const AppUserModal = ({
       districtManagerId: ""
     });
     setBusstate18(false);
+    setBusstate25(false);
     if (short) {
       setshort("");
     }
@@ -1440,6 +1483,15 @@ const AppUserModal = ({
       setuserId("");
       setReload(true);
     }
+    seteditagentcomm({
+      discoName: "",
+      commissionDetails: {
+        commissionType: "",
+        fee: null,
+        capFee: null
+      },
+      commId: ""
+    });
     if (downloading) {
       setDownload([]);
     }
@@ -1739,6 +1791,20 @@ const AppUserModal = ({
               capFee: null
             }
     }));
+    seteditagentcomm((prev) => ({
+      ...prev,
+      commissionDetails:
+        itemersagentcomm === "Fixed"
+          ? {
+              commissionType: "FIXED",
+              fee: null
+            }
+          : {
+              commissionType: "PERCENTAGE",
+              fee: null,
+              capFee: null
+            }
+    }));
     setEarnings((prev) => ({
       ...prev,
       commissions:
@@ -1891,7 +1957,8 @@ const AppUserModal = ({
     itemersmanager,
     itemerseditbank,
     itemerearning,
-    itemerearningedit
+    itemerearningedit,
+    itemersagentcomm
   ]);
 
   const ChangeSettings = (e) => {
@@ -2226,6 +2293,37 @@ const AppUserModal = ({
       ...prevDisc,
       commissionsDTO: {
         ...prevDisc.commissionsDTO,
+        [name]: sanitizedValue // Update with sanitized string value
+      }
+    }));
+  };
+
+  const ChangeSettingsTypeUserAgentComm = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers and one decimal point
+    let sanitizedValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+
+    // Ensure only one decimal point is allowed
+    const decimalCount = (sanitizedValue.match(/\./g) || []).length;
+
+    // If there's more than one decimal point, keep only the first one
+    if (decimalCount > 1) {
+      const firstDecimalIndex = sanitizedValue.indexOf(".");
+      const parts = sanitizedValue.split(".");
+      sanitizedValue =
+        parts[0] + "." + parts.slice(1).join("").replace(/\./g, "");
+    }
+
+    // If the input is empty, set the value to "0"
+    if (sanitizedValue === "") {
+      sanitizedValue = ""; // Set to "0" or another default value
+    }
+
+    seteditagentcomm((prevDisc) => ({
+      ...prevDisc,
+      commissionDetails: {
+        ...prevDisc.commissionDetails,
         [name]: sanitizedValue // Update with sanitized string value
       }
     }));
@@ -8084,6 +8182,234 @@ const AppUserModal = ({
               You have successfully Added a new{" "}
               {systemstate ? "System Care" : "Accountant"}
             </span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={70}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+
+        heading="Commission"
+      >
+        {/* editagentcommissioning */}
+        <div style={{ width: "100%", borderCollapse: "collapse" }}>
+          {agentcommissions?.data?.length > 0 && (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "20px",
+                marginLeft: "20px"
+              }}
+            >
+              <span style={{ fontWeight: "bold" }}>Disco Name</span>
+              <span style={{ fontWeight: "bold" }}>Commission Type</span>
+              <span style={{ fontWeight: "bold" }}>Fee</span>
+              <span style={{ fontWeight: "bold" }}>Cap Fee</span>
+            </div>
+          )}
+
+          {agentcommissions?.data?.map((item, index) => (
+            <div
+              style={{ display: "flex", flexDirection: "row", gap: "20px" }}
+              key={index}
+            >
+              <span
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  // justifyItems: "end",
+                  paddingLeft: "40px"
+                }}
+              >
+                {item?.discoName}
+              </span>
+              <span
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  paddingLeft: "50px"
+                }}
+              >
+                {item?.commissions?.commissionType}
+              </span>
+              <span>{item?.commissions?.fee}</span>
+              <span
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  // justifyItems: "end",
+                  paddingLeft: "10px"
+                }}
+              >
+                {item?.commissions?.capFee ? item?.commissions?.capFee : "N/A"}
+              </span>
+            </div>
+          ))}
+        </div>
+        {agentcommissions?.data?.length > 0 ? (
+          <>
+            {/* <ModalInputText
+              label="Bank Name"
+              onChange={(e) => ChangeDiscEditComm(e)}
+              name="discoName"
+              value={editagentcomm?.discoName}
+              placeholder={`${`Enter Disco Name`}`}
+            /> */}
+            <DiscoSelect
+              name="commId"
+              label="Choose Disco"
+              value={editagentcomm?.commId}
+              onChange={(e) => ChangeDiscEditComm(e)}
+              options={discoOptions2}
+              naming
+            />
+            <ModalInputSelectTwo
+              name="commissionType"
+              label="Commission DTO"
+              onChange={(e) => ChangeDiscEditComm(e)}
+              options={["Fixed", "Percentage"]}
+              itemer={itemersagentcomm}
+              big
+              setItemer={setitemersagentcomm}
+            />
+            {itemersagentcomm === "Fixed" ? (
+              <ModalInputText
+                label="Fixed Commission"
+                onChange={(e) => ChangeSettingsTypeUserAgentComm(e)}
+                name="fee"
+                value={editagentcomm?.commissionDetails?.fee || ""}
+                placeholder={`${`Enter Fixed Commission`}`}
+              />
+            ) : itemersagentcomm === "Percentage" ? (
+              <>
+                <ModalInputText
+                  label="Percentage Commission"
+                  onChange={(e) => ChangeSettingsTypeUserAgentComm(e)}
+                  name="fee"
+                  value={editagentcomm?.commissionDetails?.fee || ""}
+                  placeholder={`${`Enter Percentage Commission`}`}
+                />
+                <span style={{ color: "red", fontSize: "10px" }}>
+                  Note:Percentage Must be less than or equal to Disco Percentage
+                  with Paymeter
+                </span>
+                <ModalInputText
+                  label="Cap Fee"
+                  onChange={(e) => ChangeSettingsTypeUserAgentComm(e)}
+                  name="capFee"
+                  value={editagentcomm?.commissionDetails?.capFee}
+                  placeholder={`${`Enter Cap Fee`}`}
+                />
+              </>
+            ) : (
+              ""
+            )}
+            <LargeSignInButton
+              onClick={() => {
+                const { commissionDetails, commId } = editagentcomm;
+                console.log({ commissionDetails, commId });
+
+                // Check for missing values
+                const isFeeMissing = commissionDetails?.fee === null;
+                const isCapFeeMissing = commissionDetails?.capFee === null;
+                console.log(agentcommissions?.data);
+
+                if (
+                  commId &&
+                  (itemersagentcomm === "Fixed"
+                    ? !isFeeMissing
+                    : !isFeeMissing && !isCapFeeMissing)
+                ) {
+                  const realid = agentcommissions?.data?.filter(
+                    (item) => item?.discoName === commId
+                  );
+                  console.log(realid);
+                  console.log(realid[0]?.commissions?.id);
+
+                  if (realid) {
+                    dispatch(
+                      EditAgentComm({
+                        discoName: realid[0]?.discoName,
+                        commissionDetails,
+                        commId: realid[0]?.commissions?.id
+                      })
+                    );
+                    setBusstate25(true);
+                    // setStep(71);
+                  }
+                } else {
+                  toast.error("Fill all details");
+                }
+              }}
+              bigger
+              title={"Submit"}
+              background
+              color
+            />
+          </>
+        ) : (
+          <span>Commission can't be edited since there is no Commission</span>
+        )}
+      </AppModal>
+      <AppModal
+        step={71}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Commission Edited
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully edited Commission </span>
           </div>
           <div
             style={{

@@ -83,6 +83,8 @@ import { SystemCareSlice } from "./Reducers/SystemCare";
 import { AccountantSlice } from "./Reducers/Accountants";
 import { AdminagentmeterSlice } from "./Reducers/Adminagentmeter";
 import { UserDataEarningSlice } from "./Reducers/UserDataEarning";
+import { AgentCommissionSlice } from "./Reducers/AgentCommission";
+import { EditAgentCommSlice } from "./Reducers/EditAgentComm";
 
 export default configureStore({
   reducer: {
@@ -169,6 +171,8 @@ export default configureStore({
     systemcares: SystemCareSlice?.reducer,
     accountants: AccountantSlice?.reducer,
     adminagentmeter: AdminagentmeterSlice?.reducer,
-    userdataearning: UserDataEarningSlice?.reducer
+    userdataearning: UserDataEarningSlice?.reducer,
+    agentcommissions: AgentCommissionSlice?.reducer,
+    editagentcommissioning: EditAgentCommSlice?.reducer
   }
 });

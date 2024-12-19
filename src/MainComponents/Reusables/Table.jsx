@@ -2754,6 +2754,10 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                navigate(`/agents/${item?.user?.id}`);
+                                setOpen2(!open2);
+                              }}
                             >
                               <View />
                               <span
@@ -2773,6 +2777,12 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
                               }}
                             >
                               <Suspend />
@@ -2796,6 +2806,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
                             >
                               <Suspend />
                               <span
@@ -2818,6 +2834,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
                             >
                               <Activate />
                               <span
@@ -2839,6 +2861,37 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setuserIding(item?.user?.id);
+                                setStep(70);
+                                setOpen2(!open2);
+                              }}
+                            >
+                              <Update />
+                              <span
+                                onClick={() => {
+                                  setuserIding(item?.user?.id);
+                                  setStep(70);
+                                  setOpen2(!open2);
+                                }}
+                                className="text-black flex-row gap-1 items-center"
+                              >
+                                Commission
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
+                              }}
+                              onClick={() => {
+                                setuserIding(item?.user?.id);
+                                setStep(45);
+                                setOpen2(!open2);
                               }}
                             >
                               <Update />
@@ -3215,6 +3268,7 @@ const Tables = ({
                               justifyContent: "flex-start",
                               gap: 20
                             }}
+                            onClick={() => Pay(item?.id)}
                           >
                             <Activate />
                             <span
@@ -3365,6 +3419,10 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                navigate(`/earning/${item?.id}`);
+                                setOpen3(!open3);
+                              }}
                             >
                               <View />
                               <span
@@ -3384,6 +3442,11 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(59);
+                                setOpen3(!open3);
                               }}
                             >
                               <Edit />
@@ -3405,6 +3468,12 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen3(!open3);
+                                setuserIding(item?.id);
                               }}
                             >
                               <Suspend />
@@ -3428,6 +3497,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen3(!open3);
+                                setuserIding(item?.id);
+                              }}
                             >
                               <Suspend />
                               <span
@@ -3450,6 +3525,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen3(!open3);
+                                setuserIding(item?.id);
+                              }}
                             >
                               <Activate />
                               <span
@@ -3471,6 +3552,11 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen3(!open3);
                               }}
                             >
                               <Update />
@@ -3704,6 +3790,12 @@ const Tables = ({
                                 alignItems: "center",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setStep(39);
+                                setImages(item?.addressUrl);
+                                setOpen13(!open13);
+                                console.log(item?.addressUrl);
+                              }}
                             >
                               <Suspend width={10} />
                               <span
@@ -3727,6 +3819,12 @@ const Tables = ({
                                 alignItems: "center",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                console.log(item);
+                                // setdecliner(decliner);
+                                Pay(item, item?.user?.id, "approve");
+                                setOpen13(!open13);
+                              }}
                             >
                               <Activate width={10} />
                               <span
@@ -3748,6 +3846,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 alignItems: "center",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                console.log(item);
+                                // setdecliner(!decliner);
+                                Payer(item, item?.user?.id, "approve");
+                                setOpen13(!open13);
                               }}
                             >
                               <Activate width={10} />
@@ -3936,6 +4040,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 alignItems: "center",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                console.log(item);
+                                // setdecliner(decliner);
+                                Payreject(item, item?.user?.id, "re-approve");
+                                setOpen14(!open14);
                               }}
                             >
                               <Activate width={10} />
@@ -4783,6 +4893,11 @@ const Tables = ({
                                   justifyContent: "flex-start",
                                   gap: 20
                                 }}
+                                onClick={() => {
+                                  setStep(33);
+                                  setNaming(item);
+                                  setOpen5(!open5);
+                                }}
                               >
                                 <Activate />
                                 <span
@@ -5388,6 +5503,10 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setStep(11);
+                                setUserIds(item?.id);
+                              }}
                             >
                               <Edit />
                               <span
@@ -5407,6 +5526,12 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen4(!open4);
+                                setuserIding(item?.id);
                               }}
                             >
                               <Suspend />
@@ -5430,6 +5555,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen4(!open4);
+                                setuserIding(item?.id);
+                              }}
                             >
                               <Suspend />
                               <span
@@ -5452,6 +5583,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen4(!open4);
+                                setuserIding(item?.id);
+                              }}
                             >
                               <Activate />
                               <span
@@ -5473,6 +5610,11 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen4(!open4);
                               }}
                             >
                               <Update />
@@ -5646,6 +5788,10 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                navigate(`/user/${item?.id}`);
+                                setOpen10(!open10);
+                              }}
                             >
                               <View />
                               <span
@@ -5672,6 +5818,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
                             >
                               {" "}
                               <Suspend />{" "}
@@ -5695,6 +5847,12 @@ const Tables = ({
                                 justifyContent: "flex-start",
                                 gap: 20
                               }}
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
+                              }}
                             >
                               <Suspend />{" "}
                               <span
@@ -5716,6 +5874,12 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen10(!open10);
+                                setuserIding(item?.id);
                               }}
                             >
                               {" "}
@@ -5739,6 +5903,11 @@ const Tables = ({
                                 alignItems: "center",
                                 justifyContent: "flex-start",
                                 gap: 20
+                              }}
+                              onClick={() => {
+                                setuserIding(item?.id);
+                                setStep(45);
+                                setOpen10(!open10);
                               }}
                             >
                               {" "}
