@@ -90,9 +90,11 @@ const Transfers = ({ title }) => {
   console.log(downloadadmintrans);
 
   useEffect(() => {
-    setTimeout(() => {
-      setloading(true);
-    }, [3000]);
+    if (transactions?.data) {
+      setTimeout(() => {
+        setloading(true);
+      }, [2000]);
+    }
   }, [transactions?.data]);
 
   const next = transactions?.data?.meta?.next;
