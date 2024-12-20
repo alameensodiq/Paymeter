@@ -181,6 +181,7 @@ const Investments = ({ title }) => {
                     setoldname={setoldname}
                     investments
                     data={banks?.data?.data}
+                    currentPage={currentPage}
                   />
                 )}{" "}
                 {(!banks?.data?.data || banks?.data?.data?.length === 0) && (

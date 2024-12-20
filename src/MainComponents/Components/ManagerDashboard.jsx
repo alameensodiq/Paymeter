@@ -385,6 +385,7 @@ const ManagerDashboard = ({ title }) => {
                     setDownload={setDownload}
                     setStep={setStep}
                     customertransfer
+                    currentPage={currentPage}
                     data={earningdash?.data?.data?.slice(0, 10)}
                   />
                   <div className="flex flex-row w-[100%] justify-end pr-4">

@@ -185,6 +185,7 @@ const AgentMeter = ({ title }) => {
                       meterss
                       setStep={setStep}
                       data={agentmeters?.data?.data}
+                      currentPage={currentPage}
                     />
                     <Pagination
                       set={activater}

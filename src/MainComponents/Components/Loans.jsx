@@ -189,6 +189,7 @@ const Loans = ({ title }) => {
                       loans
                       setshort={setshort}
                       setStep={setStep}
+                      currentPage={currentPage}
                       data={discos?.data?.data}
                     />
                     <Pagination

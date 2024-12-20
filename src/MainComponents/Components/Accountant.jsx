@@ -195,6 +195,7 @@ const Accountant = ({ title }) => {
                     data={apiagentrole?.data?.data}
                     setUserIds={setUserIds}
                     setStep={setStep}
+                    currentPage={currentPage}
                   />
                 )}
                 {!apiagentrole?.status && (

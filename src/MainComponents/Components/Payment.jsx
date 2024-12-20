@@ -206,6 +206,7 @@ const Payment = ({ title }) => {
                     Pay={Pays}
                     set
                     data={paymentmethod?.data}
+                    currentPage={currentPage}
                   />
                 ) : paymentmethod?.data?.length === 0 ||
                   paymentmethod?.error ? (

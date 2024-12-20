@@ -305,7 +305,11 @@ const PaymentShift = ({ title }) => {
             </div>
             {whitecrust && payment?.data?.length >= 1 && (
               <>
-                <Tables payment data={payment?.data} />
+                <Tables
+                  currentPage={currentPage}
+                  payment
+                  data={payment?.data}
+                />
                 {/* <Pagination
                   set={activater}
                   currentPage={currentPage}
@@ -331,7 +335,7 @@ const PaymentShift = ({ title }) => {
             )}{" "}
             {other && shift?.data?.length >= 1 && (
               <>
-                <Tables shift data={shift?.data} />
+                <Tables shift data={shift?.data} currentPage={currentPage} />
                 {/* <Pagination
                   set={activater}
                   currentPage={currentPage}

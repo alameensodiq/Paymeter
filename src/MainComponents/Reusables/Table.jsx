@@ -73,7 +73,8 @@ const Tables = ({
   Payreject,
   agentvirtualmeter,
   virt,
-  virtualagenting
+  virtualagenting,
+  currentPage
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -468,7 +469,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         <Moment format="ddd MMM DD YYYY HH:mm:ss">
@@ -1043,7 +1044,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
                       {item?.name}
@@ -1199,7 +1200,7 @@ const Tables = ({
                 {data?.map((item, index) => (
                   <StyledTableRow>
                     <StyledTableCell style={{ width: "20%" }}>
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
                       {item?.name}
@@ -1743,7 +1744,7 @@ const Tables = ({
                 {data?.map((item, index) => (
                   <StyledTableRow>
                     <StyledTableCell style={{ width: "10%" }}>
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       {item?.type}
@@ -1827,7 +1828,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       onClick={() => {
@@ -1937,7 +1938,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.firstName}
@@ -2199,7 +2200,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.unitsPayment}
@@ -2304,7 +2305,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.codUser}
@@ -2388,7 +2389,7 @@ const Tables = ({
                       }}
                     >
                       <StyledTableCell style={{ width: "20%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "20%" }}>
                         {item?.discoName}
@@ -2619,7 +2620,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       // onClick={() => {
@@ -2982,7 +2983,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       className="text-dob"
@@ -3085,7 +3086,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       className="text-dob"
@@ -3178,7 +3179,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       className="text-dob"
@@ -3345,7 +3346,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.firstName}
@@ -3646,7 +3647,7 @@ const Tables = ({
                       //   console.log(item?.addressUrl);
                       // }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       className="text-dob"
@@ -3927,7 +3928,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       className="text-dob"
@@ -4242,7 +4243,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         <Moment format="ddd MMM DD YYYY HH:mm:ss">
@@ -4818,7 +4819,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.discoName}
@@ -5073,7 +5074,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.customerName}
@@ -5226,7 +5227,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.name}
@@ -5409,7 +5410,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.firstName}
@@ -5700,7 +5701,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.name || "N/A"}
@@ -6005,7 +6006,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         <Moment>{item?.dispense?.updatedDate}</Moment>
@@ -6239,7 +6240,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
                       {item?.firstName}
@@ -6476,7 +6477,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.accountName}
@@ -6654,7 +6655,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.name}
@@ -6820,7 +6821,7 @@ const Tables = ({
                 {data?.map((item, index) => (
                   <StyledTableRow>
                     <StyledTableCell style={{ width: "20%" }}>
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
                       {item?.name}
@@ -6919,7 +6920,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         <Moment format="ddd MMM DD YYYY HH:mm:ss">
@@ -7218,7 +7219,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       // onClick={() => {
@@ -7510,7 +7511,7 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {index + 1}
+                      {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell
                       // onClick={() => {
@@ -7663,7 +7664,7 @@ const Tables = ({
                   {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {index + 1}
+                        {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         <Moment format="ddd MMM DD YYYY HH:mm:ss">

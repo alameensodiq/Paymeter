@@ -567,6 +567,7 @@ const AgentTransfer = ({ title }) => {
                     agenttransfer
                     // transfers
                     data={agenttransactions?.data?.data}
+                    currentPage={currentPage}
                   />
                 )}
                 {!agenttransactions?.status && (

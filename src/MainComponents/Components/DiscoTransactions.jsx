@@ -341,6 +341,7 @@ const DiscoTransactions = ({ title }) => {
                   <Tables
                     discotransactions
                     data={disctransactions?.data?.data}
+                    currentPage={currentPage}
                   />
                 )}{" "}
                 {disctransactions?.data?.data?.length === 0 && (

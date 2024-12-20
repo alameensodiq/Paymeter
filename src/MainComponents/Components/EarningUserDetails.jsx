@@ -311,6 +311,7 @@ const EarningUserDetails = ({ title }) => {
                 {earningtrans?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (
                     <Tables
+                      currentPage={currentPage}
                       setDownload={setDownload}
                       overviewtransaction
                       data={earningtrans?.data?.data}
@@ -321,6 +322,7 @@ const EarningUserDetails = ({ title }) => {
                   getcommission?.data?.length >= 1 &&
                   status === "pending" && (
                     <Tables
+                      currentPage={currentPage}
                       setStep={setStep}
                       setNaming={setNaming}
                       overviewcommission

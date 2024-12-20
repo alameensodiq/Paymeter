@@ -300,7 +300,12 @@ const Complaints = ({ title }) => {
               <>
                 {complain?.data?.meta?.totalCount >= 1 &&
                   status === "RESOLVED" && (
-                    <Tables complain set data={complain?.data?.data} />
+                    <Tables
+                      complain
+                      currentPage={currentPage}
+                      set
+                      data={complain?.data?.data}
+                    />
                   )}{" "}
                 {(complain?.data?.data?.length === 0 ||
                   complain?.error === "") &&
@@ -323,6 +328,7 @@ const Complaints = ({ title }) => {
                       Pay={Pays}
                       set
                       data={complain?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}{" "}
                 {(complain?.data?.data?.length === 0 ||

@@ -133,6 +133,7 @@ const Setting = ({ title }) => {
               setting
               data={getsettings?.data?.data}
               setStep={setStep}
+              currentPage={currentPage}
             />
             {getsettings?.data?.meta?.totalCount >= 1 && (
               <Pagination

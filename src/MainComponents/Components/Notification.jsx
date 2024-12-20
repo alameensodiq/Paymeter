@@ -354,6 +354,7 @@ const Notification = ({ title }) => {
                       set
                       setStep={setStep}
                       data={notifications?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {notifications?.data?.meta?.totalCount >= 1 &&
@@ -369,6 +370,7 @@ const Notification = ({ title }) => {
                       setUserIds={setUserIds}
                       set
                       setStep={setStep}
+                      currentPage={currentPage}
                       data={notifications?.data?.data}
                     />
                   )}
@@ -381,6 +383,7 @@ const Notification = ({ title }) => {
                       set
                       setStep={setStep}
                       data={notifications?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {!notifications?.status && status === "accepted" && (

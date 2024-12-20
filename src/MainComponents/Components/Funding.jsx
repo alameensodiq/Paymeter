@@ -208,7 +208,13 @@ const Funding = ({ title }) => {
             {loading ? (
               <>
                 {funding?.data?.meta?.totalCount >= 1 ? (
-                  <Tables funding Pay={Pays} set data={funding?.data?.data} />
+                  <Tables
+                    funding
+                    Pay={Pays}
+                    currentPage={currentPage}
+                    set
+                    data={funding?.data?.data}
+                  />
                 ) : funding?.data?.meta?.totalCount === 0 || funding?.error ? (
                   <div
                     style={{

@@ -338,6 +338,7 @@ const AgentDetails = ({ title }) => {
                       setDownload={setDownload}
                       overviewtransaction
                       data={agenttrans?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {adminagentmeter?.data?.data?.length >= 1 &&
@@ -347,6 +348,7 @@ const AgentDetails = ({ title }) => {
                       setNaming={setNaming}
                       virtualagenting
                       data={adminagentmeter?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {(!adminagentmeter?.data?.data ||

@@ -319,6 +319,7 @@ const ManagerAgents = ({ title }) => {
                       setUserIds={setUserIds}
                       set
                       setStep={setStep}
+                      currentPage={currentPage}
                       data={districtagents?.data?.data}
                     />
                   )}

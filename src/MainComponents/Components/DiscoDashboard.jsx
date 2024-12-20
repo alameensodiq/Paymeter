@@ -386,6 +386,7 @@ const DiscoDashboard = ({ title }) => {
                   <Tables
                     setDownload={setDownload}
                     setStep={setStep}
+                    currentPage={currentPage}
                     customertransfer
                     data={disctransactions?.data?.data?.slice(0, 10)}
                   />

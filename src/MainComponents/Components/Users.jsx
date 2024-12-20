@@ -193,6 +193,7 @@ const Users = ({ title }) => {
                     setuserIding={setuserIding}
                     data={customers?.data?.data}
                     setUserIds={setUserIds}
+                    currentPage={currentPage}
                     setStep={setStep}
                   />
                 ) : (

@@ -93,7 +93,7 @@ const Transfers = ({ title }) => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [transactions]);
+  }, [transactions?.data]);
 
   const next = transactions?.data?.meta?.next;
   const previous = transactions?.data?.meta?.prev;
@@ -265,6 +265,7 @@ const Transfers = ({ title }) => {
                   <Tables
                     setDownload={setDownload}
                     setStep={setStep}
+                    currentPage={currentPage}
                     transfers
                     data={transactions?.data?.data}
                   />

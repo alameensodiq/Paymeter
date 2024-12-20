@@ -190,6 +190,7 @@ const Meter = ({ title }) => {
                       metering
                       setStep={setStep}
                       data={meters?.data?.data}
+                      currentPage={currentPage}
                     />
                     <Pagination
                       set={activater}

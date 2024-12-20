@@ -171,6 +171,7 @@ const WithdrawalsRequest = ({ title }) => {
                     setDownload={setDownload}
                     setStep={setStep}
                     withdraw
+                    currentPage={currentPage}
                     data={withdrawal?.data?.data}
                   />
                 )}{" "}

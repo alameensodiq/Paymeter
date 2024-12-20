@@ -195,6 +195,7 @@ const ApiPartner = ({ title }) => {
                     data={apiagentrole?.data?.data}
                     setUserIds={setUserIds}
                     setStep={setStep}
+                    currentPage={currentPage}
                   />
                 ) : (
                   <div

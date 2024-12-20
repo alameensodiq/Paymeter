@@ -379,6 +379,7 @@ const BankAccounts = ({ title }) => {
                       setStep={setStep}
                       bankaccountsdetails
                       data={bankaccounts?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {/* {!isEarningRoute &&

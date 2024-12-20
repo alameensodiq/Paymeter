@@ -560,6 +560,7 @@ const EarningTransfer = ({ title }) => {
               <>
                 {earningdash?.data?.data?.length >= 1 && (
                   <Tables
+                    currentPage={currentPage}
                     setDownload={setDownload}
                     setStep={setStep}
                     customertransfer

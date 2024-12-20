@@ -190,6 +190,7 @@ const MeterVirtual = ({ title }) => {
                       setdiscname={setdiscname}
                       virt
                       setStep={setStep}
+                      currentPage={currentPage}
                       data={virtual?.data ? virtual?.data : []}
                     />
                     {/* <Pagination

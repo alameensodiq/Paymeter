@@ -200,6 +200,7 @@ const DistrictManager = ({ title }) => {
                     data={apiagentrole?.data?.data}
                     setUserIds={setUserIds}
                     setStep={setStep}
+                    currentPage={currentPage}
                   />
                 ) : (
                   <div

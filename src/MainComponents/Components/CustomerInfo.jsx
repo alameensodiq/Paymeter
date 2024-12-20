@@ -204,7 +204,11 @@ const CustomerInfo = ({ title }) => {
             {loading ? (
               <>
                 {discometer?.data?.data?.length >= 1 && (
-                  <Tables meter data={discometer?.data?.data} />
+                  <Tables
+                    meter
+                    data={discometer?.data?.data}
+                    currentPage={currentPage}
+                  />
                 )}{" "}
                 {!discometer?.data && (
                   <div

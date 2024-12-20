@@ -495,6 +495,7 @@ const CustomerTransfer = ({ title }) => {
                   <Tables
                     setDownload={setDownload}
                     setStep={setStep}
+                    currentPage={currentPage}
                     customertransfer
                     data={customertransactions?.data?.data}
                   />

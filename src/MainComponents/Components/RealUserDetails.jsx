@@ -327,6 +327,7 @@ const RealUserDetails = ({ title }) => {
                       setStep={setStep}
                       overviewtransaction
                       data={usertransaction?.data?.transactions?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {usermeters?.data?.data?.length >= 1 &&
@@ -336,6 +337,7 @@ const RealUserDetails = ({ title }) => {
                       setNaming={setNaming}
                       agentvirtualmeter
                       data={usermeters?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {usertransaction?.data?.transactions?.meta?.totalCount === 0 &&

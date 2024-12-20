@@ -205,6 +205,7 @@ const ManagerAgentView = ({ title }) => {
                       setDownload={setDownload}
                       overviewtransaction
                       data={agentmanager?.data?.transactions?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {(!agentmanager?.status ||

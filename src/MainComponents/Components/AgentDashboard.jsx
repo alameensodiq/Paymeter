@@ -401,6 +401,7 @@ const AgentDashboard = ({ title }) => {
                     setDownload={setDownload}
                     setStep={setStep}
                     agenttransfer
+                    currentPage={currentPage}
                     data={agenttransactions?.data?.data?.slice(0, 10)}
                   />
                   <div className="flex flex-row w-[100%] justify-end pr-4">

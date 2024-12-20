@@ -425,6 +425,7 @@ const DistrictDetails = ({ title }) => {
                     <Tables
                       setDownload={setDownload}
                       overviewtransaction
+                      currentPage={currentPage}
                       data={district?.data?.transactions?.data}
                     />
                   )}
@@ -437,6 +438,7 @@ const DistrictDetails = ({ title }) => {
                       setNaming={setNaming}
                       overviewcommission
                       data={getcommission?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {(!district?.data?.transactions?.data ||

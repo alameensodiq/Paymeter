@@ -311,6 +311,7 @@ const UserDetails = ({ title }) => {
                       setDownload={setDownload}
                       overviewtransaction
                       data={earningtrans?.data?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {!isEarningRoute &&
@@ -322,6 +323,7 @@ const UserDetails = ({ title }) => {
                       setNaming={setNaming}
                       overviewcommission
                       data={getcommission?.data}
+                      currentPage={currentPage}
                     />
                   )}
                 {!earningtrans?.data && status === "accepted" && (
