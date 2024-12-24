@@ -51,6 +51,7 @@ import MeterVirtual from "./MainComponents/Components/MeterVirtual";
 import SystemCare from "./MainComponents/Components/SystemCare";
 import Accountant from "./MainComponents/Components/Accountant";
 import EarningUserDetails from "./MainComponents/Components/EarningUserDetails";
+import AllMeters from "./MainComponents/Components/AllMeters";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -172,6 +173,10 @@ function App() {
               element={<EarningPartner title={"Earning Partner"} />}
             />
             <Route path="/user" element={<Users title={"Users"} />} />
+            <Route
+              path="/all-meters"
+              element={<AllMeters title={"Meters"} />}
+            />
             <Route
               path="/manager"
               element={<DistrictManager title={"District Manager"} />}

@@ -49,6 +49,7 @@ const Sidebar = () => {
   const [isHovered24, setIsHovered24] = useState(false);
   const [isHovered25, setIsHovered25] = useState(false);
   const [isHovered28, setIsHovered28] = useState(false);
+  const [isHovered29, setIsHovered29] = useState(false);
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
@@ -1230,6 +1231,57 @@ const Sidebar = () => {
               }`}
             >
               Users
+            </p>
+          </Link>
+          <Link
+            to="/all-meters"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/all-meters" ||
+              router.pathname.startsWith("/all-meters/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered29(true)}
+            onMouseLeave={() => setIsHovered29(false)}
+          >
+            {router.pathname === "/all-meters" ||
+            isHovered29 ||
+            router.pathname.startsWith("/all-meters/") ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/all-meters" ||
+            isHovered29 ||
+            router.pathname.startsWith("/all-meters/") ? (
+              <Data
+                className={`${
+                  router.pathname === "/all-meters" ||
+                  router.pathname.startsWith("/all-meters/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Data
+                className={`${
+                  router.pathname === "/all-meters" ||
+                  router.pathname.startsWith("/all-meters/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/all-meters" ||
+                router.pathname.startsWith("/all-meters/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Meters
             </p>
           </Link>
           {/* <Link

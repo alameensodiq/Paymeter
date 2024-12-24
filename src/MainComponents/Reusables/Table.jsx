@@ -74,7 +74,8 @@ const Tables = ({
   agentvirtualmeter,
   virt,
   virtualagenting,
-  currentPage
+  currentPage,
+  allmetering
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -5930,6 +5931,108 @@ const Tables = ({
                         ""
                       )}
                     </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : allmetering ? (
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+          >
+            <Table
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    S/N
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>ID</StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    DATE CREATED
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    DISCO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    CUS. NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    ADDRESS
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    METER NO.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    BANK NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    BANK ACCT NO.
+                  </StyledTableCell>
+                  {/* <StyledTableCell style={{ width: "10%" }}>
+                    COMMISSION
+                  </StyledTableCell> */}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow
+                  // onClick={() => {
+                  //   setStep(11);
+                  //   setUserIds(item?.id);
+                  // }}
+                  >
+                    <StyledTableCell
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {currentPage * 10 + index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.id || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      <Moment format="DD-MM-YYYY">
+                        {item?.createdAt || "N/A"}
+                      </Moment>
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.disco?.shortName || "N/A"}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
+                      N/A
+                    </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "10%" }}>
+                      {item?.accountName || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.address || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.customerReference || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.virtualAccount?.bankName || "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.virtualAccount?.virtualAccountNumber || "N/A"}
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "5%" }}>
+                    <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#000000"
+                      }}
+                      onClick={() => navigate(`/user/${item?.id}`)}
+                    >
+                      View
+                    </span>
+                  </StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
