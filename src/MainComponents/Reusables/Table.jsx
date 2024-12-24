@@ -5961,6 +5961,9 @@ const Tables = ({
                     CUS. NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
+                    CUS. PHONE NO.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
                     ADDRESS
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
@@ -6005,19 +6008,23 @@ const Tables = ({
                     {/* <StyledTableCell style={{ width: "10%" }}>
                       N/A
                     </StyledTableCell> */}
-                    <StyledTableCell style={{ width: "10%" }}>
+                    <StyledTableCell style={{ width: "15%" }}>
                       {item?.accountName || "N/A"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "20%" }}>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.phoneNo || "N/A"}
+                    </StyledTableCell>
+
+                    <StyledTableCell style={{ width: "15%" }}>
                       {item?.address || "N/A"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "20%" }}>
+                    <StyledTableCell style={{ width: "15%" }}>
                       {item?.customerReference || "N/A"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "20%" }}>
+                    <StyledTableCell style={{ width: "15%" }}>
                       {item?.virtualAccount?.bankName || "N/A"}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "20%" }}>
+                    <StyledTableCell style={{ width: "15%" }}>
                       {item?.virtualAccount?.virtualAccountNumber || "N/A"}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "5%" }}>
