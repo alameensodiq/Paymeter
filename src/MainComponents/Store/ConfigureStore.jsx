@@ -86,6 +86,7 @@ import { UserDataEarningSlice } from "./Reducers/UserDataEarning";
 import { AgentCommissionSlice } from "./Reducers/AgentCommission";
 import { EditAgentCommSlice } from "./Reducers/EditAgentComm";
 import { AllmeterSlice } from "./Reducers/Allmeter";
+import { AllMeterDownloadSlice } from "./Reducers/AllMeterDownload";
 
 export default configureStore({
   reducer: {
@@ -175,6 +176,7 @@ export default configureStore({
     userdataearning: UserDataEarningSlice?.reducer,
     agentcommissions: AgentCommissionSlice?.reducer,
     editagentcommissioning: EditAgentCommSlice?.reducer,
-    allmetre: AllmeterSlice?.reducer
+    allmetre: AllmeterSlice?.reducer,
+    allmeterdownload: AllMeterDownloadSlice?.reducer
   }
 });

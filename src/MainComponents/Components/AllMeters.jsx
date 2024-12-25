@@ -19,6 +19,7 @@ import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
 import { Customers } from "../Store/Apis/Customers";
 import { Allmeter } from "../Store/Apis/Allmeter";
+import { AllmeterDownload } from "../Store/Apis/AllMeterDownload";
 
 const AllMeters = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -43,6 +44,7 @@ const AllMeters = ({ title }) => {
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       dispatch(Allmeter({ searcher, currentPage }));
+      dispatch(AllmeterDownload({ searcher, currentPage }));
       return;
     } else {
       navigate("/");
@@ -50,6 +52,7 @@ const AllMeters = ({ title }) => {
     }
     if (reload && sessionStorage.getItem("token")) {
       dispatch(Allmeter({ searcher, currentPage }));
+      dispatch(AllmeterDownload({ searcher, currentPage }));
       setReload(false);
     }
 
@@ -61,13 +64,18 @@ const AllMeters = ({ title }) => {
   );
   console.log(allmetre);
 
+  const { allmeterdownload, authenticatingallmeterdownload } = useSelector(
+    (state) => state?.allmeterdownload
+  );
+  console.log(allmeterdownload);
+
   useEffect(() => {
-    if (allmetre?.data?.data) {
+    if (allmetre?.data?.data && allmeterdownload) {
       setTimeout(() => {
         setloading(true);
       }, [3000]);
     }
-  }, [allmetre?.data?.data]);
+  }, [allmetre?.data?.data, allmeterdownload]);
 
   const next = allmetre?.data?.meta?.next;
   const previous = allmetre?.data?.meta?.prev;
@@ -87,22 +95,109 @@ const AllMeters = ({ title }) => {
   const PickDate = () => {
     datePickerRef.current.setOpen(true);
   };
-
   const Downloading = () => {
-    const data = allmetre?.data?.data || [];
-    const headers = data.length > 0 ? Object.keys(data[0]) : [];
-    const objValues = data.map((item) => Object.values(item).join(","));
-    const csvContent = [headers.join(","), ...objValues].join("\n");
+    // Get the data to be exported
+    console.log(allmeterdownload);
+    const data = allmeterdownload || [];
+    if (data.length === 0) {
+      toast.error("You can't download an empty file"); // Display the error toast
+      return; // Exit the function early if the data is empty
+    }
+
+    // Get the keys (fields) from the first item in the data array
+    const firstItem = data[0];
+    const allFields = Object.keys(firstItem); // All available fields in the first item
+
+    // Specify the fields you want to include in the CSV, based on the table columns
+    const selectedFields = [
+      "ID",
+      "Name", // Previously "Account Name"
+      "Meter Number", // Previously "Customer Reference"
+      "Type",
+      "Address",
+      "Bank",
+      "Disco",
+      "Created At",
+      "Phone Number"
+    ];
+
+    // Create the header row, ensuring renamed headers
+    const headers = selectedFields;
+
+    // Map over the data and create rows based on selected fields
+    const rows = data.map((item) =>
+      headers.map((header) => {
+        // Handle specific fields with renamed headers
+        if (header === "ID") {
+          return item?.ID || "N/A";
+        }
+        if (header === "Name") {
+          return item?.["Account Name"] || "N/A"; // Value from "Account Name"
+        }
+        if (header === "Meter Number") {
+          return item?.["Customer Reference"] || "N/A"; // Value from "Customer Reference"
+        }
+        if (header === "Type") {
+          return item?.Type || "not applicable";
+        }
+        if (header === "Address") {
+          return item?.Address || "not applicable";
+        }
+        if (header === "Bank") {
+          return item?.Bank || "not applicable";
+        }
+        if (header === "Disco") {
+          return item?.Disco || "not applicable";
+        }
+        if (header === "Created At") {
+          return item?.["Created At"] || "not applicable";
+        }
+        if (header === "Phone Number") {
+          return item?.["Phone Number"] || "not applicable";
+        }
+        return item?.[header] || "N/A"; // Fallback to "N/A" if the value is missing
+      })
+    );
+
+    // Create the CSV content by joining headers and rows
+    const csvContent = [
+      headers.join(","), // Join headers with commas
+      ...rows.map((row) => row.join(",")) // Join each row's values with commas
+    ].join("\n"); // Join all rows with new lines
+
+    // Create the Blob and download link
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
+
+    // Set the filename and trigger the download
     a.href = url;
-    a.download = "Bank.csv";
-    document.body.appendChild(a); // Required for Firefox
+    a.download = "Meters.csv"; // Set the filename for download
+
+    // Append the link to the body and trigger the click event
+    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a); // Clean up
+
+    // Clean up the link element and object URL
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
+
+  // const Downloading = () => {
+  //   const data = allmetre?.data?.data || [];
+  //   const headers = data.length > 0 ? Object.keys(data[0]) : [];
+  //   const objValues = data.map((item) => Object.values(item).join(","));
+  //   const csvContent = [headers.join(","), ...objValues].join("\n");
+  //   const blob = new Blob([csvContent], { type: "text/csv" });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement("a");
+  //   a.href = url;
+  //   a.download = "Bank.csv";
+  //   document.body.appendChild(a); // Required for Firefox
+  //   a.click();
+  //   document.body.removeChild(a); // Clean up
+  //   URL.revokeObjectURL(url);
+  // };
   return (
     <div className="flex flex-row">
       <div className="w-[15%] h-[100%]">
