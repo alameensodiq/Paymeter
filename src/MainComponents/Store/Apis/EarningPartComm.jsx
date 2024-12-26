@@ -13,7 +13,7 @@ export const EarningPartComm = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/earningTotalPartnerSummary/${realuserId}`,
+        `${process.env.REACT_APP_BASE_URL}admin/earningTotalPartnerSummaryV2`,
         {
           method: "GET",
           headers: {
