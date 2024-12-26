@@ -116,6 +116,7 @@ const AllMeters = ({ title }) => {
       "Type",
       "Address",
       "Bank",
+      "virtualAccountNumber",
       "Disco",
       "Created At",
       "Phone Number"
@@ -145,6 +146,9 @@ const AllMeters = ({ title }) => {
         }
         if (header === "Bank") {
           return item?.Bank || "not applicable";
+        }
+        if (header === "virtualAccountNumber") {
+          return item?.virtualAccountNumber || "not applicable";
         }
         if (header === "Disco") {
           return item?.Disco || "not applicable";
