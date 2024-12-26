@@ -34,6 +34,7 @@ import { TotalSales } from "../Store/Apis/TotalSales";
 import AppUserModal from "../../Modal/AppUserModal";
 import { Notifications } from "../Store/Apis/Notifications";
 import { Loader } from "./Loader";
+import { DashboardLastweek } from "../Store/Apis/DashboardLastweek";
 
 const Dashboard = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -56,6 +57,7 @@ const Dashboard = ({ title }) => {
       dispatch(DashboardDaily());
       dispatch(DashboardYearly());
       dispatch(DashboardSummary());
+      dispatch(DashboardLastweek());
       dispatch(DashboardDailyMonthly());
       dispatch(TotalSales());
       dispatch(ListofMeter());
@@ -123,6 +125,11 @@ const Dashboard = ({ title }) => {
     (state) => state?.notifications
   );
   console.log(notifications);
+
+  const { dashboardlastweek, authenticatingdashboardlastweek } = useSelector(
+    (state) => state?.dashboardlastweek
+  );
+  console.log(dashboardlastweek);
 
   const [revenueData, setRevenueData] = useState([]);
   const [revenueData2, setRevenueData2] = useState([]);
@@ -380,6 +387,128 @@ const Dashboard = ({ title }) => {
                       </span>
                       {/* <span className="text-card-user">6.5%</span>
                 <span className="text-[9px]">average yearly revenue</span> */}
+                    </div>
+                  </div>
+                  <div>
+                    <TotalInvestment />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <div className="flex lg:flex-row flex-col md:flex-col gap-3">
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Yesterday Sales
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold">
+                      ₦
+                      {formatNumberWithCommas(
+                        dashboardlastweek?.data?.yesterdayRevenue
+                      )}
+                    </span>
+                    <div className="flex flex-row gap-1 text-[10px]">
+                      <span className="text-black text-[12px]">
+                        Transaction Count:{" "}
+                        {formatNumberWithCommas(
+                          dashboardlastweek?.data?.yesterdayTransactionCount
+                        )}
+                      </span>
+                      {/* <span className="text-card-user">8.5%</span>
+                <span className="text-[9px]">Up yesterday</span> */}
+                    </div>
+                  </div>
+                  <div>
+                    <User />
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Last Week Sales
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold">
+                      ₦
+                      {formatNumberWithCommas(
+                        dashboardlastweek?.data?.lastWeekRevenue
+                      )}
+                    </span>
+                    <div className="flex flex-row gap-1 text-[10px]">
+                      <span className="text-black text-[12px]">
+                        Transaction Count:{" "}
+                        {formatNumberWithCommas(
+                          dashboardlastweek?.data?.lastWeekTransactionCount
+                        )}
+                      </span>
+                      {/* <span className="text-card-user">8.5%</span>
+                <span className="text-[9px]">Up yesterday</span> */}
+                    </div>
+                  </div>
+                  <div>
+                    <User />
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Last Month Sales
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      {/* ₦1 */}₦{" "}
+                      {formatNumberWithCommas(
+                        dashboardlastweek?.data?.lastMonthRevenue
+                      )}
+                      {/* {dashboard?.data?.totalApiPartners} */}
+                    </span>
+                    <div className="flex flex-row gap-1 text-[10px]">
+                      <span className="text-black text-[12px]">
+                        Transaction Count:{" "}
+                        {formatNumberWithCommas(
+                          dashboardlastweek?.data?.lastMonthTransactionCount
+                        )}
+                      </span>
+                      {/* <span className="text-card-user">6.5%</span>
+                <span className="text-[9px]">average daily revenue</span> */}
+                    </div>
+                  </div>
+                  <div>
+                    <TotalInvestment />
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Last Year Sales
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      {/* ₦1 */}₦{" "}
+                      {formatNumberWithCommas(
+                        dashboardlastweek?.data?.lastYearRevenue
+                      )}
+                      {/* {dashboard?.data?.totalApiPartners} */}
+                    </span>
+                    <div className="flex flex-row gap-1 text-[10px]">
+                      <span className="text-black text-[12px]">
+                        Transaction Count:{" "}
+                        {formatNumberWithCommas(
+                          dashboardlastweek?.data?.lastYearTransactionCount
+                        )}
+                      </span>
+                      {/* <span className="text-card-user">6.5%</span>
+                <span className="text-[9px]">average daily revenue</span> */}
                     </div>
                   </div>
                   <div>

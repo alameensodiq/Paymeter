@@ -87,6 +87,7 @@ import { AgentCommissionSlice } from "./Reducers/AgentCommission";
 import { EditAgentCommSlice } from "./Reducers/EditAgentComm";
 import { AllmeterSlice } from "./Reducers/Allmeter";
 import { AllMeterDownloadSlice } from "./Reducers/AllMeterDownload";
+import { DashboardLastweekSlice } from "./Reducers/DashboardLastweek";
 
 export default configureStore({
   reducer: {
@@ -177,6 +178,7 @@ export default configureStore({
     agentcommissions: AgentCommissionSlice?.reducer,
     editagentcommissioning: EditAgentCommSlice?.reducer,
     allmetre: AllmeterSlice?.reducer,
-    allmeterdownload: AllMeterDownloadSlice?.reducer
+    allmeterdownload: AllMeterDownloadSlice?.reducer,
+    dashboardlastweek: DashboardLastweekSlice.reducer
   }
 });
