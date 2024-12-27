@@ -7670,12 +7670,19 @@ const Tables = ({
                         >
                           PENDING
                         </button>
-                      ) : item?.status === "REJECTED" ? (
+                      ) : item?.status === "DECLINED" ? (
                         <button
                           // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
                           className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
                         >
                           DECLINED
+                        </button>
+                      ) : item?.status === "FAILED" ? (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                          className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
+                        >
+                          FAILED
                         </button>
                       ) : (
                         <button

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const Withdrawal = createAsyncThunk(
   "withdrawal",
-  async ({ searcher, currentPage }, thunkAPI) => {
+  async ({ searcher, currentPage, status }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     // const dateObj = new Date(startDate);
 
@@ -12,7 +12,7 @@ export const Withdrawal = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}agents/withdrawals?search=${searcher}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}agents/withdrawal-by-status?search=${searcher}&page=${currentPage}&status=${status}`,
         {
           method: "GET",
           headers: {

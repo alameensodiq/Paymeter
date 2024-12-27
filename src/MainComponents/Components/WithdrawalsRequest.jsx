@@ -26,6 +26,7 @@ const WithdrawalsRequest = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setloading] = useState(false);
   const [searcher, setSearcher] = useState("");
+  const [status, setStatus] = useState("SUCCESSFUL");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const [downloading, setDownload] = useState([]);
   const [reload, setReload] = useState(false);
@@ -34,13 +35,13 @@ const WithdrawalsRequest = ({ title }) => {
   const dispatch = useDispatch();
 
   const White = () => {
-    setWhitecrust(true);
-    setOther(false);
+    setStatus("SUCCESSFUL");
+    // setOther(false);
   };
 
   const Othering = () => {
-    setWhitecrust(false);
-    setOther(true);
+    setStatus("PENDING");
+    // setOther(true);
   };
 
   const [endDate, setEndDate] = useState(
@@ -69,7 +70,7 @@ const WithdrawalsRequest = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(Withdrawal({ searcher, currentPage }));
+      dispatch(Withdrawal({ searcher, currentPage, status }));
       return;
     } else {
       navigate("/");
@@ -77,7 +78,7 @@ const WithdrawalsRequest = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [searcher, currentPage]);
+  }, [searcher, currentPage, status]);
 
   const { withdrawal, authenticatingwithdrawal } = useSelector(
     (state) => state?.withdrawal
@@ -130,43 +131,89 @@ const WithdrawalsRequest = ({ title }) => {
             </div>
           </div>
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
-            <div className="flex flex-row justify-end gap-4 px-3">
-              {/* <div className="flex flex-col">
+            <div className="flex flex-row justify-start gap-4 px-3">
+              <div className="flex flex-col">
                 <div className="flex flex-row gap-4 text-[14px] items-center text-route-noncolor font-medium">
                   <span
                     onClick={() => White()}
                     className={`${
-                      whitecrust
+                      status === "SUCCESSFUL"
                         ? "text-route-color cursor-pointer"
                         : "text-route-noncolor cursor-pointer"
                     }`}
                   >
-                    To Paymeter Account
+                    Successful
                   </span>
                   <span
                     onClick={() => Othering()}
                     className={`${
-                      other
+                      status === "PENDING"
                         ? "text-route-color cursor-pointer"
                         : "text-route-noncolor cursor-pointer"
                     }`}
                   >
-                    To Other banks
+                    PENDING
+                  </span>
+                  <span
+                    onClick={() => setStatus("FAILED")}
+                    className={`${
+                      status === "FAILED"
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    FAILED
+                  </span>
+                  <span
+                    onClick={() => setStatus("DECLINED")}
+                    className={`${
+                      status === "DECLINED"
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    DECLINED
                   </span>
                 </div>
                 <div className="gap-4">
-                  {whitecrust && (
-                    <div className="w-[150px] h-[2px] bg-route-color" />
+                  {status === "SUCCESSFUL" && (
+                    <div className="w-[80px] h-[2px] bg-route-color" />
                   )}
-                  {other && (
-                    <div className="w-[100px] h-[2px] bg-route-color ml-[62%]" />
+                  {status === "PENDING" && (
+                    <div className="w-[80px] h-[2px] bg-route-color ml-[28%]" />
+                  )}
+                  {status === "FAILED" && (
+                    <div className="w-[80px] h-[2px] bg-route-color ml-[52%]" />
+                  )}
+                  {status === "DECLINED" && (
+                    <div className="w-[80px] h-[2px] bg-route-color ml-[77%]" />
                   )}
                 </div>
-              </div> */}
+              </div>
             </div>
             {loading ? (
               <>
-                {withdrawal?.data?.data?.length >= 1 && (
+                {withdrawal?.data?.data?.length >= 1 &&
+                  status === "SUCCESSFUL" && (
+                    <Tables
+                      setDownload={setDownload}
+                      setStep={setStep}
+                      withdraw
+                      currentPage={currentPage}
+                      data={withdrawal?.data?.data}
+                    />
+                  )}{" "}
+                {withdrawal?.data?.data?.length >= 1 &&
+                  status === "PENDING" && (
+                    <Tables
+                      setDownload={setDownload}
+                      setStep={setStep}
+                      withdraw
+                      currentPage={currentPage}
+                      data={withdrawal?.data?.data}
+                    />
+                  )}{" "}
+                {withdrawal?.data?.data?.length >= 1 && status === "FAILED" && (
                   <Tables
                     setDownload={setDownload}
                     setStep={setStep}
@@ -175,7 +222,29 @@ const WithdrawalsRequest = ({ title }) => {
                     data={withdrawal?.data?.data}
                   />
                 )}{" "}
-                {!withdrawal?.status && (
+                {withdrawal?.data?.data?.length >= 1 &&
+                  status === "DECLINED" && (
+                    <Tables
+                      setDownload={setDownload}
+                      setStep={setStep}
+                      withdraw
+                      currentPage={currentPage}
+                      data={withdrawal?.data?.data}
+                    />
+                  )}{" "}
+                {withdrawal?.data?.data?.length >= 1 &&
+                  status === "SUCCESSFUL" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
+                {!withdrawal?.data?.data && status === "SUCCESSFUL" && (
                   <div
                     style={{
                       display: "flex",
@@ -187,7 +256,43 @@ const WithdrawalsRequest = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )}
-                {withdrawal?.data?.data?.length >= 1 && (
+                {!withdrawal?.data?.data && status === "PENDING" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {withdrawal?.data?.data?.length >= 1 &&
+                  status === "PENDING" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
+                {!withdrawal?.data?.data && status === "FAILED" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {withdrawal?.data?.data?.length >= 1 && status === "FAILED" && (
                   <Pagination
                     set={activater}
                     currentPage={currentPage}
@@ -198,6 +303,30 @@ const WithdrawalsRequest = ({ title }) => {
                     next={next}
                   />
                 )}
+                {!withdrawal?.data?.data && status === "DECLINED" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {withdrawal?.data?.data?.length >= 1 &&
+                  status === "DECLINED" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
               </>
             ) : (
               <Loader />
