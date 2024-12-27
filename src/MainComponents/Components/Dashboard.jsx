@@ -665,7 +665,16 @@ const Dashboard = ({ title }) => {
                 </div>
               </div>
             )}
-
+            {sessionStorage.getItem("roleName") === "ADMIN" && (
+              <div className="flex flex-row justify-end items-center">
+                <button
+                  onClick={() => setStep(72)}
+                  className="px-2 h-[35px]  flex flex-row gap-1 items-center bg-route-color lg:w-[20%] md:w-[20%] sm:w-[20%] w-[60%] rounded-custom text-white font-semibold text-[11px] justify-center"
+                >
+                  Onboarding Issues
+                </button>
+              </div>
+            )}
             <div className="flex flex-col gap-3">
               <div className="flex flex-row gap-2 items-center">
                 <span className="text-circle-color font-bold">
@@ -938,7 +947,6 @@ const Dashboard = ({ title }) => {
                 </div>
               </div>
             )}
-
             {sessionStorage.getItem("roleName") === "ADMIN" && (
               <div className="flex flex-col gap-3">
                 <div className="flex flex-row gap-2 items-center">

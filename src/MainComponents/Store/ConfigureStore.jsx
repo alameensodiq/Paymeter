@@ -88,6 +88,7 @@ import { EditAgentCommSlice } from "./Reducers/EditAgentComm";
 import { AllmeterSlice } from "./Reducers/Allmeter";
 import { AllMeterDownloadSlice } from "./Reducers/AllMeterDownload";
 import { DashboardLastweekSlice } from "./Reducers/DashboardLastweek";
+import { OnboardingSlice } from "./Reducers/Onboarding";
 
 export default configureStore({
   reducer: {
@@ -179,6 +180,7 @@ export default configureStore({
     editagentcommissioning: EditAgentCommSlice?.reducer,
     allmetre: AllmeterSlice?.reducer,
     allmeterdownload: AllMeterDownloadSlice?.reducer,
-    dashboardlastweek: DashboardLastweekSlice.reducer
+    dashboardlastweek: DashboardLastweekSlice.reducer,
+    onboarding: OnboardingSlice?.reducer
   }
 });

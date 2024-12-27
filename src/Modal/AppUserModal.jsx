@@ -52,6 +52,7 @@ import { SystemCare } from "../MainComponents/Store/Apis/SystemCare";
 import { Accountant } from "../MainComponents/Store/Apis/Accountant";
 import { AgentCommission } from "../MainComponents/Store/Apis/AgentCommission";
 import { EditAgentComm } from "../MainComponents/Store/Apis/EditAgentComm";
+import { Onboarding } from "../MainComponents/Store/Apis/Onboarding";
 
 const AppUserModal = ({
   setStep,
@@ -132,6 +133,7 @@ const AppUserModal = ({
   const [bustate23, setBusstate23] = useState(false);
   const [bustate24, setBusstate24] = useState(false);
   const [bustate25, setBusstate25] = useState(false);
+  const [bustate26, setBusstate26] = useState(false);
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
@@ -399,6 +401,11 @@ const AppUserModal = ({
   );
   console.log(addbanks);
 
+  const { onboarding, authenticatingonboarding } = useSelector(
+    (state) => state?.onboarding
+  );
+  console.log(onboarding);
+
   const { withdrawing, authenticatingwithdrawing } = useSelector(
     (state) => state?.withdrawing
   );
@@ -620,6 +627,12 @@ const AppUserModal = ({
     if (bustate25 && editagentcommissioning?.status) {
       setStep(71);
     }
+    // if (bustate26 && onboarding?.status) {
+    //   setStep(73);
+    // }
+    if (bustate26) {
+      setStep(73);
+    }
 
     console.log(update);
   }, [
@@ -653,6 +666,7 @@ const AppUserModal = ({
     bustate23,
     bustate24,
     bustate25,
+    bustate26,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -677,7 +691,8 @@ const AppUserModal = ({
     withdrawing?.status,
     systemcares?.status,
     accountants?.status,
-    editagentcommissioning?.status
+    editagentcommissioning?.status,
+    onboarding?.status
   ]);
 
   useEffect(() => {
@@ -1677,6 +1692,7 @@ const AppUserModal = ({
     setBusstate22(false);
     setBusstate23(false);
     setBusstate24(false);
+    setBusstate26(false);
     setApproved(false);
     setPassword("");
     if (action) {
@@ -1728,6 +1744,11 @@ const AppUserModal = ({
       setReload(true);
     }
     setStep(0);
+  };
+
+  const Onboarder = () => {
+    setBusstate26(true);
+    // dispatch(Onboarding());
   };
 
   const handleSubmit = () => {
@@ -8410,6 +8431,126 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully edited Commission </span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={72}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Action
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to resolve Onboarding Issues</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Cancel"
+              large
+              onClick={() => setStep(0)}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => Onboarder()}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={73}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Issues Resolved
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You have successfully resolved the Onboarding Issues </span>
           </div>
           <div
             style={{
