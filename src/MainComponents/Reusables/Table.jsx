@@ -67,6 +67,8 @@ const Tables = ({
   agenttransfer,
   manageragents,
   withdraw,
+  withdrawpending,
+  setwithdrawaction,
   meterss,
   setdecliner,
   decliner,
@@ -107,6 +109,8 @@ const Tables = ({
   const [indexing13, setIndexing13] = useState(null);
   const [open14, setOpen14] = useState(false);
   const [indexing14, setIndexing14] = useState(null);
+  const [open15, setOpen15] = useState(false);
+  const [indexing15, setIndexing15] = useState(null);
   const dispatch = useDispatch();
   console.log(data);
 
@@ -7691,6 +7695,302 @@ const Tables = ({
                         >
                           ACTIVE
                         </button>
+                      )}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : withdrawpending ? (
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+          >
+            <Table
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    S/N
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    BANK NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    ACCOUNT NO.
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    BANK CODE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    STATUS
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    ACTION
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {currentPage * 10 + index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      className="text-dob"
+                      style={{ width: "20%" }}
+                    >
+                      {item?.bankName}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      style={{ width: "20%" }}
+                    >
+                      {item?.accountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      style={{ width: "15%" }}
+                    >
+                      {item?.bankCode}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      // onClick={() => {
+                      //   setStep(11);
+                      //   setUserIds(item?.id);
+                      // }}
+                      style={{ width: "20%" }}
+                    >
+                      {item?.amount
+                        ? `₦${formatNumberWithCommas(item?.amount)}`
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.status === "PENDING" ? (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                          className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                        >
+                          PENDING
+                        </button>
+                      ) : item?.status === "DECLINED" ? (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                          className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
+                        >
+                          DECLINED
+                        </button>
+                      ) : item?.status === "FAILED" ? (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                          className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
+                        >
+                          FAILED
+                        </button>
+                      ) : (
+                        <button
+                          // onClick={() => Pay(item?.id, item?.user?.id, "decline")}
+                          className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
+                        >
+                          ACTIVE
+                        </button>
+                      )}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      onClick={() => {
+                        setOpen2(!open2);
+                        setIndexing2(index);
+                      }}
+                      style={{ width: "15%", position: "relative" }}
+                    >
+                      {/* <button
+                      onClick={() => {
+                        setOpen2(!open2);
+                        setIndexing2(index);
+                      }}
+                      className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+                    >
+                      Action
+                    </button> */}
+                      <svg
+                        onClick={() => {
+                          setOpen15(!open15);
+                          setIndexing15(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
+                      {index === indexing15 && open15 ? (
+                        <div
+                          style={{ overflowY: "scroll" }}
+                          className="absolute right-40 top-0 w-36 h-15 bg-white rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2"
+                        >
+                          <div className="flex flex-col gap-2 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                gap: 20
+                              }}
+                            >
+                              <View />
+                              <span
+                                className="text-black flex-row gap-1 items-center"
+                                onClick={() => {
+                                  setwithdrawaction(item);
+                                  setStep(74);
+                                  // navigate(`/manageragents/${item?.id}`);
+                                  setOpen15(!open15);
+                                }}
+                              >
+                                Approve/Decline
+                              </span>
+                            </div>
+                            {/* <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("blocked");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Blocked
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Suspend />
+                            <span
+                              onClick={() => {
+                                setaction("restricted");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Restricted
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Activate />
+                            <span
+                              onClick={() => {
+                                setaction("active");
+                                setStep(48);
+                                setOpen2(!open2);
+                                setuserIding(item?.user?.id);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Activate
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              gap: 20
+                            }}
+                          >
+                            <Update />
+                            <span
+                              onClick={() => {
+                                setuserIding(item?.user?.id);
+                                setStep(45);
+                                setOpen2(!open2);
+                              }}
+                              className="text-black flex-row gap-1 items-center"
+                            >
+                              Update
+                            </span>
+                          </div> */}
+                            {/* <span
+                            className="text-black"
+                            onClick={() => {
+                              setStep(11);
+                              setUserIds(item?.id);
+                              setOpen2(!open2);
+                            }}
+                          >
+                            Set Commission
+                          </span> */}
+
+                            {/* <span className="text-black">Fund Wallet</span>
+                          <span className="text-black">Deplete Wallet</span> */}
+                          </div>
+                        </div>
+                      ) : (
+                        ""
                       )}
                     </StyledTableCell>
                   </StyledTableRow>

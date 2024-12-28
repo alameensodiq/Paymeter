@@ -53,6 +53,7 @@ import { Accountant } from "../MainComponents/Store/Apis/Accountant";
 import { AgentCommission } from "../MainComponents/Store/Apis/AgentCommission";
 import { EditAgentComm } from "../MainComponents/Store/Apis/EditAgentComm";
 import { Onboarding } from "../MainComponents/Store/Apis/Onboarding";
+import { ApproveWithdraw } from "../MainComponents/Store/Apis/ApproveWithdraw";
 
 const AppUserModal = ({
   setStep,
@@ -97,6 +98,8 @@ const AppUserModal = ({
   setdecliner,
   decliner,
   systemstate,
+  withdrawaction,
+  setwithdrawaction,
   reload
 }) => {
   console.log(images);
@@ -134,6 +137,8 @@ const AppUserModal = ({
   const [bustate24, setBusstate24] = useState(false);
   const [bustate25, setBusstate25] = useState(false);
   const [bustate26, setBusstate26] = useState(false);
+  const [bustate27, setBusstate27] = useState(false);
+  const [withdrawapprove, setwithdrawapprove] = useState("");
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
   const [itemersdisco, setItemerdisco] = useState("");
@@ -535,6 +540,11 @@ const AppUserModal = ({
   );
   console.log(accountants);
 
+  const { approvewithdraw, authenticatingapprovewithdraw } = useSelector(
+    (state) => state?.approvewithdraw
+  );
+  console.log(approvewithdraw);
+
   const { editagentcommissioning, authenticatingeditagentcommissioning } =
     useSelector((state) => state?.editagentcommissioning);
   console.log(editagentcommissioning);
@@ -633,6 +643,9 @@ const AppUserModal = ({
     if (bustate26) {
       setStep(73);
     }
+    if (bustate27 && approvewithdraw?.status) {
+      setStep(75);
+    }
 
     console.log(update);
   }, [
@@ -667,6 +680,7 @@ const AppUserModal = ({
     bustate24,
     bustate25,
     bustate26,
+    bustate27,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
@@ -692,7 +706,8 @@ const AppUserModal = ({
     systemcares?.status,
     accountants?.status,
     editagentcommissioning?.status,
-    onboarding?.status
+    onboarding?.status,
+    approvewithdraw?.status
   ]);
 
   useEffect(() => {
@@ -1480,6 +1495,8 @@ const AppUserModal = ({
     if (decliner) {
       setdecliner(false);
     }
+    setwithdrawaction("");
+    setwithdrawapprove("");
     setReload(true);
     if (images) {
       setImages("");
@@ -1693,6 +1710,7 @@ const AppUserModal = ({
     setBusstate23(false);
     setBusstate24(false);
     setBusstate26(false);
+    setBusstate27(false);
     setApproved(false);
     setPassword("");
     if (action) {
@@ -8551,6 +8569,146 @@ const AppUserModal = ({
             }}
           >
             <span>You have successfully resolved the Onboarding Issues </span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={74}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Action
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to approve/decline Withdrawal</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Decline"
+              large
+              onClick={() => {
+                setBusstate27(true);
+                setwithdrawapprove("decline");
+                dispatch(
+                  ApproveWithdraw({
+                    withdrawaction,
+                    action: "decline"
+                  })
+                );
+              }}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => {
+                setBusstate27(true);
+                setwithdrawapprove("approval");
+                dispatch(
+                  ApproveWithdraw({
+                    withdrawaction,
+                    action: "approve"
+                  })
+                );
+              }}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={75}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Withdrawal {withdrawapprove}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You have successfully Initiated Withdrawal {withdrawapprove}{" "}
+            </span>
           </div>
           <div
             style={{

@@ -89,6 +89,7 @@ import { AllmeterSlice } from "./Reducers/Allmeter";
 import { AllMeterDownloadSlice } from "./Reducers/AllMeterDownload";
 import { DashboardLastweekSlice } from "./Reducers/DashboardLastweek";
 import { OnboardingSlice } from "./Reducers/Onboarding";
+import { ApproveWithdrawSlice } from "./Reducers/ApproveWithdraw";
 
 export default configureStore({
   reducer: {
@@ -181,6 +182,7 @@ export default configureStore({
     allmetre: AllmeterSlice?.reducer,
     allmeterdownload: AllMeterDownloadSlice?.reducer,
     dashboardlastweek: DashboardLastweekSlice.reducer,
-    onboarding: OnboardingSlice?.reducer
+    onboarding: OnboardingSlice?.reducer,
+    approvewithdraw: ApproveWithdrawSlice?.reducer
   }
 });

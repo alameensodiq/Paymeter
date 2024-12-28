@@ -17,6 +17,7 @@ import { Loader } from "./Loader";
 import AppUserModal from "../../Modal/AppUserModal";
 import { DownloadAdminTrans } from "../Store/Apis/DownloadAdminTrans";
 import { Withdrawal } from "../Store/Apis/Withdrawal";
+import { Step } from "@mui/material";
 
 const WithdrawalsRequest = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
@@ -24,6 +25,7 @@ const WithdrawalsRequest = ({ title }) => {
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [activater, setActivater] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
+  const [withdrawaction, setwithdrawaction] = useState("");
   const [loading, setloading] = useState(false);
   const [searcher, setSearcher] = useState("");
   const [status, setStatus] = useState("SUCCESSFUL");
@@ -76,9 +78,16 @@ const WithdrawalsRequest = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
+    if (reload && Step) {
+      //   dispatch(Banks({ startDate, searcher, currentPage }));
+      dispatch(Withdrawal({ searcher, currentPage, status }));
+      setReload(false);
+      setStatus("SUCCESSFUL");
+      setCurrentPage(0);
+    }
 
     //eslint-disable-next-line
-  }, [searcher, currentPage, status]);
+  }, [searcher, currentPage, status, Step]);
 
   const { withdrawal, authenticatingwithdrawal } = useSelector(
     (state) => state?.withdrawal
@@ -103,6 +112,19 @@ const WithdrawalsRequest = ({ title }) => {
 
   return (
     <div className="flex flex-row">
+      <AppUserModal
+        // setaction={setaction}
+        // action={actions}
+        // userIds={userIds}
+        // setuserIding={setuserIding}
+        // userIding={userIding}
+        // setUserIds={setUserIds}
+        setwithdrawaction={setwithdrawaction}
+        withdrawaction={withdrawaction}
+        setStep={setStep}
+        step={step}
+        setReload={setReload}
+      />
       <div className="w-[15%] h-[100%]">
         <Sidebar />
       </div>
@@ -208,7 +230,8 @@ const WithdrawalsRequest = ({ title }) => {
                     <Tables
                       setDownload={setDownload}
                       setStep={setStep}
-                      withdraw
+                      withdrawpending
+                      setwithdrawaction={setwithdrawaction}
                       currentPage={currentPage}
                       data={withdrawal?.data?.data}
                     />
