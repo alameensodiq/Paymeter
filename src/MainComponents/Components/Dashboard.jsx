@@ -134,6 +134,24 @@ const Dashboard = ({ title }) => {
   const [revenueData, setRevenueData] = useState([]);
   const [revenueData2, setRevenueData2] = useState([]);
 
+  const currentDate = new Date();
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const firstDayOfNextMonth = new Date(year, month + 1, 1);
+  const lastDayOfCurrentMonth = new Date(firstDayOfNextMonth - 1);
+  const totalDaysInCurrentMonth = lastDayOfCurrentMonth.getDate();
+
+  const startOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  );
+  const timeDifference = currentDate - startOfMonth;
+  const daysSinceStartOfMonth = Math.floor(
+    timeDifference / (1000 * 60 * 60 * 24)
+  );
+
   useEffect(() => {
     if (dashboardyearly?.data?.monthlyRevenues) {
       setRevenueData(dashboardyearly?.data.monthlyRevenues);
@@ -491,22 +509,56 @@ const Dashboard = ({ title }) => {
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
                     <span className="text-card-title text-[14px]">
-                      Last Year Sales
+                      Extrapolated Total Sales
                     </span>
                     <span className="text-color-user text-[20px] font-bold flex flex-wrap">
                       {/* ₦1 */}₦{" "}
                       {formatNumberWithCommas(
-                        dashboardlastweek?.data?.lastYearRevenue
+                        (
+                          (currentMonthRevenue / daysSinceStartOfMonth).toFixed(
+                            2
+                          ) * totalDaysInCurrentMonth
+                        ).toFixed(0)
                       )}
                       {/* {dashboard?.data?.totalApiPartners} */}
                     </span>
                     <div className="flex flex-row gap-1 text-[10px]">
-                      <span className="text-black text-[12px]">
+                      {/* <span className="text-black text-[12px]">
                         Transaction Count:{" "}
                         {formatNumberWithCommas(
                           dashboardlastweek?.data?.lastYearTransactionCount
                         )}
-                      </span>
+                      </span> */}
+                      {/* <span className="text-card-user">6.5%</span>
+                <span className="text-[9px]">average daily revenue</span> */}
+                    </div>
+                  </div>
+                  <div>
+                    <TotalInvestment />
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
+                >
+                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                    <span className="text-card-title text-[14px]">
+                      Av. Daily Sales by Curr. Month
+                    </span>
+                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      {/* ₦1 */}₦{" "}
+                      {formatNumberWithCommas(
+                        (currentMonthRevenue / daysSinceStartOfMonth).toFixed(2)
+                      )}
+                      {/* {dashboard?.data?.totalApiPartners} */}
+                    </span>
+                    <div className="flex flex-row gap-1 text-[10px]">
+                      {/* <span className="text-black text-[12px]">
+                        Transaction Count:{" "}
+                        {formatNumberWithCommas(
+                          dashboardlastweek?.data?.lastYearTransactionCount
+                        )}
+                      </span> */}
                       {/* <span className="text-card-user">6.5%</span>
                 <span className="text-[9px]">average daily revenue</span> */}
                     </div>
