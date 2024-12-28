@@ -78,7 +78,7 @@ const WithdrawalsRequest = ({ title }) => {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload && Step) {
+    if (reload) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
       dispatch(Withdrawal({ searcher, currentPage, status }));
       setReload(false);
@@ -87,7 +87,7 @@ const WithdrawalsRequest = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [searcher, currentPage, status, Step]);
+  }, [searcher, currentPage, status]);
 
   const { withdrawal, authenticatingwithdrawal } = useSelector(
     (state) => state?.withdrawal
