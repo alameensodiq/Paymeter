@@ -11,7 +11,7 @@ const Navbar = ({ title, remove }) => {
     year: "numeric"
   });
   return (
-    <div className="flex flex-row justify-between w-[100%] h-[20vh] bg-gradient-to-r from-gradient-blue to-gradient-to pt-5 px-6">
+    <div className="flex flex-row justify-between w-[100%] h-[12vh] bg-gradient-to-r from-gradient-blue to-gradient-to pt-5 px-6">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <span className="text-white text-[18px]">{title}</span>
