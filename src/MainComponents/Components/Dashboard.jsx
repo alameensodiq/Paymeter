@@ -259,7 +259,7 @@ const Dashboard = ({ title }) => {
           />
         </div>
         {loading ? (
-          <div className="w-[100%] pt-2 pb-9 px-5 flex flex-col gap-7">
+          <div className="w-[100%] pt-2 pb-9 px-5 flex flex-col gap-4">
             {/* <div className="flex flex-row justify-start">
           <select className="border rounded-custom p-1 text-[10px] w-[10%] h-[30px] outline-none">
             <option>Hope bank</option>
@@ -416,7 +416,7 @@ const Dashboard = ({ title }) => {
             <div className="flex flex-col">
               <div className="flex lg:flex-row flex-col md:flex-col gap-3">
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[200px]  bg-white border rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -445,7 +445,7 @@ const Dashboard = ({ title }) => {
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[200px]  bg-white border rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -474,7 +474,7 @@ const Dashboard = ({ title }) => {
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[200px]  bg-white border rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -504,63 +504,68 @@ const Dashboard = ({ title }) => {
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[200px]  bg-white border rounded-custom"
+                  className="flex flex-col lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
-                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                    <span className="text-card-title text-[14px]">
-                      Av. Daily Sales by Curr. Month
-                    </span>
-                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                      {/* ₦1 */}₦{" "}
-                      {formatNumberWithCommas(
-                        (currentMonthRevenue / daysSinceStartOfMonth).toFixed(2)
-                      )}
-                      {/* {dashboard?.data?.totalApiPartners} */}
-                    </span>
-                    <div className="flex flex-row gap-1 text-[10px]">
-                      <span className="text-black text-[10px]">
-                        Cal: (Current Month Rev. / No. of Days from Start of the
-                        month till present day)
+                  <div className="flex flex-row">
+                    <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                      <span className="text-card-title text-[14px]">
+                        Av. Daily Sales by Curr. Month
                       </span>
-                      {/* <span className="text-card-user">6.5%</span>
-                <span className="text-[9px]">average daily revenue</span> */}
+                      <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                        {/* ₦1 */}₦{" "}
+                        {formatNumberWithCommas(
+                          (currentMonthRevenue / daysSinceStartOfMonth).toFixed(
+                            2
+                          )
+                        )}
+                        {/* {dashboard?.data?.totalApiPartners} */}
+                      </span>
+                    </div>
+                    <div>
+                      <TotalInvestment />
                     </div>
                   </div>
-                  <div>
-                    <TotalInvestment />
+                  <div className="flex flex-row gap-1 text-[10px] px-4">
+                    <span className="text-black text-[10px]">
+                      Cal: (Current Month Rev. / Month till Date(Days))
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
+                <span className="text-[9px]">average daily revenue</span> */}
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[200px]  bg-white border rounded-custom"
+                  className="flex flex-col lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
-                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                    <span className="text-card-title text-[14px]">
-                      Current Month Extrapolated Sales
-                    </span>
-                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                      {/* ₦1 */}₦{" "}
-                      {formatNumberWithCommas(
-                        (
-                          (currentMonthRevenue / daysSinceStartOfMonth).toFixed(
-                            2
-                          ) * totalDaysInCurrentMonth
-                        ).toFixed(0)
-                      )}
-                      {/* {dashboard?.data?.totalApiPartners} */}
-                    </span>
-                    <div className="flex flex-row gap-1 text-[10px]">
-                      <span className="text-black text-[10px]">
-                        Cal: (Current Month Rev. / No. of Days from Start of the
-                        month till present day) * No. of days in Current Month
+                  <div className="flex flex-row">
+                    <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
+                      <span className="text-card-title text-[14px]">
+                        Current Month Extrapolated Sales
                       </span>
-                      {/* <span className="text-card-user">6.5%</span>
-                <span className="text-[9px]">average daily revenue</span> */}
+                      <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                        {/* ₦1 */}₦{" "}
+                        {formatNumberWithCommas(
+                          (
+                            (
+                              currentMonthRevenue / daysSinceStartOfMonth
+                            ).toFixed(2) * totalDaysInCurrentMonth
+                          ).toFixed(0)
+                        )}
+                        {/* {dashboard?.data?.totalApiPartners} */}
+                      </span>
+                    </div>
+                    <div>
+                      <TotalInvestment />
                     </div>
                   </div>
-                  <div>
-                    <TotalInvestment />
+                  <div className="flex flex-row gap-1 text-[10px] px-4">
+                    <span className="text-black text-[10px]">
+                      Cal: (Current Month Rev. / Month till Date(Days)) * No. of
+                      days in Current Month
+                    </span>
+                    {/* <span className="text-card-user">6.5%</span>
+                <span className="text-[9px]">average daily revenue</span> */}
                   </div>
                 </div>
               </div>
