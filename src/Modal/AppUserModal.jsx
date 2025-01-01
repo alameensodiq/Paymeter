@@ -1495,7 +1495,9 @@ const AppUserModal = ({
     if (decliner) {
       setdecliner(false);
     }
-    setwithdrawaction("");
+    if (withdrawaction) {
+      setwithdrawaction("");
+    }
     setwithdrawapprove("");
     setReload(true);
     if (images) {
