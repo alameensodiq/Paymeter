@@ -148,8 +148,9 @@ const Dashboard = ({ title }) => {
     1
   );
   const timeDifference = currentDate - startOfMonth;
-  const daysSinceStartOfMonth = Math.floor(
-    timeDifference / (1000 * 60 * 60 * 24)
+  const daysSinceStartOfMonth = Math.max(
+    Math.floor(timeDifference / (1000 * 60 * 60 * 24)),
+    1 // Ensure it's at least 1 to prevent division by zero
   );
 
   useEffect(() => {
@@ -204,9 +205,9 @@ const Dashboard = ({ title }) => {
   }, [revenueData.length, revenueData2.length]);
 
   const currentMonthRevenue = revenueData[new Date().getMonth()]?.revenue;
+  console.log(currentMonthRevenue);
   const currentMonthRevenue2 =
     revenueData2[new Date().getMonth()]?.totalTransactionCount;
-
   console.log(currentMonthRevenue2);
 
   const formatNumberWithCommas = (number) => {
