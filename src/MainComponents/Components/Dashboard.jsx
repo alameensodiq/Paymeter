@@ -147,11 +147,13 @@ const Dashboard = ({ title }) => {
     currentDate.getMonth(),
     1
   );
-  const timeDifference = currentDate - startOfMonth;
+  const timeDifference = currentDate.getTime() - startOfMonth;
   const daysSinceStartOfMonth = Math.max(
-    Math.floor(timeDifference / (1000 * 60 * 60 * 24)),
+    Math.floor(timeDifference / (1000 * 60 * 60 * 24)) + 1,
     1 // Ensure it's at least 1 to prevent division by zero
   );
+
+  console.log(daysSinceStartOfMonth);
 
   useEffect(() => {
     if (dashboardyearly?.data?.monthlyRevenues) {
