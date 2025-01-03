@@ -186,7 +186,7 @@ function App() {
 
             <Route path="/api" element={<ApiPartner title={"API-Partner"} />} />
             <Route path="/discos" element={<Loans title={"Discos"} />} />
-            <Route path="/funding" element={<Funding title={"Funding"} />} />
+            <Route path="/fund" element={<Funding title={"Funding"} />} />
             <Route path="/payment" element={<Payment title={"Payment"} />} />
             <Route path="/setting" element={<Setting title={"Settings"} />} />
             <Route

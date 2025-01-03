@@ -50,10 +50,11 @@ const Sidebar = () => {
   const [isHovered25, setIsHovered25] = useState(false);
   const [isHovered28, setIsHovered28] = useState(false);
   const [isHovered29, setIsHovered29] = useState(false);
+  const [isHovered30, setIsHovered30] = useState(false);
   const [show, setShow] = useState(false);
   const router = useLocation();
   return (
-    <div className="bg-white flex flex-col border-r border pt-3 h-[109vh]">
+    <div className="bg-white flex flex-col border-r border pt-3 h-[119vh]">
       <div className="flex flex-row pt-[65px] justify-center">
         <span className="text-route-color font-bold text-[10px] lg:text-[30px] md:text-[20px]">
           Paymeter
@@ -1478,6 +1479,57 @@ const Sidebar = () => {
               }`}
             >
               Withdrawals
+            </p>
+          </Link>
+          <Link
+            to="/fund"
+            className={`flex flex-row h-[33px] ${
+              router.pathname === "/fund" ||
+              router.pathname.startsWith("/fund/")
+                ? "bg-route-bg gap-2 rounded-custom-router"
+                : "bg-white hover:bg-route-bg gap-2 rounded-custom-router"
+            }`}
+            onMouseEnter={() => setIsHovered30(true)}
+            onMouseLeave={() => setIsHovered30(false)}
+          >
+            {router.pathname === "/fund" ||
+            isHovered30 ||
+            router.pathname.startsWith("/fund/") ? (
+              <div className={`w-[3px] ${"bg-route-color rounded-t-l"}`}></div>
+            ) : (
+              <div className={`w-[3px] ${" bg-white rounded-t-l"}`}></div>
+            )}
+            {router.pathname === "/fund" ||
+            isHovered30 ||
+            router.pathname.startsWith("/fund/") ? (
+              <Cable
+                className={`${
+                  router.pathname === "/fund" ||
+                  router.pathname.startsWith("/fund/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            ) : (
+              <Cable
+                className={`${
+                  router.pathname === "/fund" ||
+                  router.pathname.startsWith("/fund/")
+                    ? "fill-current text-route-color my-[9px]"
+                    : "hover:fill-current hover:text-route-color fill-current text-white my-[9px]"
+                }`}
+              />
+            )}
+
+            <p
+              className={`${
+                router.pathname === "/fund" ||
+                router.pathname.startsWith("/fund/")
+                  ? "text-route-color my-[9px] text-[12px] font-medium hidden sm:block md:block"
+                  : "hover:text-route-color text-route-noncolor my-[9px] text-[12px] font-medium hidden sm:block md:block"
+              }`}
+            >
+              Transfer
             </p>
           </Link>
           <Link

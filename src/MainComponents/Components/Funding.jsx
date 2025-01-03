@@ -20,6 +20,7 @@ import empty from "../../assets/empty.png";
 import { Loader } from "./Loader";
 import { Fundings } from "../Store/Apis/Funding";
 import { FundingApproval } from "../Store/Apis/FundingApproval";
+import { FundType } from "../Store/Apis/Fundtype";
 
 const Funding = ({ title }) => {
   const [endDate, setEndDate] = useState(
@@ -36,6 +37,8 @@ const Funding = ({ title }) => {
   const [paymentMethodIds, setpaymentMethodIds] = useState("");
   const [actions, setActions] = useState("");
   const [real, setReal] = useState("");
+  const [status, setStatus] = useState("SUCCESSFUL");
+
   //   const [action, setAction] = useState("disable");
   //   const [paymentMethodId, setPaymentMethodId] = useState(null);
   const [role, setRole] = useState("APIPARTNER");
@@ -43,45 +46,55 @@ const Funding = ({ title }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { fundingapproval, authenticatingfundingapproval } = useSelector(
-    (state) => state?.fundingapproval
+  const { fundtype, authenticatingfundtype } = useSelector(
+    (state) => state?.fundtype
   );
-  console.log(fundingapproval);
+  console.log(fundtype);
+  console.log(authenticatingfundtype);
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(Fundings());
+      dispatch(FundType({ status }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload) {
+    if (reload && status) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
-      dispatch(Fundings());
+      dispatch(FundType(status));
       setReload(false);
     }
-    if (fundingapproval && !fundingapproval) {
+    if (fundtype && !fundtype) {
       setReload(true);
     }
 
     //eslint-disable-next-line
-  }, [reload, fundingapproval?.status, authenticatingfundingapproval]);
+  }, [reload, fundtype?.status, status]);
 
   const { funding, authenticatingfunding } = useSelector(
     (state) => state?.funding
   );
   console.log(funding);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setloading(true);
-    }, [3000]);
-  }, [funding?.data]);
+  // useEffect(() => {
+  //   if (authenticatingfundtype && status) {
+  //     setTimeout(() => {
+  //       setloading(true);
+  //     }, [3000]);
+  //   }
+  // }, [authenticatingfundtype, status]);
 
-  const next = funding?.data?.meta?.next;
-  const previous = funding?.data?.meta?.prev;
-  const totalPosts = funding?.data?.meta?.totalCount;
+  // useEffect(() => {
+  //   dispatch(FundType(status));
+  //   setTimeout(() => {
+  //     setloading(true);
+  //   }, [3000]);
+  // }, [status]);
+
+  const next = fundtype?.data?.meta?.next;
+  const previous = fundtype?.data?.meta?.prev;
+  const totalPosts = fundtype?.data?.meta?.totalCount;
 
   const paginate = (number) => {
     //  setSorted(tran)
@@ -98,11 +111,9 @@ const Funding = ({ title }) => {
     datePickerRef.current.setOpen(true);
   };
 
-  const Pays = (transactionId, userPhoneNumber, amount) => {
-    setStep(22);
+  const Pays = (transactionId) => {
+    setStep(76);
     setpaymentMethodIds(transactionId);
-    setActions(userPhoneNumber);
-    setReal(amount);
     // dispatch(FundingApproval({ transactionId, userPhoneNumber, amount }));
   };
 
@@ -205,17 +216,144 @@ const Funding = ({ title }) => {
               <Filter />
               <span className="text-route-noncolor text-[12px]">Filters</span>
             </div>
-            {loading ? (
-              <>
-                {funding?.data?.meta?.totalCount >= 1 ? (
-                  <Tables
-                    funding
-                    Pay={Pays}
-                    currentPage={currentPage}
-                    set
-                    data={funding?.data?.data}
+            <div className="flex flex-row justify-between gap-4 px-3">
+              <div className="flex flex-col">
+                <div className="flex flex-row gap-6 justify-center text-[14px] items-center text-route-noncolor pt-[10px] font-medium">
+                  <span
+                    onClick={() => {
+                      setStatus("SUCCESSFUL");
+                      setCurrentPage(0);
+                      setActivater(1);
+                      // setdecliner(false);
+                    }}
+                    className={`${
+                      status === "SUCCESSFUL"
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    Successful
+                  </span>
+                  <span
+                    onClick={() => {
+                      setStatus("PENDING");
+                      setCurrentPage(0);
+                      setActivater(1);
+                      // setdecliner(true);
+                    }}
+                    className={`${
+                      status === "PENDING"
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    Pending
+                  </span>
+                  <span
+                    onClick={() => {
+                      setStatus("DECLINED");
+                      setCurrentPage(0);
+                      setActivater(1);
+                      // setdecliner(false);
+                    }}
+                    className={`${
+                      status === "DECLINED"
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    Declined
+                  </span>
+                </div>
+                <div className="gap-2">
+                  {status === "SUCCESSFUL" && (
+                    <div className="w-[70px] h-[2px] bg-route-color" />
+                  )}
+                  {status === "PENDING" && (
+                    <div className="w-[75px] h-[2px] bg-route-color ml-[34%]" />
+                  )}
+                  {status === "DECLINED" && (
+                    <div className="w-[80px] h-[2px] bg-route-color ml-[69%]" />
+                  )}
+                </div>
+              </div>
+              <div className="flex flex-row justify-end gap-4 px-3">
+                {/* <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
+                  <DatePicker
+                    className="text-[8px] outline-none"
+                    selected={endDate}
+                    onChange={(date) => dateChanger(date)}
+                    ref={datePickerRef}
+                    showTimeSelect={false}
+                    dateFormat="MMM d yyyy" // Use format tokens to represent "Oct 13 2023"
+                    placeholderText="13 Oct 2023"
+                    popperPlacement="bottom-start"
                   />
-                ) : funding?.data?.meta?.totalCount === 0 || funding?.error ? (
+                  <Calendar
+                    className="text-[10px]"
+                    onClick={() => PickDate()}
+                  />
+                </div> */}
+                {/* <input
+                  type="date"
+                  className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
+                  placeholder="Search by name, customerID, account number, transaction reference"
+                />
+                <input
+                  type="date"
+                  className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
+                  placeholder="Search by name, customerID, account number, transaction reference"
+                /> */}
+              </div>
+            </div>
+            {!authenticatingfundtype ? (
+              <>
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "SUCCESSFUL" && (
+                    <Tables
+                      funding
+                      Pay={Pays}
+                      currentPage={currentPage}
+                      set
+                      data={fundtype?.data?.data}
+                    />
+                  )}
+                {!fundtype?.data?.meta?.totalCount &&
+                  status === "SUCCESSFUL" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "SUCCESSFUL" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "DECLINED" && (
+                    <Tables
+                      funding
+                      Pay={Pays}
+                      currentPage={currentPage}
+                      set
+                      data={fundtype?.data?.data}
+                    />
+                  )}
+                {!fundtype?.data?.meta?.totalCount && status === "DECLINED" && (
                   <div
                     style={{
                       display: "flex",
@@ -226,20 +364,53 @@ const Funding = ({ title }) => {
                   >
                     <img src={empty} alt="empty" />
                   </div>
-                ) : (
-                  ""
                 )}
-                {funding?.data?.meta?.totalCount >= 1 && (
-                  <Pagination
-                    set={activater}
-                    currentPage={currentPage}
-                    postsPerPage={postsPerPage}
-                    totalPosts={totalPosts}
-                    paginate={paginate}
-                    previous={previous}
-                    next={next}
-                  />
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "DECLINED" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "PENDING" && (
+                    <Tables
+                      fundingpending
+                      Pay={Pays}
+                      currentPage={currentPage}
+                      set
+                      data={fundtype?.data?.data}
+                    />
+                  )}
+                {!fundtype?.data?.meta?.totalCount && status === "PENDING" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
                 )}
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "PENDING" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
               </>
             ) : (
               <Loader />

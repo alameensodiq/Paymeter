@@ -152,6 +152,7 @@ const AppUserModal = ({
   const [itemersinst, setItemersinst] = useState("");
   const [itemersettings, setItemersettings] = useState("");
   const [itemerseditdisc, setItemerseditdisc] = useState("");
+  const [confirmtoken, setconfirmtoken] = useState("");
   const [Approved, setApproved] = useState(false);
   const [districthead, setDistricthead] = useState({
     districtManagerId: ""
@@ -581,7 +582,7 @@ const AppUserModal = ({
       setStep(21);
     }
     if (bustate9 && fundingapproval?.status) {
-      setStep(23);
+      setStep(78);
     }
     if (bustate10 && approve?.status) {
       setStep(26);
@@ -1517,6 +1518,7 @@ const AppUserModal = ({
       setuserId("");
       setReload(true);
     }
+    setconfirmtoken("");
     seteditagentcomm({
       discoName: "",
       commissionDetails: {
@@ -8710,6 +8712,200 @@ const AppUserModal = ({
           >
             <span>
               You have successfully Initiated Withdrawal {withdrawapprove}{" "}
+            </span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Close"
+              onClick={() => handleCloseModal4()}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={76}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Confirm Action
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>You are about to approve/decline Fund Transfer</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Decline"
+              large
+              onClick={() => {
+                dispatch(
+                  FundingApproval({
+                    action: "decline",
+                    transactionId: paymentMethodIds
+                  })
+                );
+                setBusstate9(true);
+              }}
+            />
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => {
+                setStep(77);
+              }}
+              large
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={77}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Input Token
+          </div>
+          <ModalInputText
+            label="Input Toen"
+            onChange={(e) => setconfirmtoken(e.target.value)}
+            name="confirmtoken"
+            value={confirmtoken}
+            placeholder={`${`Enter  Token`}`}
+          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => {
+                dispatch(
+                  FundingApproval({
+                    action: "approve",
+                    transactionId: paymentMethodIds,
+                    confirmationToken: confirmtoken
+                  })
+                );
+                setBusstate9(true);
+              }}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={78}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Fund Transfer {confirmtoken ? "Approved" : "Decline"}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              fontSize: "12px",
+              color: "#667085"
+            }}
+          >
+            <span>
+              You have successfully Initiated Fund{" "}
+              {confirmtoken ? "Approval" : "Decline"}
             </span>
           </div>
           <div

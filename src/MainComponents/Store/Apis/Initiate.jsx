@@ -1,42 +1,33 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const FundingApproval = createAsyncThunk(
-  "fundingapproval",
-  async ({ transactionId, action, confirmationToken }, thunkAPI) => {
+export const Initiate = createAsyncThunk(
+  "initiate",
+  async ({ id }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
-
     const accessToken = sessionStorage.getItem("token");
 
     try {
-      const requestBody = { transactionId };
-      if (confirmationToken) {
-        requestBody.confirmationToken = confirmationToken;
-      }
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/refund?action=${action}`,
+        `${process.env.REACT_APP_BASE_URL}admin/initiate-refund/10`,
         {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`
-          },
-          body: JSON.stringify(requestBody)
+          }
         }
       );
       let data = await response.json();
       if (!data?.status) {
         toast.error(data.message);
       }
-      if (data?.status) {
-        toast.success(data.message);
-      }
-      // toast.success(data.message);
       console.log(data);
-      //   sessionStorage.setItem('firstName', data?.data?.user?.firstName);
-      //   sessionStorage.setItem('role', data?.data?.user?.userRole);
-      // sessionStorage.setItem('token', data?.data?.token );
+      if (data?.status) {
+        // toast.success(data.message);
+      }
+      console.log(data);
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue({

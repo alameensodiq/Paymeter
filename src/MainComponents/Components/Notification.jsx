@@ -341,7 +341,7 @@ const Notification = ({ title }) => {
                 /> */}
               </div>
             </div>
-            {loading ? (
+            {!authenticatingnotifications ? (
               <>
                 {notifications?.data?.meta?.totalCount >= 1 &&
                   status === "accepted" && (

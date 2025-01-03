@@ -18,6 +18,7 @@ import { ReactComponent as Update } from "../../assets/Update.svg";
 import { useDispatch } from "react-redux";
 import { ResendToken } from "../Store/Apis/ResendToken";
 import { RegenerateToken } from "../Store/Apis/Regenratetoken";
+import { Initiate } from "../Store/Apis/Initiate";
 
 const Tables = ({
   customers,
@@ -77,7 +78,8 @@ const Tables = ({
   virt,
   virtualagenting,
   currentPage,
-  allmetering
+  allmetering,
+  fundingpending
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -111,6 +113,8 @@ const Tables = ({
   const [indexing14, setIndexing14] = useState(null);
   const [open15, setOpen15] = useState(false);
   const [indexing15, setIndexing15] = useState(null);
+  const [open16, setOpen16] = useState(false);
+  const [indexing16, setIndexing16] = useState(null);
   const dispatch = useDispatch();
   console.log(data);
 
@@ -986,6 +990,34 @@ const Tables = ({
                                 <Edit />
                                 <span className="text-black">Resend Token</span>
                               </div>
+                              {item?.status === "PENDING" && (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "flex-start",
+                                    alignItems: "center",
+                                    gap: 20
+                                  }}
+                                  onClick={() => {
+                                    setOpen(!open);
+                                    // setStep(53);
+                                    console.log(item?.dispense?.listtoken[0]);
+                                    dispatch(
+                                      Initiate({
+                                        // metertoken: item?.dispense?.listtoken[0],
+                                        id: item?.id
+                                      })
+                                    );
+                                    // setReload(true)
+                                  }}
+                                >
+                                  <Edit />
+                                  <span className="text-black">
+                                    Initiate Refund
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           </div>
                         ) : (
@@ -2965,13 +2997,13 @@ const Tables = ({
                     NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    EMAIL
+                    ACCOUNT NUMBER
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     PHONE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    PAYMENT TYPE
+                    BANK
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     AMOUNT
@@ -2994,19 +3026,19 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {item?.agentName}
+                      {item?.sourceAccountName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.email}
+                      {item?.accountNumber}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.phoneNumber}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
-                      {item?.paymentMethod}
+                      {item?.bankName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.amount}
+                      {item?.inputAmount ? item?.inputAmount : "N/A"}
                       {/* <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment> */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
@@ -3043,6 +3075,202 @@ const Tables = ({
                         >
                           PENDING
                         </button>
+                      )}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : fundingpending ? (
+          <TableContainer
+            // component={Paper}
+            style={{ boxShadow: "none" }}
+          >
+            <Table
+              sx={{ minWidth: 700, tableLayout: "auto" }}
+              aria-label="customized table"
+            >
+              <TableHead>
+                <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    S/N
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    ACCOUNT NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    PHONE
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "20%" }}>
+                    BANK
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    STATUS
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    ACTIONS
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.map((item, index) => (
+                  <StyledTableRow>
+                    <StyledTableCell
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {currentPage * 10 + index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {item?.sourceAccountName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.accountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.phoneNumber}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "20%" }}>
+                      {item?.bankName}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.inputAmount ? item?.inputAmount : "N/A"}
+                      {/* <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment> */}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.status === "ACCEPTED" ? (
+                        <button
+                          onClick={() =>
+                            toast.succes("Method has been Completed")
+                          }
+                          className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
+                        >
+                          COMPLETED
+                        </button>
+                      ) : item?.status === "INITIATED" ? (
+                        // <button
+                        //   onClick={() => Pay(item?.id, item?.user?.id, "approve")}
+                        //   className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
+                        // >
+                        //   INITIATED
+                        // </button>
+                        <button
+                          onClick={() =>
+                            Pay(item?.rrn, item?.phoneNumber, item?.amount)
+                          }
+                          className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                        >
+                          INITIATED
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            Pay(item?.rrn, item?.phoneNumber, item?.amount)
+                          }
+                          className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                        >
+                          PENDING
+                        </button>
+                      )}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      onClick={() => {
+                        setOpen(!open);
+                        setIndexing(index);
+                      }}
+                      style={{
+                        width: "10%",
+                        position: "relative"
+                        // justifyContent: "flex-end"
+                      }}
+                    >
+                      {/* <button
+            onClick={() => {
+              setOpen(!open);
+              setIndexing(index);
+            }}
+            className="bg-white h-[30px] w-[100%] rounded-full text-black font-semibold text-[9px]"
+          >
+            Action
+          </button> */}
+                      <svg
+                        style={{ marginLeft: "30px" }}
+                        onClick={() => {
+                          setOpen16(!open16);
+                          setIndexing16(index);
+                        }}
+                        width="4"
+                        height="16"
+                        viewBox="0 0 4 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 2C3.5 2.82843 2.82843 3.5 2 3.5C1.17157 3.5 0.5 2.82843 0.5 2C0.5 1.17157 1.17157 0.5 2 0.5C2.82843 0.5 3.5 1.17157 3.5 2Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 8C3.5 8.82843 2.82843 9.5 2 9.5C1.17157 9.5 0.5 8.82843 0.5 8C0.5 7.17157 1.17157 6.5 2 6.5C2.82843 6.5 3.5 7.17157 3.5 8Z"
+                          fill="#868FA0"
+                        />
+                        <path
+                          d="M3.5 14C3.5 14.8284 2.82843 15.5 2 15.5C1.17157 15.5 0.5 14.8284 0.5 14C0.5 13.1716 1.17157 12.5 2 12.5C2.82843 12.5 3.5 13.1716 3.5 14Z"
+                          fill="#868FA0"
+                        />
+                      </svg>
+                      {index === indexing16 && open16 ? (
+                        <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+                          <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                              onClick={() => {
+                                Pay(item?.id);
+                                setOpen16(!open16);
+                                // setOpen(!open);
+                                // setDownload(item);
+                                console.log(item);
+                                // setStep(53);
+                              }}
+                            >
+                              <Suspend width={10} />
+                              <span className="text-black">Decline</span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: 20
+                              }}
+                              onClick={() => {
+                                Pay(item?.id);
+                                setOpen16(!open16);
+                              }}
+                            >
+                              <Activate width={10} />
+                              <span className="text-black">Approve</span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
                       )}
                     </StyledTableCell>
                   </StyledTableRow>
@@ -4760,6 +4988,34 @@ const Tables = ({
                                 <Edit />
                                 <span className="text-black">Resend Token</span>
                               </div>
+                              {item?.status === "PENDING" && (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "flex-start",
+                                    alignItems: "center",
+                                    gap: 20
+                                  }}
+                                  onClick={() => {
+                                    setOpen(!open);
+                                    // setStep(53);
+                                    console.log(item?.dispense?.listtoken[0]);
+                                    dispatch(
+                                      Initiate({
+                                        // metertoken: item?.dispense?.listtoken[0],
+                                        id: item?.id
+                                      })
+                                    );
+                                    // setReload(true)
+                                  }}
+                                >
+                                  <Edit />
+                                  <span className="text-black">
+                                    Initiate Refund
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           </div>
                         ) : (

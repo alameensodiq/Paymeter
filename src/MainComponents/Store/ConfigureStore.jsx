@@ -90,6 +90,8 @@ import { AllMeterDownloadSlice } from "./Reducers/AllMeterDownload";
 import { DashboardLastweekSlice } from "./Reducers/DashboardLastweek";
 import { OnboardingSlice } from "./Reducers/Onboarding";
 import { ApproveWithdrawSlice } from "./Reducers/ApproveWithdraw";
+import { InitiateSlice } from "./Reducers/Initiate";
+import { FundTypeSlice } from "./Reducers/Fundtype";
 
 export default configureStore({
   reducer: {
@@ -183,6 +185,8 @@ export default configureStore({
     allmeterdownload: AllMeterDownloadSlice?.reducer,
     dashboardlastweek: DashboardLastweekSlice.reducer,
     onboarding: OnboardingSlice?.reducer,
-    approvewithdraw: ApproveWithdrawSlice?.reducer
+    approvewithdraw: ApproveWithdrawSlice?.reducer,
+    initiate: InitiateSlice?.reducer,
+    fundtype: FundTypeSlice?.reducer
   }
 });
