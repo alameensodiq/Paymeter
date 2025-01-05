@@ -917,7 +917,7 @@ const Tables = ({
                           />
                         </svg>
                         {index === indexing && open ? (
-                          <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+                          <div className="absolute right-10 top-5 w-44 h-30 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-4 bg-white">
                             <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
                               <div
                                 style={{
@@ -935,7 +935,7 @@ const Tables = ({
                                 }}
                               >
                                 <Suspend width={10} />
-                                <span className="text-black">
+                                <span className="text-black text-[12px]">
                                   Download Receipt
                                 </span>
                               </div>
@@ -960,7 +960,7 @@ const Tables = ({
                                 }}
                               >
                                 <Activate width={10} />
-                                <span className="text-black">
+                                <span className="text-black text-[12px]">
                                   Regenerate Token
                                 </span>
                               </div>
@@ -988,7 +988,9 @@ const Tables = ({
                                 }}
                               >
                                 <Edit />
-                                <span className="text-black">Resend Token</span>
+                                <span className="text-black text-[12px]">
+                                  Resend Token
+                                </span>
                               </div>
                               {item?.status === "PENDING" && (
                                 <div
@@ -1013,7 +1015,7 @@ const Tables = ({
                                   }}
                                 >
                                   <Edit />
-                                  <span className="text-black">
+                                  <span className="text-red-500 text-[12px]">
                                     Initiate Refund
                                   </span>
                                 </div>
@@ -4915,7 +4917,7 @@ const Tables = ({
                           />
                         </svg>
                         {index === indexing && open ? (
-                          <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
+                          <div className="absolute right-10 top-5 w-44 h-30 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-4 bg-white">
                             <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
                               <div
                                 style={{
@@ -4933,7 +4935,7 @@ const Tables = ({
                                 }}
                               >
                                 <Suspend width={10} />
-                                <span className="text-black">
+                                <span className="text-black text-[12px]">
                                   Download Receipt
                                 </span>
                               </div>
@@ -4958,7 +4960,7 @@ const Tables = ({
                                 }}
                               >
                                 <Activate width={10} />
-                                <span className="text-black">
+                                <span className="text-black text-[12px]">
                                   Regenerate Token
                                 </span>
                               </div>
@@ -4986,7 +4988,9 @@ const Tables = ({
                                 }}
                               >
                                 <Edit />
-                                <span className="text-black">Resend Token</span>
+                                <span className="text-black text-[12px]">
+                                  Resend Token
+                                </span>
                               </div>
                               {item?.status === "PENDING" && (
                                 <div
@@ -5011,7 +5015,7 @@ const Tables = ({
                                   }}
                                 >
                                   <Edit />
-                                  <span className="text-black">
+                                  <span className="text-red-500 text-[12px]">
                                     Initiate Refund
                                   </span>
                                 </div>
