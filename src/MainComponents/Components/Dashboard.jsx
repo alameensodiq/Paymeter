@@ -429,7 +429,7 @@ const Dashboard = ({ title }) => {
             <div className="flex flex-col">
               <div className="flex lg:flex-row flex-col md:flex-col gap-3">
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -458,7 +458,7 @@ const Dashboard = ({ title }) => {
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -487,7 +487,7 @@ const Dashboard = ({ title }) => {
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -517,7 +517,7 @@ const Dashboard = ({ title }) => {
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border  rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border  rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -530,12 +530,29 @@ const Dashboard = ({ title }) => {
                         dashboardyearly?.data?.totalRevenue
                       )}
                     </span>
-                    <div className="flex flex-row gap-1 text-[10px]">
+                    <div className="flex flex-col gap-1 text-[10px]">
                       <span className="text-black text-[12px]">
                         Transaction Count:{" "}
                         {formatNumberWithCommas(
                           dashboardsummary?.data?.totalTransactionCount
                         )}
+                      </span>
+                      <span className="text-[11px] flex flex-row">
+                        Last Year Sales:
+                        <span className="font-bold text-[11px]">
+                          ₦
+                          {formatNumberWithCommas(
+                            dashboardlastweek?.data?.lastYearRevenue
+                          )}{" "}
+                        </span>
+                      </span>
+                      <span className="text-black text-[12px]">
+                        Last year Count:{" "}
+                        <span className="font-bold">
+                          {formatNumberWithCommas(
+                            dashboardlastweek?.data?.lastYearTransactionCount
+                          )}
+                        </span>
                       </span>
                       {/* <span className="text-card-user">6.5%</span>
                 <span className="text-[9px]">average monthly revenue</span> */}
@@ -546,40 +563,7 @@ const Dashboard = ({ title }) => {
                   </div>
                 </div>
                 <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border  rounded-custom"
-                  style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
-                >
-                  <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
-                    <span className="text-card-title text-[14px]">
-                      Last year
-                    </span>
-                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
-                      ₦
-                      {formatNumberWithCommas(
-                        dashboardlastweek?.data?.lastYearRevenue
-                      )}
-                    </span>
-                    <div className="flex flex-row gap-1 text-[10px]">
-                      <span className="text-black text-[12px]">
-                        Transaction Count:{" "}
-                        {formatNumberWithCommas(
-                          dashboardlastweek?.data?.lastYearTransactionCount
-                        )}
-                      </span>
-                      {/* <span className="text-card-user">6.5%</span>
-                <span className="text-[9px]">average yearly revenue</span> */}
-                    </div>
-                  </div>
-                  <div>
-                    <TotalInvestment />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex lg:flex-row flex-col md:flex-col gap-3">
-                <div
-                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[150px]  bg-white border  rounded-custom"
+                  className="flex flex-row lg:w-[20%] md:w-[100%] sm:w-[100%] h-[185px]  bg-white border  rounded-custom"
                   style={{ boxShadow: "7.5px 7.5px 67.5px 0px #0000000D" }}
                 >
                   <div className="w-[77%] flex flex-col gap-2 mt-10 pl-5">
@@ -606,6 +590,7 @@ const Dashboard = ({ title }) => {
                 </div>
               </div>
             </div>
+
             {sessionStorage.getItem("roleName") === "ADMIN" && (
               <div className="flex flex-col">
                 <div className="flex flex-row gap-2 items-center mb-1">
