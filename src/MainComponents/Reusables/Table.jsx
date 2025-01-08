@@ -939,31 +939,34 @@ const Tables = ({
                                   Download Receipt
                                 </span>
                               </div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  justifyContent: "flex-start",
-                                  alignItems: "center",
-                                  gap: 20
-                                }}
-                                onClick={() => {
-                                  setOpen(!open);
-                                  dispatch(
-                                    RegenerateToken({
-                                      customerReference: item?.meterNo,
-                                      discoShortName: item?.discoName,
-                                      phone: item?.phone,
-                                      amount: item?.transactionAmount
-                                    })
-                                  );
-                                }}
-                              >
-                                <Activate width={10} />
-                                <span className="text-black text-[12px]">
-                                  Regenerate Token
-                                </span>
-                              </div>
+                              {!item?.dispense?.listtoken[0] && (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "flex-start",
+                                    alignItems: "center",
+                                    gap: 20
+                                  }}
+                                  onClick={() => {
+                                    setOpen(!open);
+                                    dispatch(
+                                      RegenerateToken({
+                                        customerReference: item?.meterNo,
+                                        discoShortName: item?.discoName,
+                                        phone: item?.phone,
+                                        amount: item?.transactionAmount
+                                      })
+                                    );
+                                  }}
+                                >
+                                  <Activate width={10} />
+                                  <span className="text-black text-[12px]">
+                                    Regenerate Token
+                                  </span>
+                                </div>
+                              )}
+
                               <div
                                 style={{
                                   display: "flex",
@@ -4939,31 +4942,34 @@ const Tables = ({
                                   Download Receipt
                                 </span>
                               </div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  justifyContent: "flex-start",
-                                  alignItems: "center",
-                                  gap: 20
-                                }}
-                                onClick={() => {
-                                  setOpen(!open);
-                                  dispatch(
-                                    RegenerateToken({
-                                      customerReference: item?.meterNo,
-                                      discoShortName: item?.discoName,
-                                      phone: item?.phone,
-                                      amount: item?.transactionAmount
-                                    })
-                                  );
-                                }}
-                              >
-                                <Activate width={10} />
-                                <span className="text-black text-[12px]">
-                                  Regenerate Token
-                                </span>
-                              </div>
+                              {!item?.dispense?.listtoken[0] && (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "flex-start",
+                                    alignItems: "center",
+                                    gap: 20
+                                  }}
+                                  onClick={() => {
+                                    setOpen(!open);
+                                    dispatch(
+                                      RegenerateToken({
+                                        customerReference: item?.meterNo,
+                                        discoShortName: item?.discoName,
+                                        phone: item?.phone,
+                                        amount: item?.transactionAmount
+                                      })
+                                    );
+                                  }}
+                                >
+                                  <Activate width={10} />
+                                  <span className="text-black text-[12px]">
+                                    Regenerate Token
+                                  </span>
+                                </div>
+                              )}
+
                               <div
                                 style={{
                                   display: "flex",
