@@ -167,7 +167,7 @@ const Transfers = ({ title }) => {
               </div>
               <input
                 className="border-input-color border-[1px] rounded-tl-custom rounded-bl-custom w-[85%] outline-none pl-[60px] text-[13px]"
-                placeholder="Search by name, customerID, account number, transaction reference"
+                placeholder="Search by Phone number, account number, meter Number"
                 value={searcher}
                 onChange={(e) => {
                   setSearcher(e.target.value);
