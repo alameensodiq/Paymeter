@@ -54,6 +54,8 @@ import { AgentCommission } from "../MainComponents/Store/Apis/AgentCommission";
 import { EditAgentComm } from "../MainComponents/Store/Apis/EditAgentComm";
 import { Onboarding } from "../MainComponents/Store/Apis/Onboarding";
 import { ApproveWithdraw } from "../MainComponents/Store/Apis/ApproveWithdraw";
+import { Otp } from "../MainComponents/Store/Apis/Otp";
+import { FundType } from "../MainComponents/Store/Apis/Fundtype";
 
 const AppUserModal = ({
   setStep,
@@ -100,7 +102,8 @@ const AppUserModal = ({
   systemstate,
   withdrawaction,
   setwithdrawaction,
-  reload
+  reload,
+  status
 }) => {
   console.log(images);
   const [searcher, setSearcher] = useState("");
@@ -138,6 +141,7 @@ const AppUserModal = ({
   const [bustate25, setBusstate25] = useState(false);
   const [bustate26, setBusstate26] = useState(false);
   const [bustate27, setBusstate27] = useState(false);
+  const [bustate28, setBusstate28] = useState(false);
   const [withdrawapprove, setwithdrawapprove] = useState("");
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
@@ -154,6 +158,7 @@ const AppUserModal = ({
   const [itemerseditdisc, setItemerseditdisc] = useState("");
   const [confirmtoken, setconfirmtoken] = useState("");
   const [Approved, setApproved] = useState(false);
+  const [confirm, setConfirm] = useState("");
   const [districthead, setDistricthead] = useState({
     districtManagerId: ""
   });
@@ -546,6 +551,9 @@ const AppUserModal = ({
   );
   console.log(approvewithdraw);
 
+  const { otp, authenticatingotp } = useSelector((state) => state?.otp);
+  console.log(otp);
+
   const { editagentcommissioning, authenticatingeditagentcommissioning } =
     useSelector((state) => state?.editagentcommissioning);
   console.log(editagentcommissioning);
@@ -580,9 +588,6 @@ const AppUserModal = ({
     }
     if (bustate8 && togglepay?.status) {
       setStep(21);
-    }
-    if (bustate9 && fundingapproval?.status) {
-      setStep(78);
     }
     if (bustate10 && approve?.status) {
       setStep(26);
@@ -638,6 +643,9 @@ const AppUserModal = ({
     if (bustate25 && editagentcommissioning?.status) {
       setStep(71);
     }
+    if (bustate28 && otp?.status) {
+      setStep(77);
+    }
     // if (bustate26 && onboarding?.status) {
     //   setStep(73);
     // }
@@ -663,7 +671,6 @@ const AppUserModal = ({
     bustate6,
     bustate7,
     bustate8,
-    bustate9,
     bustate10,
     bustate11,
     bustate12,
@@ -682,12 +689,12 @@ const AppUserModal = ({
     bustate25,
     bustate26,
     bustate27,
+    bustate28,
     createpay?.status,
     createsettings?.status,
     usercom?.status,
     earningpartner?.status,
     togglepay?.status,
-    fundingapproval?.status,
     approve?.status,
     dashboarddiscomonthly?.status,
     editsettings?.status,
@@ -708,8 +715,15 @@ const AppUserModal = ({
     accountants?.status,
     editagentcommissioning?.status,
     onboarding?.status,
-    approvewithdraw?.status
+    approvewithdraw?.status,
+    otp?.status
   ]);
+
+  useEffect(() => {
+    if (bustate9 && fundingapproval?.status) {
+      setStep(78);
+    }
+  }, [bustate9, fundingapproval?.status]);
 
   useEffect(() => {
     if (call && !role1) {
@@ -1500,6 +1514,7 @@ const AppUserModal = ({
       setwithdrawaction("");
     }
     setwithdrawapprove("");
+    setConfirm("");
     setReload(true);
     if (images) {
       setImages("");
@@ -1510,6 +1525,7 @@ const AppUserModal = ({
     });
     setBusstate18(false);
     setBusstate25(false);
+    setBusstate28(false);
     if (short) {
       setshort("");
     }
@@ -8780,28 +8796,46 @@ const AppUserModal = ({
               gap: "10px"
             }}
           >
-            <LargeSignInButton
-              title="Decline"
-              large
-              onClick={() => {
-                dispatch(
-                  FundingApproval({
-                    action: "decline",
-                    transactionId: paymentMethodIds
-                  })
-                );
-                setBusstate9(true);
-              }}
-            />
-            <LargeSignInButton
-              title="Confirm"
-              onClick={() => {
-                setStep(77);
-              }}
-              large
-              background
-              color
-            />
+            {!authenticatingotp && (
+              <>
+                <LargeSignInButton
+                  title="Decline"
+                  large
+                  onClick={() => {
+                    // dispatch(
+                    //   FundingApproval({
+                    //     action: "decline",
+                    //     transactionId: paymentMethodIds
+                    //   })
+                    // );
+                    dispatch(
+                      Otp({
+                        pendingRefundTransactionId: paymentMethodIds
+                      })
+                    );
+                    setBusstate28(true);
+                    setConfirm("no");
+                    // setBusstate9(true);
+                  }}
+                />
+                <LargeSignInButton
+                  title="Confirm"
+                  onClick={() => {
+                    dispatch(
+                      Otp({
+                        pendingRefundTransactionId: paymentMethodIds
+                      })
+                    );
+                    setBusstate28(true);
+                    setConfirm("yes");
+                    // setStep(77);
+                  }}
+                  large
+                  background
+                  color
+                />
+              </>
+            )}
           </div>
         </div>
       </AppModal>
@@ -8832,7 +8866,7 @@ const AppUserModal = ({
             Input Token
           </div>
           <ModalInputText
-            label="Input Toen"
+            label="Input Token"
             onChange={(e) => setconfirmtoken(e.target.value)}
             name="confirmtoken"
             value={confirmtoken}
@@ -8850,14 +8884,24 @@ const AppUserModal = ({
             <LargeSignInButton
               title="Confirm"
               onClick={() => {
-                dispatch(
-                  FundingApproval({
-                    action: "approve",
-                    transactionId: paymentMethodIds,
-                    confirmationToken: confirmtoken
-                  })
-                );
-                setBusstate9(true);
+                if (confirm === "yes") {
+                  dispatch(
+                    FundingApproval({
+                      action: "approve",
+                      // transactionId: paymentMethodIds,
+                      confirmationToken: confirmtoken
+                    })
+                  );
+                  setBusstate9(true);
+                } else {
+                  dispatch(
+                    FundingApproval({
+                      action: "decline",
+                      confirmationToken: confirmtoken
+                    })
+                  );
+                  setBusstate9(true);
+                }
               }}
               big
               background
@@ -8890,7 +8934,7 @@ const AppUserModal = ({
               justifyContent: "center"
             }}
           >
-            Fund Transfer {confirmtoken ? "Approved" : "Decline"}
+            Fund Transfer {confirm === "yes" ? "Approved" : "Decline"}
           </div>
           <div
             style={{
@@ -8905,7 +8949,7 @@ const AppUserModal = ({
           >
             <span>
               You have successfully Initiated Fund{" "}
-              {confirmtoken ? "Approval" : "Decline"}
+              {confirm === "yes" ? "Approval" : "Decline"}
             </span>
           </div>
           <div
@@ -8919,7 +8963,10 @@ const AppUserModal = ({
           >
             <LargeSignInButton
               title="Close"
-              onClick={() => handleCloseModal4()}
+              onClick={() => {
+                handleCloseModal4();
+                dispatch(FundType({ status, currentPage: 0 }));
+              }}
               big
               background
               color

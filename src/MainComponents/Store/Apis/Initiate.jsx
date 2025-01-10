@@ -9,7 +9,7 @@ export const Initiate = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}admin/initiate-refund/10`,
+        `${process.env.REACT_APP_BASE_URL}admin/initiate-refund/${id}`,
         {
           method: "POST",
           headers: {
@@ -25,7 +25,7 @@ export const Initiate = createAsyncThunk(
       }
       console.log(data);
       if (data?.status) {
-        // toast.success(data.message);
+        toast.success(data.message);
       }
       console.log(data);
       return data;

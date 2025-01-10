@@ -2999,7 +2999,13 @@ const Tables = ({
                     S/N
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    NAME
+                    SOURCE ACCOUNT NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    SOURCE ACCOUNT NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     ACCOUNT NUMBER
@@ -3008,10 +3014,13 @@ const Tables = ({
                     PHONE
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "20%" }}>
-                    BANK
+                    SOURCE BANK
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    AMOUNT
+                    INPUT AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    TRANX. AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     STATUS
@@ -3031,45 +3040,76 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {item?.sourceAccountName}
+                      {item?.sourceAccountName
+                        ? item?.sourceAccountName
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.accountNumber}
+                      {item?.sourceAccountNumber
+                        ? item?.sourceAccountNumber
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {item?.customerName ? item?.customerName : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.phoneNumber}
+                      {item?.accountNumber ? item?.accountNumber : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.phoneNumber ? item?.phoneNumber : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
-                      {item?.bankName}
+                      {item?.bankName ? item?.bankName : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.inputAmount ? item?.inputAmount : "N/A"}
+                      {item?.inputAmount
+                        ? `${formatNumberWithCommas(item?.inputAmount)}`
+                        : "N/A"}
                       {/* <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment> */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.status === "ACCEPTED" ? (
+                      {item?.transactionAmount
+                        ? `${formatNumberWithCommas(item?.transactionAmount)}`
+                        : "N/A"}
+                      {/* <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment> */}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.status === "SUCCESSFUL" ? (
                         <button
                           onClick={() =>
                             toast.succes("Method has been Completed")
                           }
-                          className="bg-successbg h-[30px] w-[50%] rounded-full text-successtext font-semibold text-[9px]"
+                          className="bg-successbg h-[30px] w-[100%] rounded-full text-successtext font-semibold text-[9px]"
                         >
-                          COMPLETED
+                          SUCCESSFUL
                         </button>
-                      ) : item?.status === "INITIATED" ? (
+                      ) : item?.status === "DECLINED" ? (
                         // <button
                         //   onClick={() => Pay(item?.id, item?.user?.id, "approve")}
                         //   className="bg-failedbg h-[30px] w-[50%] rounded-full text-failedtext font-semibold text-[9px]"
                         // >
                         //   INITIATED
                         // </button>
+
                         <button
                           onClick={() =>
                             Pay(item?.rrn, item?.phoneNumber, item?.amount)
                           }
-                          className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                          className="bg-failedtext h-[30px] w-[100%] rounded-full text-cable-bg font-semibold text-[9px]"
                         >
-                          INITIATED
+                          DECLINED
+                        </button>
+                      ) : item?.status === "PROCESSED" ? (
+                        <button
+                          onClick={() =>
+                            Pay(item?.rrn, item?.phoneNumber, item?.amount)
+                          }
+                          className="bg-elect-bg h-[30px] w-[100%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                        >
+                          PROCESSED
                         </button>
                       ) : (
                         <button
@@ -3102,7 +3142,13 @@ const Tables = ({
                     S/N
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    NAME
+                    SOURCE ACCOUNT NAME
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    SOURCE ACCOUNT NUMBER
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "10%" }}>
+                    CUSTOMER NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     ACCOUNT NUMBER
@@ -3115,6 +3161,9 @@ const Tables = ({
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     AMOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    TRANX. AMOUNT
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     STATUS
@@ -3137,19 +3186,40 @@ const Tables = ({
                       className="text-dob"
                       style={{ width: "10%" }}
                     >
-                      {item?.sourceAccountName}
+                      {item?.sourceAccountName
+                        ? item?.sourceAccountName
+                        : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.accountNumber}
+                      {item?.sourceAccountNumber
+                        ? item?.sourceAccountNumber
+                        : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      className="text-dob"
+                      style={{ width: "10%" }}
+                    >
+                      {item?.customerName ? item?.customerName : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.phoneNumber}
+                      {item?.accountNumber ? item?.accountNumber : "N/A"}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.phoneNumber ? item?.phoneNumber : "N/A"}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "20%" }}>
                       {item?.bankName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.inputAmount ? item?.inputAmount : "N/A"}
+                      {item?.inputAmount
+                        ? `${formatNumberWithCommas(item?.inputAmount)}`
+                        : "N/A"}
+                      {/* <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment> */}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.transactionAmount
+                        ? `${formatNumberWithCommas(item?.transactionAmount)}`
+                        : "N/A"}
                       {/* <Moment format="YYYY-MM-DD">{item?.createdDate}</Moment> */}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
@@ -3182,7 +3252,7 @@ const Tables = ({
                           onClick={() =>
                             Pay(item?.rrn, item?.phoneNumber, item?.amount)
                           }
-                          className="bg-elect-bg h-[30px] w-[50%] rounded-full text-details-loancolor font-semibold text-[9px]"
+                          className="bg-elect-bg h-[30px] w-[100%] rounded-full text-details-loancolor font-semibold text-[9px]"
                         >
                           PENDING
                         </button>
@@ -3236,7 +3306,7 @@ const Tables = ({
                       {index === indexing16 && open16 ? (
                         <div className="absolute right-10 top-5 w-36 h-20 rounded-lg p-4 flex flex-col justify-center shadow-md border border-gray-200 gap-2 bg-white">
                           <div className="flex flex-col gap-1 text-blue-600 items-start cursor-pointer">
-                            <div
+                            {/* <div
                               style={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -3255,7 +3325,7 @@ const Tables = ({
                             >
                               <Suspend width={10} />
                               <span className="text-black">Decline</span>
-                            </div>
+                            </div> */}
                             <div
                               style={{
                                 display: "flex",
@@ -3270,7 +3340,9 @@ const Tables = ({
                               }}
                             >
                               <Activate width={10} />
-                              <span className="text-black">Approve</span>
+                              <span className="text-black">
+                                Approve/Decline
+                              </span>
                             </div>
                           </div>
                         </div>

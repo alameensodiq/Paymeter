@@ -54,15 +54,15 @@ const Funding = ({ title }) => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      dispatch(FundType({ status }));
+      dispatch(FundType({ status, currentPage }));
       return;
     } else {
       navigate("/");
       toast.error("You aren't logged in");
     }
-    if (reload && status) {
+    if (reload && status && currentPage) {
       //   dispatch(Banks({ startDate, searcher, currentPage }));
-      dispatch(FundType(status));
+      dispatch(FundType(status, currentPage));
       setReload(false);
     }
     if (fundtype && !fundtype) {
@@ -70,7 +70,7 @@ const Funding = ({ title }) => {
     }
 
     //eslint-disable-next-line
-  }, [reload, fundtype?.status, status]);
+  }, [reload, fundtype?.status, status, currentPage]);
 
   const { funding, authenticatingfunding } = useSelector(
     (state) => state?.funding
@@ -145,6 +145,7 @@ const Funding = ({ title }) => {
           paymentMethodIds={paymentMethodIds}
           setpaymentMethodIds={setpaymentMethodIds}
           setActions={setActions}
+          status={status}
           actions={actions}
           setReal={setReal}
           real={real}
@@ -155,7 +156,7 @@ const Funding = ({ title }) => {
         <div className="w-[100%] py-9 px-5 flex flex-col gap-10">
           <div className="flex flex-row justify-between">
             <span className="text-route-name text-[28px] font-semibold">
-              Funding
+              Funding Request
             </span>
             <div className="relative flex flex-row w-[50%]">
               <div className="absolute top-3 left-4">
@@ -264,16 +265,34 @@ const Funding = ({ title }) => {
                   >
                     Declined
                   </span>
+                  <span
+                    onClick={() => {
+                      setStatus("PROCESSED");
+                      setCurrentPage(0);
+                      setActivater(1);
+                      // setdecliner(false);
+                    }}
+                    className={`${
+                      status === "PROCESSED"
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    Processed
+                  </span>
                 </div>
                 <div className="gap-2">
                   {status === "SUCCESSFUL" && (
                     <div className="w-[70px] h-[2px] bg-route-color" />
                   )}
                   {status === "PENDING" && (
-                    <div className="w-[75px] h-[2px] bg-route-color ml-[34%]" />
+                    <div className="w-[75px] h-[2px] bg-route-color ml-[28%]" />
                   )}
                   {status === "DECLINED" && (
-                    <div className="w-[80px] h-[2px] bg-route-color ml-[69%]" />
+                    <div className="w-[80px] h-[2px] bg-route-color ml-[52%]" />
+                  )}
+                  {status === "PROCESSED" && (
+                    <div className="w-[80px] h-[2px] bg-route-color ml-[79%]" />
                   )}
                 </div>
               </div>
@@ -367,6 +386,41 @@ const Funding = ({ title }) => {
                 )}
                 {fundtype?.data?.meta?.totalCount >= 1 &&
                   status === "DECLINED" && (
+                    <Pagination
+                      set={activater}
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={totalPosts}
+                      paginate={paginate}
+                      previous={previous}
+                      next={next}
+                    />
+                  )}
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "PROCESSED" && (
+                    <Tables
+                      funding
+                      Pay={Pays}
+                      currentPage={currentPage}
+                      set
+                      data={fundtype?.data?.data}
+                    />
+                  )}
+                {!fundtype?.data?.meta?.totalCount &&
+                  status === "PROCESSED" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <img src={empty} alt="empty" />
+                    </div>
+                  )}
+                {fundtype?.data?.meta?.totalCount >= 1 &&
+                  status === "PROCESSED" && (
                     <Pagination
                       set={activater}
                       currentPage={currentPage}
