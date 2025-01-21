@@ -213,7 +213,7 @@ const WithdrawalsRequest = ({ title }) => {
                 </div>
               </div>
             </div>
-            {loading ? (
+            {!authenticatingwithdrawal ? (
               <>
                 {withdrawal?.data?.data?.length >= 1 &&
                   status === "SUCCESSFUL" && (

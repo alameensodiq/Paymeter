@@ -283,7 +283,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       Today Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold"
+                    >
                       ₦
                       {formatNumberWithCommas(
                         dashboarddailymonthly?.data?.dailyRevenue
@@ -312,7 +320,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       This Week Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold"
+                    >
                       ₦
                       {formatNumberWithCommas(
                         dashboarddailymonthly?.data?.weeklyRevenue
@@ -342,7 +358,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       This Month Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold flex flex-wrap"
+                    >
                       {/* ₦1 */}₦ {formatNumberWithCommas(currentMonthRevenue)}
                       {/* {dashboard?.data?.totalApiPartners} */}
                     </span>
@@ -368,7 +392,15 @@ const Dashboard = ({ title }) => {
                       <span className="text-card-title text-[14px]">
                         Av. Daily Sales by Curr. Month
                       </span>
-                      <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      <span
+                        style={{
+                          fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                          whiteSpace: "nowrap", // Prevents wrapping of text
+                          // Hides overflow if text exceeds the container
+                          textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                        }}
+                        className="text-color-user text-[20px] font-bold flex flex-wrap"
+                      >
                         {/* ₦1 */}₦{" "}
                         {formatNumberWithCommas(
                           (currentMonthRevenue / daysSinceStartOfMonth).toFixed(
@@ -399,7 +431,15 @@ const Dashboard = ({ title }) => {
                       <span className="text-card-title text-[14px]">
                         Current Month Extrapolated Sales
                       </span>
-                      <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                      <span
+                        style={{
+                          fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                          whiteSpace: "nowrap", // Prevents wrapping of text
+                          // Hides overflow if text exceeds the container
+                          textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                        }}
+                        className="text-color-user text-[20px] font-bold flex flex-wrap"
+                      >
                         {/* ₦1 */}₦{" "}
                         {formatNumberWithCommas(
                           (
@@ -436,7 +476,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       Yesterday Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold"
+                    >
                       ₦
                       {formatNumberWithCommas(
                         dashboardlastweek?.data?.yesterdayRevenue
@@ -465,7 +513,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       Last Week Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold"
+                    >
                       ₦
                       {formatNumberWithCommas(
                         dashboardlastweek?.data?.lastWeekRevenue
@@ -494,7 +550,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       Last Month Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold flex flex-wrap"
+                    >
                       {/* ₦1 */}₦{" "}
                       {formatNumberWithCommas(
                         dashboardlastweek?.data?.lastMonthRevenue
@@ -524,7 +588,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       This Year Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold flex flex-wrap"
+                    >
                       ₦
                       {formatNumberWithCommas(
                         dashboardyearly?.data?.totalRevenue
@@ -570,7 +642,15 @@ const Dashboard = ({ title }) => {
                     <span className="text-card-title text-[14px]">
                       Total Sales
                     </span>
-                    <span className="text-color-user text-[20px] font-bold flex flex-wrap">
+                    <span
+                      style={{
+                        fontSize: "clamp(16px, 2vw, 20px)", // Adjusts font size based on viewport width
+                        whiteSpace: "nowrap", // Prevents wrapping of text
+                        // Hides overflow if text exceeds the container
+                        textOverflow: "ellipsis" // Adds ellipsis if the text overflows
+                      }}
+                      className="text-color-user text-[20px] font-bold flex flex-wrap"
+                    >
                       ₦{formatNumberWithCommas(totalsales?.data?.totalSales)}
                     </span>
                     <div className="flex flex-row gap-1 text-[10px]">
