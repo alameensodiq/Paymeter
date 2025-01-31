@@ -93,6 +93,7 @@ import { ApproveWithdrawSlice } from "./Reducers/ApproveWithdraw";
 import { InitiateSlice } from "./Reducers/Initiate";
 import { FundTypeSlice } from "./Reducers/Fundtype";
 import { OtpSlice } from "./Reducers/Otp";
+import { WithdrawalOtpSlice } from "./Reducers/WithdrawalOtp";
 
 export default configureStore({
   reducer: {
@@ -189,6 +190,7 @@ export default configureStore({
     approvewithdraw: ApproveWithdrawSlice?.reducer,
     initiate: InitiateSlice?.reducer,
     fundtype: FundTypeSlice?.reducer,
-    otp: OtpSlice?.reducer
+    otp: OtpSlice?.reducer,
+    withdrawalotp: WithdrawalOtpSlice?.reducer
   }
 });

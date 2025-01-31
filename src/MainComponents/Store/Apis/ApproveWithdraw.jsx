@@ -13,16 +13,16 @@ export const ApproveWithdraw = createAsyncThunk(
     const body =
       action === "approve"
         ? {
-            transactionId: withdrawaction.id,
-            beneficiaryAccountName: withdrawaction.name,
-            transactionAmount: withdrawaction.amount,
-            beneficiaryAccountNumber: withdrawaction.accountNumber,
-            beneficiaryBank: withdrawaction.bankCode
+            confirmationToken: withdrawaction
+            // beneficiaryAccountName: withdrawaction.name,
+            // transactionAmount: withdrawaction.amount,
+            // beneficiaryAccountNumber: withdrawaction.accountNumber,
+            // beneficiaryBank: withdrawaction.bankCode
           }
-        : { transactionId: withdrawaction.id };
+        : { confirmationToken: withdrawaction };
 
     const {
-      transactionId,
+      confirmationToken,
       beneficiaryAccountName,
       transactionAmount,
       beneficiaryAccountNumber,
@@ -42,14 +42,15 @@ export const ApproveWithdraw = createAsyncThunk(
           body:
             action === "approve"
               ? JSON.stringify({
-                  transactionId,
-                  beneficiaryAccountName,
-                  transactionAmount,
-                  beneficiaryAccountNumber,
-                  beneficiaryBank
+                  confirmationToken
+                  // transactionId,
+                  // beneficiaryAccountName,
+                  // transactionAmount,
+                  // beneficiaryAccountNumber,
+                  // beneficiaryBank
                 })
               : JSON.stringify({
-                  transactionId
+                  confirmationToken
                 })
         }
       );

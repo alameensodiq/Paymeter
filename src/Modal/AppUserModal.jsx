@@ -56,6 +56,7 @@ import { Onboarding } from "../MainComponents/Store/Apis/Onboarding";
 import { ApproveWithdraw } from "../MainComponents/Store/Apis/ApproveWithdraw";
 import { Otp } from "../MainComponents/Store/Apis/Otp";
 import { FundType } from "../MainComponents/Store/Apis/Fundtype";
+import { WithdrawalOtp } from "../MainComponents/Store/Apis/WithdrawalOtp";
 
 const AppUserModal = ({
   setStep,
@@ -142,6 +143,7 @@ const AppUserModal = ({
   const [bustate26, setBusstate26] = useState(false);
   const [bustate27, setBusstate27] = useState(false);
   const [bustate28, setBusstate28] = useState(false);
+  const [bustate29, setBusstate29] = useState(false);
   const [withdrawapprove, setwithdrawapprove] = useState("");
   const [itemers, setItemer] = useState("");
   const [itemersedit, setItemeredit] = useState("");
@@ -157,6 +159,7 @@ const AppUserModal = ({
   const [itemersettings, setItemersettings] = useState("");
   const [itemerseditdisc, setItemerseditdisc] = useState("");
   const [confirmtoken, setconfirmtoken] = useState("");
+  const [confirmtoken2, setconfirmtoken2] = useState("");
   const [Approved, setApproved] = useState(false);
   const [confirm, setConfirm] = useState("");
   const [districthead, setDistricthead] = useState({
@@ -554,6 +557,11 @@ const AppUserModal = ({
   const { otp, authenticatingotp } = useSelector((state) => state?.otp);
   console.log(otp);
 
+  const { withdrawalotp, authenticatingwithdrawalotp } = useSelector(
+    (state) => state?.withdrawalotp
+  );
+  console.log(withdrawalotp);
+
   const { editagentcommissioning, authenticatingeditagentcommissioning } =
     useSelector((state) => state?.editagentcommissioning);
   console.log(editagentcommissioning);
@@ -723,7 +731,10 @@ const AppUserModal = ({
     if (bustate9 && fundingapproval?.status) {
       setStep(78);
     }
-  }, [bustate9, fundingapproval?.status]);
+    if (bustate29 && withdrawalotp?.status) {
+      setStep(74);
+    }
+  }, [bustate9, fundingapproval?.status, bustate29, withdrawalotp?.status]);
 
   useEffect(() => {
     if (call && !role1) {
@@ -1525,6 +1536,7 @@ const AppUserModal = ({
     });
     setBusstate18(false);
     setBusstate25(false);
+    setBusstate29(false);
     setBusstate28(false);
     if (short) {
       setshort("");
@@ -1535,6 +1547,7 @@ const AppUserModal = ({
       setReload(true);
     }
     setconfirmtoken("");
+    setconfirmtoken2("");
     seteditagentcomm({
       discoName: "",
       commissionDetails: {
@@ -8634,7 +8647,7 @@ const AppUserModal = ({
           >
             Confirm Action
           </div>
-          <div
+          {/* <div
             style={{
               display: "flex",
               flexDirection: "column",
@@ -8646,7 +8659,7 @@ const AppUserModal = ({
             }}
           >
             <span>You are about to approve/decline Withdrawal</span>
-          </div>
+          </div> */}
           <div
             style={{
               display: "flex",
@@ -8664,7 +8677,7 @@ const AppUserModal = ({
                 setwithdrawapprove("decline");
                 dispatch(
                   ApproveWithdraw({
-                    withdrawaction,
+                    withdrawaction: confirmtoken2,
                     action: "decline"
                   })
                 );
@@ -8677,7 +8690,7 @@ const AppUserModal = ({
                 setwithdrawapprove("approval");
                 dispatch(
                   ApproveWithdraw({
-                    withdrawaction,
+                    withdrawaction: confirmtoken2,
                     action: "approve"
                   })
                 );
@@ -8966,6 +8979,77 @@ const AppUserModal = ({
               onClick={() => {
                 handleCloseModal4();
                 dispatch(FundType({ status, currentPage: 0 }));
+              }}
+              big
+              background
+              color
+            />
+          </div>
+        </div>
+      </AppModal>
+      <AppModal
+        step={79}
+        currentStep={step}
+        closeModal={handleCloseModal4}
+        // updateUserListData(update);
+        // window.location.reload()
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <Success /> */}
+          {/* <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            Input Token
+          </div>
+          <ModalInputText
+            label="Input Token"
+            onChange={(e) => setconfirmtoken2(e.target.value)}
+            name="confirmtoken"
+            value={confirmtoken2}
+            placeholder={`${`Enter  Token`}`}
+          /> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px"
+            }}
+          >
+            <LargeSignInButton
+              title="Confirm"
+              onClick={() => {
+                if (confirm === "yes") {
+                  dispatch(
+                    WithdrawalOtp({
+                      action: "approve",
+                      // transactionId: paymentMethodIds,
+                      pendingRefundTransactionId: withdrawaction?.id
+                    })
+                  );
+                  setBusstate29(true);
+                } else {
+                  dispatch(
+                    WithdrawalOtp({
+                      action: "decline",
+                      pendingRefundTransactionId: withdrawaction?.id
+                    })
+                  );
+                  setBusstate29(true);
+                }
               }}
               big
               background

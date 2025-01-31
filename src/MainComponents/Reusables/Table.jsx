@@ -8217,7 +8217,7 @@ const Tables = ({
                                 className="text-black flex-row gap-1 items-center"
                                 onClick={() => {
                                   setwithdrawaction(item);
-                                  setStep(74);
+                                  setStep(79);
                                   // navigate(`/manageragents/${item?.id}`);
                                   setOpen15(!open15);
                                 }}
