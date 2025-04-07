@@ -6893,17 +6893,21 @@ const Tables = ({
             >
               <TableHead>
                 <TableRow style={{ paddingRight: "0px" }}>
+                  <StyledTableCell style={{ width: "5%" }}>S/N</StyledTableCell>
                   <StyledTableCell style={{ width: "10%" }}>
-                    S/N
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
                     NAME
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "15%" }}>
+                  <StyledTableCell style={{ width: "10%" }}>
                     DISCO
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     ADDRESS
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    ACCT.NO
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    BANK NAME
                   </StyledTableCell>
                   {/* <StyledTableCell style={{ width: "10%" }}>
                   COMMISSION
@@ -6911,7 +6915,7 @@ const Tables = ({
                   <StyledTableCell style={{ width: "10%" }}>
                     DATE ADDED
                   </StyledTableCell>
-                  <StyledTableCell style={{ width: "20%" }}>
+                  <StyledTableCell style={{ width: "15%" }}>
                     CUS. REF.
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "5%" }}></StyledTableCell>
@@ -6927,18 +6931,24 @@ const Tables = ({
                   >
                     <StyledTableCell
                       className="text-dob"
-                      style={{ width: "10%" }}
+                      style={{ width: "5%" }}
                     >
                       {currentPage * 10 + index + 1}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "15%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.accountName}
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "15%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       {item?.disco?.shortName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.address}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.virtualAccount?.virtualAccountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.virtualAccount?.bankName}
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                     {"N/A"}
@@ -6946,7 +6956,7 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       <Moment format="DD-MM-YYYY">{item?.createdAt}</Moment>
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "20%" }}>
+                    <StyledTableCell style={{ width: "15%" }}>
                       {item?.customerReference}
                     </StyledTableCell>
                     <StyledTableCell
