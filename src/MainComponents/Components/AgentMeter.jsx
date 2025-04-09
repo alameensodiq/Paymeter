@@ -97,7 +97,8 @@ const AgentMeter = ({ title }) => {
     const typeMatchname = item?.virtualAccount?.name
       ?.toLowerCase()
       .includes(search);
-    return nameMatch || typeMatch || typeMatchname;
+    const bank = item?.virtualAccount?.bankName?.toLowerCase().includes(search);
+    return nameMatch || typeMatch || typeMatchname || bank;
   });
 
   //   const Downloading = () => {
@@ -182,7 +183,7 @@ const AgentMeter = ({ title }) => {
                 </div>
                 <input
                   className="border-input-color border-[1px] rounded-custom w-[85%] outline-none pl-[60px] text-[13px]"
-                  placeholder="Search by name,type"
+                  placeholder="Search by name,acct.number,bank"
                   value={searcher}
                   onChange={(e) => setSearcher(e.target.value)}
                 />
