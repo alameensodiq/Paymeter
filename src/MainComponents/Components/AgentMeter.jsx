@@ -88,6 +88,18 @@ const AgentMeter = ({ title }) => {
     setActivater(number);
   };
 
+  const filteredData = agentmeters?.data?.data?.filter((item) => {
+    const search = searcher.toLowerCase();
+    const nameMatch = item?.virtualAccount?.virtualAccountNumber
+      ?.toLowerCase()
+      .includes(search);
+    const typeMatch = item?.customerReference?.toLowerCase().includes(search);
+    const typeMatchname = item?.virtualAccount?.name
+      ?.toLowerCase()
+      .includes(search);
+    return nameMatch || typeMatch || typeMatchname;
+  });
+
   //   const Downloading = () => {
   //     const data = agentmeters?.data?.data || [];
   //     const headers = data.length > 0 ? Object.keys(data[0]) : [];
@@ -140,17 +152,17 @@ const AgentMeter = ({ title }) => {
             </div> */}
           </div>
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
-            <div className="flex flex-row justify-end gap-4 px-3">
+            <div className="flex flex-row justify-end gap-2 px-3">
               {/* <input
-                 type='date'
-                 className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
-                 placeholder="Search by name, customerID, account number, transaction reference"
-               />
-               <input
-                 type='date'
-                 className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
-                 placeholder="Search by name, customerID, account number, transaction reference"
-               /> */}
+                type="date"
+                className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
+                placeholder="Search by name, customerID, account number, transaction reference"
+              />
+              <input
+                type="date"
+                className="border-input-color border-[1px] rounded-custom  w-[117px] h-[36px] outline-none px-[10px] text-[11px]"
+                placeholder="Search by name, customerID, account number, transaction reference"
+              /> */}
               {/* <div className="position:relative w-[120px] h-[35px] rounded-custom px-[5px] flex flex-row border items-center">
                 <DatePicker
                   className="text-[8px] outline-none"
@@ -164,6 +176,20 @@ const AgentMeter = ({ title }) => {
                 />
                 <Calendar className="text-[10px]" onClick={() => PickDate()} />
               </div> */}
+              <div className="relative flex flex-row w-[30%]">
+                <div className="absolute top-3 left-4">
+                  <Search />
+                </div>
+                <input
+                  className="border-input-color border-[1px] rounded-custom w-[85%] outline-none pl-[60px] text-[13px]"
+                  placeholder="Search by name,type"
+                  value={searcher}
+                  onChange={(e) => setSearcher(e.target.value)}
+                />
+                {/* <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
+                  Search
+                </button> */}
+              </div>
               <button
                 // onClick={() => Downloading()}
                 className="px-2 flex flex-row gap-1 items-center bg-route-color w-[12%] rounded-custom text-white font-semibold text-[11px] h-[40px]"
@@ -184,7 +210,8 @@ const AgentMeter = ({ title }) => {
                       setdiscname={setdiscname}
                       meterss
                       setStep={setStep}
-                      data={agentmeters?.data?.data}
+                      // data={agentmeters?.data?.data}
+                      data={filteredData}
                       currentPage={currentPage}
                     />
                     <Pagination
