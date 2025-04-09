@@ -7085,10 +7085,13 @@ const Tables = ({
                     S/N
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    NAME
+                    BANK NAME
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
-                    DISCO ACCOUNT
+                    BANK ACCOUNT
+                  </StyledTableCell>
+                  <StyledTableCell style={{ width: "15%" }}>
+                    BANK
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "15%" }}>
                     ADDRESS
@@ -7120,10 +7123,13 @@ const Tables = ({
                       {currentPage * 10 + index + 1}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.name}
+                      {item?.virtualAccount?.name}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
-                      {item?.discoAccount}
+                      {item?.virtualAccount?.virtualAccountNumber}
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "15%" }}>
+                      {item?.virtualAccount?.bankName}
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "15%" }}>
                       {item?.address}
