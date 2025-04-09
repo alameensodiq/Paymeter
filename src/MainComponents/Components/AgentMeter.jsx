@@ -57,7 +57,7 @@ const AgentMeter = ({ title }) => {
     //eslint-disable-next-line
   }, [reload, searcher, currentPage, startDate]);
 
-  const { agentmeters, authenticatingmeters } = useSelector(
+  const { agentmeters, authenticatingagentmeters } = useSelector(
     (state) => state?.agentmeters
   );
   console.log(agentmeters);
@@ -176,7 +176,7 @@ const AgentMeter = ({ title }) => {
               <Filter />
               <span className="text-route-noncolor text-[12px]">Filters</span>
             </div>
-            {loading ? (
+            {!authenticatingagentmeters ? (
               <>
                 {agentmeters?.data?.data?.length >= 1 && (
                   <>

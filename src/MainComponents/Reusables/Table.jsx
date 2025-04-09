@@ -5508,7 +5508,7 @@ const Tables = ({
                       S/N
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      CUSTOMER NAME
+                      ACCT. NAME
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                       BANK NAME
@@ -5541,7 +5541,7 @@ const Tables = ({
                       REFERENCE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      SOURCE
+                      BANK NAME
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       TYPE
@@ -5573,7 +5573,7 @@ const Tables = ({
                         {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.name}
+                        {item?.virtualAccount?.name}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
                         {item?.bankName}
@@ -5582,10 +5582,10 @@ const Tables = ({
                         {item?.discoName}
                       </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.discoAccount}
+                        {item?.virtualAccount?.virtualAccountNumber}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.meterSerial}
+                        N/A
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
                         {item?.transactionAmount}
@@ -5606,7 +5606,7 @@ const Tables = ({
                         {item?.customerReference}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.source}
+                        {item?.virtualAccount?.bankName}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.type}
