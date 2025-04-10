@@ -17,8 +17,8 @@ import { Shift } from "../Store/Apis/Shift";
 import empty from "../../assets/empty.png";
 
 const PaymentShift = ({ title }) => {
-  const [whitecrust, setWhitecrust] = useState(true);
-  const [other, setOther] = useState(false);
+  const [whitecrust, setWhitecrust] = useState(false);
+  const [other, setOther] = useState(true);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [activater, setActivater] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
@@ -58,10 +58,9 @@ const PaymentShift = ({ title }) => {
 
   useEffect(() => {
     // Check if searcher has at least 5 characters
-    if (searcher.length < 8) {
-      return; // Do not dispatch if less than 5 characters
+    if (searcher.length > 0 && searcher.length < 8) {
+      return; // Skip dispatch
     }
-
     // Dispatch actions if the condition is met
     dispatch(
       Payment({
@@ -71,10 +70,10 @@ const PaymentShift = ({ title }) => {
       })
     );
 
-    dispatch(Shift({ date: startDater, currentPage }));
+    dispatch(Shift({ date: startDate, currentPage }));
 
     // eslint-disable-next-line
-  }, [startDater, searcher, currentPage, endDate]);
+  }, [startDater, searcher, currentPage, endDate, startDate]);
 
   const { payment, authenticatingpayment } = useSelector(
     (state) => state?.payment
@@ -237,7 +236,7 @@ const PaymentShift = ({ title }) => {
                   >
                     Meter Payment
                   </span>
-                  {/* <span
+                  <span
                     onClick={() => Othering()}
                     className={`${
                       other
@@ -246,15 +245,15 @@ const PaymentShift = ({ title }) => {
                     }`}
                   >
                     Shift
-                  </span> */}
+                  </span>
                 </div>
                 <div className="gap-6">
                   {whitecrust && (
                     <div className="w-[105px] h-[2px] bg-route-color" />
                   )}
-                  {/* {other && (
+                  {other && (
                     <div className="w-[60px] h-[2px] bg-route-color ml-[74%]" />
-                  )} */}
+                  )}
                 </div>
               </div>
               <div className="flex flex-row justify-end gap-4 px-3">
