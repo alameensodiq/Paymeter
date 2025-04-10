@@ -348,7 +348,7 @@ const ManagerAgents = ({ title }) => {
                     />
                   )} */}
                 {(!districtagents?.status ||
-                  districtagents?.data?.data?.length === 0) &&
+                  districtagents?.data?.meta?.length === 0) &&
                   status === "accepted" && (
                     <div
                       style={{

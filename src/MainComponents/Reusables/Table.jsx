@@ -79,7 +79,8 @@ const Tables = ({
   virtualagenting,
   currentPage,
   allmetering,
-  fundingpending
+  fundingpending,
+  handleSort
 }) => {
   const navigate = useNavigate();
   const inputRef3 = useRef(null);
@@ -5508,7 +5509,25 @@ const Tables = ({
                       S/N
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ACCT. NAME
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center"
+                        }}
+                      >
+                        ACCT. NAME{" "}
+                        <img
+                          onClick={() => handleSort("name")}
+                          style={{
+                            width: "20px",
+                            height: "20px",
+                            cursor: "pointer"
+                          }}
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABVUlEQVR4nO3ar0tdYRjA8Y/bZIgMBgNhsGAwWAyGGZYsSyaTaW1tzeY/YLPZbCbTksliWphhwWIwLAwGwkAQGWO6HRHeF24Y4rzn58P7hW+7cM833HPf8zyHQmGwbCQHzQdUyXUD5R3+jIT8xXsDYxVXIxHZa6wZCG/x6x8R2d9Y0XPe4PKOiOxPLOspS7i4R0T29rOv9YwF/PiPiOw5FvWEOXx/QET2DPNdR7zC1zEist8w21XEDE5qiMie4mXbEc/xpcaI7DFetBXxDEcNRGQ/p+9olCkcNhhRJT9huqmISey3EFElD/C07ojH2Gsxokp+xJO6Iiaw00FEldzFozpCtjqMqJLb40Zs9iCiSt5eS6FQaIhQP/atCLffUH+IYY4ooQ6NoY7xoR6sQj3qhho+hBoHhRrQhRqZhhpih1orhFr0hFq9hVqGhlpPh3phoFAo6Ac35fmpcy8GLsoAAAAASUVORK5CYII="
+                          alt="sort"
+                        ></img>
+                      </div>
                     </StyledTableCell>
                     {/* <StyledTableCell style={{ width: "10%" }}>
                       BANK NAME
@@ -5520,7 +5539,25 @@ const Tables = ({
                       ACCOUNT NUMBER
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      BANK NAME
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center"
+                        }}
+                      >
+                        BANK NAME{" "}
+                        <img
+                          onClick={() => handleSort("bank")}
+                          style={{
+                            width: "20px",
+                            height: "20px",
+                            cursor: "pointer"
+                          }}
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABVUlEQVR4nO3ar0tdYRjA8Y/bZIgMBgNhsGAwWAyGGZYsSyaTaW1tzeY/YLPZbCbTksliWphhwWIwLAwGwkAQGWO6HRHeF24Y4rzn58P7hW+7cM833HPf8zyHQmGwbCQHzQdUyXUD5R3+jIT8xXsDYxVXIxHZa6wZCG/x6x8R2d9Y0XPe4PKOiOxPLOspS7i4R0T29rOv9YwF/PiPiOw5FvWEOXx/QET2DPNdR7zC1zEist8w21XEDE5qiMie4mXbEc/xpcaI7DFetBXxDEcNRGQ/p+9olCkcNhhRJT9huqmISey3EFElD/C07ojH2Gsxokp+xJO6Iiaw00FEldzFozpCtjqMqJLb40Zs9iCiSt5eS6FQaIhQP/atCLffUH+IYY4ooQ6NoY7xoR6sQj3qhho+hBoHhRrQhRqZhhpih1orhFr0hFq9hVqGhlpPh3phoFAo6Ac35fmpcy8GLsoAAAAASUVORK5CYII="
+                          alt="sort"
+                        ></img>
+                      </div>
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       METER NUMBER

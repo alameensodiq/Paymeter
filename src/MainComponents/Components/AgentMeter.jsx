@@ -31,6 +31,8 @@ const AgentMeter = ({ title }) => {
   const [loading, setloading] = useState(false);
   const [discname, setdiscname] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
+  const [sortField, setSortField] = useState(null); // e.g. "name", "type"
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -78,6 +80,58 @@ const AgentMeter = ({ title }) => {
     setEndDate(date);
   };
 
+  function getSortValue(item, field) {
+    switch (field) {
+      case "name":
+        return item?.virtualAccount?.name;
+      case "type":
+        return item?.customerReference;
+      case "account":
+        return item?.virtualAccount?.virtualAccountNumber;
+      case "bank":
+        return item?.virtualAccount?.bankName;
+      default:
+        return "";
+    }
+  }
+
+  const filteredData = (agentmeters?.data?.data || []).filter((item) => {
+    const search = searcher.toLowerCase();
+    const nameMatch = item?.virtualAccount?.virtualAccountNumber
+      ?.toLowerCase()
+      .includes(search);
+    const typeMatch = item?.customerReference?.toLowerCase().includes(search);
+    const nameMatch2 = item?.virtualAccount?.name
+      ?.toLowerCase()
+      .includes(search);
+    const bankMatch = item?.virtualAccount?.bankName
+      ?.toLowerCase()
+      .includes(search);
+    return nameMatch || typeMatch || nameMatch2 || bankMatch;
+  });
+
+  const sortedData = [...filteredData].sort((a, b) => {
+    if (!sortField) return 0; // No sorting if no field selected
+
+    const valA = getSortValue(a, sortField)?.toLowerCase?.() || "";
+    const valB = getSortValue(b, sortField)?.toLowerCase?.() || "";
+
+    if (valA < valB) return sortOrder === "asc" ? -1 : 1;
+    if (valA > valB) return sortOrder === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  const handleSort = (field) => {
+    if (field === sortField) {
+      // Toggle order if clicking same field again
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      // New field to sort by
+      setSortField(field);
+      setSortOrder("asc");
+    }
+  };
+
   //   const PickDate = () => {
   //     datePickerRef.current.setOpen(true);
   //   };
@@ -87,19 +141,6 @@ const AgentMeter = ({ title }) => {
     setCurrentPage(number - 1);
     setActivater(number);
   };
-
-  const filteredData = agentmeters?.data?.data?.filter((item) => {
-    const search = searcher.toLowerCase();
-    const nameMatch = item?.virtualAccount?.virtualAccountNumber
-      ?.toLowerCase()
-      .includes(search);
-    const typeMatch = item?.customerReference?.toLowerCase().includes(search);
-    const typeMatchname = item?.virtualAccount?.name
-      ?.toLowerCase()
-      .includes(search);
-    const bank = item?.virtualAccount?.bankName?.toLowerCase().includes(search);
-    return nameMatch || typeMatch || typeMatchname || bank;
-  });
 
   //   const Downloading = () => {
   //     const data = agentmeters?.data?.data || [];
@@ -211,8 +252,10 @@ const AgentMeter = ({ title }) => {
                       setdiscname={setdiscname}
                       meterss
                       setStep={setStep}
+                      handleSort={handleSort}
                       // data={agentmeters?.data?.data}
-                      data={filteredData}
+                      // data={filteredData}
+                      data={sortedData}
                       currentPage={currentPage}
                     />
                     <Pagination
