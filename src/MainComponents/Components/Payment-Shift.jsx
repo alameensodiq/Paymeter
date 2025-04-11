@@ -30,7 +30,7 @@ const PaymentShift = ({ title }) => {
   const [searcher, setSearcher] = useState("");
   const [startDate, setStartDate] = useState(new Date("2022-01-01"));
   const [startDater, setStartDater] = useState(new Date("2022-01-01"));
-  const [endDate, setEndDate] = useState(new Date("2022-01-01"));
+  const [endDate, setEndDate] = useState(new Date("2022-01-30"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -453,10 +453,12 @@ const PaymentShift = ({ title }) => {
                 )}
               </div>
             </div>
-            {!authenticatingpayment ||
-            !authenticatingstatement ||
-            !authenticatingshift ||
-            !authenticatingbalance ? (
+            {authenticatingpayment ||
+            authenticatingstatement ||
+            authenticatingshift ||
+            authenticatingbalance ? (
+              <Loader />
+            ) : (
               <>
                 {whitecrust && payment?.data?.length >= 1 && (
                   <>
@@ -579,8 +581,6 @@ const PaymentShift = ({ title }) => {
                   </div>
                 )}
               </>
-            ) : (
-              <Loader />
             )}
           </div>
         </div>

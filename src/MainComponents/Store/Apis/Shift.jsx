@@ -5,6 +5,7 @@ export const Shift = createAsyncThunk(
   "shift",
   async ({ date, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
+    console.log(date);
     const accessToken = sessionStorage.getItem("token");
 
     try {
