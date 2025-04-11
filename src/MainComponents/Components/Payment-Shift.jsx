@@ -597,7 +597,7 @@ const PaymentShift = ({ title }) => {
                   /> */}
                   </>
                 )}
-                {stating && !statement?.status && (
+                {stating && statement?.statementData?.length === 0 && (
                   <div
                     style={{
                       display: "flex",
