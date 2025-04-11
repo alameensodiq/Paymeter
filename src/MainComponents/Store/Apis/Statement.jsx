@@ -33,7 +33,7 @@ export const Statement = createAsyncThunk(
       //   }
       // );
       const response = await fetch(
-        "http://192.168.213.71:21443/venTopUps/1.0.1/",
+        "http://192.168.213.71:21443/venStatement/1.0.1/",
         {
           method: "POST",
           headers: {
