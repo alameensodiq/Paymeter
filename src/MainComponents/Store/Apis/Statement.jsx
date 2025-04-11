@@ -14,24 +14,41 @@ export const Statement = createAsyncThunk(
     const formattedDateTo = dateObjs.toISOString().slice(0, 10);
 
     try {
+      // const response = await fetch(
+      //   `http://192.168.213.71:21443/venStatement/1.0.1/`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       Accept: "application/json",
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer a63cd5db-a5ee-3177-9669-af0095e314d1`
+      //     },
+      //     body: JSON.stringify({
+      //       // customerReference,
+      //       idVendor: 7131,
+      //       codUser: "payMeter",
+      //       dateFrom: new Date(dateFrom).getTime(),
+      //       dateTo: new Date(dateTo).getTime()
+      //     })
+      //   }
+      // );
       const response = await fetch(
-        `http://192.168.213.71:21443/venStatement/1.0.1/`,
+        "https://192.168.213.71:21443/venTopUps/1.0.1/",
         {
           method: "POST",
           headers: {
-            Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer a63cd5db-a5ee-3177-9669-af0095e314d1`
+            Authorization: "Bearer a63cd5db-a5ee-3177-9669-af0095e314d1"
           },
           body: JSON.stringify({
-            // customerReference,
             idVendor: 7131,
             codUser: "payMeter",
-            dateFrom: new Date(dateFrom).getTime(),
-            dateTo: new Date(dateTo).getTime()
+            dateFrom: 1738195200000,
+            dateTo: 1744243200000
           })
         }
       );
+
       let data = await response.json();
       //   toast.success(data.message);
       console.log(data);
