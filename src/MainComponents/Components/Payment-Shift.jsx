@@ -159,7 +159,7 @@ const PaymentShift = ({ title }) => {
   const { statement, authenticatingstatement } = useSelector(
     (state) => state?.statement
   );
-  console.log(statement);
+  console.log(statement?.statementData);
 
   const { shift, authenticatingshift } = useSelector((state) => state?.shift);
   console.log(shift);
@@ -579,11 +579,11 @@ const PaymentShift = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )}
-                {stating && statement?.data?.length >= 1 && (
+                {stating && statement?.statementData?.length >= 1 && (
                   <>
                     <Tables
                       statementvirtual
-                      data={statement?.statementData}
+                      data={statement}
                       currentPage={currentPage}
                     />
                     {/* <Pagination

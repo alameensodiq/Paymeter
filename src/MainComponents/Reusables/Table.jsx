@@ -2497,7 +2497,7 @@ const Tables = ({
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.map((item, index) => (
+                  {data?.statementData?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
                         {currentPage * 10 + index + 1}

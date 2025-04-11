@@ -43,7 +43,9 @@ export const Statement = createAsyncThunk(
           body: JSON.stringify({
             idVendor: 7131,
             codUser: "payMeter",
-            dateFrom: 1738195200000,
+            // dateFrom: 1738195200000,
+            // dateTo: 1744243200000
+            dateFrom: 1741737600000,
             dateTo: 1744243200000
           })
         }
