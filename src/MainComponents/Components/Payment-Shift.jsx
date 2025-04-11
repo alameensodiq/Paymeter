@@ -107,11 +107,7 @@ const PaymentShift = ({ title }) => {
 
     dispatch(Shift({ date: startDate, currentPage }));
 
-    dispatch(
-      Balance({
-        value: searcher
-      })
-    );
+    dispatch(Balance());
 
     // eslint-disable-next-line
   }, []);
@@ -140,11 +136,12 @@ const PaymentShift = ({ title }) => {
   useEffect(() => {
     // if (searcher.length > 0) {
     dispatch(
-      Balance({
-        value: searcher
-        // dateFrom: startDater,
-        // dateTo: endDate
-      })
+      // Balance({
+      //   value: searcher
+      //   // dateFrom: startDater,
+      //   // dateTo: endDate
+      // })
+      Balance()
     );
     // }
 
@@ -541,7 +538,7 @@ const PaymentShift = ({ title }) => {
                   /> */}
                   </>
                 )}
-                {other && !shift?.status && (
+                {other && shift?.data?.length === 0 && (
                   <div
                     style={{
                       display: "flex",

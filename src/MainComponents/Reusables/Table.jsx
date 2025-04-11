@@ -2413,19 +2413,22 @@ const Tables = ({
                       S/N
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      METER NUMBER/ACCT. NO
+                      ID VENDOR
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      NAME
+                      DESC VENDOR
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      TARIFF DESCRIPTION
+                      DISTRICT
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ACCOUNT BALANCE
+                      BALANCE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "5%" }}>
-                      SERVICE ADDRESS
+                      DISPLAY BALANCE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      LOW BALANCE ALERT
                     </StyledTableCell>
                   </TableRow>
                 </TableHead>
@@ -2436,19 +2439,22 @@ const Tables = ({
                         {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.account}
+                        {item?.idVendor}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.name}
+                        {item?.descVendor}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.tariffDescription}
+                        {item?.district}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.accountBalance}
+                        {item?.balance}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "5%" }}>
-                        {item?.serviceAddress}
+                        {item?.displayBalance}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.lowBalanceAlert}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -2509,7 +2515,9 @@ const Tables = ({
                         {item?.transactionType}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.transactionDate}
+                        <Moment format="DD-MM-YYYY">
+                          {item?.transactionDate}
+                        </Moment>
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.openingBalance}
