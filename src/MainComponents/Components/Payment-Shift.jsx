@@ -307,7 +307,7 @@ const PaymentShift = ({ title }) => {
               <span className="text-route-name text-[28px] font-semibold">
                 Balance
               </span>
-              <div className="relative flex flex-row w-[50%]">
+              {/* <div className="relative flex flex-row w-[50%]">
                 <div className="absolute top-3 left-4">
                   <Search />
                 </div>
@@ -320,7 +320,7 @@ const PaymentShift = ({ title }) => {
                 <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
                   Search
                 </button>
-              </div>
+              </div> */}
             </div>
           ) : (
             <>
