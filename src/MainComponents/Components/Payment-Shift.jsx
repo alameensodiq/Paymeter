@@ -119,7 +119,7 @@ const PaymentShift = ({ title }) => {
   }, [startDater, searcher, currentPage, endDate, startDate]);
 
   useEffect(() => {
-    if (searcher.length > 0 && searcher.length < 8) {
+    if (!(searcher.length > 0 && searcher.length < 8)) {
       dispatch(
         Balance({
           customerReference: searcher,
