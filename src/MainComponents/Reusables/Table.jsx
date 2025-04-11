@@ -63,6 +63,7 @@ const Tables = ({
   customer,
   setDownload,
   setoldname,
+  balance,
   bankaccountsdetails,
   customertransfer,
   agenttransfer,
@@ -70,6 +71,7 @@ const Tables = ({
   withdraw,
   withdrawpending,
   setwithdrawaction,
+  statementvirtual,
   meterss,
   setdecliner,
   decliner,
@@ -2198,49 +2200,28 @@ const Tables = ({
                     <StyledTableCell style={{ width: "7%" }}>
                       S/N
                     </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "7%" }}>
+                      BALANCE
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "7%" }}>
-                      UNIT PAYMENT
+                      TRANSACTION TYPE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "7%" }}>
-                      DEBT PAYMENT
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "7%" }}>
-                      UNIT TYPE
+                      TRANSACTION DATE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "8%" }}>
-                      UNITS
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "7%" }}>
-                      AMOUNT
+                      TRANSACTION AMOUNT
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "7%" }}>
                       RECEIPT
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "7%" }}>
-                      ACCOUNT
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "7%" }}>
-                      TARRIF
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "7%" }}>
-                      VENDOR ID
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "7%" }}>
-                      CASHIER NAME
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
-                      CUSTOMER. NAME
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "7%" }}>
-                      DATE
-                    </StyledTableCell>
-                    <StyledTableCell style={{ width: "7%" }}>
-                      METER SERIAL
+                      REQUEST ID
                     </StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.map((item, index) => (
+                  {/* {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
                         {currentPage * 10 + index + 1}
@@ -2279,12 +2260,35 @@ const Tables = ({
                         {item?.customerName}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {/* <Moment format="DD-MM-YYYY"> */}
                         {item?.paymentDate ? item?.paymentDate : 0}
-                        {/* </Moment> */}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.meterSerial}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))} */}
+                  {data?.map((item, index) => (
+                    <StyledTableRow>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {currentPage * 10 + index + 1}
+                      </StyledTableCell>
+                      {/* <StyledTableCell style={{ width: "10%" }}>
+                        {item?.balance}
+                      </StyledTableCell> */}
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.transactionType}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.transactionDate}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.transactionAmount}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.receiptNo}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.requestID}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -2306,31 +2310,31 @@ const Tables = ({
               >
                 <TableHead>
                   <TableRow style={{ paddingRight: "0px" }}>
-                    <StyledTableCell style={{ width: "8%" }}>
+                    <StyledTableCell style={{ width: "5%" }}>
                       S/N
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       USER
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       UNIT PAYMENT
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       DEBT PAYMENT
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
-                      UNIT TYPE
+                    <StyledTableCell style={{ width: "10%" }}>
+                      TRANSACTION DATE
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       AMOUNT
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "9%" }}>
+                    <StyledTableCell style={{ width: "5%" }}>
                       RECEIPT
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       ACCOUNT.
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "8%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       VENDOR ID
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -2339,7 +2343,7 @@ const Tables = ({
                     {/* <StyledTableCell style={{ width: "8%" }}>
                     DATE
                   </StyledTableCell> */}
-                    <StyledTableCell style={{ width: "9%" }}>
+                    <StyledTableCell style={{ width: "10%" }}>
                       METER SERIAL
                     </StyledTableCell>
                   </TableRow>
@@ -2360,7 +2364,9 @@ const Tables = ({
                         {item?.debtPayment}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        <Moment format="DD-MM-YYYY">{item?.paymentTime}</Moment>
+                        <Moment format="DD-MM-YYYY">
+                          {item?.transactionDate}
+                        </Moment>
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.totalAmount}
@@ -2382,6 +2388,149 @@ const Tables = ({
                     </StyledTableCell> */}
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.meterSerial}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </ScrollableXContainer>
+        ) : balance ? (
+          <ScrollableXContainer>
+            <TableContainer
+              // component={Paper}
+              sx={{ maxHeight: "60vh" }}
+              style={{ boxShadow: "none" }}
+            >
+              <Table
+                stickyHeader
+                sx={{ minWidth: 1300, tableLayout: "auto" }}
+                aria-label="customized table"
+              >
+                <TableHead>
+                  <TableRow style={{ paddingRight: "0px" }}>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      S/N
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      METER NUMBER
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ACCOUNT
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      TARIFF DESCRIPTION
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      ACCOUNT BALANCE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      SERVICE ADDRESS
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
+                      NAME
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data?.map((item, index) => (
+                    <StyledTableRow>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {currentPage * 10 + index + 1}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.meterSerial}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.account}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.tariffDescription}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.accountBalance}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.serviceAddress}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.name}
+                      </StyledTableCell>
+                      {/* <StyledTableCell style={{ width: "10%" }}>
+                  {item?.account?.disco?.name}
+                </StyledTableCell> */}
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </ScrollableXContainer>
+        ) : statementvirtual ? (
+          <ScrollableXContainer>
+            <TableContainer
+              // component={Paper}
+              sx={{ maxHeight: "60vh" }}
+              style={{ boxShadow: "none" }}
+            >
+              <Table
+                stickyHeader
+                sx={{ minWidth: 1300, tableLayout: "auto" }}
+                aria-label="customized table"
+              >
+                <TableHead>
+                  <TableRow style={{ paddingRight: "0px" }}>
+                    <StyledTableCell style={{ width: "7%" }}>
+                      S/N
+                    </StyledTableCell>
+                    {/* <StyledTableCell style={{ width: "7%" }}>
+                      BALANCE
+                    </StyledTableCell> */}
+                    <StyledTableCell style={{ width: "7%" }}>
+                      TRANSACTION TYPE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "7%" }}>
+                      TRANSACTION DATE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "8%" }}>
+                      OPENING BALANCE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "7%" }}>
+                      CLOSING BALANCE
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "7%" }}>
+                      CREDIT
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "7%" }}>
+                      DEBIT
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data?.map((item, index) => (
+                    <StyledTableRow>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {currentPage * 10 + index + 1}
+                      </StyledTableCell>
+                      {/* <StyledTableCell style={{ width: "10%" }}>
+                        {item?.balance}
+                      </StyledTableCell> */}
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.transactionType}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.transactionDate}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.openingBalance}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.closingBalance}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.credit}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.debit}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}

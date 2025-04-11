@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-export const Payment = createAsyncThunk(
-  "payment",
+export const Statement = createAsyncThunk(
+  "statement",
   async ({ customerReference, dateFrom, dateTo }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
     const accessToken = sessionStorage.getItem("token");
@@ -15,7 +15,7 @@ export const Payment = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `https://192.168.213.71:21443/venTopUps/1.0.1/`,
+        `https://192.168.213.71:21443/venStatement/1.0.1/`,
         {
           method: "POST",
           headers: {
@@ -35,9 +35,9 @@ export const Payment = createAsyncThunk(
       let data = await response.json();
       //   toast.success(data.message);
       console.log(data);
-      // if (!data?.status) {
-      //   toast.error(data.message);
-      // }
+      //   if (!data?.status) {
+      //     toast.error(data.message);
+      //   }
       console.log(data);
       if (data?.status) {
         // toast.success(data.message);

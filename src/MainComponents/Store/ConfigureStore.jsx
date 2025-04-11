@@ -94,6 +94,8 @@ import { InitiateSlice } from "./Reducers/Initiate";
 import { FundTypeSlice } from "./Reducers/Fundtype";
 import { OtpSlice } from "./Reducers/Otp";
 import { WithdrawalOtpSlice } from "./Reducers/WithdrawalOtp";
+import { BalanceSlice } from "./Reducers/Balance";
+import { StatementSlice } from "./Reducers/Statement";
 
 export default configureStore({
   reducer: {
@@ -191,6 +193,8 @@ export default configureStore({
     initiate: InitiateSlice?.reducer,
     fundtype: FundTypeSlice?.reducer,
     otp: OtpSlice?.reducer,
-    withdrawalotp: WithdrawalOtpSlice?.reducer
+    withdrawalotp: WithdrawalOtpSlice?.reducer,
+    balance: BalanceSlice?.reducer,
+    statement: StatementSlice?.reducer
   }
 });

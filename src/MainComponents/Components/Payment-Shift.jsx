@@ -15,10 +15,14 @@ import Pagination from "../Reusables/Pagination";
 import { Payment } from "../Store/Apis/Payment";
 import { Shift } from "../Store/Apis/Shift";
 import empty from "../../assets/empty.png";
+import { Balance } from "../Store/Apis/Balance";
+import { Statement } from "../Store/Apis/Statement";
 
 const PaymentShift = ({ title }) => {
-  const [whitecrust, setWhitecrust] = useState(false);
-  const [other, setOther] = useState(true);
+  const [whitecrust, setWhitecrust] = useState(true);
+  const [other, setOther] = useState(false);
+  const [balancestate, setbalancestate] = useState(false);
+  const [stating, setstating] = useState(false);
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [activater, setActivater] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
@@ -33,6 +37,8 @@ const PaymentShift = ({ title }) => {
     setWhitecrust(true);
     setOther(false);
     setSearcher("");
+    setbalancestate(false);
+    setstating(false);
   };
 
   const Othering = () => {
@@ -40,6 +46,26 @@ const PaymentShift = ({ title }) => {
     setOther(true);
     setSearcher("");
     setStartDater("");
+    setbalancestate(false);
+    setstating(false);
+  };
+
+  const Balancing = () => {
+    setWhitecrust(false);
+    setOther(false);
+    setSearcher("");
+    setStartDater("");
+    setbalancestate(true);
+    setstating(false);
+  };
+
+  const Statements = () => {
+    setWhitecrust(false);
+    setOther(false);
+    setSearcher("");
+    setStartDater("");
+    setbalancestate(false);
+    setstating(true);
   };
 
   // const [endDate, setEndDate] = useState(
@@ -64,6 +90,22 @@ const PaymentShift = ({ title }) => {
     // Dispatch actions if the condition is met
     dispatch(
       Payment({
+        // customerReference: searcher,
+        dateFrom: startDater,
+        dateTo: endDate
+      })
+    );
+
+    dispatch(
+      Statement({
+        // customerReference: searcher,
+        dateFrom: startDater,
+        dateTo: endDate
+      })
+    );
+
+    dispatch(
+      Balance({
         customerReference: searcher,
         dateFrom: startDater,
         dateTo: endDate
@@ -80,8 +122,18 @@ const PaymentShift = ({ title }) => {
   );
   console.log(payment);
 
+  const { statement, authenticatingstatement } = useSelector(
+    (state) => state?.statement
+  );
+  console.log(statement);
+
   const { shift, authenticatingshift } = useSelector((state) => state?.shift);
   console.log(shift);
+
+  const { balance, authenticatingbalance } = useSelector(
+    (state) => state?.balance
+  );
+  console.log(balance);
 
   const next = payment?.data?.meta?.next;
   const previous = payment?.data?.meta?.prev;
@@ -150,7 +202,7 @@ const PaymentShift = ({ title }) => {
                 <span className="text-route-name text-[28px] font-semibold">
                   Meter Transactions
                 </span>
-                <div className="relative flex flex-row w-[50%]">
+                {/* <div className="relative flex flex-row w-[50%]">
                   <div className="absolute top-3 left-4">
                     <Search />
                   </div>
@@ -163,7 +215,7 @@ const PaymentShift = ({ title }) => {
                   <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
                     Search
                   </button>
-                </div>
+                </div> */}
               </div>
               <div className="flex h-[40px] gap-[10px] flex-row justify-end w-[100%]">
                 {/* <div className="absolute top-3 left-4">
@@ -219,8 +271,79 @@ const PaymentShift = ({ title }) => {
                 </button> */}
               </div>
             </div>
+          ) : balancestate ? (
+            <div className="flex flex-row justify-between">
+              <span className="text-route-name text-[28px] font-semibold">
+                Balance
+              </span>
+              <div className="relative flex flex-row w-[50%]">
+                <div className="absolute top-3 left-4">
+                  <Search />
+                </div>
+                <input
+                  className="border-input-color border-[1px] rounded-tl-custom rounded-bl-custom w-[85%] outline-none pl-[60px] text-[13px]"
+                  placeholder="Search by Customer reference"
+                  value={searcher}
+                  onChange={(e) => setSearcher(e.target.value)}
+                />
+                <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
+                  Search
+                </button>
+              </div>
+            </div>
           ) : (
-            ""
+            <>
+              <div className="flex flex-row justify-between">
+                <span className="text-route-name text-[28px] font-semibold">
+                  Statement
+                </span>
+                {/* <div className="relative flex flex-row w-[50%]">
+                  <div className="absolute top-3 left-4">
+                    <Search />
+                  </div>
+                  <input
+                    className="border-input-color border-[1px] rounded-tl-custom rounded-bl-custom w-[85%] outline-none pl-[60px] text-[13px]"
+                    placeholder="Search by Customer reference"
+                    value={searcher}
+                    onChange={(e) => setSearcher(e.target.value)}
+                  />
+                  <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
+                    Search
+                  </button>
+                </div> */}
+              </div>
+              <div className="flex h-[40px] gap-[10px] flex-row justify-end w-[100%]">
+                {/* <div className="absolute top-3 left-4">
+                  <Search />
+                </div> */}
+                <div className="flex flex-col w-[15%] h-[70px]">
+                  <span>Start Date</span>
+                  <input
+                    className="border-input-color border-[1px] rounded-tr-custom rounded-tl-custom rounded-bl-custom rounded-br-custom w-[100%] outline-none pl-[20px] h-[40px] text-[13px]"
+                    placeholder="Search by name, customerID, account number, transaction reference"
+                    value={startDater}
+                    type="date"
+                    format="YYYY-MM-DD"
+                    onChange={handleStartDateChange}
+                  />
+                </div>
+                <div className="flex flex-col w-[15%] h-[70px]">
+                  <span>End Date</span>
+                  <input
+                    className="border-input-color border-[1px] rounded-tr-custom rounded-tl-custom rounded-bl-custom rounded-br-custom w-[100%] outline-none pl-[20px] h-[40px] text-[13px]"
+                    placeholder="Search by name, customerID, account number, transaction reference"
+                    value={setEndDate}
+                    type="date"
+                    format="YYYY-MM-DD"
+                    disabled
+                    onChange={handleStartDateChange}
+                  />
+                </div>
+                {/* <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
+                  Search
+                </button> */}
+              </div>
+            </>
           )}
           <div className="flex flex-col border-input-color border-[1px] rounded-custom py-4 gap-6">
             <div className="flex flex-row justify-between gap-4 px-3">
@@ -234,7 +357,7 @@ const PaymentShift = ({ title }) => {
                         : "text-route-noncolor cursor-pointer"
                     }`}
                   >
-                    Meter Payment
+                    Meter Transaction
                   </span>
                   <span
                     onClick={() => Othering()}
@@ -246,13 +369,40 @@ const PaymentShift = ({ title }) => {
                   >
                     Shift
                   </span>
+                  <span
+                    onClick={() => Balancing()}
+                    className={`${
+                      balancestate
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    Balance
+                  </span>
+                  <span
+                    onClick={() => Statements()}
+                    className={`${
+                      stating
+                        ? "text-route-color cursor-pointer"
+                        : "text-route-noncolor cursor-pointer"
+                    }`}
+                  >
+                    Statement
+                  </span>
                 </div>
                 <div className="gap-6">
                   {whitecrust && (
-                    <div className="w-[105px] h-[2px] bg-route-color" />
+                    <div className="w-[125px] h-[2px] bg-route-color" />
                   )}
+
                   {other && (
                     <div className="w-[60px] h-[2px] bg-route-color ml-[74%]" />
+                  )}
+                  {balancestate && (
+                    <div className="w-[60px] h-[2px] bg-route-color ml-[75%]" />
+                  )}
+                  {stating && (
+                    <div className="w-[60px] h-[2px] bg-route-color ml-[79%]" />
                   )}
                 </div>
               </div>
@@ -307,7 +457,7 @@ const PaymentShift = ({ title }) => {
                 <Tables
                   currentPage={currentPage}
                   payment
-                  data={payment?.data}
+                  data={payment?.topUpData}
                 />
                 {/* <Pagination
                   set={activater}
@@ -346,7 +496,67 @@ const PaymentShift = ({ title }) => {
                 /> */}
               </>
             )}
-            {other && !payment?.status && (
+            {other && !shift?.status && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <img src={empty} alt="empty" />
+              </div>
+            )}
+            {balancestate && balance?.data?.length >= 1 && (
+              <>
+                <Tables
+                  balance
+                  data={balance?.data}
+                  currentPage={currentPage}
+                />
+                {/* <Pagination
+                  set={activater}
+                  currentPage={currentPage}
+                  postsPerPage={postsPerPage}
+                  totalPosts={totalPosts}
+                  paginate={paginate}
+                  previous={previous}
+                  next={next}
+                /> */}
+              </>
+            )}
+            {balancestate && !balance?.status && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <img src={empty} alt="empty" />
+              </div>
+            )}
+            {stating && statement?.data?.length >= 1 && (
+              <>
+                <Tables
+                  statementvirtual
+                  data={statement?.statementData}
+                  currentPage={currentPage}
+                />
+                {/* <Pagination
+                  set={activater}
+                  currentPage={currentPage}
+                  postsPerPage={postsPerPage}
+                  totalPosts={totalPosts}
+                  paginate={paginate}
+                  previous={previous}
+                  next={next}
+                /> */}
+              </>
+            )}
+            {stating && !statement?.status && (
               <div
                 style={{
                   display: "flex",

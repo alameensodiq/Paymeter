@@ -15,14 +15,14 @@ export const Shift = createAsyncThunk(
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer a63cd5db-a5ee-3177-9669-af0095e314d1","refresh_token":"7b1adbd2-819d-3d5b-8111-d565dd97db20`
+            Authorization: `Bearer a63cd5db-a5ee-3177-9669-af0095e314d1`
           },
           body: JSON.stringify({
             idVendor: 7131,
             paymentDate: new Date(date).getTime(),
             codUser: "payMeter",
             size: 1000,
-            page: currentPage,
+            page: currentPage + 1,
             codUserShift: "payMeter",
             paginate: true
           })
