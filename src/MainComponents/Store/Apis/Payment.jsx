@@ -21,7 +21,7 @@ export const Payment = createAsyncThunk(
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer a63cd5db-a5ee-3177-9669-af0095e314d1`
+            Authorization: `Bearer 9159d38f-f4b4-3d91-8749-f4852644aa05`
           },
           body: JSON.stringify({
             // customerReference,
