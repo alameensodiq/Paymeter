@@ -15,7 +15,7 @@ export const Balance = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `http://192.168.213.71:21443/venMeter/1.0.1/`,
+        `http://194.63.145.119:5600/venMeter/1.0.1/`,
         {
           method: "POST",
           headers: {
