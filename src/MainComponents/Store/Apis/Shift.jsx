@@ -16,7 +16,7 @@ export const Shift = createAsyncThunk(
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer 9159d38f-f4b4-3d91-8749-f4852644aa05`
+            Authorization: `Bearer 84710bfe-2e7b-38cb-af2b-6c48d50bc1ad`
           },
           body: JSON.stringify({
             idVendor: 7131,
