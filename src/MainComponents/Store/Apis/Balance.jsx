@@ -24,14 +24,11 @@ export const Balance = createAsyncThunk(
             Authorization: `Bearer a63cd5db-a5ee-3177-9669-af0095e314d1`
           },
           body: JSON.stringify({
-            // customerReference,
             idVendor: 7131,
             codUser: "payMeter",
             value: customerReference,
             codType: "MY001",
             totalPayment: 1000
-            // dateFrom: new Date(dateFrom).getTime(),
-            // dateTo: new Date(dateTo).getTime()
           })
         }
       );

@@ -10,7 +10,7 @@ export const Shift = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `http://192.168.213.71:21443/venShiftEnquiries/1.0.1/`,
+        `http://194.63.145.119:5600/venShiftEnquiries`,
         {
           method: "POST",
           headers: {
@@ -19,13 +19,13 @@ export const Shift = createAsyncThunk(
             Authorization: `Bearer a63cd5db-a5ee-3177-9669-af0095e314d1`
           },
           body: JSON.stringify({
-            idVendor: 7131,
-            paymentDate: new Date(date).getTime(),
-            codUser: "payMeter",
-            size: 1000,
-            page: currentPage + 1,
-            codUserShift: "payMeter",
-            paginate: true
+            // idVendor: 7131,
+            paymentDate: new Date(date).getTime()
+            // codUser: "payMeter",
+            // size: 1000,
+            // page: currentPage + 1,
+            // codUserShift: "payMeter",
+            // paginate: true
           })
         }
       );
