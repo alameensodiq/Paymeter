@@ -17,6 +17,7 @@ import { Shift } from "../Store/Apis/Shift";
 import empty from "../../assets/empty.png";
 import { Balance } from "../Store/Apis/Balance";
 import { Statement } from "../Store/Apis/Statement";
+import { Loader } from "./Loader";
 
 const PaymentShift = ({ title }) => {
   const [whitecrust, setWhitecrust] = useState(true);
@@ -396,10 +397,10 @@ const PaymentShift = ({ title }) => {
                   )}
 
                   {other && (
-                    <div className="w-[60px] h-[2px] bg-route-color ml-[74%]" />
+                    <div className="w-[45px] h-[2px] bg-route-color ml-[40%]" />
                   )}
                   {balancestate && (
-                    <div className="w-[60px] h-[2px] bg-route-color ml-[75%]" />
+                    <div className="w-[55px] h-[2px] bg-route-color ml-[58%]" />
                   )}
                   {stating && (
                     <div className="w-[60px] h-[2px] bg-route-color ml-[79%]" />
@@ -452,121 +453,134 @@ const PaymentShift = ({ title }) => {
                 )}
               </div>
             </div>
-            {whitecrust && payment?.data?.length >= 1 && (
+            {!authenticatingpayment ||
+            !authenticatingstatement ||
+            !authenticatingshift ||
+            !authenticatingbalance ? (
               <>
-                <Tables
-                  currentPage={currentPage}
-                  payment
-                  data={payment?.topUpData}
-                />
-                {/* <Pagination
-                  set={activater}
-                  currentPage={currentPage}
-                  postsPerPage={postsPerPage}
-                  totalPosts={totalPosts}
-                  paginate={paginate}
-                  previous={previous}
-                  next={next}
-                /> */}
+                {whitecrust && payment?.data?.length >= 1 && (
+                  <>
+                    <Tables
+                      currentPage={currentPage}
+                      payment
+                      data={payment?.topUpData}
+                    />
+                    {/* <Pagination
+                    set={activater}
+                    currentPage={currentPage}
+                    postsPerPage={postsPerPage}
+                    totalPosts={totalPosts}
+                    paginate={paginate}
+                    previous={previous}
+                    next={next}
+                  /> */}
+                  </>
+                )}{" "}
+                {whitecrust && !payment?.status && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}{" "}
+                {other && shift?.data?.length >= 1 && (
+                  <>
+                    <Tables
+                      shift
+                      data={shift?.data}
+                      currentPage={currentPage}
+                    />
+                    {/* <Pagination
+                    set={activater}
+                    currentPage={currentPage}
+                    postsPerPage={postsPerPage}
+                    totalPosts={totalPosts}
+                    paginate={paginate}
+                    previous={previous}
+                    next={next}
+                  /> */}
+                  </>
+                )}
+                {other && !shift?.status && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {balancestate && balance?.data?.length >= 1 && (
+                  <>
+                    <Tables
+                      balance
+                      data={balance?.data}
+                      currentPage={currentPage}
+                    />
+                    {/* <Pagination
+                    set={activater}
+                    currentPage={currentPage}
+                    postsPerPage={postsPerPage}
+                    totalPosts={totalPosts}
+                    paginate={paginate}
+                    previous={previous}
+                    next={next}
+                  /> */}
+                  </>
+                )}
+                {balancestate && !balance?.status && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
+                {stating && statement?.data?.length >= 1 && (
+                  <>
+                    <Tables
+                      statementvirtual
+                      data={statement?.statementData}
+                      currentPage={currentPage}
+                    />
+                    {/* <Pagination
+                    set={activater}
+                    currentPage={currentPage}
+                    postsPerPage={postsPerPage}
+                    totalPosts={totalPosts}
+                    paginate={paginate}
+                    previous={previous}
+                    next={next}
+                  /> */}
+                  </>
+                )}
+                {stating && !statement?.status && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <img src={empty} alt="empty" />
+                  </div>
+                )}
               </>
-            )}{" "}
-            {whitecrust && !payment?.status && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <img src={empty} alt="empty" />
-              </div>
-            )}{" "}
-            {other && shift?.data?.length >= 1 && (
-              <>
-                <Tables shift data={shift?.data} currentPage={currentPage} />
-                {/* <Pagination
-                  set={activater}
-                  currentPage={currentPage}
-                  postsPerPage={postsPerPage}
-                  totalPosts={totalPosts}
-                  paginate={paginate}
-                  previous={previous}
-                  next={next}
-                /> */}
-              </>
-            )}
-            {other && !shift?.status && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <img src={empty} alt="empty" />
-              </div>
-            )}
-            {balancestate && balance?.data?.length >= 1 && (
-              <>
-                <Tables
-                  balance
-                  data={balance?.data}
-                  currentPage={currentPage}
-                />
-                {/* <Pagination
-                  set={activater}
-                  currentPage={currentPage}
-                  postsPerPage={postsPerPage}
-                  totalPosts={totalPosts}
-                  paginate={paginate}
-                  previous={previous}
-                  next={next}
-                /> */}
-              </>
-            )}
-            {balancestate && !balance?.status && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <img src={empty} alt="empty" />
-              </div>
-            )}
-            {stating && statement?.data?.length >= 1 && (
-              <>
-                <Tables
-                  statementvirtual
-                  data={statement?.statementData}
-                  currentPage={currentPage}
-                />
-                {/* <Pagination
-                  set={activater}
-                  currentPage={currentPage}
-                  postsPerPage={postsPerPage}
-                  totalPosts={totalPosts}
-                  paginate={paginate}
-                  previous={previous}
-                  next={next}
-                /> */}
-              </>
-            )}
-            {stating && !statement?.status && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <img src={empty} alt="empty" />
-              </div>
+            ) : (
+              <Loader />
             )}
           </div>
         </div>
