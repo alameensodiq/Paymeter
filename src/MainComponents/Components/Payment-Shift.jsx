@@ -105,29 +105,29 @@ const PaymentShift = ({ title }) => {
       })
     );
 
+    dispatch(Shift({ date: startDate, currentPage }));
+
     dispatch(
       Balance({
-        customerReference: searcher,
-        dateFrom: startDater,
-        dateTo: endDate
+        value: searcher
       })
     );
 
-    dispatch(Shift({ date: startDate, currentPage }));
-
     // eslint-disable-next-line
-  }, [startDater, searcher, currentPage, endDate, startDate]);
+  }, []);
+
+  console.log(searcher);
 
   useEffect(() => {
-    if (!(searcher.length > 0 && searcher.length < 8)) {
-      dispatch(
-        Balance({
-          customerReference: searcher,
-          dateFrom: startDater,
-          dateTo: endDate
-        })
-      );
-    }
+    // if (!(searcher.length > 0 && searcher.length < 8)) {
+    //   dispatch(
+    //     Balance({
+    //       customerReference: searcher,
+    //       dateFrom: startDater,
+    //       dateTo: endDate
+    //     })
+    //   );
+    // }
 
     dispatch(Payment({ dateFrom: startDater, dateTo: endDate }));
     dispatch(Statement({ dateFrom: startDater, dateTo: endDate }));
@@ -135,7 +135,21 @@ const PaymentShift = ({ title }) => {
     dispatch(Shift({ date: startDate, currentPage }));
 
     // eslint-disable-next-line
-  }, [startDater, searcher, currentPage, endDate, startDate]);
+  }, [startDater, currentPage, endDate, startDate]);
+
+  useEffect(() => {
+    // if (searcher.length > 0) {
+    dispatch(
+      Balance({
+        value: searcher
+        // dateFrom: startDater,
+        // dateTo: endDate
+      })
+    );
+    // }
+
+    // eslint-disable-next-line
+  }, [startDater, searcher, endDate]);
 
   const { payment, authenticatingpayment } = useSelector(
     (state) => state?.payment
@@ -202,7 +216,7 @@ const PaymentShift = ({ title }) => {
     setStartDater(selectedStartDate);
     // Calculate endDate as startDate + 30 days
     const newEndDate = new Date(selectedStartDate);
-    newEndDate.setDate(newEndDate.getDate() + 30);
+    newEndDate.setDate(newEndDate.getDate() + 29);
     setEndDate(newEndDate.toISOString().split("T")[0]); // Format as YYYY-MM-DD
   };
 
@@ -539,13 +553,9 @@ const PaymentShift = ({ title }) => {
                     <img src={empty} alt="empty" />
                   </div>
                 )}
-                {balancestate && balance?.data?.length >= 1 && (
+                {balancestate && balance?.length >= 1 && (
                   <>
-                    <Tables
-                      balance
-                      data={balance?.data}
-                      currentPage={currentPage}
-                    />
+                    <Tables balance data={balance} currentPage={currentPage} />
                     {/* <Pagination
                     set={activater}
                     currentPage={currentPage}
@@ -557,7 +567,7 @@ const PaymentShift = ({ title }) => {
                   /> */}
                   </>
                 )}
-                {balancestate && !balance?.status && (
+                {balancestate && !balance?.length && (
                   <div
                     style={{
                       display: "flex",

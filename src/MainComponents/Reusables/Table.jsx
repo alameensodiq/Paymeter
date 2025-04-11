@@ -2413,10 +2413,10 @@ const Tables = ({
                       S/N
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      METER NUMBER
+                      METER NUMBER/ACCT. NO
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ACCOUNT
+                      NAME
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       TARIFF DESCRIPTION
@@ -2427,9 +2427,6 @@ const Tables = ({
                     <StyledTableCell style={{ width: "5%" }}>
                       SERVICE ADDRESS
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
-                      NAME
-                    </StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -2439,10 +2436,10 @@ const Tables = ({
                         {currentPage * 10 + index + 1}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.meterSerial}
+                        {item?.account}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        {item?.account}
+                        {item?.name}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.tariffDescription}
@@ -2453,12 +2450,6 @@ const Tables = ({
                       <StyledTableCell style={{ width: "5%" }}>
                         {item?.serviceAddress}
                       </StyledTableCell>
-                      <StyledTableCell style={{ width: "10%" }}>
-                        {item?.name}
-                      </StyledTableCell>
-                      {/* <StyledTableCell style={{ width: "10%" }}>
-                  {item?.account?.disco?.name}
-                </StyledTableCell> */}
                     </StyledTableRow>
                   ))}
                 </TableBody>
