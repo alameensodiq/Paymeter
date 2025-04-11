@@ -10,7 +10,7 @@ export const Shift = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `https://192.168.213.71:21443/venShiftEnquiries/1.0.1/`,
+        `http://192.168.213.71:21443/venShiftEnquiries/1.0.1/`,
         {
           method: "POST",
           headers: {

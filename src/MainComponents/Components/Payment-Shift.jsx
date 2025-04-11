@@ -118,6 +118,25 @@ const PaymentShift = ({ title }) => {
     // eslint-disable-next-line
   }, [startDater, searcher, currentPage, endDate, startDate]);
 
+  useEffect(() => {
+    if (!(searcher.length > 0 && searcher.length < 8)) {
+      dispatch(
+        Balance({
+          customerReference: searcher,
+          dateFrom: startDater,
+          dateTo: endDate
+        })
+      );
+    }
+
+    dispatch(Payment({ dateFrom: startDater, dateTo: endDate }));
+    dispatch(Statement({ dateFrom: startDater, dateTo: endDate }));
+
+    dispatch(Shift({ date: startDate, currentPage }));
+
+    // eslint-disable-next-line
+  }, [startDater, searcher, currentPage, endDate, startDate]);
+
   const { payment, authenticatingpayment } = useSelector(
     (state) => state?.payment
   );
