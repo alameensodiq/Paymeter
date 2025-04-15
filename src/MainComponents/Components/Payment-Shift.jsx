@@ -33,6 +33,9 @@ const PaymentShift = ({ title }) => {
   const [endDate, setEndDate] = useState(new Date("2022-01-30"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [code, setCode] = useState("");
+  const [value, setValue] = useState("");
+  const [amount, setAmount] = useState(1000);
 
   const White = () => {
     setWhitecrust(true);
@@ -107,7 +110,7 @@ const PaymentShift = ({ title }) => {
 
     dispatch(Shift({ date: startDate, currentPage }));
 
-    dispatch(Balance());
+    dispatch(Balance({ code: code, value: value, amount }));
 
     // eslint-disable-next-line
   }, []);
@@ -141,12 +144,12 @@ const PaymentShift = ({ title }) => {
       //   // dateFrom: startDater,
       //   // dateTo: endDate
       // })
-      Balance()
+      Balance({ code: code, value: value, amount })
     );
     // }
 
     // eslint-disable-next-line
-  }, [startDater, searcher, endDate]);
+  }, [value, amount]);
 
   const { payment, authenticatingpayment } = useSelector(
     (state) => state?.payment
@@ -295,7 +298,7 @@ const PaymentShift = ({ title }) => {
                   value={startDate}
                   type="date"
                   format="YYYY-MM-DD"
-                  onChange={(e) => setStartDate(e.target.value)}
+                  onChange={(e) => setSearcher(e.target.value)}
                 />
                 {/* <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
                   Search
@@ -303,24 +306,73 @@ const PaymentShift = ({ title }) => {
               </div>
             </div>
           ) : balancestate ? (
-            <div className="flex flex-row justify-between">
-              <span className="text-route-name text-[28px] font-semibold">
-                Balance
-              </span>
-              {/* <div className="relative flex flex-row w-[50%]">
-                <div className="absolute top-3 left-4">
-                  <Search />
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-row justify-between">
+                <span className="text-route-name text-[28px] font-semibold">
+                  Balance
+                </span>
+                <div className="relative flex flex-row w-[50%]">
+                  <div className="absolute top-3 left-4">
+                    <Search />
+                  </div>
+                  <input
+                    className="border-input-color border-[1px] rounded-tl-custom rounded-bl-custom w-[85%] outline-none pl-[60px] text-[13px]"
+                    placeholder={
+                      code === "MY001"
+                        ? "Search by Account Number"
+                        : code === "MY002"
+                        ? "Search by customer identification"
+                        : code === "MY003"
+                        ? "Search by meter number"
+                        : code === "MY004"
+                        ? "Search by Driver Licence"
+                        : code === "MY005"
+                        ? "Search by Legacy Account Number"
+                        : code === "MY006"
+                        ? "Search by Service Point Number"
+                        : ""
+                    }
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                  />
+                  <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
+                    Search
+                  </button>
                 </div>
-                <input
-                  className="border-input-color border-[1px] rounded-tl-custom rounded-bl-custom w-[85%] outline-none pl-[60px] text-[13px]"
-                  placeholder="Search by Customer reference"
-                  value={searcher}
-                  onChange={(e) => setSearcher(e.target.value)}
-                />
-                <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
-                  Search
-                </button>
-              </div> */}
+              </div>
+              <div className="flex flex-row justify-between  h-[40px]">
+                <span className="text-route-name text-[28px] font-semibold"></span>
+                <div className="flex flex-row w-[50%]">
+                  <div className="relative flex flex-row w-[20%]">
+                    <select
+                      className="border-input-color border-[1px] rounded-custom outline-none pl-[12px] text-[13px]"
+                      onChange={(e) => setCode(e.target.value)}
+                    >
+                      <option value="">None</option>
+                      <option value="MY001">MY001</option>
+                      <option value="MY002">MY002</option>
+                      <option value="MY003">MY003</option>
+                      <option value="MY004">MY004</option>
+                      <option value="MY005">MY005</option>
+                      <option value="MY006">MY006</option>
+                    </select>
+                  </div>
+                  <div className="relative flex flex-row w-[80%]">
+                    <div className="absolute top-3 left-4">
+                      <Search />
+                    </div>
+                    <input
+                      className="border-input-color border-[1px] rounded-tl-custom rounded-bl-custom w-[85%] outline-none pl-[60px] text-[13px]"
+                      placeholder="Enter Amount"
+                      value={value}
+                      onChange={(e) => setAmount(e.target.value)}
+                    />
+                    <button className="bg-route-color w-[15%] rounded-tr-custom rounded-br-custom text-white font-semibold text-[12px]">
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <>
@@ -538,7 +590,7 @@ const PaymentShift = ({ title }) => {
                   /> */}
                   </>
                 )}
-                {other && shift?.data?.length === 0 && (
+                {other && !shift?.data && (
                   <div
                     style={{
                       display: "flex",
@@ -594,7 +646,7 @@ const PaymentShift = ({ title }) => {
                   /> */}
                   </>
                 )}
-                {stating && statement?.statementData?.length === 0 && (
+                {stating && !statement?.statementData && (
                   <div
                     style={{
                       display: "flex",

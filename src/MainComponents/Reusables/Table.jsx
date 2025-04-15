@@ -2413,27 +2413,64 @@ const Tables = ({
                       S/N
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      ID VENDOR
+                      Meter Serial
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      DESC VENDOR
+                      Account
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      DISTRICT
+                      Tariff Description
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
-                      BALANCE
+                      Service Address
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "5%" }}>
-                      DISPLAY BALANCE
+                      Name
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "5%" }}>
-                      LOW BALANCE ALERT
+                      Account Balance
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      Indicator PrePostAccount
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "5%" }}>
+                      Collection Ind
                     </StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {data?.map((item, index) => (
+                    <StyledTableRow>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {currentPage * 10 + index + 1}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.meterSerial}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.account}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.tariffDescription}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.serviceAddress}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.name}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.accountBalance}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.indicatorPrePostAccount}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "5%" }}>
+                        {item?.collectionInd}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                  {/* {data?.map((item, index) => (
                     <StyledTableRow>
                       <StyledTableCell style={{ width: "5%" }}>
                         {currentPage * 10 + index + 1}
@@ -2457,7 +2494,7 @@ const Tables = ({
                         {item?.lowBalanceAlert}
                       </StyledTableCell>
                     </StyledTableRow>
-                  ))}
+                  ))} */}
                 </TableBody>
               </Table>
             </TableContainer>
