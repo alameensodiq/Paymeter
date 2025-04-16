@@ -21,7 +21,7 @@ export const Balance = createAsyncThunk(
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer 84710bfe-2e7b-38cb-af2b-6c48d50bc1ad`
+            Authorization: `Bearer 44c471a0-c86d-38cf-8725-1cb93e6cf2b2`
           },
           body: JSON.stringify({
             idVendor: 7131,
