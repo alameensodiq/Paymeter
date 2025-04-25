@@ -5810,7 +5810,7 @@ const Tables = ({
                         {item?.virtualAccount?.bankName}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
-                        N/A
+                        {item?.discoAccount}
                       </StyledTableCell>
                       {/* <StyledTableCell style={{ width: "10%" }}>
                         {item?.transactionAmount}
