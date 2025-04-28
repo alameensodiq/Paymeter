@@ -7097,6 +7097,54 @@ const AppUserModal = ({
                     )}
                   </span>
                 </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Balance:-
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898",
+                      font: "Lucida Sans Typewriter"
+                    }}
+                    className="font-lucida"
+                  >
+                    ₦
+                    {formatNumberWithCommas(
+                      downloading?.dispense?.accountBalance
+                        ? downloading?.dispense?.accountBalance
+                        : "N/A"
+                    )}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingInline: 60
+                  }}
+                >
+                  <span className="font-lucida" style={{ color: "#989898" }}>
+                    Meter Type:-
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: "#989898"
+                    }}
+                    className="font-lucida"
+                  >
+                    {downloading?.meterType ? downloading?.meterType : "N/A"}
+                  </span>
+                </div>
               </div>
               <div style={{ marginBottom: "6px", textAlign: "center" }}>
                 <p

@@ -8598,6 +8598,9 @@ const Tables = ({
                       REF.
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
+                      STATUS
+                    </StyledTableCell>
+                    <StyledTableCell style={{ width: "10%" }}>
                       USER TYPE
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
@@ -8642,12 +8645,12 @@ const Tables = ({
                     <StyledTableCell style={{ width: "10%" }}>
                       AGENT COMM. CAP FEE
                     </StyledTableCell>
-                    <StyledTableCell style={{ width: "10%" }}>
+                    {/* <StyledTableCell style={{ width: "10%" }}>
                       TOKEN
                     </StyledTableCell>
                     <StyledTableCell style={{ width: "10%" }}>
                       TOKEN DS.
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                     <StyledTableCell style={{ width: "10%" }}>
                       ACTIONS
                     </StyledTableCell>
@@ -8666,6 +8669,85 @@ const Tables = ({
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.reference}
+                      </StyledTableCell>
+                      <StyledTableCell style={{ width: "10%" }}>
+                        {item?.status === "SUCCESSFUL" ? (
+                          <button
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              width: "90px",
+                              height: "20px",
+                              background: "#ECFDF3",
+                              color: "#027A48",
+                              gap: "6px",
+                              borderRadius: "6px"
+                            }}
+                          >
+                            <span
+                              style={{
+                                background: "#027A48",
+                                fontSize: "10px",
+                                width: "6px",
+                                height: "6px",
+                                borderRadius: "50%"
+                              }}
+                            ></span>{" "}
+                            SUCCESSFUL
+                          </button>
+                        ) : item?.status === "PENDING" ? (
+                          <button
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              width: "80%",
+                              height: "20px",
+                              background: "#8a8a7d",
+                              color: "#e6df19",
+                              gap: "6px",
+                              borderRadius: "6px"
+                            }}
+                          >
+                            <span
+                              style={{
+                                background: "#e5e999",
+                                width: "6px",
+                                height: "6px",
+                                borderRadius: "50%"
+                              }}
+                            ></span>{" "}
+                            PENDING
+                          </button>
+                        ) : (
+                          <button
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              width: "80%",
+                              height: "20px",
+                              background: "#ed7d6c",
+                              color: "#f4270b",
+                              gap: "6px",
+                              borderRadius: "6px"
+                            }}
+                          >
+                            <span
+                              style={{
+                                background: "#f4270b",
+                                width: "6px",
+                                height: "6px",
+                                borderRadius: "50%"
+                              }}
+                            ></span>{" "}
+                            FAILED
+                          </button>
+                        )}
                       </StyledTableCell>
                       <StyledTableCell style={{ width: "10%" }}>
                         {item?.userType}
@@ -8743,7 +8825,7 @@ const Tables = ({
                             )}`
                           : "N/A"}
                       </StyledTableCell>
-                      <StyledTableCell
+                      {/* <StyledTableCell
                         ref={inputRef3}
                         onClick={() =>
                           handleCopy3(item?.dispense?.listtoken[0])
@@ -8834,7 +8916,7 @@ const Tables = ({
                         ) : (
                           "N/A"
                         )}
-                      </StyledTableCell>
+                      </StyledTableCell> */}
                       <StyledTableCell
                         onClick={() => {
                           setOpen(!open);
