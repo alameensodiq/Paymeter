@@ -177,18 +177,40 @@ const Tables = ({
     }
   }));
 
+  // const handleCopy3 = (item) => {
+  //   const textToCopy = item; // Get the text to copy
+  //   if (textToCopy) {
+  //     navigator.clipboard
+  //       .writeText(textToCopy)
+  //       .then(() => {
+  //         toast.success("Copied to clipboard!");
+  //       })
+  //       .catch((err) => {
+  //         console.error("Failed to copy address: ", err);
+  //         toast.error("Failed to copy address.");
+  //       });
+  //   }
+  // };
+
   const handleCopy3 = (item) => {
-    const textToCopy = item; // Get the text to copy
-    if (textToCopy) {
-      navigator.clipboard
-        .writeText(textToCopy)
-        .then(() => {
-          toast.success("Copied to clipboard!");
-        })
-        .catch((err) => {
-          console.error("Failed to copy address: ", err);
-          toast.error("Failed to copy address.");
-        });
+    const textToCopy = item;
+    if (!textToCopy) return;
+
+    try {
+      // Create a temporary textarea element
+      const textarea = document.createElement("textarea");
+      textarea.value = textToCopy;
+      textarea.style.position = "fixed"; // Avoid scrolling to bottom
+      textarea.style.opacity = "0"; // Invisible
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy"); // Legacy copy command
+      document.body.removeChild(textarea);
+
+      toast.success("Copied to clipboard!");
+    } catch (err) {
+      console.error("Fallback copy failed:", err);
+      toast.error("Failed to copy address.");
     }
   };
 
