@@ -98,9 +98,11 @@ const AgentTransfer = ({ title }) => {
   console.log(agenttransactions);
 
   useEffect(() => {
-    setTimeout(() => {
-      setloading(true);
-    }, [3000]);
+    if (agenttransactions?.data) {
+      setTimeout(() => {
+        setloading(true);
+      }, [3000]);
+    }
   }, [agenttransactions?.data]);
 
   const next = agenttransactions?.data?.meta?.next;

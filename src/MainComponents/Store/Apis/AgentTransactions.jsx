@@ -5,6 +5,7 @@ export const AgentTransactions = createAsyncThunk(
   "agenttransactions",
   async ({ searcher, currentPage }, thunkAPI) => {
     console.log(process.env.REACT_APP_BASE_URL);
+    console.log(currentPage);
     // const dateObj = new Date(startDate);
 
     // const formattedDate = dateObj.toISOString().slice(0, 10);
