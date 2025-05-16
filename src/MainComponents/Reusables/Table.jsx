@@ -8680,7 +8680,7 @@ const Tables = ({
                 </TableHead>
                 <TableBody>
                   {data?.map((item, index) => (
-                    <StyledTableRow>
+                    <StyledTableRow key={item?.dispense?.updatedDate || index}>
                       <StyledTableCell style={{ width: "5%" }}>
                         {currentPage * 10 + index + 1}
                       </StyledTableCell>
