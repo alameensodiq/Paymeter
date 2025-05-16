@@ -101,7 +101,7 @@ const AgentTransfer = ({ title }) => {
     setTimeout(() => {
       setloading(true);
     }, [3000]);
-  }, [agenttransactions]);
+  }, [agenttransactions?.data]);
 
   const next = agenttransactions?.data?.meta?.next;
   const previous = agenttransactions?.data?.meta?.prev;
@@ -558,7 +558,7 @@ const AgentTransfer = ({ title }) => {
                 </button>
               </div>
             </div>
-            {loading ? (
+            {!authenticatingagenttransactions ? (
               <>
                 {agenttransactions?.data?.data?.length >= 1 && (
                   <Tables
