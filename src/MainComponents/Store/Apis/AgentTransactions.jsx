@@ -13,7 +13,7 @@ export const AgentTransactions = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}dashboard/Trx-by-agentId/${agentId}&search=${searcher}&page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}dashboard/Trx-by-agentId/${agentId}?search=${searcher}&page=${currentPage}`,
         {
           method: "GET",
           headers: {
